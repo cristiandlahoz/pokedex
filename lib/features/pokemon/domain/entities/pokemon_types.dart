@@ -1,4 +1,3 @@
-
 enum PokemonTypes {
   grass,
   poison,
@@ -20,4 +19,51 @@ enum PokemonTypes {
   dark,
   monster,
   unknown,
+}
+
+extension PokemonTypeExtension on PokemonTypes {
+  static PokemonTypes fromString(String type) {
+    switch (type.toLowerCase()) {
+      case 'grass':
+        return PokemonTypes.grass;
+      case 'poison':
+        return PokemonTypes.poison;
+      case 'fire':
+        return PokemonTypes.fire;
+      case 'flying':
+        return PokemonTypes.flying;
+      case 'water':
+        return PokemonTypes.water;
+      case 'bug':
+        return PokemonTypes.bug;
+      case 'normal':
+        return PokemonTypes.normal;
+      case 'electric':
+        return PokemonTypes.electric;
+      case 'ground':
+        return PokemonTypes.ground;
+      case 'fairy':
+        return PokemonTypes.fairy;
+      case 'fighting':
+        return PokemonTypes.fighting;
+      case 'psychic':
+        return PokemonTypes.psychic;
+      case 'rock':
+        return PokemonTypes.rock;
+      case 'steel':
+        return PokemonTypes.steel;
+      case 'ice':
+        return PokemonTypes.ice;
+      case 'ghost':
+        return PokemonTypes.ghost;
+      case 'dragon':
+        return PokemonTypes.dragon;
+      case 'dark':
+        return PokemonTypes.dark;
+      case 'monster':
+        return PokemonTypes.monster;
+      default:
+        return PokemonTypes.unknown;
+    }
+  }
 }
