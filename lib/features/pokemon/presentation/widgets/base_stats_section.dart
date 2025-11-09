@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../domain/entities/pokemon.dart';
+import '../../domain/entities/pokemon_stat.dart';
 import 'stat_bar.dart';
 
 class BaseStatsSection extends StatelessWidget {
@@ -64,6 +65,8 @@ class BaseStatsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int maxStatValue = stats.map((s) => s.baseStat).reduce((a, b) => a > b ? a : b);
+    
     return Padding(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
       child: Column(
@@ -82,6 +85,7 @@ class BaseStatsSection extends StatelessWidget {
               name: _formatStatName(stat.name),
               value: stat.baseStat,
               color: _getStatColor(stat.name),
+              maxValue: maxStatValue,
             ),
           ),
         ],

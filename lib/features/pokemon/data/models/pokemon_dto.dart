@@ -1,5 +1,7 @@
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_ability.dart';
+import '../../domain/entities/pokemon_move.dart';
+import '../../domain/entities/pokemon_stat.dart';
 import '../../domain/entities/pokemon_types.dart';
 
 class PokemonDto extends Pokemon {
