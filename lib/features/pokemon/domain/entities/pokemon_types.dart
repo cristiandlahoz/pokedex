@@ -19,6 +19,7 @@ enum PokemonTypes {
   dark,
   monster,
   unknown,
+  shadow,
 }
 
 extension PokemonTypeExtension on PokemonTypes {
@@ -62,6 +63,8 @@ extension PokemonTypeExtension on PokemonTypes {
         return PokemonTypes.dark;
       case 'monster':
         return PokemonTypes.monster;
+      case 'shadow':
+        return PokemonTypes.shadow;
       default:
         return PokemonTypes.unknown;
     }
