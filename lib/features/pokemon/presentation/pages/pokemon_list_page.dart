@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/core/constants/ui_constants.dart';
 import '../../../../core/di/injection_container.dart';
 import '../bloc/pokemon_bloc.dart';
 import '../bloc/pokemon_event.dart';
@@ -50,17 +51,17 @@ class _PokemonListPageState extends State<PokemonListPage> {
         appBar: AppBar(
           title: const Text(
             'Pokédex',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.w500),
           ),
           backgroundColor: Colors.deepOrange,
           foregroundColor: Colors.white,
-          elevation: 0,
+          elevation: App.appBarElevation,
         ),
         body: BlocBuilder<PokemonBloc, PokemonState>(
           builder: (context, state) {
             if (state is PokemonLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: GlowingOverscrollIndicator(axisDirection: AxisDirection.right, color: Colors.deepOrange),
               );
             }
 
@@ -116,14 +117,11 @@ class _PokemonListPageState extends State<PokemonListPage> {
                       );
                   await Future.delayed(const Duration(milliseconds: 500));
                 },
-                child: GridView.builder(
+                child: ListView.builder(
                   controller: _scrollController,
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.75,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
                   ),
                   itemCount: state.hasReachedMax
                       ? state.pokemons.length
@@ -139,16 +137,19 @@ class _PokemonListPageState extends State<PokemonListPage> {
                     }
 
                     final pokemon = state.pokemons[index];
-                    return PokemonCard(
-                      pokemon: pokemon,
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Tapped on ${pokemon.displayName}'),
-                            duration: const Duration(milliseconds: 500),
-                          ),
-                        );
-                      },
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: PokemonCard(
+                        pokemon: pokemon,
+                        onTap: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Tapped on ${pokemon.displayName}'),
+                              duration: const Duration(milliseconds: 500),
+                            ),
+                          );
+                        },
+                      ),
                     );
                   },
                 ),
