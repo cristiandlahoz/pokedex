@@ -5,6 +5,7 @@ import '../bloc/pokemon_bloc.dart';
 import '../bloc/pokemon_event.dart';
 import '../bloc/pokemon_state.dart';
 import '../widgets/pokemon_card.dart';
+import 'pokemon_details_page.dart';
 
 class PokemonListPage extends StatefulWidget {
   const PokemonListPage({super.key});
@@ -142,10 +143,24 @@ class _PokemonListPageState extends State<PokemonListPage> {
                     return PokemonCard(
                       pokemon: pokemon,
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Tapped on ${pokemon.displayName}'),
-                            duration: const Duration(milliseconds: 500),
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) =>
+                                PokemonDetailsPage(pokemon: pokemon),
+                            transitionsBuilder:
+                                (context, animation, secondaryAnimation, child) {
+                              const begin = Offset(1.0, 0.0);
+                              const end = Offset.zero;
+                              const curve = Curves.easeInOut;
+                              final tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
+                              final offsetAnimation = animation.drive(tween);
+                              return SlideTransition(
+                                position: offsetAnimation,
+                                child: child,
+                              );
+                            },
+                            transitionDuration: const Duration(milliseconds: 300),
                           ),
                         );
                       },
