@@ -37,6 +37,17 @@ query GetPokemonDetails(\$id: Int!) {
       }
       is_hidden
     }
+    pokemonstats {
+      base_stat
+      stat {
+        name
+      }
+    }
+    pokemonmoves(limit: 20) {
+      move {
+        name
+      }
+    }
   }
 }
 ''';

@@ -11,6 +11,8 @@ class PokemonDto extends Pokemon {
     super.weight,
     super.baseExperience,
     super.abilities,
+    super.stats,
+    super.moves,
   });
 
   factory PokemonDto.fromJson(Map<String, dynamic> json) {
@@ -39,6 +41,33 @@ class PokemonDto extends Pokemon {
       }
     }
 
+    List<PokemonStat>? stats;
+    if (json['pokemonstats'] != null) {
+      stats = [];
+      for (final statData in json['pokemonstats'] as List) {
+        if (statData['stat'] != null && 
+            statData['stat']['name'] != null &&
+            statData['base_stat'] != null) {
+          stats.add(PokemonStat(
+            name: statData['stat']['name'] as String,
+            baseStat: statData['base_stat'] as int,
+          ));
+        }
+      }
+    }
+
+    List<PokemonMove>? moves;
+    if (json['pokemonmoves'] != null) {
+      moves = [];
+      for (final moveData in json['pokemonmoves'] as List) {
+        if (moveData['move'] != null && moveData['move']['name'] != null) {
+          moves.add(PokemonMove(
+            name: moveData['move']['name'] as String,
+          ));
+        }
+      }
+    }
+
     return PokemonDto(
       id: json['id'] as int,
       name: json['name'] as String,
@@ -47,6 +76,8 @@ class PokemonDto extends Pokemon {
       baseExperience: json['base_experience'] as int?,
       types: types,
       abilities: abilities,
+      stats: stats,
+      moves: moves,
     );
   }
 }
