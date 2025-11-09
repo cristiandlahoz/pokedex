@@ -20,7 +20,6 @@ class PokemonTypeColors {
     'bug': Color(0xFF92BC2C),
     'ghost': Color(0xFF5F6DBC),
     'steel': Color(0xFF5695A3),
-
   };
 
   static Color getColor(String type) {
