@@ -12,6 +12,9 @@ query GetPokemonList(\$limit: Int, \$offset: Int) {
         name
       }
     }
+    pokemonsprites {
+      sprites
+    }
   }
 }
 ''';
