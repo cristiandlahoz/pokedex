@@ -1,30 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:pokedex/features/pokemon/domain/entities/pokemon_move.dart';
+import 'package:pokedex/features/pokemon/domain/entities/pokemon_stat.dart';
 import 'pokemon_ability.dart';
 import 'pokemon_types.dart';
-
-class PokemonStat extends Equatable {
-  final String name;
-  final int baseStat;
-  
-  const PokemonStat({
-    required this.name,
-    required this.baseStat,
-  });
-  
-  @override
-  List<Object?> get props => [name, baseStat];
-}
-
-class PokemonMove extends Equatable {
-  final String name;
-  
-  const PokemonMove({
-    required this.name,
-  });
-  
-  @override
-  List<Object?> get props => [name];
-}
 
 class Pokemon extends Equatable {
   final int id;
