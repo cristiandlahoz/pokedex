@@ -89,6 +89,7 @@ class AbilitiesSection extends StatelessWidget {
   }
 
   String _formatAbilityName(String name) {
+    if (name.isEmpty) return '';
     return name[0].toUpperCase() + name.substring(1).replaceAll('-', ' ');
   }
 }
