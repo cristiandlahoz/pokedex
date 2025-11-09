@@ -29,6 +29,7 @@ class MovesSection extends StatelessWidget {
   String _formatMoveName(String name) {
     return name
         .split('-')
+        .where((word) => word.isNotEmpty)
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ');
   }
