@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../core/errors/failures.dart';
+import '../../../../core/exceptions/failures.dart';
 import '../entities/pokemon.dart';
 import '../repositories/pokemon_repository.dart';
 

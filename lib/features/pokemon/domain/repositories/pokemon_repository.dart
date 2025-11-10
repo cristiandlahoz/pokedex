@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/errors/failures.dart';
+import '../../../../core/exceptions/failures.dart';
 import '../entities/pokemon.dart';
 
 abstract class PokemonRepository {
