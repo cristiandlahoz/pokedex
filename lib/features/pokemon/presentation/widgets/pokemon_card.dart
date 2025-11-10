@@ -51,15 +51,14 @@ class PokemonCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: ResponsiveUtils.getCardImageSize(context) +
-                    cardPadding * 2,
+                left:
+                    ResponsiveUtils.getCardImageSize(context) + cardPadding * 2,
                 top: 0,
                 bottom: 0,
-                right: ResponsiveUtils.getPokemonIdBadgeSize(context) +
+                right:
+                    ResponsiveUtils.getPokemonIdBadgeSize(context) +
                     cardPadding * 2,
-                child: Center(
-                  child: PokemonCardInfo(pokemon: pokemon),
-                ),
+                child: Center(child: PokemonCardInfo(pokemon: pokemon)),
               ),
               Positioned(
                 right: ResponsiveUtils.getWidthPercentage(
@@ -69,10 +68,7 @@ class PokemonCard extends StatelessWidget {
                 top: 0,
                 bottom: 0,
                 child: Center(
-                  child: PokemonIdBadge(
-                    pokemonId: pokemon.id,
-                    isLarge: true,
-                  ),
+                  child: PokemonIdBadge(pokemonId: pokemon.id, isLarge: true),
                 ),
               ),
               Positioned(
@@ -105,10 +101,12 @@ class PokemonCard extends StatelessWidget {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        PokemonTypeColors.getColorForType(primaryType)
-            .withValues(alpha: PokemonCardConstants.gradientOpacity),
-        PokemonTypeColors.getColorForType(secondaryType)
-            .withValues(alpha: PokemonCardConstants.gradientOpacity),
+        PokemonTypeColors.getColorForType(
+          primaryType,
+        ).withValues(alpha: PokemonCardConstants.gradientOpacity),
+        PokemonTypeColors.getColorForType(
+          secondaryType,
+        ).withValues(alpha: PokemonCardConstants.gradientOpacity),
       ],
     );
   }
