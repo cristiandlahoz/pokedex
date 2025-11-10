@@ -4,7 +4,7 @@ import '../../../../core/errors/failures.dart';
 import '../entities/pokemon.dart';
 import '../repositories/pokemon_repository.dart';
 
-@injectable
+@lazySingleton
 class GetPokemonDetails {
   final PokemonRepository repository;
   
