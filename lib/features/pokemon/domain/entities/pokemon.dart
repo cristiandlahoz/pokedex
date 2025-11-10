@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:pokedex/features/pokemon/domain/entities/pokemon_move.dart';
+import 'package:pokedex/features/pokemon/domain/entities/pokemon_stat.dart';
 import 'pokemon_ability.dart';
 import 'pokemon_types.dart';
 
@@ -10,6 +12,16 @@ class Pokemon extends Equatable {
   final int? baseExperience;
   final List<PokemonTypes> types;
   final List<PokemonAbility>? abilities;
+  final List<PokemonStat>? stats;
+  final List<PokemonMove>? moves;
+  final String? genus;
+  final String? flavorText;
+  final int? genderRate;
+  final int? captureRate;
+  final int? baseHappiness;
+  final int? hatchCounter;
+  final String? growthRateName;
+  final List<String>? eggGroups;
   
   const Pokemon({
     required this.id,
@@ -19,6 +31,16 @@ class Pokemon extends Equatable {
     this.weight,
     this.baseExperience,
     this.abilities,
+    this.stats,
+    this.moves,
+    this.genus,
+    this.flavorText,
+    this.genderRate,
+    this.captureRate,
+    this.baseHappiness,
+    this.hatchCounter,
+    this.growthRateName,
+    this.eggGroups,
   });
   
   String get imageUrl => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
@@ -26,5 +48,5 @@ class Pokemon extends Equatable {
   String get displayName => name[0].toUpperCase() + name.substring(1);
   
   @override
-  List<Object?> get props => [id, name, height, weight, baseExperience, types, abilities];
+  List<Object?> get props => [id, name, height, weight, baseExperience, types, abilities, stats, moves, genus, flavorText, genderRate, captureRate, baseHappiness, hatchCounter, growthRateName, eggGroups];
 }

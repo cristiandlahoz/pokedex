@@ -26,6 +26,8 @@ import 'package:pokedex/features/pokemon/domain/usecases/search_pokemon.dart'
     as _i1058;
 import 'package:pokedex/features/pokemon/presentation/bloc/pokemon_bloc.dart'
     as _i563;
+import 'package:pokedex/features/pokemon/presentation/bloc/pokemon_details_bloc.dart'
+    as _i202;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,16 +47,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i716.PokemonGraphQLDataSource(gh<_i403.GraphQLService>()));
     gh.lazySingleton<_i896.PokemonRepository>(() =>
         _i337.PokemonRepositoryImpl(gh<_i716.PokemonGraphQLDataSource>()));
-    gh.factory<_i261.GetPokemonDetails>(
-        () => _i261.GetPokemonDetails(gh<_i896.PokemonRepository>()));
-    gh.factory<_i680.GetPokemonList>(
-        () => _i680.GetPokemonList(gh<_i896.PokemonRepository>()));
     gh.factory<_i1058.SearchPokemon>(
         () => _i1058.SearchPokemon(gh<_i896.PokemonRepository>()));
+    gh.factory<_i680.GetPokemonList>(
+        () => _i680.GetPokemonList(gh<_i896.PokemonRepository>()));
+    gh.factory<_i261.GetPokemonDetails>(
+        () => _i261.GetPokemonDetails(gh<_i896.PokemonRepository>()));
     gh.factory<_i563.PokemonBloc>(() => _i563.PokemonBloc(
           getPokemonList: gh<_i680.GetPokemonList>(),
           searchPokemon: gh<_i1058.SearchPokemon>(),
         ));
+    gh.factory<_i202.PokemonDetailsBloc>(() => _i202.PokemonDetailsBloc(
+        getPokemonDetails: gh<_i261.GetPokemonDetails>()));
     return this;
   }
 }
