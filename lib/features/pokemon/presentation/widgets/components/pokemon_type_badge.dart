@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/constants/ui_constants.dart';
-import '../../../../../core/utils/pokemon_type_colors.dart';
-import '../../../../../core/utils/pokemon_type_icons.dart';
+import '../../utils/pokemon_type_colors.dart';
+import '../../utils/pokemon_type_icons.dart';
 import '../../../../../core/utils/responsive_utils.dart';
 import '../../../domain/entities/pokemon_types.dart';
 
