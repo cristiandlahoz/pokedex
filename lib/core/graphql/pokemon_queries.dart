@@ -33,6 +33,9 @@ query GetPokemonDetails(\$id: Int!) {
         name
       }
     }
+    pokemonsprites {
+      sprites
+    }
     pokemonabilities {
       ability {
         id
