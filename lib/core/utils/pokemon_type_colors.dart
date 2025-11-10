@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../features/pokemon/domain/entities/pokemon_types.dart';
+import '../constants/ui_constants.dart';
 
 class PokemonTypeColors {
   static const Map<PokemonTypes, Color> _typeColorMap = {
@@ -29,7 +30,7 @@ class PokemonTypeColors {
     return _typeColorMap[type] ?? Colors.grey;
   }
 
-  static Color getBackgroundColorForType(PokemonTypes type, {double opacity = 0.2}) {
+  static Color getBackgroundColorForType(PokemonTypes type, {double opacity = PokemonCardConstants.defaultGradientOpacity}) {
     return getColorForType(type).withValues(alpha: opacity);
   }
 }

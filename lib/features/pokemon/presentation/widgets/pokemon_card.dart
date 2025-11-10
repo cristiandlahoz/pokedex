@@ -101,12 +101,15 @@ class PokemonCard extends StatelessWidget {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        PokemonTypeColors.getColorForType(
+        PokemonTypeColors.getBackgroundColorForType(primaryType),
+        PokemonTypeColors.getBackgroundColorForType(
           primaryType,
-        ).withValues(alpha: PokemonCardConstants.gradientOpacity),
-        PokemonTypeColors.getColorForType(
+          opacity: PokemonCardConstants.gradientOpacity,
+        ),
+        PokemonTypeColors.getBackgroundColorForType(
           secondaryType,
-        ).withValues(alpha: PokemonCardConstants.gradientOpacity),
+          opacity: PokemonCardConstants.gradientOpacity,
+        ),
       ],
     );
   }
