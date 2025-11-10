@@ -25,7 +25,7 @@ class PokemonIdBadge extends StatelessWidget {
         letterSpacing: 0.8,
         shadows: [
           Shadow(
-            color: Colors.black.withValues(
+            color: Colors.white70.withValues(
               alpha: PokemonIdBadgeConstants.shadowOpacityLarge,
             ),
             offset: const Offset(
@@ -36,7 +36,7 @@ class PokemonIdBadge extends StatelessWidget {
           ),
         ],
         fontStyle: FontStyle.italic,
-        color: Colors.black.withValues(
+        color: Colors.white12.withValues(
           alpha: isLarge
               ? PokemonIdBadgeConstants.opacityLarge
               : PokemonIdBadgeConstants.opacityNormal,
