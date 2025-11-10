@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../core/theme/pokemon_type_colors.dart';
-import '../../domain/entities/pokemon.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../../utils/pokemon_type_colors.dart';
+import '../../../domain/entities/pokemon.dart';
 
 class TrainingSection extends StatelessWidget {
   final Pokemon pokemon;

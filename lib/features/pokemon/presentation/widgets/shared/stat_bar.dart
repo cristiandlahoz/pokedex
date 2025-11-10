@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
+import '../../../../../core/constants/app_constants.dart';
 
 class StatBar extends StatelessWidget {
   final String name;

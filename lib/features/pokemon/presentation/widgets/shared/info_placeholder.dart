@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
+import '../../../../../core/constants/app_constants.dart';
 
 class InfoPlaceholder extends StatelessWidget {
   final String message;

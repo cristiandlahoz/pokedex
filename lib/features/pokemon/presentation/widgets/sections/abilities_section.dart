@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../domain/entities/pokemon_ability.dart';
-import 'info_placeholder.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../../../domain/entities/pokemon_ability.dart';
+import '../shared/info_placeholder.dart';
 
 class AbilitiesSection extends StatelessWidget {
   final List<PokemonAbility> abilities;

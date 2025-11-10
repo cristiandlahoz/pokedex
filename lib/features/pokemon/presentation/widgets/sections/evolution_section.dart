@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
-import 'info_placeholder.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../shared/info_placeholder.dart';
 
 class EvolutionSection extends StatelessWidget {
   const EvolutionSection({super.key});
