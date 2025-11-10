@@ -1,4 +1,4 @@
-import 'package:pokedex/features/pokemon/domain/entities/pokemon_types.dart';
+import '../../domain/entities/pokemon_types.dart';
 
 class PokemonTypeIcons {
   static String getIconPath(PokemonTypes type) {
