@@ -1,8 +1,8 @@
 class PokemonCardConstants {
-  static const double cardElevation = 8.0;
+  static const double cardElevation = 5.0;
   static const double backgroundOpacity = 0.2;
   static const double errorIconSize = 48.0;
-  static const double gradientOpacity = 0.15;
+  static const double gradientOpacity = 0.55;
   static const double imagePositionLeft = 0.02;
   static const double imagePositionBottom = -0.002;
   static const double idBadgePositionRight = 0.02;
@@ -40,9 +40,9 @@ class PokemonListPageConstants {
   static const double errorSpacing = 16.0;
   static const double emptyStateTextSize = 18.0;
   static const double errorTextSize = 16.0;
-  static const double listHorizontalPadding = 11.0;
+  static const double listHorizontalPadding = 8.0;
   static const double listVerticalPadding = 2.0;
-  static const double listItemVerticalPadding = 4.0;
-  static const double loadingIndicatorPadding = 16.0;
+  static const double listItemVerticalPadding = 2.0;
+  static const double loadingIndicatorPadding = 18.0;
 }
 
