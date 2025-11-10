@@ -3,6 +3,7 @@ class PokemonCardConstants {
   static const double backgroundOpacity = 0.2;
   static const double errorIconSize = 48.0;
   static const double gradientOpacity = 0.55;
+  static const double defaultGradientOpacity = 0.2;
   static const double imagePositionLeft = 0.02;
   static const double imagePositionBottom = -0.002;
   static const double idBadgePositionRight = 0.02;
