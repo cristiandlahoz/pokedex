@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/constants/ui_constants.dart';
 import '../../../../../core/utils/responsive_utils.dart';
 
@@ -18,44 +19,30 @@ class PokemonCardImage extends StatelessWidget {
 
     return Hero(
       tag: 'pokemon_$pokemonId',
+      transitionOnUserGestures: true,
       child: SizedBox(
         width: imageSize,
         height: imageSize,
-        child: Image.network(
-          imageUrl,
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
           fit: BoxFit.contain,
-          loadingBuilder: _buildLoadingState,
-          errorBuilder: _buildErrorState,
+          placeholder: _buildLoadingState,
+          errorWidget: _buildErrorWidget,
         ),
       ),
     );
   }
 
-  Widget _buildLoadingState(
-    BuildContext context,
-    Widget child,
-    ImageChunkEvent? loadingProgress,
-  ) {
-    if (loadingProgress == null) return child;
-
-    return Center(
-      child: CircularProgressIndicator(
-        value: _calculateLoadingProgress(loadingProgress),
-      ),
+  Widget _buildLoadingState(BuildContext context, String url) {
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 
-  double? _calculateLoadingProgress(ImageChunkEvent loadingProgress) {
-    final totalBytes = loadingProgress.expectedTotalBytes;
-    if (totalBytes == null) return null;
-
-    return loadingProgress.cumulativeBytesLoaded / totalBytes;
-  }
-
-  Widget _buildErrorState(
+  Widget _buildErrorWidget(
     BuildContext context,
-    Object error,
-    StackTrace? stackTrace,
+    String url,
+    dynamic error,
   ) {
     return const Center(
       child: Icon(
