@@ -99,7 +99,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     Emitter<PokemonState> emit,
   ) async {
     if (event.query.isEmpty) {
-      add(const LoadPokemonList(isRefresh: true));
+      // add(const LoadPokemonList(isRefresh: true));
       return;
     }
 
