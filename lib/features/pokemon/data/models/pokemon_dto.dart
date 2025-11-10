@@ -27,7 +27,8 @@ class PokemonDto extends Pokemon {
   });
 
   factory PokemonDto.fromJson(Map<String, dynamic> json) {
-    final sprites = json['pokemonsprites']?[0]?['sprites'] as Map<String, dynamic>?;
+    final sprites =
+        json['pokemonsprites']?[0]?['sprites'] as Map<String, dynamic>?;
     final imageUrl = sprites != null ? getSprite(sprites) : null;
 
     final List<PokemonTypes> types = [];
@@ -63,14 +64,16 @@ class PokemonDto extends Pokemon {
     if (json['pokemonstats'] != null) {
       stats = [];
       for (final statData in json['pokemonstats'] as List) {
-        if (statData['stat'] != null && 
+        if (statData['stat'] != null &&
             statData['stat']['name'] != null &&
             statData['base_stat'] != null) {
-          stats.add(PokemonStat(
-            name: statData['stat']['name'] as String,
-            baseStat: statData['base_stat'] as int,
-            effort: statData['effort'] as int? ?? 0,
-          ));
+          stats.add(
+            PokemonStat(
+              name: statData['stat']['name'] as String,
+              baseStat: statData['base_stat'] as int,
+              effort: statData['effort'] as int? ?? 0,
+            ),
+          );
         }
       }
     }
@@ -80,9 +83,7 @@ class PokemonDto extends Pokemon {
       moves = [];
       for (final moveData in json['pokemonmoves'] as List) {
         if (moveData['move'] != null && moveData['move']['name'] != null) {
-          moves.add(PokemonMove(
-            name: moveData['move']['name'] as String,
-          ));
+          moves.add(PokemonMove(name: moveData['move']['name'] as String));
         }
       }
     }
@@ -95,38 +96,39 @@ class PokemonDto extends Pokemon {
     int? hatchCounter;
     String? growthRateName;
     List<String>? eggGroups;
-    
+
     if (json['pokemonspecy'] != null) {
       final speciesData = json['pokemonspecy'] as Map<String, dynamic>;
-      
+
       genderRate = speciesData['gender_rate'] as int?;
       captureRate = speciesData['capture_rate'] as int?;
       baseHappiness = speciesData['base_happiness'] as int?;
       hatchCounter = speciesData['hatch_counter'] as int?;
-      
+
       if (speciesData['growthrate'] != null) {
         growthRateName = speciesData['growthrate']['name'] as String?;
       }
-      
+
       if (speciesData['pokemonegggroups'] != null) {
         eggGroups = [];
         for (final eggGroupData in speciesData['pokemonegggroups'] as List) {
-          if (eggGroupData['egggroup'] != null && 
+          if (eggGroupData['egggroup'] != null &&
               eggGroupData['egggroup']['name'] != null) {
             eggGroups.add(eggGroupData['egggroup']['name'] as String);
           }
         }
       }
-      
-      if (speciesData['pokemonspeciesnames'] != null && 
+
+      if (speciesData['pokemonspeciesnames'] != null &&
           (speciesData['pokemonspeciesnames'] as List).isNotEmpty) {
         final nameData = (speciesData['pokemonspeciesnames'] as List)[0];
         genus = nameData['genus'] as String?;
       }
-      
-      if (speciesData['pokemonspeciesflavortexts'] != null && 
+
+      if (speciesData['pokemonspeciesflavortexts'] != null &&
           (speciesData['pokemonspeciesflavortexts'] as List).isNotEmpty) {
-        final flavorData = (speciesData['pokemonspeciesflavortexts'] as List)[0];
+        final flavorData =
+            (speciesData['pokemonspeciesflavortexts'] as List)[0];
         flavorText = flavorData['flavor_text'] as String?;
       }
     }
@@ -154,13 +156,11 @@ class PokemonDto extends Pokemon {
   }
 
   static String getSprite(Map<String, dynamic> sprites) {
-    final String officialArtWork =
-        sprites['other']?['official-artwork']?['front_default'] as String;
-    final String home = sprites['other']?['home']?['front_default'] as String;
+    final String? officialArtWork =
+        sprites['other']?['official-artwork']?['front_default'] as String?;
+    final String? home = sprites['other']?['home']?['front_default'] as String?;
     final String defaultSprite = sprites['front_default'] as String;
 
-    return officialArtWork ??
-        home ??
-        defaultSprite;
+    return officialArtWork ?? home ?? defaultSprite;
   }
 }
