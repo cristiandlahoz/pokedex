@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../domain/entities/pokemon.dart';
-import 'physical_stat_card.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../../../domain/entities/pokemon.dart';
+import '../shared/physical_stat_card.dart';
 
 class PhysicalStatsSection extends StatelessWidget {
   final Pokemon pokemon;

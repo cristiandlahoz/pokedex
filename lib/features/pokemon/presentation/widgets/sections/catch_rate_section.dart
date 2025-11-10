@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import '../../../../core/constants/app_constants.dart';
-import '../../../../core/theme/pokemon_type_colors.dart';
-import '../../domain/entities/pokemon.dart';
-import '../../domain/entities/pokemon_stat.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../../utils/pokemon_type_colors.dart';
+import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_stat.dart';
 
 class _CatchRateConstants {
   static const double pokeBallSize = 70.0;

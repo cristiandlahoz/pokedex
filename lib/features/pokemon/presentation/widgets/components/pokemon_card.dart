@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/ui_constants.dart';
-import '../../../../core/utils/pokemon_type_colors.dart';
-import '../../../../core/utils/responsive_utils.dart';
-import '../../domain/entities/pokemon.dart';
-import '../../domain/entities/pokemon_types.dart';
-import 'components/pokemon_card_image.dart';
-import 'components/pokemon_card_info.dart';
-import 'components/pokemon_id_badge.dart';
+import '../../../../../core/constants/ui_constants.dart';
+import '../../utils/pokemon_type_colors.dart';
+import '../../../../../core/utils/responsive_utils.dart';
+import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_types.dart';
+import 'pokemon_card_image.dart';
+import 'pokemon_card_info.dart';
+import 'pokemon_id_badge.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;

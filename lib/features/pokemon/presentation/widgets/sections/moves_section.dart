@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../domain/entities/pokemon_move.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../../../domain/entities/pokemon_move.dart';
 
 class MovesSection extends StatelessWidget {
   final List<PokemonMove> moves;

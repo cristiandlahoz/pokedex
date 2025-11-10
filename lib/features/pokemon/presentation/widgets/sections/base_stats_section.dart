@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../domain/entities/pokemon_stat.dart';
-import 'stat_bar.dart';
+import '../../../../../core/constants/app_constants.dart';
+import '../../../domain/entities/pokemon_stat.dart';
+import '../shared/stat_bar.dart';
 
 class BaseStatsSection extends StatelessWidget {
   final List<PokemonStat> stats;
