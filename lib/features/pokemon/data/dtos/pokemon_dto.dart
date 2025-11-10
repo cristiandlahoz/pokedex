@@ -4,27 +4,69 @@ import '../../domain/entities/pokemon_move.dart';
 import '../../domain/entities/pokemon_stat.dart';
 import '../../domain/entities/pokemon_types.dart';
 
-class PokemonDto extends Pokemon {
+class PokemonDto {
+  final int id;
+  final String name;
+  final String? imageUrl;
+  final int? height;
+  final int? weight;
+  final int? baseExperience;
+  final List<PokemonTypes> types;
+  final List<PokemonAbility>? abilities;
+  final List<PokemonStat>? stats;
+  final List<PokemonMove>? moves;
+  final String? genus;
+  final String? flavorText;
+  final int? genderRate;
+  final int? captureRate;
+  final int? baseHappiness;
+  final int? hatchCounter;
+  final String? growthRateName;
+  final List<String>? eggGroups;
+
   const PokemonDto({
-    required super.id,
-    required super.name,
-    required super.types,
-    super.imageUrl,
-    super.height,
-    super.weight,
-    super.baseExperience,
-    super.abilities,
-    super.stats,
-    super.moves,
-    super.genus,
-    super.flavorText,
-    super.genderRate,
-    super.captureRate,
-    super.baseHappiness,
-    super.hatchCounter,
-    super.growthRateName,
-    super.eggGroups,
+    required this.id,
+    required this.name,
+    required this.types,
+    this.imageUrl,
+    this.height,
+    this.weight,
+    this.baseExperience,
+    this.abilities,
+    this.stats,
+    this.moves,
+    this.genus,
+    this.flavorText,
+    this.genderRate,
+    this.captureRate,
+    this.baseHappiness,
+    this.hatchCounter,
+    this.growthRateName,
+    this.eggGroups,
   });
+
+  Pokemon toDomain() {
+    return Pokemon(
+      id: id,
+      name: name,
+      types: types,
+      imageUrl: imageUrl,
+      height: height,
+      weight: weight,
+      baseExperience: baseExperience,
+      abilities: abilities,
+      stats: stats,
+      moves: moves,
+      genus: genus,
+      flavorText: flavorText,
+      genderRate: genderRate,
+      captureRate: captureRate,
+      baseHappiness: baseHappiness,
+      hatchCounter: hatchCounter,
+      growthRateName: growthRateName,
+      eggGroups: eggGroups,
+    );
+  }
 
   factory PokemonDto.fromJson(Map<String, dynamic> json) {
     final sprites =
