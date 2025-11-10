@@ -32,10 +32,18 @@ class CatchRateSection extends StatelessWidget {
     double statusModifier = 1.0,
   }) {
     final effectiveCurrentHP = currentHP ?? maxHP;
-    final numerator = (3 * maxHP - 2 * effectiveCurrentHP) * captureRate * ballModifier * statusModifier;
-    final denominator = 3 * maxHP;
-    final rate = (numerator / denominator) * 100;
-    return math.min(rate, 100.0);
+    
+    final double hpFactor = (3 * maxHP - 2 * effectiveCurrentHP) / (3 * maxHP);
+    final double a = hpFactor * captureRate * ballModifier * statusModifier;
+    
+    if (a >= 255) return 100.0;
+    
+    final double b = 1048560 / math.pow(16711680 / a, 0.25);
+    
+    final double shakeChance = math.min(b / 65535, 1.0);
+    final double captureChance = math.pow(shakeChance, 4).toDouble();
+    
+    return (captureChance.clamp(0.0, 1.0) * 100);
   }
 
   Color _getPrimaryTypeColor() {
