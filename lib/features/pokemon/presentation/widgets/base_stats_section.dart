@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_stat.dart';
 import 'stat_bar.dart';
 
