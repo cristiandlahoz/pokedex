@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../domain/entities/pokemon.dart';
 
@@ -74,17 +75,24 @@ class PokemonDetailAppBar extends StatelessWidget {
     return Center(
       child: Hero(
         tag: 'pokemon_${pokemon.id}',
-        child: Image.network(
-          pokemon.imageUrl,
+        transitionOnUserGestures: true,
+        child: CachedNetworkImage(
+          imageUrl: pokemon.imageUrl ?? '',
           height: AppConstants.pokemonImageHeight,
           fit: BoxFit.contain,
-          errorBuilder: (context, error, stackTrace) {
-            return const Icon(
-              Icons.error_outline,
-              size: AppConstants.iconSizeLarge,
-              color: Colors.white70,
-            );
-          },
+          placeholder: (context, url) => const SizedBox(
+            height: AppConstants.pokemonImageHeight,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          errorWidget: (context, url, error) => const Icon(
+            Icons.error_outline,
+            size: AppConstants.iconSizeLarge,
+            color: Colors.white70,
+          ),
         ),
       ),
     );
