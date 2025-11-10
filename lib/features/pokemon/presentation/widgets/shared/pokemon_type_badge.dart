@@ -28,10 +28,6 @@ class PokemonTypeBadge extends StatelessWidget {
       ),
       child: SvgPicture.asset(
         PokemonTypeIcons.getIconPath(type),
-        colorFilter: const ColorFilter.mode(
-          Colors.white,
-          BlendMode.srcIn,
-        ),
       ),
     );
   }
