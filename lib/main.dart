@@ -3,26 +3,10 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'core/di/injection_container.dart';
 import 'features/pokemon/presentation/pages/pokemon_list_page.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
+void main() async {
   await initHiveForFlutter();
-  
-  await configureDependencies();
-  
-  runApp(const PokedexApp());
-}
 
-class PokedexApp extends StatelessWidget {
-  const PokedexApp({super.key});
+  configureDependencies();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: const PokemonListPage(),
-    );
-  }
+  runApp(const MaterialApp(home: PokemonListPage()));
 }
