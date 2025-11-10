@@ -6,7 +6,7 @@ import '../../../../core/graphql/graphql_service.dart';
 import '../../../../core/graphql/pokemon_queries.dart';
 import '../models/pokemon_dto.dart';
 
-@injectable
+@lazySingleton
 class PokemonGraphQLDataSource {
   final GraphQLService graphQLService;
   
