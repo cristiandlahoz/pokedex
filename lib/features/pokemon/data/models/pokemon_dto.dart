@@ -15,6 +15,14 @@ class PokemonDto extends Pokemon {
     super.abilities,
     super.stats,
     super.moves,
+    super.genus,
+    super.flavorText,
+    super.genderRate,
+    super.captureRate,
+    super.baseHappiness,
+    super.hatchCounter,
+    super.growthRateName,
+    super.eggGroups,
   });
 
   factory PokemonDto.fromJson(Map<String, dynamic> json) {
@@ -53,6 +61,7 @@ class PokemonDto extends Pokemon {
           stats.add(PokemonStat(
             name: statData['stat']['name'] as String,
             baseStat: statData['base_stat'] as int,
+            effort: statData['effort'] as int? ?? 0,
           ));
         }
       }
@@ -70,6 +79,50 @@ class PokemonDto extends Pokemon {
       }
     }
 
+    String? genus;
+    String? flavorText;
+    int? genderRate;
+    int? captureRate;
+    int? baseHappiness;
+    int? hatchCounter;
+    String? growthRateName;
+    List<String>? eggGroups;
+    
+    if (json['pokemonspecy'] != null) {
+      final speciesData = json['pokemonspecy'] as Map<String, dynamic>;
+      
+      genderRate = speciesData['gender_rate'] as int?;
+      captureRate = speciesData['capture_rate'] as int?;
+      baseHappiness = speciesData['base_happiness'] as int?;
+      hatchCounter = speciesData['hatch_counter'] as int?;
+      
+      if (speciesData['growthrate'] != null) {
+        growthRateName = speciesData['growthrate']['name'] as String?;
+      }
+      
+      if (speciesData['pokemonegggroups'] != null) {
+        eggGroups = [];
+        for (final eggGroupData in speciesData['pokemonegggroups'] as List) {
+          if (eggGroupData['egggroup'] != null && 
+              eggGroupData['egggroup']['name'] != null) {
+            eggGroups.add(eggGroupData['egggroup']['name'] as String);
+          }
+        }
+      }
+      
+      if (speciesData['pokemonspeciesnames'] != null && 
+          (speciesData['pokemonspeciesnames'] as List).isNotEmpty) {
+        final nameData = (speciesData['pokemonspeciesnames'] as List)[0];
+        genus = nameData['genus'] as String?;
+      }
+      
+      if (speciesData['pokemonspeciesflavortexts'] != null && 
+          (speciesData['pokemonspeciesflavortexts'] as List).isNotEmpty) {
+        final flavorData = (speciesData['pokemonspeciesflavortexts'] as List)[0];
+        flavorText = flavorData['flavor_text'] as String?;
+      }
+    }
+
     return PokemonDto(
       id: json['id'] as int,
       name: json['name'] as String,
@@ -80,6 +133,14 @@ class PokemonDto extends Pokemon {
       abilities: abilities,
       stats: stats,
       moves: moves,
+      genus: genus,
+      flavorText: flavorText,
+      genderRate: genderRate,
+      captureRate: captureRate,
+      baseHappiness: baseHappiness,
+      hatchCounter: hatchCounter,
+      growthRateName: growthRateName,
+      eggGroups: eggGroups,
     );
   }
 }

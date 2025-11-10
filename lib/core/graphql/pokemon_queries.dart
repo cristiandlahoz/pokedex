@@ -39,6 +39,7 @@ query GetPokemonDetails(\$id: Int!) {
     }
     pokemonstats {
       base_stat
+      effort
       stat {
         name
       }
@@ -46,6 +47,26 @@ query GetPokemonDetails(\$id: Int!) {
     pokemonmoves(limit: 20) {
       move {
         name
+      }
+    }
+    pokemonspecy {
+      gender_rate
+      capture_rate
+      base_happiness
+      hatch_counter
+      growthrate {
+        name
+      }
+      pokemonegggroups {
+        egggroup {
+          name
+        }
+      }
+      pokemonspeciesnames(where: {language_id: {_eq: 9}}, limit: 1) {
+        genus
+      }
+      pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}, limit: 1, order_by: {version_id: desc}) {
+        flavor_text
       }
     }
   }
