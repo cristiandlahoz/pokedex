@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -30,35 +31,42 @@ import 'package:pokedex/features/pokemon/presentation/bloc/pokemon_details_bloc.
     as _i202;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i526.GetItHelper(
-      this,
-      environment,
-      environmentFilter,
-    );
-    gh.factory<_i1008.GraphQLConfig>(() => _i1008.GraphQLConfig());
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.lazySingleton<_i1008.GraphQLConfig>(() => _i1008.GraphQLConfig());
     gh.lazySingleton<_i403.GraphQLService>(
-        () => _i403.GraphQLService(gh<_i1008.GraphQLConfig>()));
-    gh.factory<_i716.PokemonGraphQLDataSource>(
-        () => _i716.PokemonGraphQLDataSource(gh<_i403.GraphQLService>()));
-    gh.lazySingleton<_i896.PokemonRepository>(() =>
-        _i337.PokemonRepositoryImpl(gh<_i716.PokemonGraphQLDataSource>()));
-    gh.factory<_i1058.SearchPokemon>(
-        () => _i1058.SearchPokemon(gh<_i896.PokemonRepository>()));
-    gh.factory<_i680.GetPokemonList>(
-        () => _i680.GetPokemonList(gh<_i896.PokemonRepository>()));
-    gh.factory<_i261.GetPokemonDetails>(
-        () => _i261.GetPokemonDetails(gh<_i896.PokemonRepository>()));
-    gh.factory<_i563.PokemonBloc>(() => _i563.PokemonBloc(
-          getPokemonList: gh<_i680.GetPokemonList>(),
-          searchPokemon: gh<_i1058.SearchPokemon>(),
-        ));
-    gh.factory<_i202.PokemonDetailsBloc>(() => _i202.PokemonDetailsBloc(
-        getPokemonDetails: gh<_i261.GetPokemonDetails>()));
+      () => _i403.GraphQLService(gh<_i1008.GraphQLConfig>()),
+    );
+    gh.lazySingleton<_i716.PokemonGraphQLDataSource>(
+      () => _i716.PokemonGraphQLDataSource(gh<_i403.GraphQLService>()),
+    );
+    gh.lazySingleton<_i896.PokemonRepository>(
+      () => _i337.PokemonRepositoryImpl(gh<_i716.PokemonGraphQLDataSource>()),
+    );
+    gh.lazySingleton<_i261.GetPokemonDetails>(
+      () => _i261.GetPokemonDetails(gh<_i896.PokemonRepository>()),
+    );
+    gh.lazySingleton<_i680.GetPokemonList>(
+      () => _i680.GetPokemonList(gh<_i896.PokemonRepository>()),
+    );
+    gh.lazySingleton<_i1058.SearchPokemon>(
+      () => _i1058.SearchPokemon(gh<_i896.PokemonRepository>()),
+    );
+    gh.factory<_i563.PokemonBloc>(
+      () => _i563.PokemonBloc(
+        getPokemonList: gh<_i680.GetPokemonList>(),
+        searchPokemon: gh<_i1058.SearchPokemon>(),
+      ),
+    );
+    gh.factory<_i202.PokemonDetailsBloc>(
+      () => _i202.PokemonDetailsBloc(
+        getPokemonDetails: gh<_i261.GetPokemonDetails>(),
+      ),
+    );
     return this;
   }
 }
