@@ -6,7 +6,7 @@ import '../../domain/entities/pokemon.dart';
 import '../bloc/pokemon_bloc.dart';
 import '../bloc/pokemon_event.dart';
 import '../bloc/pokemon_state.dart';
-import '../widgets/components/pokemon_card.dart';
+import '../widgets/list_card/pokemon_card.dart';
 import 'pokemon_details_page.dart';
 
 class PokemonListPage extends StatefulWidget {

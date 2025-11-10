@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/constants/ui_constants.dart';
 import '../../../../../core/utils/responsive_utils.dart';
 import '../../../domain/entities/pokemon.dart';
-import 'pokemon_type_badge.dart';
+import '../shared/pokemon_type_badge.dart';
 
 class PokemonCardInfo extends StatelessWidget {
   final Pokemon pokemon;
