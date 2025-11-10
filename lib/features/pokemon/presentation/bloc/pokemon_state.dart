@@ -50,6 +50,19 @@ class PokemonLoadingMore extends PokemonLoaded {
   });
 }
 
+class PokemonLoadMoreError extends PokemonLoaded {
+  final String errorMessage;
+  
+  const PokemonLoadMoreError({
+    required super.pokemons,
+    required super.currentPage,
+    required this.errorMessage,
+  });
+  
+  @override
+  List<Object?> get props => [pokemons, currentPage, errorMessage];
+}
+
 class PokemonError extends PokemonState {
   final String message;
 

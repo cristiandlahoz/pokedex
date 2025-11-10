@@ -23,9 +23,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     LoadPokemonList event,
     Emitter<PokemonState> emit,
   ) async {
-    if (event.isRefresh) {
-      emit(const PokemonLoading());
-    } else if (state is! PokemonLoaded) {
+    if (event.isRefresh || state is! PokemonLoaded) {
       emit(const PokemonLoading());
     }
 
@@ -59,7 +57,9 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     Emitter<PokemonState> emit,
   ) async {
     final currentState = state;
-    if (currentState is! PokemonLoaded || currentState.hasReachedMax) {
+    if (currentState is! PokemonLoaded || 
+        currentState.hasReachedMax ||
+        currentState is PokemonLoadingMore) {
       return;
     }
 
@@ -75,7 +75,11 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     );
 
     result.fold(
-      (failure) => emit(PokemonError(failure.message)),
+      (failure) => emit(PokemonLoadMoreError(
+        pokemons: currentState.pokemons,
+        currentPage: currentState.currentPage,
+        errorMessage: failure.message,
+      )),
       (newPokemons) {
         if (newPokemons.isEmpty) {
           emit(currentState.copyWith(hasReachedMax: true));
