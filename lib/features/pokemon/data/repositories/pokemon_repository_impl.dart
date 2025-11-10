@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../core/errors/exceptions.dart';
-import '../../../../core/errors/failures.dart';
+import '../../../../core/exceptions/exceptions.dart';
+import '../../../../core/exceptions/failures.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/repositories/pokemon_repository.dart';
 import '../datasources/pokemon_graphql_datasource.dart';
@@ -16,7 +16,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Either<Failure, List<Pokemon>>> getPokemonList({int page = 0, int limit = 20}) async {
     try {
       final result = await dataSource.getPokemonList(page: page, limit: limit);
-      return Right(result);
+      return Right(result.map((dto) => dto.toDomain()).toList());
     } on GraphQLException catch (e) {
       return Left(ServerFailure(e.message));
     } on NetworkException catch (e) {
@@ -33,7 +33,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
       if (result == null) {
         return const Left(ServerFailure('Pokemon not found'));
       }
-      return Right(result);
+      return Right(result.toDomain());
     } on GraphQLException catch (e) {
       return Left(ServerFailure(e.message));
     } on NetworkException catch (e) {
@@ -47,7 +47,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Either<Failure, List<Pokemon>>> searchPokemon(String query) async {
     try {
       final result = await dataSource.searchPokemon(query);
-      return Right(result);
+      return Right(result.map((dto) => dto.toDomain()).toList());
     } on GraphQLException catch (e) {
       return Left(ServerFailure(e.message));
     } on NetworkException catch (e) {

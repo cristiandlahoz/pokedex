@@ -1,10 +1,10 @@
 import 'package:gql/language.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../core/errors/exceptions.dart';
+import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/graphql/graphql_service.dart';
-import '../../../../core/graphql/pokemon_queries.dart';
-import '../models/pokemon_dto.dart';
+import 'pokemon_queries.dart';
+import '../dtos/pokemon_dto.dart';
 
 @lazySingleton
 class PokemonGraphQLDataSource {
