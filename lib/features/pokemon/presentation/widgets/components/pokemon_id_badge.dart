@@ -20,7 +20,22 @@ class PokemonIdBadge extends StatelessWidget {
         fontSize: isLarge
             ? ResponsiveUtils.getFontSizeExtraLarge(context)
             : ResponsiveUtils.getFontSizeSmall(context),
+        fontFamily: 'Serif',
         fontWeight: FontWeight.bold,
+        letterSpacing: 0.8,
+        shadows: [
+          Shadow(
+            color: Colors.black.withValues(
+              alpha: PokemonIdBadgeConstants.shadowOpacityLarge,
+            ),
+            offset: const Offset(
+              PokemonIdBadgeConstants.shadowOffsetSizeX,
+              PokemonIdBadgeConstants.shadowOffsetSizeY,
+            ),
+            blurRadius: 2,
+          ),
+        ],
+        fontStyle: FontStyle.italic,
         color: Colors.black.withValues(
           alpha: isLarge
               ? PokemonIdBadgeConstants.opacityLarge
