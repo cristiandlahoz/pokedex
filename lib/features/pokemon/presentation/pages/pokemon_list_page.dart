@@ -18,22 +18,30 @@ class PokemonListPage extends StatefulWidget {
 
 class _PokemonListPageState extends State<PokemonListPage> {
   final ScrollController _scrollController = ScrollController();
+  late final PokemonBloc _pokemonBloc;
 
   @override
   void initState() {
     super.initState();
+    _pokemonBloc = getIt<PokemonBloc>()..add(const LoadPokemonList());
     _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _pokemonBloc.close();
     super.dispose();
   }
 
   void _onScroll() {
+    final currentState = _pokemonBloc.state;
+
+    if (currentState is PokemonLoadingMore) return;
+    if (currentState is PokemonLoaded && currentState.hasReachedMax) return;
+
     if (_isNearScrollThreshold) {
-      context.read<PokemonBloc>().add(const LoadMorePokemon());
+      _pokemonBloc.add(const LoadMorePokemon());
     }
   }
 
@@ -41,11 +49,12 @@ class _PokemonListPageState extends State<PokemonListPage> {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * PokemonListPageConstants.scrollThreshold);
+    return currentScroll >=
+        (maxScroll * PokemonListPageConstants.scrollThreshold);
   }
 
   void _handleRefresh() {
-    context.read<PokemonBloc>().add(const LoadPokemonList(isRefresh: true));
+    _pokemonBloc.add(const LoadPokemonList(isRefresh: true));
   }
 
   void _handlePokemonTap(Pokemon pokemon) {
@@ -56,24 +65,25 @@ class _PokemonListPageState extends State<PokemonListPage> {
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;
-          const curve = Curves.easeInOut;
-          final tween = Tween(begin: begin, end: end)
-              .chain(CurveTween(curve: curve));
+          const curve = Curves.easeOutCubic;
+          final tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
           final offsetAnimation = animation.drive(tween);
-          return SlideTransition(
-            position: offsetAnimation,
-            child: child,
-          );
+          return SlideTransition(position: offsetAnimation, child: child);
         },
-        transitionDuration: const Duration(milliseconds: 300),
+        transitionDuration: const Duration(milliseconds: 500),
       ),
     );
   }
 
+  final SearchController controller = SearchController();
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<PokemonBloc>()..add(const LoadPokemonList()),
+    return BlocProvider.value(
+      value: _pokemonBloc,
       child: Scaffold(
         appBar: _PokemonListAppBar(),
         body: BlocBuilder<PokemonBloc, PokemonState>(
@@ -87,9 +97,10 @@ class _PokemonListPageState extends State<PokemonListPage> {
     return switch (state) {
       PokemonLoading() => const _LoadingStateWidget(),
       PokemonError() => _ErrorStateWidget(
-          message: state.message,
-          onRetry: _handleRefresh,
-        ),
+        message: state.message,
+        onRetry: _handleRefresh,
+      ),
+      PokemonLoadMoreError() => _buildLoadedContentWithError(state),
       PokemonLoaded() => _buildLoadedContent(state),
       _ => const SizedBox.shrink(),
     };
@@ -107,33 +118,66 @@ class _PokemonListPageState extends State<PokemonListPage> {
       onPokemonTap: _handlePokemonTap,
     );
   }
+
+  Widget _buildLoadedContentWithError(PokemonLoadMoreError state) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to load more: ${state.errorMessage}'),
+          backgroundColor: Colors.red,
+          action: SnackBarAction(
+            label: 'Retry',
+            textColor: Colors.white,
+            onPressed: () => _pokemonBloc.add(const LoadMorePokemon()),
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    });
+
+    return _buildLoadedContent(state);
+  }
 }
 
-class _PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
+class _PokemonListAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(120);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text(
-        'Pokédex',
-        style: TextStyle(fontWeight: FontWeight.w500),
+      flexibleSpace: const SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Pokédex',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepOrange,
+                ),
+              ),
+            ),
+            SizedBox(height: 8),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search Pokémon...',
+                  prefixIcon: Icon(Icons.search),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      backgroundColor: Colors.deepOrange,
-      foregroundColor: Colors.white,
-      elevation: App.appBarElevation,
-    );
-  }
-}
-
-class _LoadingStateWidget extends StatelessWidget {
-  const _LoadingStateWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
     );
   }
 }
@@ -142,10 +186,7 @@ class _ErrorStateWidget extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
 
-  const _ErrorStateWidget({
-    required this.message,
-    required this.onRetry,
-  });
+  const _ErrorStateWidget({required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -190,9 +231,7 @@ class _EmptyStateWidget extends StatelessWidget {
     return const Center(
       child: Text(
         'No Pokémon found',
-        style: TextStyle(
-          fontSize: PokemonListPageConstants.emptyStateTextSize,
-        ),
+        style: TextStyle(fontSize: PokemonListPageConstants.emptyStateTextSize),
       ),
     );
   }
@@ -235,7 +274,7 @@ class _PokemonListView extends StatelessWidget {
 
   Widget _buildListItem(int index) {
     if (index >= state.pokemons.length) {
-      return const _LoadingMoreIndicator();
+      return const _LoadingStateWidget();
     }
 
     final pokemon = state.pokemons[index];
@@ -243,10 +282,7 @@ class _PokemonListView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         vertical: PokemonListPageConstants.listItemVerticalPadding,
       ),
-      child: PokemonCard(
-        pokemon: pokemon,
-        onTap: () => onPokemonTap(pokemon),
-      ),
+      child: PokemonCard(pokemon: pokemon, onTap: () => onPokemonTap(pokemon)),
     );
   }
 
@@ -260,15 +296,17 @@ class _PokemonListView extends StatelessWidget {
   }
 }
 
-class _LoadingMoreIndicator extends StatelessWidget {
-  const _LoadingMoreIndicator();
+class _LoadingStateWidget extends StatelessWidget {
+  const _LoadingStateWidget();
 
   @override
   Widget build(BuildContext context) {
     return const Center(
       child: Padding(
-        padding: EdgeInsets.all(PokemonListPageConstants.loadingIndicatorPadding),
-        child: CircularProgressIndicator(),
+        padding: EdgeInsets.all(
+          PokemonListPageConstants.loadingIndicatorPadding,
+        ),
+        child: LinearProgressIndicator(color: Colors.deepOrange),
       ),
     );
   }
