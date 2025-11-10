@@ -9,6 +9,7 @@ class PokemonDto extends Pokemon {
     required super.id,
     required super.name,
     required super.types,
+    super.imageUrl,
     super.height,
     super.weight,
     super.baseExperience,
@@ -26,11 +27,16 @@ class PokemonDto extends Pokemon {
   });
 
   factory PokemonDto.fromJson(Map<String, dynamic> json) {
+    final sprites = json['pokemonsprites']?[0]?['sprites'] as Map<String, dynamic>?;
+    final imageUrl = sprites != null ? getSprite(sprites) : null;
+
     final List<PokemonTypes> types = [];
     if (json['pokemontypes'] != null) {
       for (final typeData in json['pokemontypes'] as List) {
         if (typeData['type'] != null && typeData['type']['name'] != null) {
-          types.add(PokemonTypeExtension.fromString(typeData['type']['name'] as String));
+          types.add(
+            PokemonTypeExtension.fromString(typeData['type']['name'] as String),
+          );
         }
       }
     }
@@ -39,14 +45,16 @@ class PokemonDto extends Pokemon {
     if (json['pokemonabilities'] != null) {
       abilities = [];
       for (final abilityData in json['pokemonabilities'] as List) {
-        if (abilityData['ability'] != null && 
+        if (abilityData['ability'] != null &&
             abilityData['ability']['id'] != null &&
             abilityData['ability']['name'] != null) {
-          abilities.add(PokemonAbility(
-            id: abilityData['ability']['id'] as int,
-            name: abilityData['ability']['name'] as String,
-            isHidden: abilityData['is_hidden'] as bool? ?? false,
-          ));
+          abilities.add(
+            PokemonAbility(
+              id: abilityData['ability']['id'] as int,
+              name: abilityData['ability']['name'] as String,
+              isHidden: abilityData['is_hidden'] as bool? ?? false,
+            ),
+          );
         }
       }
     }
@@ -126,6 +134,7 @@ class PokemonDto extends Pokemon {
     return PokemonDto(
       id: json['id'] as int,
       name: json['name'] as String,
+      imageUrl: imageUrl,
       height: json['height'] as int?,
       weight: json['weight'] as int?,
       baseExperience: json['base_experience'] as int?,
@@ -142,5 +151,16 @@ class PokemonDto extends Pokemon {
       growthRateName: growthRateName,
       eggGroups: eggGroups,
     );
+  }
+
+  static String getSprite(Map<String, dynamic> sprites) {
+    final String officialArtWork =
+        sprites['other']?['official-artwork']?['front_default'] as String;
+    final String home = sprites['other']?['home']?['front_default'] as String;
+    final String defaultSprite = sprites['front_default'] as String;
+
+    return officialArtWork ??
+        home ??
+        defaultSprite;
   }
 }

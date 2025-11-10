@@ -7,6 +7,7 @@ import 'pokemon_types.dart';
 class Pokemon extends Equatable {
   final int id;
   final String name;
+  final String? imageUrl;
   final int? height;
   final int? weight;
   final int? baseExperience;
@@ -22,11 +23,12 @@ class Pokemon extends Equatable {
   final int? hatchCounter;
   final String? growthRateName;
   final List<String>? eggGroups;
-  
+
   const Pokemon({
     required this.id,
     required this.name,
     required this.types,
+    this.imageUrl,
     this.height,
     this.weight,
     this.baseExperience,
@@ -42,11 +44,9 @@ class Pokemon extends Equatable {
     this.growthRateName,
     this.eggGroups,
   });
-  
-  String get imageUrl => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
-  
+
   String get displayName => name[0].toUpperCase() + name.substring(1);
-  
+
   @override
   List<Object?> get props => [id, name, height, weight, baseExperience, types, abilities, stats, moves, genus, flavorText, genderRate, captureRate, baseHappiness, hatchCounter, growthRateName, eggGroups];
 }

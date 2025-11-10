@@ -1,167 +1,89 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/ui_constants.dart';
+import '../../../../core/utils/pokemon_type_colors.dart';
+import '../../../../core/utils/responsive_utils.dart';
 import '../../domain/entities/pokemon.dart';
+import '../../domain/entities/pokemon_types.dart';
+import 'components/pokemon_card_image.dart';
+import 'components/pokemon_card_info.dart';
+import 'components/pokemon_id_badge.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
   final VoidCallback? onTap;
 
-  const PokemonCard({
-    super.key,
-    required this.pokemon,
-    this.onTap,
-  });
-
-  Color _getTypeColor(String type) {
-    switch (type.toLowerCase()) {
-      case 'fire':
-        return Colors.deepOrange;
-      case 'water':
-        return Colors.blue;
-      case 'grass':
-        return Colors.green;
-      case 'electric':
-        return Colors.amber;
-      case 'psychic':
-        return Colors.pink;
-      case 'ice':
-        return Colors.lightBlue;
-      case 'dragon':
-        return Colors.indigo.shade900;
-      case 'dark':
-        return Colors.black87;
-      case 'fairy':
-        return Colors.pinkAccent;
-      case 'normal':
-        return Colors.grey;
-      case 'fighting':
-        return Colors.red;
-      case 'flying':
-        return Colors.indigo;
-      case 'poison':
-        return Colors.purple;
-      case 'ground':
-        return Colors.brown;
-      case 'rock':
-        return Colors.grey.shade700;
-      case 'bug':
-        return Colors.lightGreen;
-      case 'ghost':
-        return Colors.deepPurple;
-      case 'steel':
-        return Colors.blueGrey;
-      default:
-        return Colors.grey;
-    }
-  }
+  const PokemonCard({super.key, required this.pokemon, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first.name
-        : 'normal';
-    final backgroundColor = _getTypeColor(primaryType).withValues(alpha: 0.2);
+    final cardHeight = ResponsiveUtils.getCardHeight(context);
+    final cardPadding = ResponsiveUtils.getCardPadding(context);
+    final borderRadius = ResponsiveUtils.getCardBorderRadius(context);
 
     return Card(
-      elevation: 4,
+      elevation: PokemonCardConstants.cardElevation,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(borderRadius),
         child: Container(
+          height: cardHeight,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: backgroundColor,
+            borderRadius: BorderRadius.circular(borderRadius),
+            gradient: _buildGradient(),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
             children: [
-              Expanded(
-                flex: 3,
-                child: Hero(
-                  tag: 'pokemon_${pokemon.id}',
-                  child: Image.network(
-                    pokemon.imageUrl,
-                    fit: BoxFit.contain,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return const Center(
-                        child: Icon(
-                          Icons.error_outline,
-                          size: 48,
-                          color: Colors.red,
-                        ),
-                      );
-                    },
-                  ),
+              Positioned(
+                left: ResponsiveUtils.getWidthPercentage(
+                  context,
+                  PokemonCardConstants.imagePositionLeft,
+                ),
+                bottom: ResponsiveUtils.getHeightPercentage(
+                  context,
+                  PokemonCardConstants.imagePositionBottom,
+                ),
+                child: PokemonCardImage(
+                  imageUrl: pokemon.imageUrl ?? '',
+                  pokemonId: pokemon.id,
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '#${pokemon.id.toString().padLeft(3, '0')}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        pokemon.displayName,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 4,
-                        runSpacing: 4,
-                        alignment: WrapAlignment.center,
-                        children: pokemon.types.map((type) {
-                          final typeName = type.name;
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: _getTypeColor(typeName),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              typeName.toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
+              Positioned(
+                left:
+                    ResponsiveUtils.getCardImageSize(context) + cardPadding * 2,
+                top: 0,
+                bottom: 0,
+                right:
+                    ResponsiveUtils.getPokemonIdBadgeSize(context) +
+                    cardPadding * 2,
+                child: Center(child: PokemonCardInfo(pokemon: pokemon)),
+              ),
+              Positioned(
+                right: ResponsiveUtils.getWidthPercentage(
+                  context,
+                  PokemonCardConstants.idBadgePositionRight,
+                ),
+                top: 0,
+                bottom: 0,
+                child: Center(
+                  child: PokemonIdBadge(pokemonId: pokemon.id, isLarge: true),
+                ),
+              ),
+              Positioned(
+                top: ResponsiveUtils.getHeightPercentage(
+                  context,
+                  PokemonCardConstants.heartIconTop,
+                ),
+                right: ResponsiveUtils.getWidthPercentage(
+                  context,
+                  PokemonCardConstants.heartIconRight,
+                ),
+                child: Icon(
+                  Icons.favorite_border,
+                  color: Colors.white.withValues(alpha: 0.7),
+                  size: ResponsiveUtils.getFontSizeLarge(context),
                 ),
               ),
             ],
@@ -169,5 +91,31 @@ class PokemonCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  LinearGradient _buildGradient() {
+    final primaryType = _getPrimaryType();
+    final secondaryType = _getSecondaryType();
+
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        PokemonTypeColors.getColorForType(
+          primaryType,
+        ).withValues(alpha: PokemonCardConstants.gradientOpacity),
+        PokemonTypeColors.getColorForType(
+          secondaryType,
+        ).withValues(alpha: PokemonCardConstants.gradientOpacity),
+      ],
+    );
+  }
+
+  PokemonTypes _getPrimaryType() {
+    return pokemon.types.isNotEmpty ? pokemon.types.first : PokemonTypes.normal;
+  }
+
+  PokemonTypes _getSecondaryType() {
+    return pokemon.types.length > 1 ? pokemon.types[1] : _getPrimaryType();
   }
 }
