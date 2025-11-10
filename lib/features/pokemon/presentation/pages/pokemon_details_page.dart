@@ -9,11 +9,15 @@ import '../bloc/pokemon_details_event.dart';
 import '../bloc/pokemon_details_state.dart';
 import '../widgets/abilities_section.dart';
 import '../widgets/base_stats_section.dart';
+import '../widgets/breeding_section.dart';
+import '../widgets/catch_rate_section.dart';
 import '../widgets/evolution_section.dart';
 import '../widgets/moves_section.dart';
 import '../widgets/physical_stats_section.dart';
 import '../widgets/pokemon_detail_app_bar.dart';
 import '../widgets/pokemon_detail_header.dart';
+import '../widgets/species_section.dart';
+import '../widgets/training_section.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -28,18 +32,21 @@ class PokemonDetailsPage extends StatefulWidget {
 }
 
 class _PokemonDetailsPageState extends State<PokemonDetailsPage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _initializeAnimations();
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
   void dispose() {
+    _tabController.dispose();
     _animationController.dispose();
     super.dispose();
   }
@@ -142,19 +149,19 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildLoadedState(Pokemon pokemon) {
-    return CustomScrollView(
-      slivers: [
-        PokemonDetailAppBar(
-          pokemon: pokemon,
-          backgroundColor: _getPrimaryTypeColor(pokemon),
-        ),
-        SliverToBoxAdapter(
-          child: FadeTransition(
-            opacity: _fadeAnimation,
-            child: _buildContentContainer(pokemon),
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          PokemonDetailAppBar(
+            pokemon: pokemon,
+            backgroundColor: _getPrimaryTypeColor(pokemon),
           ),
-        ),
-      ],
+        ];
+      },
+      body: FadeTransition(
+        opacity: _fadeAnimation,
+        child: _buildContentContainer(pokemon),
+      ),
     );
   }
 
@@ -171,20 +178,97 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           PokemonDetailHeader(pokemon: pokemon),
-          PhysicalStatsSection(pokemon: pokemon),
-          if (pokemon.stats != null && pokemon.stats!.isNotEmpty)
-            BaseStatsSection(stats: pokemon.stats!)
-          else
-            BaseStatsSection.withSampleData(),
-          AbilitiesSection(abilities: pokemon.abilities ?? []),
-          const EvolutionSection(),
-          if (pokemon.moves != null && pokemon.moves!.isNotEmpty)
-            MovesSection(moves: pokemon.moves!)
-          else
-            MovesSection.withSampleData(),
-          const SizedBox(height: AppConstants.largePadding),
+          _buildTabBar(pokemon),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                _buildAboutTab(pokemon),
+                _buildStatsTab(pokemon),
+                _buildMovesTab(pokemon),
+                _buildOtherTab(pokemon),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
+
+  Widget _buildTabBar(Pokemon pokemon) {
+    return TabBar(
+      controller: _tabController,
+      labelColor: _getPrimaryTypeColor(pokemon),
+      unselectedLabelColor: Colors.grey,
+      indicatorColor: _getPrimaryTypeColor(pokemon),
+      indicatorWeight: 3,
+      labelStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+      ),
+      tabs: const [
+        Tab(text: 'About'),
+        Tab(text: 'Stats'),
+        Tab(text: 'Moves'),
+        Tab(text: 'Other'),
+      ],
+    );
+  }
+
+  Widget _buildAboutTab(Pokemon pokemon) {
+    return ListView(
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      children: [
+        if (pokemon.genus != null || pokemon.flavorText != null)
+          SpeciesSection(pokemon: pokemon),
+        PhysicalStatsSection(pokemon: pokemon),
+        CatchRateSection(pokemon: pokemon),
+        TrainingSection(pokemon: pokemon),
+        BreedingSection(pokemon: pokemon),
+        const SizedBox(height: AppConstants.largePadding),
+      ],
+    );
+  }
+
+  Widget _buildStatsTab(Pokemon pokemon) {
+    return ListView(
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      children: [
+        if (pokemon.stats != null && pokemon.stats!.isNotEmpty)
+          BaseStatsSection(stats: pokemon.stats!)
+        else
+          BaseStatsSection.withSampleData(),
+        const SizedBox(height: AppConstants.largePadding),
+      ],
+    );
+  }
+
+  Widget _buildMovesTab(Pokemon pokemon) {
+    return ListView(
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      children: [
+        if (pokemon.moves != null && pokemon.moves!.isNotEmpty)
+          MovesSection(moves: pokemon.moves!)
+        else
+          MovesSection.withSampleData(),
+        const SizedBox(height: AppConstants.largePadding),
+      ],
+    );
+  }
+
+  Widget _buildOtherTab(Pokemon pokemon) {
+    return ListView(
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      children: [
+        AbilitiesSection(abilities: pokemon.abilities ?? []),
+        const EvolutionSection(),
+        const SizedBox(height: AppConstants.largePadding),
+      ],
+    );
+  }
+
 }

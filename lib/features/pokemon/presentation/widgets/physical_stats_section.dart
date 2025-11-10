@@ -21,38 +21,51 @@ class PhysicalStatsSection extends StatelessWidget {
     return '${(weight / 10).toStringAsFixed(1)} kg';
   }
 
+  String _formatGenderRatio(int? genderRate) {
+    if (genderRate == null) return 'Unknown';
+    if (genderRate == -1) return 'Genderless';
+    
+    final femalePercent = (genderRate / 8 * 100).toStringAsFixed(1);
+    final malePercent = ((8 - genderRate) / 8 * 100).toStringAsFixed(1);
+    return '$malePercent%  $femalePercent%';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppConstants.defaultPadding),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: PhysicalStatCard(
-              label: 'Height',
-              value: _formatHeight(pokemon.height),
-              icon: Icons.height,
-              color: Colors.blue,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: PhysicalStatCard(
+                  label: 'Height',
+                  value: _formatHeight(pokemon.height),
+                  icon: Icons.height,
+                  color: Colors.blue,
+                ),
+              ),
+              const SizedBox(width: AppConstants.smallPadding),
+              Expanded(
+                child: PhysicalStatCard(
+                  label: 'Weight',
+                  value: _formatWeight(pokemon.weight),
+                  icon: Icons.monitor_weight,
+                  color: Colors.orange,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: AppConstants.smallPadding),
-          Expanded(
-            child: PhysicalStatCard(
-              label: 'Weight',
-              value: _formatWeight(pokemon.weight),
-              icon: Icons.monitor_weight,
-              color: Colors.orange,
+          if (pokemon.genderRate != null) ...[
+            const SizedBox(height: AppConstants.smallPadding),
+            PhysicalStatCard(
+              label: 'Gender Ratio',
+              value: _formatGenderRatio(pokemon.genderRate),
+              icon: pokemon.genderRate == -1 ? Icons.block : Icons.wc,
+              color: pokemon.genderRate == -1 ? Colors.grey : Colors.purple,
             ),
-          ),
-          const SizedBox(width: AppConstants.smallPadding),
-          Expanded(
-            child: PhysicalStatCard(
-              label: 'Base EXP',
-              value: pokemon.baseExperience?.toString() ?? 'N/A',
-              icon: Icons.star,
-              color: Colors.amber,
-            ),
-          ),
+          ],
         ],
       ),
     );
