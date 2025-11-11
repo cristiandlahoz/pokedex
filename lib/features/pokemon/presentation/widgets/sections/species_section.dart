@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
 import '../../utils/pokemon_type_colors.dart';
-import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_details.dart';
 import '../../../domain/entities/pokemon_types.dart';
 
 class SpeciesSection extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
 
   const SpeciesSection({
     super.key,
@@ -61,10 +61,10 @@ class SpeciesSection extends StatelessWidget {
               ),
             ),
           ],
-          if (pokemon.flavorText != null) ...[
+          if (pokemon.description != null) ...[
             const SizedBox(height: 12),
             Text(
-              pokemon.flavorText!.replaceAll('\n', ' ').replaceAll('\f', ' '),
+              pokemon.description!.replaceAll('\n', ' ').replaceAll('\f', ' '),
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 14,

@@ -3,8 +3,10 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/exceptions/failures.dart';
 import '../../domain/entities/pokemon.dart';
+import '../../domain/entities/pokemon_details.dart';
 import '../../domain/repositories/pokemon_repository.dart';
 import '../datasources/pokemon_graphql_datasource.dart';
+import '../dtos/pokemon_details_dto.dart';
 
 @LazySingleton(as: PokemonRepository)
 class PokemonRepositoryImpl implements PokemonRepository {
@@ -27,13 +29,13 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
   
   @override
-  Future<Either<Failure, Pokemon>> getPokemonDetails(int id) async {
+  Future<Either<Failure, PokemonDetails>> getPokemonDetails(int id) async {
     try {
       final result = await dataSource.getPokemonDetails(id);
       if (result == null) {
         return const Left(ServerFailure('Pokemon not found'));
       }
-      return Right(result.toDomain());
+      return Right(PokemonDetailsDto.fromJson(result.toJson()).toDomainDetails());
     } on GraphQLException catch (e) {
       return Left(ServerFailure(e.message));
     } on NetworkException catch (e) {

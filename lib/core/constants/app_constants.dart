@@ -11,7 +11,7 @@ class AppConstants {
   
   static const double appBarExpandedHeight = 300.0;
   static const double pokemonImageHeight = 200.0;
-  static const double statBarHeight = 24.0;
+  static const double statBarHeight = 12.0;
   static const double statNameWidth = 80.0;
   static const double statValueWidth = 40.0;
   
