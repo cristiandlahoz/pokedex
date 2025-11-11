@@ -47,14 +47,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i896.PokemonRepository>(
       () => _i337.PokemonRepositoryImpl(gh<_i716.PokemonGraphQLDataSource>()),
     );
-    gh.lazySingleton<_i261.GetPokemonDetails>(
-      () => _i261.GetPokemonDetails(gh<_i896.PokemonRepository>()),
+    gh.lazySingleton<_i1058.SearchPokemon>(
+      () => _i1058.SearchPokemon(gh<_i896.PokemonRepository>()),
     );
     gh.lazySingleton<_i680.GetPokemonList>(
       () => _i680.GetPokemonList(gh<_i896.PokemonRepository>()),
     );
-    gh.lazySingleton<_i1058.SearchPokemon>(
-      () => _i1058.SearchPokemon(gh<_i896.PokemonRepository>()),
+    gh.lazySingleton<_i261.GetPokemonDetails>(
+      () => _i261.GetPokemonDetails(gh<_i896.PokemonRepository>()),
     );
     gh.factory<_i563.PokemonBloc>(
       () => _i563.PokemonBloc(

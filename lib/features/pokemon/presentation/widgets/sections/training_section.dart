@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
 import '../../utils/pokemon_type_colors.dart';
-import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_details.dart';
 
 class TrainingSection extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
 
   const TrainingSection({
     super.key,
@@ -27,9 +27,9 @@ class TrainingSection extends StatelessWidget {
   }
 
   String _getEvYield() {
-    if (pokemon.stats == null || pokemon.stats!.isEmpty) return 'Unknown';
+    if (pokemon.stats.isEmpty) return 'Unknown';
     
-    final evStats = pokemon.stats!.where((stat) => stat.effort > 0).toList();
+    final evStats = pokemon.stats.where((stat) => stat.effort > 0).toList();
     if (evStats.isEmpty) return 'None';
     
     return evStats.map((stat) {
@@ -41,7 +41,7 @@ class TrainingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (pokemon.growthRateName == null && 
+    if (pokemon.growthRate == null && 
         pokemon.baseExperience == null && 
         pokemon.baseHappiness == null) {
       return const SizedBox.shrink();
@@ -77,10 +77,10 @@ class TrainingSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          if (pokemon.growthRateName != null)
+          if (pokemon.growthRate != null)
             _buildInfoRow(
               label: 'Growth Rate:',
-              value: _formatGrowthRate(pokemon.growthRateName),
+              value: _formatGrowthRate(pokemon.growthRate),
             ),
           if (pokemon.baseExperience != null) ...[
             const SizedBox(height: 12),

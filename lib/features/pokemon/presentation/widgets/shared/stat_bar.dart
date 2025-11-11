@@ -60,12 +60,7 @@ class StatBar extends StatelessWidget {
             child: Container(
               height: AppConstants.statBarHeight,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    color.withValues(alpha: AppConstants.opacityMedium),
-                    color,
-                  ],
-                ),
+                color: color,
                 borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
               ),
             ),
