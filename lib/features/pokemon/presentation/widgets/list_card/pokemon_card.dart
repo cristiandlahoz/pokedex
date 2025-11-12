@@ -65,7 +65,7 @@ class PokemonCard extends StatelessWidget {
                   context,
                   PokemonCardConstants.idBadgePositionRight,
                 ),
-                top: 0,
+                top: 54,
                 bottom: 0,
                 child: Center(
                   child: PokemonIdBadge(pokemonId: pokemon.id, isLarge: true),
