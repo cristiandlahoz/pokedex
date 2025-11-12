@@ -49,7 +49,7 @@ class PokemonDetailAppBar extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          _buildPokeballWatermark(),
+          // _buildPokeballWatermark(),
           _buildPokemonImage(),
         ],
       ),

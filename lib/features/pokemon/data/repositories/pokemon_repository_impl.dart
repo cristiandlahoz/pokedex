@@ -52,7 +52,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
       if (result == null) {
         return const Left(ServerFailure('Pokemon not found'));
       }
-      return Right(result.toDomain());
+      return Right(PokemonDetailsDto.fromJson(result).toDomainDetails());
     } on GraphQLException catch (e, stackTrace) {
       _logError('getPokemonDetails', e, stackTrace);
       return Left(
