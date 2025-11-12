@@ -34,6 +34,9 @@ query GetPokemonDetails(\$id: Int!) {
       ability {
         id
         name
+        abilityflavortexts(where: {language_id: {_eq: 9}}, limit: 1, order_by: {version_group_id: desc}) {
+          flavor_text
+        }
       }
       is_hidden
       slot
@@ -88,21 +91,12 @@ query GetPokemonDetails(\$id: Int!) {
           name
         }
       }
-    }
-  }
-}
-''';
-
-const String getTypeEfficaciesQuery = '''
-query GetTypeEfficacies(\$typeIds: [Int!]!) {
-  type(where: {id: {_in: \$typeIds}}) {
-    id
-    name
-    TypeefficaciesByTargetTypeId {
-      damage_factor
-      type {
-        id
-        name
+      TypeefficaciesByTargetTypeId {
+        damage_factor
+        type {
+          id
+          name
+        }
       }
     }
   }
