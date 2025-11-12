@@ -37,7 +37,7 @@ class PokemonGraphQLDataSource {
 
     final result = await graphQLService.query(
       QueryOptions(
-        document: parseString(getPokemonListQuery),
+        document: gql(getPokemonListQuery),
         variables: variables,
         fetchPolicy: FetchPolicy.cacheAndNetwork,
       ),
@@ -57,7 +57,7 @@ class PokemonGraphQLDataSource {
       try {
         result = await graphQLService.query(
           QueryOptions(
-            document: parseString(getPokemonDetailsQuery),
+            document: gql(getPokemonDetailsQuery),
             variables: {'id': id},
             fetchPolicy: FetchPolicy.cacheFirst,
           ),
@@ -65,7 +65,7 @@ class PokemonGraphQLDataSource {
       } catch (e) {
         result = await graphQLService.query(
           QueryOptions(
-            document: parseString(getPokemonDetailsQuery),
+            document: gql(getPokemonDetailsQuery),
             variables: {'id': id},
             fetchPolicy: FetchPolicy.cacheOnly,
           ),
@@ -101,7 +101,7 @@ class PokemonGraphQLDataSource {
   Future<List<PokemonDto>> searchPokemon(String name) async {
     final result = await graphQLService.query(
       QueryOptions(
-        document: parseString(searchPokemonQuery),
+        document: gql(searchPokemonQuery),
         variables: {'name': '%$name%'},
         fetchPolicy: FetchPolicy.cacheAndNetwork,
       ),
