@@ -30,6 +30,10 @@ class PokemonTypeColors {
     return _typeColorMap[type] ?? Colors.grey;
   }
 
+  static Color getTypeColor(PokemonTypes type) {
+    return getColorForType(type);
+  }
+
   static Color getColor(String typeName) {
     final type = PokemonTypeExtension.fromString(typeName);
     return getColorForType(type);
