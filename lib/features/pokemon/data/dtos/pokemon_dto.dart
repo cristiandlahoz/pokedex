@@ -197,11 +197,11 @@ class PokemonDto {
     );
   }
 
-  static String getSprite(Map<String, dynamic> sprites) {
+  static String? getSprite(Map<String, dynamic> sprites) {
     final String? officialArtWork =
         sprites['other']?['official-artwork']?['front_default'] as String?;
     final String? home = sprites['other']?['home']?['front_default'] as String?;
-    final String defaultSprite = sprites['front_default'] as String;
+    final String? defaultSprite = sprites['front_default'] as String?;
 
     return officialArtWork ?? home ?? defaultSprite;
   }

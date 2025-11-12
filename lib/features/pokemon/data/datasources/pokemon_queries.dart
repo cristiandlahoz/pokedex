@@ -86,11 +86,15 @@ query SearchPokemon(\$name: String!) {
     name
     height
     weight
+    base_experience
     pokemontypes {
       type {
         id
         name
       }
+    }
+    pokemonsprites {
+      sprites
     }
   }
 }
