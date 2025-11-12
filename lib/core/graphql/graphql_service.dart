@@ -7,7 +7,13 @@ class GraphQLService {
   late GraphQLClient client;
 
   GraphQLService(GraphQLConfig config) {
-    final httpLink = HttpLink(config.endpoint);
+    final httpLink = HttpLink(
+      config.endpoint,
+      defaultHeaders: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
 
     client = GraphQLClient(
       link: httpLink,
@@ -23,6 +29,15 @@ class GraphQLService {
   }
 
   Future<QueryResult> query(QueryOptions options) async {
-    return await client.query(options);
+    try {
+      return await client.query(options).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw Exception('Request timeout');
+        },
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 }

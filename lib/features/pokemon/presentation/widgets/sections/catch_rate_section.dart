@@ -1,17 +1,13 @@
-import 'package:flutter/material.dart';
+import '../../../domain/entities/pokemon_details.dart';
+import '../../../domain/entities/pokemon_stat.dart';
 import 'dart:math' as math;
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/constants/app_constants.dart';
 import '../../utils/pokemon_type_colors.dart';
-import '../../../domain/entities/pokemon.dart';
-import '../../../domain/entities/pokemon_stat.dart';
 
 class _CatchRateConstants {
   static const double pokeBallSize = 70.0;
-  static const double pokeBallBorderWidth = 2.0;
-  static const double centerLineWidth = 30.0;
-  static const double centerLineHeight = 2.0;
-  static const double centerButtonSize = 16.0;
-  static const double centerButtonTopOffset = 33.0;
   static const double rateTagTopOffset = 6.0;
   static const double pokeBallModifier = 1.0;
   static const double greatBallModifier = 1.5;
@@ -24,12 +20,12 @@ class _CatchRateConstants {
 
 class _BallRate {
   final double rate;
-  final Color color;
+  final String assetPath;
   final String label;
 
   const _BallRate({
     required this.rate,
-    required this.color,
+    required this.assetPath,
     required this.label,
   });
 }
@@ -67,58 +63,16 @@ class _SectionTitleBadge extends StatelessWidget {
 }
 
 class _PokeBallVisual extends StatelessWidget {
-  final Color color;
+  final String assetPath;
 
-  const _PokeBallVisual({required this.color});
+  const _PokeBallVisual({required this.assetPath});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SvgPicture.asset(
+      assetPath,
       width: _CatchRateConstants.pokeBallSize,
       height: _CatchRateConstants.pokeBallSize,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: RadialGradient(
-          colors: [
-            color.withValues(alpha: 0.3),
-            color.withValues(alpha: 0.6),
-          ],
-        ),
-        border: Border.all(
-          color: Colors.black87,
-          width: _CatchRateConstants.pokeBallBorderWidth,
-        ),
-      ),
-      child: Center(
-        child: Container(
-          width: _CatchRateConstants.centerLineWidth,
-          height: _CatchRateConstants.centerLineHeight,
-          color: Colors.black87,
-        ),
-      ),
-    );
-  }
-}
-
-class _PokeBallCenterButton extends StatelessWidget {
-  const _PokeBallCenterButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: _CatchRateConstants.centerButtonTopOffset,
-      child: Container(
-        width: _CatchRateConstants.centerButtonSize,
-        height: _CatchRateConstants.centerButtonSize,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.black87,
-            width: _CatchRateConstants.pokeBallBorderWidth,
-          ),
-        ),
-      ),
     );
   }
 }
@@ -170,8 +124,7 @@ class _PokeBallRateCard extends StatelessWidget {
         Stack(
           alignment: Alignment.topCenter,
           children: [
-            _PokeBallVisual(color: ballRate.color),
-            const _PokeBallCenterButton(),
+            _PokeBallVisual(assetPath: ballRate.assetPath),
             _RateTag(rate: ballRate.rate),
           ],
         ),
@@ -189,7 +142,7 @@ class _PokeBallRateCard extends StatelessWidget {
 }
 
 class CatchRateSection extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
 
   const CatchRateSection({
     super.key,
@@ -197,9 +150,9 @@ class CatchRateSection extends StatelessWidget {
   });
 
   int _getMaxHP() {
-    if (pokemon.stats == null) return 100;
+    if (pokemon.stats.isEmpty) return 100;
     
-    final hpStat = pokemon.stats!.firstWhere(
+    final hpStat = pokemon.stats.firstWhere(
       (stat) => stat.name.toLowerCase() == 'hp',
       orElse: () => const PokemonStat(name: 'hp', baseStat: 100),
     );
@@ -238,7 +191,6 @@ class CatchRateSection extends StatelessWidget {
 
   List<_BallRate> _getBallRates() {
     final maxHP = _getMaxHP();
-    const double statusModifier = 1.0;
 
     return [
       _BallRate(
@@ -246,9 +198,8 @@ class CatchRateSection extends StatelessWidget {
           pokemon.captureRate!,
           _CatchRateConstants.pokeBallModifier,
           maxHP,
-          statusModifier: statusModifier,
         ) * 100,
-        color: Colors.red,
+        assetPath: 'assets/icons/pokeballs/poke_ball.svg',
         label: 'Poké Ball',
       ),
       _BallRate(
@@ -256,9 +207,8 @@ class CatchRateSection extends StatelessWidget {
           pokemon.captureRate!,
           _CatchRateConstants.greatBallModifier,
           maxHP,
-          statusModifier: statusModifier,
         ) * 100,
-        color: Colors.blue,
+        assetPath: 'assets/icons/pokeballs/great_ball.svg',
         label: 'Great Ball',
       ),
       _BallRate(
@@ -266,9 +216,8 @@ class CatchRateSection extends StatelessWidget {
           pokemon.captureRate!,
           _CatchRateConstants.ultraBallModifier,
           maxHP,
-          statusModifier: statusModifier,
         ) * 100,
-        color: Colors.yellow[700]!,
+        assetPath: 'assets/icons/pokeballs/ultra_ball.svg',
         label: 'Ultra Ball',
       ),
     ];

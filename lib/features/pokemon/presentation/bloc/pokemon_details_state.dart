@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import '../../../../core/exceptions/failures.dart';
-import '../../domain/entities/pokemon.dart';
+import '../../domain/entities/pokemon_details.dart';
 
 abstract class PokemonDetailsState extends Equatable {
   const PokemonDetailsState();
@@ -18,7 +18,7 @@ class PokemonDetailsLoading extends PokemonDetailsState {
 }
 
 class PokemonDetailsLoaded extends PokemonDetailsState {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
 
   const PokemonDetailsLoaded(this.pokemon);
 

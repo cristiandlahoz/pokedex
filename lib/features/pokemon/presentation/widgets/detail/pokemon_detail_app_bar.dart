@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/constants/app_constants.dart';
-import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_details.dart';
 
 class PokemonDetailAppBar extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
   final Color backgroundColor;
 
   const PokemonDetailAppBar({

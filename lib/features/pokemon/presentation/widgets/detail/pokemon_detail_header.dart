@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
 import '../../utils/pokemon_type_colors.dart';
-import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_details.dart';
 import '../shared/type_badge.dart';
 
 class PokemonDetailHeader extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
 
   const PokemonDetailHeader({
     super.key,
@@ -21,7 +21,6 @@ class PokemonDetailHeader extends StatelessWidget {
         children: [
           _buildNameAndId(),
           const SizedBox(height: AppConstants.smallPadding),
-          _buildTypeBadges(),
         ],
       ),
     );
@@ -49,19 +48,6 @@ class PokemonDetailHeader extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildTypeBadges() {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: pokemon.types
-          .map((type) => TypeBadge(
-                typeName: type.name,
-                color: PokemonTypeColors.getColor(type.name),
-              ))
-          .toList(),
     );
   }
 }

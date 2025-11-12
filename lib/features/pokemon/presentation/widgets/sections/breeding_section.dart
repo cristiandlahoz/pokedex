@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
 import '../../utils/pokemon_type_colors.dart';
-import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_details.dart';
 
 class BreedingSection extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
 
   const BreedingSection({
     super.key,
@@ -40,7 +40,7 @@ class BreedingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (pokemon.eggGroups == null || pokemon.eggGroups!.isEmpty) {
+    if (pokemon.eggGroups.isEmpty) {
       return const SizedBox.shrink();
     }
 
@@ -88,7 +88,7 @@ class BreedingSection extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: pokemon.eggGroups!.asMap().entries.map((entry) {
+            children: pokemon.eggGroups.asMap().entries.map((entry) {
               final index = entry.key;
               final eggGroup = entry.value;
               return Container(
@@ -123,39 +123,6 @@ class BreedingSection extends StatelessWidget {
               );
             }).toList(),
           ),
-          if (pokemon.hatchCounter != null) ...[
-            const SizedBox(height: 20),
-            const Text(
-              'Egg cycles:',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 8),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: '${pokemon.hatchCounter} ',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  TextSpan(
-                    text: '(${(pokemon.hatchCounter! + 1) * 255} Steps)',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ],
       ),
     );
