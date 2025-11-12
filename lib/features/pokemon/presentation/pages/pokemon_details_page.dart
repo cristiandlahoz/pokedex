@@ -20,7 +20,7 @@ import '../widgets/sections/physical_stats_section.dart';
 import '../widgets/detail/pokemon_detail_app_bar.dart';
 import '../widgets/detail/pokemon_detail_header.dart';
 import '../widgets/sections/training_section.dart';
-import '../widgets/sections/type_defenses_section.dart';
+import '../widgets/sections/type_effectiveness_section.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -243,6 +243,8 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         CatchRateSection(pokemon: pokemon),
         TrainingSection(pokemon: pokemon),
         BreedingSection(pokemon: pokemon),
+        AbilitiesSection(abilities: pokemon.abilities),
+        const EvolutionSection(),
         const SizedBox(height: AppConstants.largePadding),
       ],
     );
@@ -259,7 +261,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
           )
         else
           BaseStatsSection.withSampleData(),
-        TypeDefensesSection(pokemon: pokemon),
+        TypeEffectivenessSection(pokemon: pokemon),
         const SizedBox(height: AppConstants.largePadding),
       ],
     );
@@ -281,10 +283,8 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   Widget _buildOtherTab(PokemonDetails pokemon) {
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
-      children: [
-        AbilitiesSection(abilities: pokemon.abilities),
-        const EvolutionSection(),
-        const SizedBox(height: AppConstants.largePadding),
+      children: const [
+        SizedBox(height: AppConstants.largePadding),
       ],
     );
   }
