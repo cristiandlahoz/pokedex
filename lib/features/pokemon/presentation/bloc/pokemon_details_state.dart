@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '../../../../core/exceptions/failures.dart';
 import '../../domain/entities/pokemon.dart';
 
 abstract class PokemonDetailsState extends Equatable {
@@ -26,10 +27,10 @@ class PokemonDetailsLoaded extends PokemonDetailsState {
 }
 
 class PokemonDetailsError extends PokemonDetailsState {
-  final String message;
+  final Failure failure;
 
-  const PokemonDetailsError(this.message);
+  const PokemonDetailsError(this.failure);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [failure];
 }

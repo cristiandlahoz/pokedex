@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
+import '../../../../core/exceptions/failures.dart';
 import '../../domain/entities/pokemon.dart';
 
-abstract class PokemonState extends Equatable {
+sealed class PokemonState extends Equatable {
   const PokemonState();
 
   @override
@@ -51,23 +52,23 @@ class PokemonLoadingMore extends PokemonLoaded {
 }
 
 class PokemonLoadMoreError extends PokemonLoaded {
-  final String errorMessage;
+  final Failure failure;
   
   const PokemonLoadMoreError({
     required super.pokemons,
     required super.currentPage,
-    required this.errorMessage,
+    required this.failure,
   });
   
   @override
-  List<Object?> get props => [pokemons, currentPage, errorMessage];
+  List<Object?> get props => [pokemons, currentPage, failure];
 }
 
 class PokemonError extends PokemonState {
-  final String message;
+  final Failure failure;
 
-  const PokemonError(this.message);
+  const PokemonError(this.failure);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [failure];
 }

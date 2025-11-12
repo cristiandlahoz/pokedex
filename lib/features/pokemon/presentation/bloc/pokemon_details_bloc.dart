@@ -23,7 +23,7 @@ class PokemonDetailsBloc extends Bloc<PokemonDetailsEvent, PokemonDetailsState> 
     final result = await getPokemonDetails(event.pokemonId);
 
     result.fold(
-      (failure) => emit(PokemonDetailsError(failure.message)),
+      (failure) => emit(PokemonDetailsError(failure)),
       (pokemon) => emit(PokemonDetailsLoaded(pokemon)),
     );
   }
