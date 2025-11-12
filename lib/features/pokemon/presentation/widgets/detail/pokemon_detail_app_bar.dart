@@ -47,27 +47,7 @@ class PokemonDetailAppBar extends StatelessWidget {
           ],
         ),
       ),
-      child: Stack(
-        children: [
-          // _buildPokeballWatermark(),
-          _buildPokemonImage(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPokeballWatermark() {
-    return const Positioned(
-      right: -30,
-      top: -30,
-      child: Opacity(
-        opacity: AppConstants.opacityLight,
-        child: Icon(
-          Icons.catching_pokemon,
-          size: AppConstants.iconSizeExtraLarge,
-          color: Colors.white,
-        ),
-      ),
+      child: _buildPokemonImage(),
     );
   }
 
