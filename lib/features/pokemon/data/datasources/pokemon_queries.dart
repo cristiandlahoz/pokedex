@@ -27,21 +27,16 @@ query GetPokemonDetails(\$id: Int!) {
     height
     weight
     base_experience
-    pokemontypes {
-      type {
-        id
-        name
-      }
-    }
     pokemonsprites {
       sprites
     }
-    pokemonabilities {
+    pokemonabilities(order_by: {slot: asc}) {
       ability {
         id
         name
       }
       is_hidden
+      slot
     }
     pokemonstats {
       base_stat
@@ -73,6 +68,28 @@ query GetPokemonDetails(\$id: Int!) {
       }
       pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}, limit: 1, order_by: {version_id: desc}) {
         flavor_text
+      }
+    }
+  }
+  pokemontype(where: {pokemon_id: {_eq: \$id}}) {
+    type {
+      id
+      name
+    }
+  }
+}
+''';
+
+const String getTypeEfficaciesQuery = '''
+query GetTypeEfficacies(\$typeIds: [Int!]!) {
+  type(where: {id: {_in: \$typeIds}}) {
+    id
+    name
+    TypeefficaciesByTargetTypeId {
+      damage_factor
+      type {
+        id
+        name
       }
     }
   }

@@ -24,10 +24,17 @@ class GraphQLException extends AppException {
     
     final linkException = result.exception?.linkException;
     if (linkException != null) {
-      return GraphQLException('Network error: ${linkException.toString()}');
+      final errorStr = linkException.toString();
+      if (errorStr.contains('FormatException') || errorStr.contains('Unexpected character')) {
+        return const GraphQLException('API service temporarily unavailable. Please try again later.');
+      }
+      if (errorStr.contains('SocketException') || errorStr.contains('Failed host lookup')) {
+        return const GraphQLException('No internet connection. Please check your network.');
+      }
+      return GraphQLException('Network error. Please try again.');
     }
     
-    return const GraphQLException('Unknown GraphQL error');
+    return const GraphQLException('Unknown error occurred. Please try again.');
   }
 }
 
