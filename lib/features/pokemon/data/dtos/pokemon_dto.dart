@@ -59,8 +59,9 @@ class PokemonDto {
     if (json['pokemontypes'] != null) {
       for (final typeData in json['pokemontypes'] as List) {
         if (typeData['type'] != null && typeData['type']['name'] != null) {
+          final typeName = typeData['type']['name'] as String;
           types.add(
-            PokemonTypeExtension.fromString(typeData['type']['name'] as String),
+            PokemonTypeExtension.fromString(typeName),
           );
         }
       }

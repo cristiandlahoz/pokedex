@@ -74,12 +74,12 @@ class PokemonDetailsDto extends PokemonDto {
     String? genus;
     String? description;
     if (species != null) {
-      final genera = species['pokemonspeciesgenera'] as List?;
+      final genera = species['pokemonspeciesnames'] as List?;
       if (genera != null && genera.isNotEmpty) {
         genus = genera[0]['genus'] as String?;
       }
 
-      final descriptions = species['pokemonspeciesflavortext'] as List?;
+      final descriptions = species['pokemonspeciesflavortexts'] as List?;
       if (descriptions != null && descriptions.isNotEmpty) {
         description = (descriptions[0]['flavor_text'] as String?)
             ?.replaceAll('\n', ' ')
@@ -132,8 +132,8 @@ class PokemonDetailsDto extends PokemonDto {
     }
 
     final List<String> eggGroups = [];
-    if (species != null && species['pokemonspeciesegggroups'] != null) {
-      for (final eggGroupData in species['pokemonspeciesegggroups'] as List) {
+    if (species != null && species['pokemonegggroups'] != null) {
+      for (final eggGroupData in species['pokemonegggroups'] as List) {
         if (eggGroupData['egggroup'] != null &&
             eggGroupData['egggroup']['name'] != null) {
           eggGroups.add(eggGroupData['egggroup']['name'] as String);
@@ -170,38 +170,6 @@ class PokemonDetailsDto extends PokemonDto {
     Map<String, dynamic> json,
     List<PokemonTypes> pokemonTypes,
   ) {
-    if (pokemonTypes.isEmpty) return [];
-
-    final Map<PokemonTypes, double> damageMap = {};
-
-    for (final type in PokemonTypes.values) {
-      damageMap[type] = 1.0;
-    }
-
-    for (final pokemonType in pokemonTypes) {
-      final typeData = json['pokemontypes']?.firstWhere(
-        (t) => t['type']?['name'] == pokemonType.name,
-        orElse: () => null,
-      );
-
-      if (typeData != null && typeData['type']?['TypeefficaciesByTargetTypeId'] != null) {
-        for (final efficacy in typeData['type']['TypeefficaciesByTargetTypeId'] as List) {
-          final damageTypeName = efficacy['type']?['name'] as String?;
-          final damageFactor = efficacy['damage_factor'] as int?;
-
-          if (damageTypeName != null && damageFactor != null) {
-            final attackingType = PokemonTypeExtension.fromString(damageTypeName);
-            damageMap[attackingType] = (damageMap[attackingType] ?? 1.0) * (damageFactor / 100.0);
-          }
-        }
-      }
-    }
-
-    return damageMap.entries
-        .map((entry) => TypeDefenseInfo(
-              type: entry.key,
-              damageMultiplier: entry.value,
-            ))
-        .toList();
+    return [];
   }
 }

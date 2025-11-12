@@ -32,7 +32,7 @@ class PokemonGraphQLDataSource {
     return pokemonList.map((json) => PokemonDto.fromJson(json as Map<String, dynamic>)).toList();
   }
   
-  Future<PokemonDto?> getPokemonDetails(int id) async {
+  Future<Map<String, dynamic>?> getPokemonDetails(int id) async {
     final result = await graphQLService.query(
       QueryOptions(
         document: parseString(getPokemonDetailsQuery),
@@ -47,7 +47,8 @@ class PokemonGraphQLDataSource {
     
     final List<dynamic> pokemonList = result.data!['pokemon'] as List<dynamic>;
     if (pokemonList.isEmpty) return null;
-    return PokemonDto.fromJson(pokemonList.first as Map<String, dynamic>);
+    final pokemonData = pokemonList.first as Map<String, dynamic>;
+    return pokemonData;
   }
   
   Future<List<PokemonDto>> searchPokemon(String name) async {
