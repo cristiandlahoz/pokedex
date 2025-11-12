@@ -214,11 +214,7 @@ class _PokemonFilterMenuState extends State<PokemonFilterMenu> {
             ),
             if (isSelected) ...[
               const SizedBox(width: AppDesignTokens.spacingXS),
-              const Icon(
-                Icons.check,
-                size: 16,
-                color: Colors.white,
-              ),
+              const Icon(Icons.check, size: 16, color: Colors.white),
             ],
           ],
         ),
@@ -255,8 +251,9 @@ class _PokemonFilterMenuState extends State<PokemonFilterMenu> {
           ],
         ),
         const SizedBox(height: AppDesignTokens.spacingM),
-        ...GenerationFilterItem.allGenerations
-            .map((item) => _buildGenerationTile(item)),
+        ...GenerationFilterItem.allGenerations.map(
+          (item) => _buildGenerationTile(item),
+        ),
       ],
     );
   }
@@ -319,8 +316,9 @@ class _PokemonFilterMenuState extends State<PokemonFilterMenu> {
                     style: TextStyle(
                       fontSize: AppDesignTokens.fontSizeMedium,
                       fontWeight: FontWeight.w600,
-                      color:
-                          isSelected ? AppColors.primary : AppColors.textPrimary,
+                      color: isSelected
+                          ? AppColors.primary
+                          : AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -351,9 +349,7 @@ class _PokemonFilterMenuState extends State<PokemonFilterMenu> {
       padding: const EdgeInsets.all(AppDesignTokens.spacingL),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: Border(
-          top: BorderSide(color: AppColors.cardBorder, width: 1),
-        ),
+        border: Border(top: BorderSide(color: AppColors.cardBorder, width: 1)),
       ),
       child: Row(
         children: [
@@ -397,15 +393,13 @@ class _PokemonFilterMenuState extends State<PokemonFilterMenu> {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                   vertical: AppDesignTokens.spacingM,
+                ),
+                backgroundColor: AppColors.primary,
+                disabledBackgroundColor: AppColors.textSecondary.withValues(
+                  alpha: 0.3,
+                ),
               ),
-              backgroundColor: AppColors.primary,
-              disabledBackgroundColor:
-                  AppColors.textSecondary.withValues(alpha: 0.3),
-            ),
-              child: const Text(
-                'Apply',
-                style: TextStyle(color: Colors.white),
-              ),
+              child: const Text('Apply', style: TextStyle(color: Colors.white)),
             ),
           ),
         ],
