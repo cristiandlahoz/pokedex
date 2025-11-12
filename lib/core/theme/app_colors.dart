@@ -12,5 +12,6 @@ class AppColors {
   static const Color textPrimary = Colors.black87;
   static const Color textSecondary = Color(0xFF757575);
   static const Color divider = Color(0xFFE0E0E0);
+  static const Color cardBorder = Color(0xFFE0E0E0);
   static const Color error = Colors.red;
 }
