@@ -28,6 +28,7 @@ class PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
     backgroundColor: AppColors.surface,
     elevation: 0,
     toolbarHeight: AppBarConstants.toolbarHeight,
+    centerTitle: true,
     title: Text(
       'Pokédex',
       style: TextStyle(
@@ -37,17 +38,18 @@ class PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
         letterSpacing: -0.5,
       ),
     ),
-    actions: [
-      IconButton(
-        icon: Icon(
-          Icons.settings,
-          color: AppColors.iconColor,
-          size: AppDesignTokens.iconSizeLarge,
-        ),
-        tooltip: 'Settings',
-        onPressed: () {},
-      ),
-    ],
+    //TODO: add action handler
+    // actions: [
+    //   IconButton(
+    //     icon: Icon(
+    //       Icons.settings,
+    //       color: AppColors.iconColor,
+    //       size: AppDesignTokens.iconSizeLarge,
+    //     ),
+    //     tooltip: 'Settings',
+    //     onPressed: () {},
+    //   ),
+    // ],
     flexibleSpace: SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -113,14 +115,13 @@ class PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
               right: 6,
               top: 6,
               child: Container(
-                padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
                 constraints: const BoxConstraints(
-                  minWidth: 18,
-                  minHeight: 18,
+                  minWidth: 14,
+                  minHeight: 14,
                 ),
                 child: Center(
                   child: Text(
