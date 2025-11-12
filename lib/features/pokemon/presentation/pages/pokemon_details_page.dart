@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/di/injection_container.dart';
-import '../utils/pokemon_type_colors.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
-import '../../domain/entities/pokemon_types.dart';
 import '../bloc/pokemon_details_bloc.dart';
 import '../bloc/pokemon_details_event.dart';
 import '../bloc/pokemon_details_state.dart';
+import '../utils/pokemon_type_helper.dart';
 import '../widgets/sections/abilities_section.dart';
 import '../widgets/sections/base_stats_section.dart';
 import '../widgets/sections/breeding_section.dart';
@@ -21,6 +20,8 @@ import '../widgets/detail/pokemon_detail_app_bar.dart';
 import '../widgets/detail/pokemon_detail_header.dart';
 import '../widgets/sections/training_section.dart';
 import '../widgets/sections/type_effectiveness_section.dart';
+import '../widgets/shared/loading_state_widget.dart';
+import '../widgets/shared/error_state_widget.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -44,8 +45,10 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   void initState() {
     super.initState();
     _initializeAnimations();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: _tabs.length, vsync: this);
   }
+
+  static const List<String> _tabs = ['About', 'Stats', 'Moves', 'Other'];
 
   @override
   void dispose() {
@@ -64,13 +67,6 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
       curve: Curves.easeInOut,
     );
     _animationController.forward();
-  }
-
-  Color _getPrimaryTypeColor(Pokemon pokemon) {
-    final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first
-        : PokemonTypes.normal;
-    return PokemonTypeColors.getColorForType(primaryType);
   }
 
   @override
@@ -93,72 +89,28 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
               return _buildLoadedState(state.pokemon);
             }
             
-            return _buildInitialState();
+            return _buildLoadingState();
           },
         ),
       ),
     );
   }
 
-  Widget _buildInitialState() {
-    return Container(
-      color: _getPrimaryTypeColor(widget.pokemon),
-      child: const Center(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        ),
-      ),
-    );
-  }
-
   Widget _buildLoadingState() {
-    return Container(
-      color: _getPrimaryTypeColor(widget.pokemon),
-      child: const Center(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        ),
-      ),
+    return LoadingStateWidget(
+      backgroundColor: PokemonTypeHelper.getPrimaryTypeColor(widget.pokemon),
     );
   }
 
   Widget _buildErrorState(String message) {
-    return Container(
-      color: _getPrimaryTypeColor(widget.pokemon),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.error_outline,
-              size: 64,
-              color: Colors.white,
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Text(
-                message,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: () {
-                context.read<PokemonDetailsBloc>().add(
-                      LoadPokemonDetails(widget.pokemon.id),
-                    );
-              },
-              icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
-            ),
-          ],
-        ),
-      ),
+    return ErrorStateWidget(
+      message: message,
+      backgroundColor: PokemonTypeHelper.getPrimaryTypeColor(widget.pokemon),
+      onRetry: () {
+        context.read<PokemonDetailsBloc>().add(
+              LoadPokemonDetails(widget.pokemon.id),
+            );
+      },
     );
   }
 
@@ -168,7 +120,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         return [
           PokemonDetailAppBar(
             pokemon: pokemon,
-            backgroundColor: _getPrimaryTypeColor(pokemon),
+            backgroundColor: PokemonTypeHelper.getPrimaryTypeColor(pokemon),
           ),
         ];
       },
@@ -210,11 +162,13 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildTabBar(PokemonDetails pokemon) {
+    final primaryTypeColor = PokemonTypeHelper.getPrimaryTypeColor(pokemon);
+    
     return TabBar(
       controller: _tabController,
-      labelColor: _getPrimaryTypeColor(pokemon),
+      labelColor: primaryTypeColor,
       unselectedLabelColor: Colors.grey,
-      indicatorColor: _getPrimaryTypeColor(pokemon),
+      indicatorColor: primaryTypeColor,
       indicatorWeight: 3,
       labelStyle: const TextStyle(
         fontSize: 16,
@@ -224,12 +178,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         fontSize: 16,
         fontWeight: FontWeight.normal,
       ),
-      tabs: const [
-        Tab(text: 'About'),
-        Tab(text: 'Stats'),
-        Tab(text: 'Moves'),
-        Tab(text: 'Other'),
-      ],
+      tabs: _tabs.map((tab) => Tab(text: tab)).toList(),
     );
   }
 
@@ -257,7 +206,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         if (pokemon.stats.isNotEmpty)
           BaseStatsSection(
             stats: pokemon.stats,
-            primaryType: pokemon.types.isNotEmpty ? pokemon.types.first.name : 'normal',
+            primaryType: PokemonTypeHelper.getPrimaryTypeName(pokemon),
           )
         else
           BaseStatsSection.withSampleData(),
