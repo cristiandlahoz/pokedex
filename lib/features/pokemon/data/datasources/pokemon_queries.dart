@@ -48,6 +48,12 @@ query GetPokemonDetails(\$id: Int!) {
     pokemonmoves(limit: 20) {
       move {
         name
+        power
+        accuracy
+        pp
+        type {
+          name
+        }
       }
     }
     pokemonspecy {
