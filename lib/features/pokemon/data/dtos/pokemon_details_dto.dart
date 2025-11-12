@@ -98,11 +98,20 @@ class PokemonDetailsDto extends PokemonDto {
           if (abilityData is Map && 
               abilityData['ability'] != null &&
               abilityData['ability']['name'] != null) {
+            String? effect;
+            final flavorTexts = abilityData['ability']['abilityflavortexts'] as List?;
+            if (flavorTexts != null && flavorTexts.isNotEmpty) {
+              effect = (flavorTexts[0]['flavor_text'] as String?)
+                  ?.replaceAll('\n', ' ')
+                  .replaceAll('\f', ' ');
+            }
+            
             abilities.add(
               PokemonAbility(
                 id: abilityData['ability']['id'] as int,
                 name: abilityData['ability']['name'] as String,
                 isHidden: abilityData['is_hidden'] as bool? ?? false,
+                effect: effect,
               ),
             );
           }

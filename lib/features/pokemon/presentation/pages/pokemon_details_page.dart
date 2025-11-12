@@ -193,7 +193,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         CatchRateSection(pokemon: pokemon),
         TrainingSection(pokemon: pokemon),
         BreedingSection(pokemon: pokemon),
-        AbilitiesSection(abilities: pokemon.abilities),
+        AbilitiesSection(pokemon: pokemon),
         const EvolutionSection(),
         const SizedBox(height: AppConstants.largePadding),
       ],
