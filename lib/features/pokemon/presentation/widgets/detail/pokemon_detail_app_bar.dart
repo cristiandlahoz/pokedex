@@ -58,20 +58,24 @@ class PokemonDetailAppBar extends StatelessWidget {
         transitionOnUserGestures: true,
         child: CachedNetworkImage(
           imageUrl: pokemon.imageUrl ?? '',
+          width: AppConstants.pokemonImageHeight,
           height: AppConstants.pokemonImageHeight,
           fit: BoxFit.contain,
-          placeholder: (context, url) => const SizedBox(
+          placeholder: (context, url) => SizedBox(
+            width: AppConstants.pokemonImageHeight,
             height: AppConstants.pokemonImageHeight,
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 color: Colors.white,
               ),
             ),
           ),
-          errorWidget: (context, url, error) => const Icon(
-            Icons.error_outline,
-            size: AppConstants.iconSizeLarge,
-            color: Colors.white70,
+          errorWidget: (context, url, error) => const Center(
+            child: Icon(
+              Icons.error_outline,
+              size: AppConstants.iconSizeLarge,
+              color: Colors.white70,
+            ),
           ),
         ),
       ),
