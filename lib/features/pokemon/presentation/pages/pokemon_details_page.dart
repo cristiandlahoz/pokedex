@@ -5,6 +5,7 @@ import '../../../../core/di/injection_container.dart';
 import '../utils/pokemon_type_colors.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
+import '../../domain/entities/pokemon_types.dart';
 import '../bloc/pokemon_details_bloc.dart';
 import '../bloc/pokemon_details_event.dart';
 import '../bloc/pokemon_details_state.dart';
@@ -67,9 +68,9 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
 
   Color _getPrimaryTypeColor(Pokemon pokemon) {
     final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first.name
-        : 'normal';
-    return PokemonTypeColors.getColor(primaryType);
+        ? pokemon.types.first
+        : PokemonTypes.normal;
+    return PokemonTypeColors.getColorForType(primaryType);
   }
 
   @override

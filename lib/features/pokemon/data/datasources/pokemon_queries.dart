@@ -31,12 +31,6 @@ query GetPokemonDetails(\$id: Int!) {
       type {
         id
         name
-        TypeefficaciesByTargetTypeId {
-          damage_factor
-          type {
-            name
-          }
-        }
       }
     }
     pokemonsprites {
