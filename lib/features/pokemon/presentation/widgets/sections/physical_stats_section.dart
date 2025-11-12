@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
-import '../../../domain/entities/pokemon.dart';
+import '../../../domain/entities/pokemon_details.dart';
 import '../shared/physical_stat_card.dart';
 
 class PhysicalStatsSection extends StatelessWidget {
-  final Pokemon pokemon;
+  final PokemonDetails pokemon;
 
   const PhysicalStatsSection({
     super.key,
@@ -57,13 +57,13 @@ class PhysicalStatsSection extends StatelessWidget {
               ),
             ],
           ),
-          if (pokemon.genderRate != null) ...[
+          if (pokemon.genderRatio != null) ...[
             const SizedBox(height: AppConstants.smallPadding),
             PhysicalStatCard(
               label: 'Gender Ratio',
-              value: _formatGenderRatio(pokemon.genderRate),
-              icon: pokemon.genderRate == -1 ? Icons.block : Icons.wc,
-              color: pokemon.genderRate == -1 ? Colors.grey : Colors.purple,
+              value: _formatGenderRatio(pokemon.genderRatio),
+              icon: pokemon.genderRatio == -1 ? Icons.block : Icons.wc,
+              color: pokemon.genderRatio == -1 ? Colors.grey : Colors.purple,
             ),
           ],
         ],

@@ -11,7 +11,7 @@ class AppConstants {
   
   static const double appBarExpandedHeight = 300.0;
   static const double pokemonImageHeight = 200.0;
-  static const double statBarHeight = 24.0;
+  static const double statBarHeight = 12.0;
   static const double statNameWidth = 80.0;
   static const double statValueWidth = 40.0;
   
@@ -34,4 +34,12 @@ class AppConstants {
   
   static const double opacityLight = 0.1;
   static const double opacityMedium = 0.7;
+  static const double opacityBorder = 0.3;
+  static const double opacityText = 0.8;
+  
+  static const double chipHorizontalPadding = 8.0;
+  static const double chipVerticalPadding = 4.0;
+  static const double chipBorderRadius = 6.0;
+  static const double chipSpacing = 8.0;
+  static const double chipRunSpacing = 4.0;
 }

@@ -4,22 +4,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/di/injection_container.dart';
 import '../../../../core/exceptions/failures.dart';
-import '../utils/pokemon_type_colors.dart';
 import '../../domain/entities/pokemon.dart';
+import '../../domain/entities/pokemon_details.dart';
 import '../bloc/pokemon_details_bloc.dart';
 import '../bloc/pokemon_details_event.dart';
 import '../bloc/pokemon_details_state.dart';
+import '../utils/pokemon_type_helper.dart';
 import '../widgets/sections/abilities_section.dart';
 import '../widgets/sections/base_stats_section.dart';
 import '../widgets/sections/breeding_section.dart';
 import '../widgets/sections/catch_rate_section.dart';
+import '../widgets/sections/species_section.dart';
 import '../widgets/sections/evolution_section.dart';
 import '../widgets/sections/moves_section.dart';
 import '../widgets/sections/physical_stats_section.dart';
 import '../widgets/detail/pokemon_detail_app_bar.dart';
 import '../widgets/detail/pokemon_detail_header.dart';
-import '../widgets/sections/species_section.dart';
 import '../widgets/sections/training_section.dart';
+import '../widgets/sections/type_effectiveness_section.dart';
+import '../widgets/shared/loading_state_widget.dart';
+import '../widgets/shared/error_state_widget.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -38,14 +42,15 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late TabController _tabController;
-  bool _showErrorDetails = false;
 
   @override
   void initState() {
     super.initState();
     _initializeAnimations();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: _tabs.length, vsync: this);
   }
+
+  static const List<String> _tabs = ['About', 'Stats', 'Moves', 'Other'];
 
   @override
   void dispose() {
@@ -64,13 +69,6 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
       curve: Curves.easeInOut,
     );
     _animationController.forward();
-  }
-
-  Color _getPrimaryTypeColor(Pokemon pokemon) {
-    final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first.name
-        : 'normal';
-    return PokemonTypeColors.getColor(primaryType);
   }
 
   @override
@@ -93,7 +91,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
               return _buildLoadedState(state.pokemon);
             }
             
-            return _buildLoadedState(widget.pokemon);
+            return _buildLoadingState();
           },
         ),
       ),
@@ -101,99 +99,30 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildLoadingState() {
-    return Container(
-      color: _getPrimaryTypeColor(widget.pokemon),
-      child: const Center(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        ),
-      ),
+    return LoadingStateWidget(
+      backgroundColor: PokemonTypeHelper.getPrimaryTypeColor(widget.pokemon),
     );
   }
 
   Widget _buildErrorState(Failure failure) {
-    return Container(
-      color: _getPrimaryTypeColor(widget.pokemon),
-      child: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.error_outline,
-                size: 64,
-                color: Colors.white,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                failure.message,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-              if (kDebugMode) ...[
-                const SizedBox(height: 16),
-                TextButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      _showErrorDetails = !_showErrorDetails;
-                    });
-                  },
-                  icon: Icon(
-                    _showErrorDetails ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                    color: Colors.white,
-                  ),
-                  label: Text(
-                    _showErrorDetails ? 'Hide Details' : 'Show Details',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                if (_showErrorDetails) ...[
-                  const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: SelectableText(
-                      failure.toDetailedString(),
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontFamily: 'monospace',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ],
-              const SizedBox(height: 16),
-              ElevatedButton.icon(
-                onPressed: () {
-                  context.read<PokemonDetailsBloc>().add(
-                        LoadPokemonDetails(widget.pokemon.id),
-                      );
-                },
-                icon: const Icon(Icons.refresh),
-                label: const Text('Retry'),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return ErrorStateWidget(
+      message: failure.message,
+      backgroundColor: PokemonTypeHelper.getPrimaryTypeColor(widget.pokemon),
+      onRetry: () {
+        context.read<PokemonDetailsBloc>().add(
+              LoadPokemonDetails(widget.pokemon.id),
+            );
+      },
     );
   }
 
-  Widget _buildLoadedState(Pokemon pokemon) {
+  Widget _buildLoadedState(PokemonDetails pokemon) {
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
           PokemonDetailAppBar(
             pokemon: pokemon,
-            backgroundColor: _getPrimaryTypeColor(pokemon),
+            backgroundColor: PokemonTypeHelper.getPrimaryTypeColor(pokemon),
           ),
         ];
       },
@@ -204,7 +133,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
     );
   }
 
-  Widget _buildContentContainer(Pokemon pokemon) {
+  Widget _buildContentContainer(PokemonDetails pokemon) {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -234,12 +163,14 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
     );
   }
 
-  Widget _buildTabBar(Pokemon pokemon) {
+  Widget _buildTabBar(PokemonDetails pokemon) {
+    final primaryTypeColor = PokemonTypeHelper.getPrimaryTypeColor(pokemon);
+    
     return TabBar(
       controller: _tabController,
-      labelColor: _getPrimaryTypeColor(pokemon),
+      labelColor: primaryTypeColor,
       unselectedLabelColor: Colors.grey,
-      indicatorColor: _getPrimaryTypeColor(pokemon),
+      indicatorColor: primaryTypeColor,
       indicatorWeight: 3,
       labelStyle: const TextStyle(
         fontSize: 16,
@@ -249,49 +180,50 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         fontSize: 16,
         fontWeight: FontWeight.normal,
       ),
-      tabs: const [
-        Tab(text: 'About'),
-        Tab(text: 'Stats'),
-        Tab(text: 'Moves'),
-        Tab(text: 'Other'),
-      ],
+      tabs: _tabs.map((tab) => Tab(text: tab)).toList(),
     );
   }
 
-  Widget _buildAboutTab(Pokemon pokemon) {
+  Widget _buildAboutTab(PokemonDetails pokemon) {
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
       children: [
-        if (pokemon.genus != null || pokemon.flavorText != null)
+        if (pokemon.genus != null || pokemon.description != null)
           SpeciesSection(pokemon: pokemon),
         PhysicalStatsSection(pokemon: pokemon),
         CatchRateSection(pokemon: pokemon),
         TrainingSection(pokemon: pokemon),
         BreedingSection(pokemon: pokemon),
+        AbilitiesSection(abilities: pokemon.abilities),
+        const EvolutionSection(),
         const SizedBox(height: AppConstants.largePadding),
       ],
     );
   }
 
-  Widget _buildStatsTab(Pokemon pokemon) {
+  Widget _buildStatsTab(PokemonDetails pokemon) {
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
       children: [
-        if (pokemon.stats != null && pokemon.stats!.isNotEmpty)
-          BaseStatsSection(stats: pokemon.stats!)
+        if (pokemon.stats.isNotEmpty)
+          BaseStatsSection(
+            stats: pokemon.stats,
+            primaryType: PokemonTypeHelper.getPrimaryTypeName(pokemon),
+          )
         else
           BaseStatsSection.withSampleData(),
+        TypeEffectivenessSection(pokemon: pokemon),
         const SizedBox(height: AppConstants.largePadding),
       ],
     );
   }
 
-  Widget _buildMovesTab(Pokemon pokemon) {
+  Widget _buildMovesTab(PokemonDetails pokemon) {
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
       children: [
-        if (pokemon.moves != null && pokemon.moves!.isNotEmpty)
-          MovesSection(moves: pokemon.moves!)
+        if (pokemon.moves.isNotEmpty)
+          MovesSection(moves: pokemon.moves)
         else
           MovesSection.withSampleData(),
         const SizedBox(height: AppConstants.largePadding),
@@ -299,13 +231,11 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
     );
   }
 
-  Widget _buildOtherTab(Pokemon pokemon) {
+  Widget _buildOtherTab(PokemonDetails pokemon) {
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
-      children: [
-        AbilitiesSection(abilities: pokemon.abilities ?? []),
-        const EvolutionSection(),
-        const SizedBox(height: AppConstants.largePadding),
+      children: const [
+        SizedBox(height: AppConstants.largePadding),
       ],
     );
   }
