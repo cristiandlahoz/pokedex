@@ -142,29 +142,36 @@ class _BaseStatsSectionState extends State<BaseStatsSection> {
   Widget build(BuildContext context) {
     final int maxValue = _getMaxValue();
 
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              decoration: BoxDecoration(
-                border: Border.all(color: _getPrimaryTypeColor(), width: 2),
-                borderRadius: BorderRadius.circular(20),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: _getPrimaryTypeColor().withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: _getPrimaryTypeColor(),
+                width: 1.5,
               ),
-              child: Text(
-                _getTitle(),
-                style: TextStyle(
-                  fontSize: AppConstants.fontSizeTitle,
-                  fontWeight: FontWeight.bold,
-                  color: _getPrimaryTypeColor(),
-                ),
+            ),
+            child: Text(
+              _getTitle(),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: _getPrimaryTypeColor(),
               ),
             ),
           ),
-          const SizedBox(height: AppConstants.mediumPadding),
+          const SizedBox(height: 16),
           Row(
             children: [
               _buildToggleButton(StatView.base, 'Base'),
