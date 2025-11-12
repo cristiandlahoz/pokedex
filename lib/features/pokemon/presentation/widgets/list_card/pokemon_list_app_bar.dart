@@ -9,6 +9,7 @@ class PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
   final ValueChanged<String> onSearchChanged;
   final VoidCallback? onSortPressed;
   final VoidCallback? onFilterPressed;
+  final int filterCount;
 
   const PokemonListAppBar({
     super.key,
@@ -16,6 +17,7 @@ class PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.onSearchChanged,
     this.onSortPressed,
     this.onFilterPressed,
+    this.filterCount = 0,
   });
 
   @override
@@ -63,11 +65,7 @@ class PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
                 tooltip: 'Sort',
                 onPressed: onSortPressed,
               ),
-              _buildActionButton(
-                icon: Icons.filter_alt_outlined,
-                tooltip: 'Filter',
-                onPressed: onFilterPressed,
-              ),
+              _buildFilterButtonWithBadge(),
               const SizedBox(width: AppDesignTokens.spacingL),
             ],
           ),
@@ -94,4 +92,50 @@ class PokemonListAppBar extends StatelessWidget implements PreferredSizeWidget {
       onPressed: onPressed ?? () {},
     ),
   );
+
+  Widget _buildFilterButtonWithBadge() {
+    return SizedBox(
+      width: AppBarConstants.actionButtonSize,
+      height: AppBarConstants.actionButtonSize,
+      child: Stack(
+        children: [
+          IconButton(
+            icon: Icon(
+              Icons.filter_alt_outlined,
+              color: AppColors.iconColor,
+              size: AppBarConstants.actionButtonIconSize,
+            ),
+            tooltip: 'Filter',
+            onPressed: onFilterPressed ?? () {},
+          ),
+          if (filterCount > 0)
+            Positioned(
+              right: 6,
+              top: 6,
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  shape: BoxShape.circle,
+                ),
+                constraints: const BoxConstraints(
+                  minWidth: 18,
+                  minHeight: 18,
+                ),
+                child: Center(
+                  child: Text(
+                    '$filterCount',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 }
