@@ -47,27 +47,7 @@ class PokemonDetailAppBar extends StatelessWidget {
           ],
         ),
       ),
-      child: Stack(
-        children: [
-          // _buildPokeballWatermark(),
-          _buildPokemonImage(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPokeballWatermark() {
-    return const Positioned(
-      right: -30,
-      top: -30,
-      child: Opacity(
-        opacity: AppConstants.opacityLight,
-        child: Icon(
-          Icons.catching_pokemon,
-          size: AppConstants.iconSizeExtraLarge,
-          color: Colors.white,
-        ),
-      ),
+      child: _buildPokemonImage(),
     );
   }
 
@@ -78,20 +58,24 @@ class PokemonDetailAppBar extends StatelessWidget {
         transitionOnUserGestures: true,
         child: CachedNetworkImage(
           imageUrl: pokemon.imageUrl ?? '',
+          width: AppConstants.pokemonImageHeight,
           height: AppConstants.pokemonImageHeight,
           fit: BoxFit.contain,
-          placeholder: (context, url) => const SizedBox(
+          placeholder: (context, url) => SizedBox(
+            width: AppConstants.pokemonImageHeight,
             height: AppConstants.pokemonImageHeight,
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 color: Colors.white,
               ),
             ),
           ),
-          errorWidget: (context, url, error) => const Icon(
-            Icons.error_outline,
-            size: AppConstants.iconSizeLarge,
-            color: Colors.white70,
+          errorWidget: (context, url, error) => const Center(
+            child: Icon(
+              Icons.error_outline,
+              size: AppConstants.iconSizeLarge,
+              color: Colors.white70,
+            ),
           ),
         ),
       ),
