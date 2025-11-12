@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/app_constants.dart';
@@ -194,7 +193,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         CatchRateSection(pokemon: pokemon),
         TrainingSection(pokemon: pokemon),
         BreedingSection(pokemon: pokemon),
-        AbilitiesSection(abilities: pokemon.abilities),
+        AbilitiesSection(pokemon: pokemon),
         const EvolutionSection(),
         const SizedBox(height: AppConstants.largePadding),
       ],
