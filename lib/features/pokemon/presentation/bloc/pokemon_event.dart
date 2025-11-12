@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import '../../domain/value_objects/filter_criteria.dart';
+import '../../domain/value_objects/sort_criteria.dart';
 
 abstract class PokemonEvent extends Equatable {
   const PokemonEvent();
@@ -33,4 +35,26 @@ class SearchPokemonEvent extends PokemonEvent {
 
   @override
   List<Object?> get props => [query];
+}
+
+class ApplySortEvent extends PokemonEvent {
+  final SortCriteria sortCriteria;
+
+  const ApplySortEvent(this.sortCriteria);
+
+  @override
+  List<Object?> get props => [sortCriteria];
+}
+
+class ApplyFilterEvent extends PokemonEvent {
+  final FilterCriteria filterCriteria;
+
+  const ApplyFilterEvent(this.filterCriteria);
+
+  @override
+  List<Object?> get props => [filterCriteria];
+}
+
+class ClearFiltersEvent extends PokemonEvent {
+  const ClearFiltersEvent();
 }
