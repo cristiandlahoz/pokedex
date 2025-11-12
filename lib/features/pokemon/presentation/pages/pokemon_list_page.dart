@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/core/constants/ui_constants.dart';
 import '../../../../core/di/injection_container.dart';
+import '../../../../core/theme/app_design_tokens.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/value_objects/filter_criteria.dart';
 import '../../domain/value_objects/sort_criteria.dart';
@@ -27,6 +30,7 @@ class _PokemonListPageState extends State<PokemonListPage>
     with ScrollPaginationMixin {
   late final PokemonBloc _pokemonBloc;
   final TextEditingController _searchController = TextEditingController();
+  Timer? _debounceSearch;
 
   @override
   void initState() {
@@ -40,6 +44,7 @@ class _PokemonListPageState extends State<PokemonListPage>
     _searchController.dispose();
     disposeScrollPagination();
     _pokemonBloc.close();
+    _debounceSearch?.cancel();
     super.dispose();
   }
 
@@ -66,8 +71,12 @@ class _PokemonListPageState extends State<PokemonListPage>
   void _handleRefresh() =>
       _pokemonBloc.add(const LoadPokemonList(isRefresh: true));
 
-  void _handleSearchChanged(String query) =>
+  void _handleSearchChanged(String query) {
+    _debounceSearch?.cancel();
+    _debounceSearch = Timer(const Duration(milliseconds: 500), () {
       _pokemonBloc.add(SearchPokemonEvent(query));
+    });
+  }
 
   void _handlePokemonTap(Pokemon pokemon) =>
       PokemonNavigation.navigateToDetails(context: context, pokemon: pokemon);
@@ -148,7 +157,7 @@ class _PokemonListPageState extends State<PokemonListPage>
       scrollController: scrollController,
       onRefresh: _handleRefresh,
       onPokemonTap: _handlePokemonTap,
-    )
+    ),
   };
 
   Widget _buildLoadedContentWithError(PokemonLoadMoreError state) {
