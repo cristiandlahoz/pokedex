@@ -1,6 +1,6 @@
 const String getPokemonListQuery = '''
-query GetPokemonList(\$limit: Int, \$offset: Int) {
-  pokemon(limit: \$limit, offset: \$offset, order_by: {id: asc}) {
+query GetPokemonList(\$limit: Int, \$offset: Int, \$order_by: [pokemon_order_by!], \$where: pokemon_bool_exp) {
+  pokemon(limit: \$limit, offset: \$offset, order_by: \$order_by, where: \$where) {
     id
     name
     height

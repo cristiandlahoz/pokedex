@@ -3,23 +3,42 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/graphql/graphql_service.dart';
+import '../../domain/value_objects/filter_criteria.dart';
+import '../../domain/value_objects/sort_criteria.dart';
 import 'pokemon_queries.dart';
 import '../dtos/pokemon_dto.dart';
+import 'query_builders/pokemon_query_builder.dart';
 
 @lazySingleton
 class PokemonGraphQLDataSource {
   final GraphQLService graphQLService;
+  final PokemonQueryBuilder _queryBuilder = PokemonQueryBuilder();
   
   PokemonGraphQLDataSource(this.graphQLService);
   
-  Future<List<PokemonDto>> getPokemonList({int page = 0, int limit = 20}) async {
+  Future<List<PokemonDto>> getPokemonList({
+    int page = 0,
+    int limit = 20,
+    SortCriteria? sortCriteria,
+    FilterCriteria? filterCriteria,
+  }) async {
+    final orderBy = _queryBuilder.buildOrderBy(sortCriteria);
+    final whereClause = _queryBuilder.buildWhereClause(filterCriteria);
+
+    final variables = {
+      'limit': limit,
+      'offset': page * limit,
+      'order_by': [orderBy],
+    };
+
+    if (whereClause != null) {
+      variables['where'] = whereClause;
+    }
+
     final result = await graphQLService.query(
       QueryOptions(
         document: parseString(getPokemonListQuery),
-        variables: {
-          'limit': limit,
-          'offset': page * limit,
-        },
+        variables: variables,
         fetchPolicy: FetchPolicy.cacheAndNetwork,
       ),
     );
