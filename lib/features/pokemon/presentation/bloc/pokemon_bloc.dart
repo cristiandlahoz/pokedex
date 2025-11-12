@@ -33,7 +33,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     );
 
     result.fold(
-      (failure) => emit(PokemonError(failure.message)),
+      (failure) => emit(PokemonError(failure)),
       (pokemons) {
         if (pokemons.isEmpty) {
           emit(const PokemonLoaded(
@@ -78,7 +78,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
       (failure) => emit(PokemonLoadMoreError(
         pokemons: currentState.pokemons,
         currentPage: currentState.currentPage,
-        errorMessage: failure.message,
+        failure: failure,
       )),
       (newPokemons) {
         if (newPokemons.isEmpty) {
@@ -99,7 +99,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     Emitter<PokemonState> emit,
   ) async {
     if (event.query.isEmpty) {
-      // add(const LoadPokemonList(isRefresh: true));
+      add(const LoadPokemonList(isRefresh: true));
       return;
     }
 
@@ -108,7 +108,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     final result = await searchPokemon(event.query);
 
     result.fold(
-      (failure) => emit(PokemonError(failure.message)),
+      (failure) => emit(PokemonError(failure)),
       (pokemons) {
         emit(PokemonLoaded(
           pokemons: pokemons,
