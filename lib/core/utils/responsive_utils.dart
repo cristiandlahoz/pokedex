@@ -62,6 +62,6 @@ class ResponsiveUtils {
   }
 
   static double getFontSizeExtraLarge(BuildContext context) {
-    return getWidthPercentage(context, 0.135);
+    return getWidthPercentage(context, 0.115);
   }
 }
