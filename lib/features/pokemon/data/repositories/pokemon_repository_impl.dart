@@ -6,6 +6,8 @@ import '../../../../core/exceptions/failures.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
 import '../../domain/repositories/pokemon_repository.dart';
+import '../../domain/value_objects/filter_criteria.dart';
+import '../../domain/value_objects/sort_criteria.dart';
 import '../datasources/pokemon_graphql_datasource.dart';
 import '../dtos/pokemon_details_dto.dart';
 
@@ -19,9 +21,16 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Either<Failure, List<Pokemon>>> getPokemonList({
     int page = 0,
     int limit = 20,
+    SortCriteria? sortCriteria,
+    FilterCriteria? filterCriteria,
   }) async {
     try {
-      final result = await dataSource.getPokemonList(page: page, limit: limit);
+      final result = await dataSource.getPokemonList(
+        page: page,
+        limit: limit,
+        sortCriteria: sortCriteria,
+        filterCriteria: filterCriteria,
+      );
       return Right(result.map((dto) => dto.toDomain()).toList());
     } on GraphQLException catch (e, stackTrace) {
       _logError('getPokemonList', e, stackTrace);
