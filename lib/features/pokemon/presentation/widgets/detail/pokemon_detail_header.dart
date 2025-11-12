@@ -21,7 +21,6 @@ class PokemonDetailHeader extends StatelessWidget {
         children: [
           _buildNameAndId(),
           const SizedBox(height: AppConstants.smallPadding),
-          _buildTypeBadges(),
         ],
       ),
     );
@@ -49,19 +48,6 @@ class PokemonDetailHeader extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildTypeBadges() {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: pokemon.types
-          .map((type) => TypeBadge(
-                typeName: type.name,
-                color: PokemonTypeColors.getColor(type.name),
-              ))
-          .toList(),
     );
   }
 }
