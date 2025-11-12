@@ -19,8 +19,23 @@ class AppDesignTokens {
   static const double iconSizeLargeBase = 28.0;
   static double get iconSizeLarge => iconSizeLargeBase * densityMultiplier;
 
+  static const double iconSizeMediumBase = 20.0;
+  static double get iconSizeMedium => iconSizeMediumBase * densityMultiplier;
+
+  static const double iconSizeSmallBase = 16.0;
+  static double get iconSizeSmall => iconSizeSmallBase * densityMultiplier;
+
   static const double borderRadiusBase = 24.0;
   static double get borderRadius => borderRadiusBase * densityMultiplier;
+
+  static const double radiusLBase = 16.0;
+  static double get radiusL => radiusLBase * densityMultiplier;
+
+  static const double radiusMBase = 12.0;
+  static double get radiusM => radiusMBase * densityMultiplier;
+
+  static const double radiusSBase = 8.0;
+  static double get radiusS => radiusSBase * densityMultiplier;
 
   static const double appBarHeightBase = 120.0;
   static double get appBarHeight => appBarHeightBase * densityMultiplier;
