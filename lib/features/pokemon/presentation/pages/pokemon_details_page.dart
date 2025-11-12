@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/di/injection_container.dart';
+import '../../../../core/exceptions/failures.dart';
 import '../utils/pokemon_type_colors.dart';
 import '../../domain/entities/pokemon.dart';
 import '../bloc/pokemon_details_bloc.dart';
@@ -36,6 +38,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late TabController _tabController;
+  bool _showErrorDetails = false;
 
   @override
   void initState() {
@@ -83,7 +86,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
             }
             
             if (state is PokemonDetailsError) {
-              return _buildErrorState(state.message);
+              return _buildErrorState(state.failure);
             }
             
             if (state is PokemonDetailsLoaded) {
@@ -108,41 +111,77 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
     );
   }
 
-  Widget _buildErrorState(String message) {
+  Widget _buildErrorState(Failure failure) {
     return Container(
       color: _getPrimaryTypeColor(widget.pokemon),
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.error_outline,
-              size: 64,
-              color: Colors.white,
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Text(
-                message,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.error_outline,
+                size: 64,
+                color: Colors.white,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                failure.message,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: () {
-                context.read<PokemonDetailsBloc>().add(
-                      LoadPokemonDetails(widget.pokemon.id),
-                    );
-              },
-              icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
-            ),
-          ],
+              if (kDebugMode) ...[
+                const SizedBox(height: 16),
+                TextButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      _showErrorDetails = !_showErrorDetails;
+                    });
+                  },
+                  icon: Icon(
+                    _showErrorDetails ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    _showErrorDetails ? 'Hide Details' : 'Show Details',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                if (_showErrorDetails) ...[
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: SelectableText(
+                      failure.toDetailedString(),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ],
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: () {
+                  context.read<PokemonDetailsBloc>().add(
+                        LoadPokemonDetails(widget.pokemon.id),
+                      );
+                },
+                icon: const Icon(Icons.refresh),
+                label: const Text('Retry'),
+              ),
+            ],
+          ),
         ),
       ),
     );
