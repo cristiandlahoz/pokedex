@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
-import '../../utils/pokemon_type_colors.dart';
 import '../../../domain/entities/pokemon_details.dart';
-import '../shared/type_badge.dart';
 
 class PokemonDetailHeader extends StatelessWidget {
   final PokemonDetails pokemon;
