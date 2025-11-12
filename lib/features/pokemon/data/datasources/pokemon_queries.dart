@@ -75,6 +75,13 @@ query GetPokemonDetails(\$id: Int!) {
     type {
       id
       name
+      typeefficacies {
+        damage_factor
+        TypeByTargetTypeId {
+          id
+          name
+        }
+      }
     }
   }
 }

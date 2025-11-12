@@ -18,6 +18,7 @@ class PokemonDetails extends Pokemon {
   final int? genderRatio;
   final List<String> eggGroups;
   final List<TypeDefenseInfo> typeDefenses;
+  final List<TypeDefenseInfo> typeOffenses;
 
   const PokemonDetails({
     required super.id,
@@ -39,6 +40,7 @@ class PokemonDetails extends Pokemon {
     this.genderRatio,
     this.eggGroups = const [],
     this.typeDefenses = const [],
+    this.typeOffenses = const [],
   });
 
   @override
@@ -57,5 +59,6 @@ class PokemonDetails extends Pokemon {
         genderRatio,
         eggGroups,
         typeDefenses,
+        typeOffenses,
       ];
 }

@@ -20,6 +20,7 @@ class PokemonDetailsDto extends PokemonDto {
   final int? genderRatio;
   final List<String> eggGroups;
   final List<TypeDefenseInfo> typeDefenses;
+  final List<TypeDefenseInfo> typeOffenses;
 
   const PokemonDetailsDto({
     required super.id,
@@ -41,6 +42,7 @@ class PokemonDetailsDto extends PokemonDto {
     this.genderRatio,
     this.eggGroups = const [],
     this.typeDefenses = const [],
+    this.typeOffenses = const [],
   });
 
   PokemonDetails toDomainDetails() {
@@ -64,6 +66,7 @@ class PokemonDetailsDto extends PokemonDto {
       genderRatio: genderRatio,
       eggGroups: eggGroups,
       typeDefenses: typeDefenses,
+      typeOffenses: typeOffenses,
     );
   }
 
@@ -156,6 +159,7 @@ class PokemonDetailsDto extends PokemonDto {
       }
 
       final typeDefenses = _parseTypeDefenses(json, baseDto.types);
+      final typeOffenses = _parseTypeOffenses(json, baseDto.types);
 
       return PokemonDetailsDto(
         id: baseDto.id,
@@ -177,6 +181,7 @@ class PokemonDetailsDto extends PokemonDto {
         genderRatio: species?['gender_rate'] as int?,
         eggGroups: eggGroups,
         typeDefenses: typeDefenses,
+        typeOffenses: typeOffenses,
       );
     } catch (e) {
       rethrow;
@@ -272,6 +277,67 @@ class PokemonDetailsDto extends PokemonDto {
 
       effectivenessMap[attackingType] = totalMultiplier;
     }
+
+      return effectivenessMap.entries
+          .map((entry) => TypeDefenseInfo(
+                type: entry.key,
+                damageMultiplier: entry.value,
+              ))
+          .toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  static List<TypeDefenseInfo> _parseTypeOffenses(
+    Map<String, dynamic> json,
+    List<PokemonTypes> pokemonTypes,
+  ) {
+    try {
+      if (pokemonTypes.isEmpty) {
+        return [];
+      }
+
+      final Map<PokemonTypes, double> effectivenessMap = {};
+
+      final pokemonTypesData = json['pokemontypes'];
+      
+      if (pokemonTypesData == null) {
+        return [];
+      }
+      
+      if (pokemonTypesData is! List || pokemonTypesData.isEmpty) {
+        return [];
+      }
+
+      for (final pokemonTypeData in pokemonTypesData) {
+        final typeData = pokemonTypeData['type'] as Map<String, dynamic>?;
+        if (typeData == null) continue;
+
+        final efficacies = typeData['typeefficacies'] as List?;
+        if (efficacies == null) continue;
+
+        for (final efficacy in efficacies) {
+          final targetTypeData = efficacy['TypeByTargetTypeId'] as Map<String, dynamic>?;
+          if (targetTypeData == null) continue;
+
+          final targetTypeName = targetTypeData['name'] as String?;
+          if (targetTypeName == null) continue;
+
+          final defendingType = _parseTypeName(targetTypeName);
+          if (defendingType == PokemonTypes.unknown ||
+              defendingType == PokemonTypes.monster ||
+              defendingType == PokemonTypes.shadow) {
+            continue;
+          }
+
+          final damageFactor = efficacy['damage_factor'] as int?;
+          if (damageFactor == null) continue;
+
+          final currentMultiplier = effectivenessMap[defendingType] ?? 1.0;
+          effectivenessMap[defendingType] = currentMultiplier * (damageFactor / 100.0);
+        }
+      }
 
       return effectivenessMap.entries
           .map((entry) => TypeDefenseInfo(
