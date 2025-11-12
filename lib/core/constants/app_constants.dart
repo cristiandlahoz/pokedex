@@ -34,4 +34,12 @@ class AppConstants {
   
   static const double opacityLight = 0.1;
   static const double opacityMedium = 0.7;
+  static const double opacityBorder = 0.3;
+  static const double opacityText = 0.8;
+  
+  static const double chipHorizontalPadding = 8.0;
+  static const double chipVerticalPadding = 4.0;
+  static const double chipBorderRadius = 6.0;
+  static const double chipSpacing = 8.0;
+  static const double chipRunSpacing = 4.0;
 }

@@ -4,6 +4,20 @@ import '../../../domain/entities/pokemon_move.dart';
 import '../../utils/pokemon_type_colors.dart';
 
 class MovesSection extends StatelessWidget {
+  static const String _sectionTitle = 'Moves';
+  static const String _powerLabel = 'PWR';
+  static const String _accuracyLabel = 'ACC';
+  static const String _ppLabel = 'PP';
+  static const String _accuracySuffix = '%';
+  static const String _nameSeparator = '-';
+  static const String _nameJoiner = ' ';
+  
+  static const Color _cardBackgroundColor = Colors.white;
+  static const Color _powerColor = Colors.red;
+  static const Color _accuracyColor = Colors.blue;
+  static const Color _ppColor = Colors.green;
+  static const Color _typeBadgeTextColor = Colors.white;
+
   final List<PokemonMove> moves;
 
   const MovesSection({
@@ -26,12 +40,16 @@ class MovesSection extends StatelessWidget {
     );
   }
 
-  String _formatMoveName(String name) {
+  String _formatName(String name) {
     return name
-        .split('-')
+        .split(_nameSeparator)
         .where((word) => word.isNotEmpty)
         .map((word) => word[0].toUpperCase() + word.substring(1))
-        .join(' ');
+        .join(_nameJoiner);
+  }
+
+  bool _hasStats(PokemonMove move) {
+    return move.power != null || move.accuracy != null || move.pp != null;
   }
 
   @override
@@ -42,7 +60,7 @@ class MovesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Moves',
+            _sectionTitle,
             style: TextStyle(
               fontSize: AppConstants.fontSizeTitle,
               fontWeight: FontWeight.bold,
@@ -57,7 +75,7 @@ class MovesSection extends StatelessWidget {
 
   Widget _buildMovesList() {
     return Column(
-      children: moves.map((move) => _buildMoveCard(move)).toList(),
+      children: moves.map(_buildMoveCard).toList(),
     );
   }
 
@@ -66,33 +84,35 @@ class MovesSection extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppConstants.smallPadding),
       padding: const EdgeInsets.all(AppConstants.mediumPadding),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: _cardBackgroundColor,
         borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  _formatMoveName(move.name),
-                  style: const TextStyle(
-                    fontSize: AppConstants.fontSizeLarge,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              if (move.type != null) _buildTypeBadge(move.type!),
-            ],
-          ),
-          if (move.power != null || move.accuracy != null || move.pp != null)
-            const SizedBox(height: AppConstants.smallPadding),
-          if (move.power != null || move.accuracy != null || move.pp != null)
-            _buildMoveStats(move),
+          _buildMoveHeader(move),
+          if (_hasStats(move)) const SizedBox(height: AppConstants.smallPadding),
+          if (_hasStats(move)) _buildMoveStats(move),
         ],
       ),
+    );
+  }
+
+  Widget _buildMoveHeader(PokemonMove move) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            _formatName(move.name),
+            style: const TextStyle(
+              fontSize: AppConstants.fontSizeLarge,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        if (move.type != null) _buildTypeBadge(move.type!),
+      ],
     );
   }
 
@@ -101,18 +121,18 @@ class MovesSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppConstants.smallPadding,
-        vertical: 4,
+        vertical: AppConstants.chipVerticalPadding,
       ),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(AppConstants.largeBorderRadius),
       ),
       child: Text(
-        _formatMoveName(type),
+        _formatName(type),
         style: const TextStyle(
           fontSize: AppConstants.fontSizeSmall,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: _typeBadgeTextColor,
         ),
       ),
     );
@@ -122,20 +142,20 @@ class MovesSection extends StatelessWidget {
     final stats = <Widget>[];
 
     if (move.power != null) {
-      stats.add(_buildStatChip('PWR', move.power.toString(), Colors.red));
+      stats.add(_buildStatChip(_powerLabel, move.power.toString(), _powerColor));
     }
 
     if (move.accuracy != null) {
-      stats.add(_buildStatChip('ACC', '${move.accuracy}%', Colors.blue));
+      stats.add(_buildStatChip(_accuracyLabel, '${move.accuracy}$_accuracySuffix', _accuracyColor));
     }
 
     if (move.pp != null) {
-      stats.add(_buildStatChip('PP', move.pp.toString(), Colors.green));
+      stats.add(_buildStatChip(_ppLabel, move.pp.toString(), _ppColor));
     }
 
     return Wrap(
-      spacing: 8,
-      runSpacing: 4,
+      spacing: AppConstants.chipSpacing,
+      runSpacing: AppConstants.chipRunSpacing,
       children: stats,
     );
   }
@@ -143,13 +163,13 @@ class MovesSection extends StatelessWidget {
   Widget _buildStatChip(String label, String value, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 4,
+        horizontal: AppConstants.chipHorizontalPadding,
+        vertical: AppConstants.chipVerticalPadding,
       ),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
+        color: color.withValues(alpha: AppConstants.opacityLight),
+        borderRadius: BorderRadius.circular(AppConstants.chipBorderRadius),
+        border: Border.all(color: color.withValues(alpha: AppConstants.opacityBorder)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -162,12 +182,12 @@ class MovesSection extends StatelessWidget {
               color: color,
             ),
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: AppConstants.chipVerticalPadding),
           Text(
             value,
             style: TextStyle(
               fontSize: AppConstants.fontSizeSmall,
-              color: color.withValues(alpha: 0.8),
+              color: color.withValues(alpha: AppConstants.opacityText),
             ),
           ),
         ],
