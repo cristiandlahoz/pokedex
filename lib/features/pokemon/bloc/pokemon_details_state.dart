@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import '../../../../core/exceptions/failures.dart';
-import '../../domain/entities/pokemon_details.dart';
+import '../../../core/exceptions/failures.dart';
+import '../domain/entities/pokemon_details.dart';
 
-abstract class PokemonDetailsState extends Equatable {
+sealed class PokemonDetailsState extends Equatable {
   const PokemonDetailsState();
 
   @override

@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import '../../../../core/exceptions/failures.dart';
-import '../../domain/entities/pokemon.dart';
-import '../../domain/value_objects/filter_criteria.dart';
-import '../../domain/value_objects/sort_criteria.dart';
+import '../../../core/exceptions/failures.dart';
+import '../domain/entities/pokemon.dart';
+import '../domain/value_objects/filter_criteria.dart';
+import '../domain/value_objects/sort_criteria.dart';
 
 sealed class PokemonState extends Equatable {
   const PokemonState();

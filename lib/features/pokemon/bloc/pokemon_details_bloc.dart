@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import '../../domain/usecases/get_pokemon_details.dart';
+import '../domain/usecases/get_pokemon_details.dart';
 import 'pokemon_details_event.dart';
 import 'pokemon_details_state.dart';
 

@@ -3,8 +3,8 @@ import '../theme/app_design_tokens.dart';
 /// Feature-specific UI constants that build on top of design tokens
 /// All values should reference AppDesignTokens for consistency
 
-class CardConstants {
-  CardConstants._();
+class PokemonCardConstants {
+  PokemonCardConstants._();
 
   static const double elevation = AppDesignTokens.cardElevation;
   static const double backgroundOpacity = AppDesignTokens.opacityMediumLight;
@@ -19,8 +19,8 @@ class CardConstants {
   static const double heartIconRight = 0.02;
 }
 
-class IdBadgeConstants {
-  IdBadgeConstants._();
+class PokemonIdBadgeConstants {
+  PokemonIdBadgeConstants._();
 
   static const int idPadLength = 3;
   static const double opacityNormal = AppDesignTokens.opacityMedium;
@@ -36,15 +36,15 @@ class NameConstants {
   static const double spacing = AppDesignTokens.spacingXS;
 }
 
-class TypeBadgeConstants {
-  TypeBadgeConstants._();
+class PokemonTypeBadgeConstants {
+  PokemonTypeBadgeConstants._();
 
   static const double iconPadding = 4.8;
   static const double spacing = AppDesignTokens.spacingXS;
 }
 
-class ListPageConstants {
-  ListPageConstants._();
+class PokemonListPageConstants {
+  PokemonListPageConstants._();
 
   static const double scrollThreshold = AppDesignTokens.scrollThreshold;
   static const int snackBarDuration = AppDesignTokens.snackBarDurationMs;
@@ -59,8 +59,8 @@ class ListPageConstants {
   static const double loadingIndicatorPadding = AppDesignTokens.fontSizeLarge;
 }
 
-class SearchBarConstants {
-  SearchBarConstants._();
+class PokemonSearchBarConstants {
+  PokemonSearchBarConstants._();
 
   static double get height => AppDesignTokens.searchBarHeight;
   static double get borderRadius => AppDesignTokens.borderRadius;
