@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import '../../domain/usecases/get_pokemon_list.dart';
-import '../../domain/usecases/search_pokemon.dart';
-import '../../domain/value_objects/filter_criteria.dart';
-import '../../domain/value_objects/sort_criteria.dart';
+import '../domain/usecases/get_pokemon_list.dart';
+import '../domain/usecases/search_pokemon.dart';
+import '../domain/value_objects/filter_criteria.dart';
+import '../domain/value_objects/sort_criteria.dart';
 import 'pokemon_event.dart';
 import 'pokemon_state.dart';
 
@@ -87,7 +87,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     final nextPage = currentState.currentPage + 1;
     final result = await getPokemonList(
       page: nextPage,
-      limit: AppDesignTokens.defaultPageSize,
+      limit: 20,
       sortCriteria: _currentSort,
       filterCriteria: _currentFilter,
     );

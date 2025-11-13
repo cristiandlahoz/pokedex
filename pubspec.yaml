@@ -40,6 +40,7 @@ dependencies:
   # GraphQL
   graphql_flutter: ^5.2.1
   graphql: ^5.2.3
+  gql: ^1.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   

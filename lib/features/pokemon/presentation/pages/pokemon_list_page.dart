@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/core/constants/ui_constants.dart';
 import '../../../../core/di/injection_container.dart';
-import '../../../../core/theme/app_design_tokens.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/value_objects/filter_criteria.dart';
 import '../../domain/value_objects/sort_criteria.dart';

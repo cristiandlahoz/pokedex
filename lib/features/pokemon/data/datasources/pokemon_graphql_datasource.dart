@@ -1,8 +1,8 @@
-import 'package:gql/language.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/graphql/graphql_service.dart';
+import '../../../../core/theme/app_design_tokens.dart';
 import '../../domain/value_objects/filter_criteria.dart';
 import '../../domain/value_objects/sort_criteria.dart';
 import 'pokemon_queries.dart';

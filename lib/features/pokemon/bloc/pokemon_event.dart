@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import '../../../../core/theme/app_design_tokens.dart';
-import '../../domain/value_objects/filter_criteria.dart';
-import '../../domain/value_objects/sort_criteria.dart';
+import '../../../core/theme/app_design_tokens.dart';
+import '../domain/value_objects/filter_criteria.dart';
+import '../domain/value_objects/sort_criteria.dart';
 
-abstract class PokemonEvent extends Equatable {
+sealed class PokemonEvent extends Equatable {
   const PokemonEvent();
 
   @override

@@ -21,7 +21,7 @@ class PokemonCard extends StatelessWidget {
     final borderRadius = ResponsiveUtils.getCardBorderRadius(context);
 
     return Card(
-      elevation: PokemonCardConstants.cardElevation,
+      elevation: PokemonCardConstants.elevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),

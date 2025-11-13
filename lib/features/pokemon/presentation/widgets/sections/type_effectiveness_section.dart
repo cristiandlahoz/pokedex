@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../domain/entities/pokemon_details.dart';
-import '../../../domain/entities/pokemon_types.dart';
 import '../../../domain/entities/type_defense_info.dart';
 import '../../utils/pokemon_type_helper.dart';
 import '../shared/section_container.dart';
