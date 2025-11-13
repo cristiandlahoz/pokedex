@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '../../../../core/theme/app_design_tokens.dart';
 import '../../domain/value_objects/filter_criteria.dart';
 import '../../domain/value_objects/sort_criteria.dart';
 
@@ -16,7 +17,7 @@ class LoadPokemonList extends PokemonEvent {
 
   const LoadPokemonList({
     this.page = 0,
-    this.limit = 20,
+    this.limit = AppDesignTokens.defaultPageSize,
     this.isRefresh = false,
   });
 
