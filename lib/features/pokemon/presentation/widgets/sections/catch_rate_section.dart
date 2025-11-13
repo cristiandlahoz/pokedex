@@ -1,20 +1,18 @@
-import '../../../domain/entities/pokemon_details.dart';
-import '../../../domain/entities/pokemon_stat.dart';
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/constants/app_constants.dart';
-import '../../utils/pokemon_type_colors.dart';
+import '../../../domain/entities/pokemon_details.dart';
+import '../../../domain/entities/pokemon_stat.dart';
+import '../../../domain/services/catch_rate_calculator.dart';
+import '../../utils/pokemon_type_helper.dart';
+import '../shared/section_title_badge.dart';
 
 class _CatchRateConstants {
   static const double pokeBallSize = 70.0;
   static const double rateTagTopOffset = 6.0;
-  static const double pokeBallModifier = 1.0;
-  static const double greatBallModifier = 1.5;
-  static const double ultraBallModifier = 2.0;
-  static const String explanationText = 
+  static const String explanationText =
       'When a Poké Ball is thrown at a wild Pokémon, the game uses that Pokémon\'s catch rate in a formula to determine the chances of catching that Pokémon. The catch rate can change according to the health of the Pokémon, the type of Poké Ball, the status condition, and active special powers.';
-  static const String disclaimerText = 
+  static const String disclaimerText =
       'Sample rates for this Pokémon when on full HP and no status problems';
 }
 
@@ -28,38 +26,6 @@ class _BallRate {
     required this.assetPath,
     required this.label,
   });
-}
-
-class _SectionTitleBadge extends StatelessWidget {
-  final Color color;
-
-  const _SectionTitleBadge({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppConstants.mediumPadding,
-        vertical: AppConstants.smallPadding / 2,
-      ),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: AppConstants.opacityLight * 2),
-        borderRadius: BorderRadius.circular(AppConstants.extraLargeBorderRadius),
-        border: Border.all(
-          color: color,
-          width: 1.5,
-        ),
-      ),
-      child: Text(
-        'Catch rate',
-        style: TextStyle(
-          fontSize: AppConstants.fontSizeRegular,
-          fontWeight: FontWeight.bold,
-          color: color,
-        ),
-      ),
-    );
-  }
 }
 
 class _PokeBallVisual extends StatelessWidget {
@@ -151,42 +117,13 @@ class CatchRateSection extends StatelessWidget {
 
   int _getMaxHP() {
     if (pokemon.stats.isEmpty) return 100;
-    
+
     final hpStat = pokemon.stats.firstWhere(
       (stat) => stat.name.toLowerCase() == 'hp',
       orElse: () => const PokemonStat(name: 'hp', baseStat: 100),
     );
-    
+
     return hpStat.baseStat;
-  }
-
-  double _calculateCatchRate(
-    int captureRate,
-    double ballModifier,
-    int maxHP, {
-    int? currentHP,
-    double statusModifier = 1.0,
-  }) {
-    final effectiveCurrentHP = currentHP ?? maxHP;
-    
-    final double hpFactor = (3 * maxHP - 2 * effectiveCurrentHP) / (3 * maxHP);
-    final double a = hpFactor * captureRate * ballModifier * statusModifier;
-    
-    if (a >= 255) return 1.0;
-    
-    final double b = 1048560 / math.pow(16711680 / a, 0.25);
-    
-    final double shakeChance = math.min(b / 65535, 1.0);
-    final double captureChance = math.pow(shakeChance, 4).toDouble();
-    
-    return captureChance.clamp(0.0, 1.0);
-  }
-
-  Color get _primaryTypeColor {
-    final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first.name
-        : 'normal';
-    return PokemonTypeColors.getColor(primaryType);
   }
 
   List<_BallRate> _getBallRates() {
@@ -194,29 +131,32 @@ class CatchRateSection extends StatelessWidget {
 
     return [
       _BallRate(
-        rate: _calculateCatchRate(
-          pokemon.captureRate!,
-          _CatchRateConstants.pokeBallModifier,
-          maxHP,
-        ) * 100,
+        rate: CatchRateCalculator.calculate(
+              captureRate: pokemon.captureRate!,
+              ballModifier: CatchRateCalculator.pokeBallModifier,
+              maxHP: maxHP,
+            ) *
+            100,
         assetPath: 'assets/icons/pokeballs/poke_ball.svg',
         label: 'Poké Ball',
       ),
       _BallRate(
-        rate: _calculateCatchRate(
-          pokemon.captureRate!,
-          _CatchRateConstants.greatBallModifier,
-          maxHP,
-        ) * 100,
+        rate: CatchRateCalculator.calculate(
+              captureRate: pokemon.captureRate!,
+              ballModifier: CatchRateCalculator.greatBallModifier,
+              maxHP: maxHP,
+            ) *
+            100,
         assetPath: 'assets/icons/pokeballs/great_ball.svg',
         label: 'Great Ball',
       ),
       _BallRate(
-        rate: _calculateCatchRate(
-          pokemon.captureRate!,
-          _CatchRateConstants.ultraBallModifier,
-          maxHP,
-        ) * 100,
+        rate: CatchRateCalculator.calculate(
+              captureRate: pokemon.captureRate!,
+              ballModifier: CatchRateCalculator.ultraBallModifier,
+              maxHP: maxHP,
+            ) *
+            100,
         assetPath: 'assets/icons/pokeballs/ultra_ball.svg',
         label: 'Ultra Ball',
       ),
@@ -242,7 +182,10 @@ class CatchRateSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _SectionTitleBadge(color: _primaryTypeColor),
+          SectionTitleBadge(
+            title: 'Catch rate',
+            color: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon),
+          ),
           const SizedBox(height: AppConstants.mediumPadding),
           const Text(
             _CatchRateConstants.explanationText,
@@ -256,7 +199,9 @@ class CatchRateSection extends StatelessWidget {
           const SizedBox(height: AppConstants.defaultPadding),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: ballRates.map((ballRate) => _PokeBallRateCard(ballRate: ballRate)).toList(),
+            children: ballRates
+                .map((ballRate) => _PokeBallRateCard(ballRate: ballRate))
+                .toList(),
           ),
           const SizedBox(height: AppConstants.mediumPadding),
           const Text(

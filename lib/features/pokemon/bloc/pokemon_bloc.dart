@@ -87,7 +87,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     final nextPage = currentState.currentPage + 1;
     final result = await getPokemonList(
       page: nextPage,
-      limit: 20,
+      limit: AppDesignTokens.defaultPageSize,
       sortCriteria: _currentSort,
       filterCriteria: _currentFilter,
     );
