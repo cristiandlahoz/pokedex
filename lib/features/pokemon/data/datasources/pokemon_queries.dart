@@ -1,35 +1,77 @@
-const String getPokemonListQuery = '''
-query GetPokemonList(\$limit: Int, \$offset: Int, \$order_by: [pokemon_order_by!], \$where: pokemon_bool_exp) {
-  pokemon(limit: \$limit, offset: \$offset, order_by: \$order_by, where: \$where) {
-    id
-    name
-    height
-    weight
-    base_experience
-    pokemontypes {
-      type {
-        id
-        name
-      }
+import '../../../../core/theme/app_design_tokens.dart';
+
+// ==================== GRAPHQL FRAGMENTS ====================
+// Reusable fragments to eliminate duplication and maintain consistency
+
+/// Basic pokemon information fragment used across list and search queries
+const String basicPokemonFragment = '''
+fragment BasicPokemonFields on pokemon {
+  id
+  name
+  height
+  weight
+  base_experience
+  pokemontypes {
+    type {
+      id
+      name
     }
-    pokemonsprites {
-      sprites
+  }
+  pokemonsprites {
+    sprites
+  }
+}
+''';
+
+/// Type information fragment for detailed type data
+const String typeFragment = '''
+fragment TypeFields on type {
+  id
+  name
+}
+''';
+
+/// Type effectiveness fragment for battle calculations
+const String typeEffectivenessFragment = '''
+fragment TypeEffectivenessFields on type {
+  id
+  name
+  typeefficacies {
+    damage_factor
+    TypeByTargetTypeId {
+      id
+      name
+    }
+  }
+  TypeefficaciesByTargetTypeId {
+    damage_factor
+    type {
+      id
+      name
     }
   }
 }
 ''';
 
+// ==================== QUERIES ====================
+
+const String getPokemonListQuery = '''
+$basicPokemonFragment
+
+query GetPokemonList(\$limit: Int, \$offset: Int, \$order_by: [pokemon_order_by!], \$where: pokemon_bool_exp) {
+  pokemon(limit: \$limit, offset: \$offset, order_by: \$order_by, where: \$where) {
+    ...BasicPokemonFields
+  }
+}
+''';
+
 const String getPokemonDetailsQuery = '''
+$basicPokemonFragment
+$typeEffectivenessFragment
+
 query GetPokemonDetails(\$id: Int!) {
   pokemon(where: {id: {_eq: \$id}}, limit: 1) {
-    id
-    name
-    height
-    weight
-    base_experience
-    pokemonsprites {
-      sprites
-    }
+    ...BasicPokemonFields
     pokemonabilities(order_by: {slot: asc}) {
       ability {
         id
@@ -48,7 +90,7 @@ query GetPokemonDetails(\$id: Int!) {
         name
       }
     }
-    pokemonmoves(limit: 20) {
+    pokemonmoves(limit: ${AppDesignTokens.defaultMovesLimit}) {
       move {
         name
         power
@@ -82,44 +124,18 @@ query GetPokemonDetails(\$id: Int!) {
   }
   pokemontype(where: {pokemon_id: {_eq: \$id}}) {
     type {
-      id
-      name
-      typeefficacies {
-        damage_factor
-        TypeByTargetTypeId {
-          id
-          name
-        }
-      }
-      TypeefficaciesByTargetTypeId {
-        damage_factor
-        type {
-          id
-          name
-        }
-      }
+      ...TypeEffectivenessFields
     }
   }
 }
 ''';
 
 const String searchPokemonQuery = '''
+$basicPokemonFragment
+
 query SearchPokemon(\$name: String!) {
   pokemon(where: {name: {_ilike: \$name}}) {
-    id
-    name
-    height
-    weight
-    base_experience
-    pokemontypes {
-      type {
-        id
-        name
-      }
-    }
-    pokemonsprites {
-      sprites
-    }
+    ...BasicPokemonFields
   }
 }
 ''';

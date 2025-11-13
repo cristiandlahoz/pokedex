@@ -18,7 +18,7 @@ class PokemonGraphQLDataSource {
   
   Future<List<PokemonDto>> getPokemonList({
     int page = 0,
-    int limit = 20,
+    int limit = AppDesignTokens.defaultPageSize,
     SortCriteria? sortCriteria,
     FilterCriteria? filterCriteria,
   }) async {

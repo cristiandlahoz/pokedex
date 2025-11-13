@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
-import '../../utils/pokemon_type_colors.dart';
+import '../../utils/pokemon_type_helper.dart';
 import '../../../domain/entities/pokemon_details.dart';
+import '../shared/section_title_badge.dart';
 
 class BreedingSection extends StatelessWidget {
   final PokemonDetails pokemon;
@@ -10,14 +11,6 @@ class BreedingSection extends StatelessWidget {
     super.key,
     required this.pokemon,
   });
-
-  Color _getPrimaryTypeColor() {
-    final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first.name
-        : 'normal';
-    return PokemonTypeColors.getColor(primaryType);
-  }
-
 
   String _formatEggGroupName(String name) {
     if (name.contains('-')) {
@@ -55,24 +48,9 @@ class BreedingSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                color: _getPrimaryTypeColor().withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: _getPrimaryTypeColor(),
-                  width: 1.5,
-                ),
-              ),
-              child: Text(
-                'Breeding',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: _getPrimaryTypeColor(),
-                ),
-              ),
+            child: SectionTitleBadge(
+              title: 'Breeding',
+              color: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon),
             ),
           ),
           const SizedBox(height: 20),

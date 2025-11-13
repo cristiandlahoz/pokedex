@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_constants.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/theme/app_design_tokens.dart';
 
+/// Reusable container for detail sections
+/// Provides consistent styling across all section widgets
 class SectionContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final Color? backgroundColor;
 
   const SectionContainer({
     super.key,
     required this.child,
-    this.padding = const EdgeInsets.all(AppConstants.defaultPadding),
-    this.margin = const EdgeInsets.only(bottom: AppConstants.defaultPadding),
+    this.padding = const EdgeInsets.all(AppDesignTokens.defaultPadding),
+    this.margin = const EdgeInsets.only(bottom: AppDesignTokens.defaultPadding),
+    this.backgroundColor,
   });
 
   @override
@@ -19,8 +24,9 @@ class SectionContainer extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+        color: backgroundColor ?? AppColors.sectionBackground,
+        borderRadius:
+            BorderRadius.circular(AppDesignTokens.defaultBorderRadius),
       ),
       child: child,
     );

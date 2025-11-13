@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
+import '../../utils/pokemon_type_helper.dart';
 import '../../utils/pokemon_type_colors.dart';
 import '../../../domain/entities/pokemon_details.dart';
 import '../../../domain/entities/pokemon_types.dart';
+import '../shared/section_title_badge.dart';
 
 class SpeciesSection extends StatelessWidget {
   final PokemonDetails pokemon;
@@ -11,13 +13,6 @@ class SpeciesSection extends StatelessWidget {
     super.key,
     required this.pokemon,
   });
-
-  Color _getPrimaryTypeColor() {
-    final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first.name
-        : 'normal';
-    return PokemonTypeColors.getColor(primaryType);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +26,9 @@ class SpeciesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: _getPrimaryTypeColor().withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: _getPrimaryTypeColor(),
-                width: 1.5,
-              ),
-            ),
-            child: Text(
-              'Species',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: _getPrimaryTypeColor(),
-              ),
-            ),
+          SectionTitleBadge(
+            title: 'Species',
+            color: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon),
           ),
           if (pokemon.genus != null) ...[
             const SizedBox(height: 16),

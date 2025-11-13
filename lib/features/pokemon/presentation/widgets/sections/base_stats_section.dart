@@ -3,6 +3,7 @@ import '../../../../../core/constants/app_constants.dart';
 import '../../../domain/entities/pokemon_stat.dart';
 import '../shared/stat_bar.dart';
 import '../../utils/pokemon_type_colors.dart';
+import '../shared/section_title_badge.dart';
 
 enum StatView { base, min, max }
 
@@ -152,24 +153,9 @@ class _BaseStatsSectionState extends State<BaseStatsSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: _getPrimaryTypeColor().withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: _getPrimaryTypeColor(),
-                width: 1.5,
-              ),
-            ),
-            child: Text(
-              _getTitle(),
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: _getPrimaryTypeColor(),
-              ),
-            ),
+          SectionTitleBadge(
+            title: _getTitle(),
+            color: _getPrimaryTypeColor(),
           ),
           const SizedBox(height: 16),
           Row(

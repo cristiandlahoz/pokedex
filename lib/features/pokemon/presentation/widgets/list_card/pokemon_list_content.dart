@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/ui_constants.dart';
 import '../../../domain/entities/pokemon.dart';
-import '../../bloc/pokemon_state.dart';
+import '../../../bloc/pokemon_state.dart';
 import 'pokemon_card.dart';
 import 'pokemon_list_states.dart';
 

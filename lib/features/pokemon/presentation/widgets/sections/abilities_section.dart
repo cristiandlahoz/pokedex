@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/constants/app_constants.dart';
 import '../../../domain/entities/pokemon_ability.dart';
 import '../../../domain/entities/pokemon_details.dart';
-import '../../utils/pokemon_type_colors.dart';
+import '../../utils/pokemon_type_helper.dart';
 
 class _AbilitiesConstants {
   static const String explanationText = 
@@ -153,13 +153,6 @@ class AbilitiesSection extends StatelessWidget {
     required this.pokemon,
   });
 
-  Color get _primaryTypeColor {
-    final primaryType = pokemon.types.isNotEmpty
-        ? pokemon.types.first.name
-        : 'normal';
-    return PokemonTypeColors.getColor(primaryType);
-  }
-
   @override
   Widget build(BuildContext context) {
     if (pokemon.abilities.isEmpty) {
@@ -179,7 +172,7 @@ class AbilitiesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _SectionTitleBadge(color: _primaryTypeColor),
+          _SectionTitleBadge(color: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon)),
           const SizedBox(height: AppConstants.mediumPadding),
           const Text(
             _AbilitiesConstants.explanationText,
@@ -193,7 +186,7 @@ class AbilitiesSection extends StatelessWidget {
           const SizedBox(height: AppConstants.defaultPadding),
           ...pokemon.abilities.map((ability) => _AbilityCard(
                 ability: ability,
-                primaryTypeColor: _primaryTypeColor,
+                primaryTypeColor: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon),
               )),
         ],
       ),
