@@ -1,10 +1,10 @@
 import '../../../domain/entities/pokemon_generation.dart';
-import '../../../domain/value_objects/sort_criteria.dart';
-import '../../../domain/value_objects/filter_criteria.dart';
+import '../../../domain/value_objects/sorting.dart';
+import '../../../domain/value_objects/filters.dart';
 
 class PokemonQueryBuilder {
-  Map<String, String> buildOrderBy(SortCriteria? criteria) {
-    if (criteria == null) {
+  Map<String, String> buildOrderBy(Sorting? sort) {
+    if (sort == null) {
       return {'id': 'asc'};
     }
 
@@ -22,19 +22,19 @@ class PokemonQueryBuilder {
     };
 
     return {
-      fieldMapping[criteria.field]!: directionMapping[criteria.direction]!,
+      fieldMapping[sort.field]!: directionMapping[sort.direction]!,
     };
   }
 
-  Map<String, dynamic>? buildWhereClause(FilterCriteria? criteria) {
-    if (criteria == null || criteria.isEmpty) {
+  Map<String, dynamic>? buildWhereClause(Filters? filter) {
+    if (filter == null || filter.isEmpty) {
       return null;
     }
 
     final List<Map<String, dynamic>> conditions = [];
 
-    if (criteria.types.isNotEmpty) {
-      final typeNames = criteria.types.map((t) => t.name).toList();
+    if (filter.types.isNotEmpty) {
+      final typeNames = filter.types.map((t) => t.name).toList();
       conditions.add({
         'pokemontypes': {
           'type': {
@@ -44,8 +44,8 @@ class PokemonQueryBuilder {
       });
     }
 
-    if (criteria.generations.isNotEmpty) {
-      final generationIds = criteria.generations.map((g) => g.id).toList();
+    if (filter.generations.isNotEmpty) {
+      final generationIds = filter.generations.map((g) => g.id).toList();
       conditions.add({
         'pokemonspecy': {
           'generation_id': {'_in': generationIds}

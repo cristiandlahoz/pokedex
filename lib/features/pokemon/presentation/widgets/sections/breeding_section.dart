@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_constants.dart';
-import '../../utils/pokemon_type_helper.dart';
+import '../../../../../core/constants/app.dart';
+import '../../utils/type_helper.dart';
 import '../../../domain/entities/pokemon_details.dart';
 import '../shared/section_title_badge.dart';
 
@@ -50,7 +50,7 @@ class BreedingSection extends StatelessWidget {
           Center(
             child: SectionTitleBadge(
               title: 'Breeding',
-              color: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon),
+              color: TypeHelper.getPrimaryTypeColorFromDetails(pokemon),
             ),
           ),
           const SizedBox(height: 20),

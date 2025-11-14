@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_constants.dart';
+import '../../../../../core/constants/app.dart';
 import '../../../domain/entities/pokemon_ability.dart';
 import '../../../domain/entities/pokemon_details.dart';
-import '../../utils/pokemon_type_helper.dart';
+import '../../utils/type_helper.dart';
 
 class _AbilitiesConstants {
   static const String explanationText = 
@@ -172,7 +172,7 @@ class AbilitiesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _SectionTitleBadge(color: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon)),
+          _SectionTitleBadge(color: TypeHelper.getPrimaryTypeColorFromDetails(pokemon)),
           const SizedBox(height: AppConstants.mediumPadding),
           const Text(
             _AbilitiesConstants.explanationText,
@@ -186,7 +186,7 @@ class AbilitiesSection extends StatelessWidget {
           const SizedBox(height: AppConstants.defaultPadding),
           ...pokemon.abilities.map((ability) => _AbilityCard(
                 ability: ability,
-                primaryTypeColor: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon),
+                primaryTypeColor: TypeHelper.getPrimaryTypeColorFromDetails(pokemon),
               )),
         ],
       ),

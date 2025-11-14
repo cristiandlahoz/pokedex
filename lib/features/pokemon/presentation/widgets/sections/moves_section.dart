@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_constants.dart';
+import '../../../../../core/constants/app.dart';
 import '../../../domain/entities/pokemon_move.dart';
-import '../../utils/pokemon_type_colors.dart';
+import '../../utils/type_colors.dart';
 
 class MovesSection extends StatelessWidget {
   static const String _sectionTitle = 'Moves';
@@ -117,7 +117,7 @@ class MovesSection extends StatelessWidget {
   }
 
   Widget _buildTypeBadge(String type) {
-    final color = PokemonTypeColors.getColor(type);
+    final color = TypeColors.getColor(type);
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppConstants.smallPadding,

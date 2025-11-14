@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../constants/badge.dart';
+import '../../utils/type_colors.dart';
+import '../../utils/type_icons.dart';
+import '../../../../../core/utils/responsive_utils.dart';
+import '../../../domain/entities/pokemon_types.dart';
 
 class TypeBadge extends StatelessWidget {
-  final String typeName;
-  final Color color;
+  final PokemonTypes type;
 
   const TypeBadge({
     super.key,
-    required this.typeName,
-    required this.color,
+    required this.type,
   });
 
   @override
   Widget build(BuildContext context) {
+    final badgeSize = ResponsiveUtils.getTypeBadgeSize(context);
+
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppConstants.mediumPadding,
-        vertical: 8,
-      ),
+      width: badgeSize,
+      height: badgeSize,
+      padding: const EdgeInsets.all(TypeBadgeConstants.iconPadding),
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(AppConstants.extraLargeBorderRadius),
+        color: TypeColors.getColorForType(type),
+        shape: BoxShape.circle,
       ),
-      child: Text(
-        typeName.toUpperCase(),
-        style: const TextStyle(
-          fontSize: AppConstants.fontSizeRegular,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
+      child: SvgPicture.asset(
+        TypeIcons.getIconPath(type),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
-import 'app_design_tokens.dart';
+import 'tokens.dart';
 
 class AppTheme {
   AppTheme._();
@@ -18,10 +18,10 @@ class AppTheme {
       elevation: 0,
       iconTheme: IconThemeData(
         color: AppColors.iconColor,
-        size: AppDesignTokens.iconSizeLarge,
+        size: DesignTokens.iconSizeLarge,
       ),
       titleTextStyle: TextStyle(
-        fontSize: AppDesignTokens.fontSizeXXLarge,
+        fontSize: DesignTokens.fontSizeXXLarge,
         fontWeight: FontWeight.bold,
         color: AppColors.primary,
         letterSpacing: -0.5,
@@ -29,7 +29,7 @@ class AppTheme {
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        iconSize: WidgetStateProperty.all(AppDesignTokens.iconSize),
+        iconSize: WidgetStateProperty.all(DesignTokens.iconSize),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -41,7 +41,7 @@ class AppTheme {
         fontWeight: FontWeight.w400,
       ),
       contentPadding: const EdgeInsets.symmetric(
-        horizontal: AppDesignTokens.spacingL,
+        horizontal: DesignTokens.spacingL,
         vertical: 0,
       ),
       isDense: true,

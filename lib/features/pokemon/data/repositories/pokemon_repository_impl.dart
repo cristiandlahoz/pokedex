@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/exceptions/failures.dart';
-import '../../../../core/theme/app_design_tokens.dart';
+import '../../../../core/theme/tokens.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
 import '../../domain/repositories/pokemon_repository.dart';
-import '../../domain/value_objects/filter_criteria.dart';
-import '../../domain/value_objects/sort_criteria.dart';
+import '../../domain/value_objects/filters.dart';
+import '../../domain/value_objects/sorting.dart';
 import '../datasources/pokemon_graphql_datasource.dart';
-import '../dtos/pokemon_details_dto.dart';
+import '../dtos/details_dto.dart';
 
 @LazySingleton(as: PokemonRepository)
 class PokemonRepositoryImpl implements PokemonRepository {
@@ -21,9 +21,9 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<Either<Failure, List<Pokemon>>> getPokemonList({
     int page = 0,
-    int limit = AppDesignTokens.defaultPageSize,
-    SortCriteria? sortCriteria,
-    FilterCriteria? filterCriteria,
+    int limit = DesignTokens.defaultPageSize,
+    Sorting? sort,
+    Filters? filter,
   }) async {
     return _handleRepositoryCall(
       operation: 'getPokemonList',
@@ -31,8 +31,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
         final result = await dataSource.getPokemonList(
           page: page,
           limit: limit,
-          sortCriteria: sortCriteria,
-          filterCriteria: filterCriteria,
+          sort: sort,
+          filter: filter,
         );
         return result.map((dto) => dto.toDomain()).toList();
       },
@@ -48,7 +48,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
         if (result == null) {
           throw const ServerFailure('Pokemon not found');
         }
-        return PokemonDetailsDto.fromJson(result).toDomainDetails();
+        return DetailsDto.fromJson(result).toDomainDetails();
       },
     );
   }

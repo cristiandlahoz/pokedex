@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/pokemon_types.dart';
 import '../../domain/entities/pokemon_generation.dart';
-import '../utils/pokemon_type_colors.dart';
+import '../utils/type_colors.dart';
 
 class TypeFilterItem {
   final PokemonTypes type;
@@ -38,7 +38,7 @@ class TypeFilterItem {
       return TypeFilterItem(
         type: type,
         label: type.displayName,
-        color: PokemonTypeColors.getTypeColor(type),
+        color: TypeColors.getTypeColor(type),
       );
     }).toList();
   }

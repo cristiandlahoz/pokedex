@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/theme/app_design_tokens.dart';
+import '../../../../../core/theme/tokens.dart';
 
 /// Reusable container for detail sections
 /// Provides consistent styling across all section widgets
@@ -13,8 +13,8 @@ class SectionContainer extends StatelessWidget {
   const SectionContainer({
     super.key,
     required this.child,
-    this.padding = const EdgeInsets.all(AppDesignTokens.defaultPadding),
-    this.margin = const EdgeInsets.only(bottom: AppDesignTokens.defaultPadding),
+    this.padding = const EdgeInsets.all(DesignTokens.spacingL),
+    this.margin = const EdgeInsets.only(bottom: DesignTokens.spacingL),
     this.backgroundColor,
   });
 
@@ -26,7 +26,7 @@ class SectionContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? AppColors.sectionBackground,
         borderRadius:
-            BorderRadius.circular(AppDesignTokens.defaultBorderRadius),
+            BorderRadius.circular(DesignTokens.defaultBorderRadius),
       ),
       child: child,
     );

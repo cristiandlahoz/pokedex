@@ -1,6 +1,5 @@
-import '../../../../core/theme/app_design_tokens.dart';
+import '../../../../core/theme/tokens.dart';
 
-// ==================== GRAPHQL FRAGMENTS ====================
 // Reusable fragments to eliminate duplication and maintain consistency
 
 /// Basic pokemon information fragment used across list and search queries
@@ -53,7 +52,6 @@ fragment TypeEffectivenessFields on type {
 }
 ''';
 
-// ==================== QUERIES ====================
 
 const String getPokemonListQuery = '''
 $basicPokemonFragment
@@ -90,7 +88,7 @@ query GetPokemonDetails(\$id: Int!) {
         name
       }
     }
-    pokemonmoves(limit: ${AppDesignTokens.defaultMovesLimit}) {
+    pokemonmoves(limit: ${DesignTokens.defaultMovesLimit}) {
       move {
         name
         power

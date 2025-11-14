@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_constants.dart';
+import '../../../../../core/constants/app.dart';
 import '../../../domain/entities/pokemon_stat.dart';
 import '../shared/stat_bar.dart';
-import '../../utils/pokemon_type_colors.dart';
+import '../../utils/type_colors.dart';
 import '../shared/section_title_badge.dart';
 
 enum StatView { base, min, max }
@@ -58,7 +58,7 @@ class _BaseStatsSectionState extends State<BaseStatsSection> {
   }
 
   Color _getPrimaryTypeColor() {
-    return PokemonTypeColors.getColor(widget.primaryType);
+    return TypeColors.getColor(widget.primaryType);
   }
 
 

@@ -13,9 +13,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:pokedex/core/graphql/graphql_config.dart' as _i1008;
 import 'package:pokedex/core/graphql/graphql_service.dart' as _i403;
-import 'package:pokedex/features/pokemon/bloc/pokemon_bloc.dart' as _i907;
-import 'package:pokedex/features/pokemon/bloc/pokemon_details_bloc.dart'
-    as _i976;
+import 'package:pokedex/features/pokemon/bloc/details_bloc.dart' as _i477;
+import 'package:pokedex/features/pokemon/bloc/list_bloc.dart' as _i524;
 import 'package:pokedex/features/pokemon/data/datasources/pokemon_graphql_datasource.dart'
     as _i716;
 import 'package:pokedex/features/pokemon/data/repositories/pokemon_repository_impl.dart'
@@ -55,16 +54,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1058.SearchPokemon>(
       () => _i1058.SearchPokemon(gh<_i896.PokemonRepository>()),
     );
-    gh.factory<_i907.PokemonBloc>(
-      () => _i907.PokemonBloc(
+    gh.factory<_i524.ListBloc>(
+      () => _i524.ListBloc(
         getPokemonList: gh<_i680.GetPokemonList>(),
         searchPokemon: gh<_i1058.SearchPokemon>(),
       ),
     );
-    gh.factory<_i976.PokemonDetailsBloc>(
-      () => _i976.PokemonDetailsBloc(
-        getPokemonDetails: gh<_i261.GetPokemonDetails>(),
-      ),
+    gh.factory<_i477.DetailsBloc>(
+      () => _i477.DetailsBloc(getPokemonDetails: gh<_i261.GetPokemonDetails>()),
     );
     return this;
   }
