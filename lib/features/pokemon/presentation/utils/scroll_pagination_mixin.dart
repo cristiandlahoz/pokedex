@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/core/theme/tokens.dart';
 
 mixin ScrollPaginationMixin<T extends StatefulWidget> on State<T> {
   late final ScrollController scrollController;
-  double scrollThreshold = 0.9;
+  double scrollThreshold = DesignTokens.scrollThreshold;
 
   @protected
   void onLoadMore();
