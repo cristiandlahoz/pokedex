@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../domain/entities/pokemon_types.dart';
-import '../../utils/pokemon_type_colors.dart';
-import '../../utils/pokemon_type_icons.dart';
+import '../../utils/type_colors.dart';
+import '../../utils/type_icons.dart';
 
 class TypeEffectivenessBadge extends StatelessWidget {
   final PokemonTypes type;
@@ -18,8 +18,8 @@ class TypeEffectivenessBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final typeColor = PokemonTypeColors.getColorForType(type);
-    final typeIcon = PokemonTypeIcons.getIconPath(type);
+    final typeColor = TypeColors.getColorForType(type);
+    final typeIcon = TypeIcons.getIconPath(type);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

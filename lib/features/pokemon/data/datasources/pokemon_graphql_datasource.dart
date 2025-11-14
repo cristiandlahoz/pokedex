@@ -2,28 +2,28 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/graphql/graphql_service.dart';
-import '../../../../core/theme/app_design_tokens.dart';
-import '../../domain/value_objects/filter_criteria.dart';
-import '../../domain/value_objects/sort_criteria.dart';
+import '../../../../core/theme/tokens.dart';
+import '../../domain/value_objects/filters.dart';
+import '../../domain/value_objects/sorting.dart';
 import 'pokemon_queries.dart';
-import '../dtos/pokemon_dto.dart';
+import '../dtos/list_item_dto.dart';
 import 'query_builders/pokemon_query_builder.dart';
 
 @lazySingleton
 class PokemonGraphQLDataSource {
   final GraphQLService graphQLService;
   final PokemonQueryBuilder _queryBuilder = PokemonQueryBuilder();
-  
+
   PokemonGraphQLDataSource(this.graphQLService);
-  
-  Future<List<PokemonDto>> getPokemonList({
+
+  Future<List<ListItemDto>> getPokemonList({
     int page = 0,
-    int limit = AppDesignTokens.defaultPageSize,
-    SortCriteria? sortCriteria,
-    FilterCriteria? filterCriteria,
+    int limit = DesignTokens.defaultPageSize,
+    Sorting? sort,
+    Filters? filter,
   }) async {
-    final orderBy = _queryBuilder.buildOrderBy(sortCriteria);
-    final whereClause = _queryBuilder.buildWhereClause(filterCriteria);
+    final orderBy = _queryBuilder.buildOrderBy(sort);
+    final whereClause = _queryBuilder.buildWhereClause(filter);
 
     final variables = {
       'limit': limit,
@@ -42,15 +42,17 @@ class PokemonGraphQLDataSource {
         fetchPolicy: FetchPolicy.cacheAndNetwork,
       ),
     );
-    
+
     if (result.hasException) {
       throw GraphQLException.fromResult(result);
     }
-    
+
     final List<dynamic> pokemonList = result.data!['pokemon'] as List<dynamic>;
-    return pokemonList.map((json) => PokemonDto.fromJson(json as Map<String, dynamic>)).toList();
+    return pokemonList
+        .map((json) => ListItemDto.fromJson(json as Map<String, dynamic>))
+        .toList();
   }
-  
+
   Future<Map<String, dynamic>?> getPokemonDetails(int id) async {
     try {
       QueryResult result;
@@ -71,34 +73,36 @@ class PokemonGraphQLDataSource {
           ),
         );
       }
-      
+
       if (result.hasException) {
         throw GraphQLException.fromResult(result);
       }
-      
+
       if (result.data == null) {
         return null;
       }
-      
+
       final pokemonList = result.data!['pokemon'] as List<dynamic>?;
       if (pokemonList == null || pokemonList.isEmpty) return null;
-      
+
       final originalData = pokemonList.first as Map<String, dynamic>;
       final pokemonData = Map<String, dynamic>.from(originalData);
-      
+
       final pokemonTypesRaw = result.data!['pokemontype'] as List<dynamic>?;
       if (pokemonTypesRaw != null && pokemonTypesRaw.isNotEmpty) {
-        final pokemonTypes = pokemonTypesRaw.map((pt) => Map<String, dynamic>.from(pt as Map<String, dynamic>)).toList();
+        final pokemonTypes = pokemonTypesRaw
+            .map((pt) => Map<String, dynamic>.from(pt as Map<String, dynamic>))
+            .toList();
         pokemonData['pokemontypes'] = pokemonTypes;
       }
-      
+
       return pokemonData;
     } catch (e) {
       rethrow;
     }
   }
-  
-  Future<List<PokemonDto>> searchPokemon(String name) async {
+
+  Future<List<ListItemDto>> searchPokemon(String name) async {
     final result = await graphQLService.query(
       QueryOptions(
         document: gql(searchPokemonQuery),
@@ -106,12 +110,14 @@ class PokemonGraphQLDataSource {
         fetchPolicy: FetchPolicy.cacheAndNetwork,
       ),
     );
-    
+
     if (result.hasException) {
       throw GraphQLException.fromResult(result);
     }
-    
+
     final List<dynamic> pokemonList = result.data!['pokemon'] as List<dynamic>;
-    return pokemonList.map((json) => PokemonDto.fromJson(json as Map<String, dynamic>)).toList();
+    return pokemonList
+        .map((json) => ListItemDto.fromJson(json as Map<String, dynamic>))
+        .toList();
   }
 }

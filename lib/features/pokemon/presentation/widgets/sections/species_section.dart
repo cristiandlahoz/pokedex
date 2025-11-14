@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/app_constants.dart';
-import '../../utils/pokemon_type_helper.dart';
-import '../../utils/pokemon_type_colors.dart';
+import '../../../../../core/constants/app.dart';
+import '../../utils/type_helper.dart';
+import '../../utils/type_colors.dart';
 import '../../../domain/entities/pokemon_details.dart';
 import '../../../domain/entities/pokemon_types.dart';
 import '../shared/section_title_badge.dart';
@@ -28,7 +28,7 @@ class SpeciesSection extends StatelessWidget {
         children: [
           SectionTitleBadge(
             title: 'Species',
-            color: PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon),
+            color: TypeHelper.getPrimaryTypeColorFromDetails(pokemon),
           ),
           if (pokemon.genus != null) ...[
             const SizedBox(height: 16),
@@ -61,7 +61,7 @@ class SpeciesSection extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: PokemonTypeColors.getColor(type.name),
+                  color: TypeColors.getColor(type.name),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(

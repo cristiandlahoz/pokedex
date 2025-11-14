@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../domain/value_objects/sort_criteria.dart';
+import '../../domain/value_objects/sorting.dart';
 
 class SortMenuItem {
   final SortField field;

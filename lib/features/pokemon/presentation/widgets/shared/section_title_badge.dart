@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theme/app_design_tokens.dart';
+import '../../../../../core/theme/tokens.dart';
 
 /// Reusable section title badge with consistent styling
 /// Used across all detail section widgets
@@ -17,21 +17,21 @@ class SectionTitleBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppDesignTokens.spacingL,
-        vertical: AppDesignTokens.spacingS,
+        horizontal: DesignTokens.spacingL,
+        vertical: DesignTokens.spacingS,
       ),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: AppDesignTokens.opacityMediumLight),
-        borderRadius: BorderRadius.circular(AppDesignTokens.radiusXLBase),
+        color: color.withValues(alpha: DesignTokens.opacityMediumLight),
+        borderRadius: BorderRadius.circular(DesignTokens.radiusXLBase),
         border: Border.all(
           color: color,
-          width: AppDesignTokens.borderWidthMedium,
+          width: DesignTokens.borderWidthMedium,
         ),
       ),
       child: Text(
         title,
         style: TextStyle(
-          fontSize: AppDesignTokens.fontSizeBody,
+          fontSize: DesignTokens.fontSizeBody,
           fontWeight: FontWeight.bold,
           color: color,
         ),

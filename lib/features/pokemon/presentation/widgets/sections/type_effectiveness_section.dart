@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../domain/entities/pokemon_details.dart';
 import '../../../domain/entities/type_defense_info.dart';
-import '../../utils/pokemon_type_helper.dart';
+import '../../utils/type_helper.dart';
 import '../shared/section_container.dart';
 import '../shared/section_title_badge.dart';
 import '../shared/category_header.dart';
@@ -46,7 +46,7 @@ class TypeEffectivenessSection extends StatelessWidget {
         .where((d) => d.damageMultiplier == 0)
         .toList();
 
-    final primaryTypeColor = PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon);
+    final primaryTypeColor = TypeHelper.getPrimaryTypeColorFromDetails(pokemon);
 
     return SectionContainer(
       margin: const EdgeInsets.only(bottom: 16),
@@ -89,7 +89,7 @@ class TypeEffectivenessSection extends StatelessWidget {
 
   Widget _buildTypeDamageCard(BuildContext context) {
     final offensiveData = _calculateOffensiveEffectiveness();
-    final primaryTypeColor = PokemonTypeHelper.getPrimaryTypeColorFromDetails(pokemon);
+    final primaryTypeColor = TypeHelper.getPrimaryTypeColorFromDetails(pokemon);
 
     return SectionContainer(
       margin: const EdgeInsets.only(bottom: 16),
