@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../core/theme/tokens.dart';
-import '../domain/usecases/get_pokemon_list.dart';
-import '../domain/usecases/search_pokemon.dart';
+import '../domain/repositories/pokemon_repository.dart';
 import '../domain/value_objects/filters.dart';
 import '../domain/value_objects/sorting.dart';
 import 'list_event.dart';
@@ -10,13 +9,12 @@ import 'list_state.dart';
 
 @injectable
 class ListBloc extends Bloc<ListEvent, ListState> {
-  final GetPokemonList getPokemonList;
-  final SearchPokemon searchPokemon;
+  final PokemonRepository repository;
 
   Sorting _currentSort = Sorting.defaultCriteria;
   Filters _currentFilter = Filters.empty;
 
-  ListBloc({required this.getPokemonList, required this.searchPokemon})
+  ListBloc({required this.repository})
     : super(const ListInitial()) {
     on<ListLoadRequested>(_onListLoadRequested);
     on<ListLoadMoreRequested>(_onListLoadMoreRequested);
@@ -34,7 +32,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       emit(const ListLoading());
     }
 
-    final result = await getPokemonList(
+    final result = await repository.getPokemonList(
       page: event.page,
       limit: event.limit,
       sort: _currentSort,
@@ -87,7 +85,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     );
 
     final nextPage = currentState.currentPage + 1;
-    final result = await getPokemonList(
+    final result = await repository.getPokemonList(
       page: nextPage,
       limit: DesignTokens.defaultPageSize,
       sort: _currentSort,
@@ -133,7 +131,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
 
     emit(const ListLoading());
 
-    final result = await searchPokemon(event.query);
+    final result = await repository.searchPokemon(event.query);
 
     result.fold((failure) => emit(ListFailure(failure)), (pokemons) {
       emit(
