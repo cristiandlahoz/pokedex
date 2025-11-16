@@ -1,7 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/exceptions/failures.dart';
+import '../../../../core/logging/logger.dart';
+import '../../../../core/logging/log_event.dart';
 import '../../../../core/theme/tokens.dart';
 import '../../../../core/utils/result.dart';
 import '../../domain/entities/pokemon.dart';
@@ -15,8 +16,11 @@ import '../dtos/details_dto.dart';
 @LazySingleton(as: PokemonRepository)
 class PokemonRepositoryImpl implements PokemonRepository {
   final PokemonGraphQLDataSource dataSource;
+  final Logger logger;
 
-  PokemonRepositoryImpl(this.dataSource);
+  PokemonRepositoryImpl(this.dataSource, this.logger);
+
+  static int _counter = 0;
 
   @override
   Future<Result<List<Pokemon>>> getPokemonList({
@@ -70,24 +74,65 @@ class PokemonRepositoryImpl implements PokemonRepository {
     required String operation,
     required Future<T> Function() call,
   }) async {
+    final requestId = _generateRequestId();
+    final stopwatch = Stopwatch()..start();
+
+    logger.logRequest(RequestEvent(
+      id: requestId,
+      operation: operation,
+      timestamp: DateTime.now(),
+    ));
+
     try {
       final result = await call();
+
+      logger.logResponse(ResponseEvent(
+        requestId: requestId,
+        durationMs: stopwatch.elapsedMilliseconds,
+        status: 'success',
+        timestamp: DateTime.now(),
+        itemCount: result is List ? result.length : null,
+      ));
+
       return Success(result);
     } on AppFailure catch (failure) {
-      _logError(operation, failure, StackTrace.current);
+      logger.logError(ErrorEvent(
+        requestId: requestId,
+        errorType: failure.runtimeType.toString(),
+        message: failure.message,
+        timestamp: DateTime.now(),
+      ));
       return Failure(failure);
     } on GraphQLException catch (e, stackTrace) {
-      _logError(operation, e, stackTrace);
+      logger.logError(ErrorEvent(
+        requestId: requestId,
+        errorType: 'GraphQLException',
+        message: e.message,
+        stackTrace: stackTrace,
+        timestamp: DateTime.now(),
+      ));
       return Failure(
         ServerFailure(e.message, stackTrace: stackTrace, originalError: e),
       );
     } on NetworkException catch (e, stackTrace) {
-      _logError(operation, e, stackTrace);
+      logger.logError(ErrorEvent(
+        requestId: requestId,
+        errorType: 'NetworkException',
+        message: e.message,
+        stackTrace: stackTrace,
+        timestamp: DateTime.now(),
+      ));
       return Failure(
         NetworkFailure(e.message, stackTrace: stackTrace, originalError: e),
       );
     } catch (e, stackTrace) {
-      _logError(operation, e, stackTrace);
+      logger.logError(ErrorEvent(
+        requestId: requestId,
+        errorType: e.runtimeType.toString(),
+        message: e.toString(),
+        stackTrace: stackTrace,
+        timestamp: DateTime.now(),
+      ));
       return Failure(
         UnexpectedFailure(
           'Unexpected error: ${e.toString()}',
@@ -98,13 +143,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
     }
   }
 
-  void _logError(String operation, Object error, StackTrace stackTrace) {
-    if (kDebugMode) {
-      debugPrint(
-        'canonical-log-line error_repository_implementation Error in $operation:',
-      );
-      debugPrint('   Error: $error');
-      debugPrint('   Stack trace:\n$stackTrace');
-    }
+  String _generateRequestId() {
+    return '${DateTime.now().millisecondsSinceEpoch}_${_counter++}';
   }
 }
