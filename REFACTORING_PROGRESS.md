@@ -29,57 +29,44 @@
 - Added damageFactorDivisor = 100.0
 - Replaced magic numbers in GraphQLService, ListPage, and DetailsDto
 
-## Remaining Phases (5-8)
+## Completed Additional Phases
 
-### Phase 5: Refactor DTO Parsing (Factory Pattern)
-**Status:** Pending
-**Complexity:** High - requires creating 5 new parser classes
+### Phase 5: Refactor DTO Parsing (Factory Pattern) ✅
+**Status:** Complete
+**Commit:** 0765ba3 - refactor: extract DTO parsing into specialized parser classes
+**Completed Tasks:**
+1. ✅ Created lib/features/pokemon/data/dtos/parsers/ directory
+2. ✅ Created SpeciesParser with SpeciesInfo helper class
+3. ✅ Created AbilitiesParser
+4. ✅ Created StatsParser
+5. ✅ Created MovesParser
+6. ✅ Created EggGroupsParser
+7. ✅ Updated DetailsDto.fromJson to use parsers
 
-**Tasks:**
-1. Create lib/features/pokemon/data/dtos/parsers/ directory
-2. Create SpeciesParser with SpeciesInfo helper class
-3. Create AbilitiesParser
-4. Create StatsParser
-5. Create MovesParser
-6. Create EggGroupsParser
-7. Update DetailsDto.fromJson to use parsers
-8. Commit changes
-
-**Files to Create:**
-- lib/features/pokemon/data/dtos/parsers/species_parser.dart
-- lib/features/pokemon/data/dtos/parsers/abilities_parser.dart
-- lib/features/pokemon/data/dtos/parsers/stats_parser.dart
-- lib/features/pokemon/data/dtos/parsers/moves_parser.dart
-- lib/features/pokemon/data/dtos/parsers/egg_groups_parser.dart
-
-**Benefits:**
-- Reduces DetailsDto.fromJson from 207 lines to ~50 lines
+**Results:**
+- Reduced DetailsDto.fromJson from ~130 lines to ~40 lines
 - Each parser has single responsibility
-- Easier to test and maintain
-- Better error isolation
+- Better separation of concerns
 
-### Phase 6: Extract Domain Service (Type Effectiveness)
-**Status:** Pending
-**Complexity:** High - complex game logic extraction
+### Phase 6: Extract Domain Service (Type Effectiveness) ✅
+**Status:** Complete
+**Commit:** 39b1b83 - refactor: extract domain service for type effectiveness calculation
+**Completed Tasks:**
+1. ✅ Created TypeEffectivenessCalculator domain service
+2. ✅ Moved _parseTypeDefenses logic (~100 lines) to service
+3. ✅ Moved _parseTypeOffenses logic (~60 lines) to service
+4. ✅ Updated DetailsDto to inject and use service via getIt
 
-**Tasks:**
-1. Create TypeEffectivenessCalculator domain service
-2. Move _parseTypeDefenses logic to service
-3. Move _parseTypeOffenses logic to service
-4. Update DetailsDto to inject and use service
-5. Regenerate DI code
-6. Commit changes
+**Results:**
+- Simplified DetailsDto from 324 lines to ~122 lines
+- Domain logic properly in domain layer (Clean Architecture)
+- Reusable service for future features
 
-**File to Create:**
-- lib/features/pokemon/domain/services/type_effectiveness_calculator.dart (~200 lines)
-
-**Benefits:**
-- Domain logic in domain layer (Clean Architecture)
-- Reusable for future features
-- DetailsDto focuses only on data transformation
+## Remaining Phases (7-8)
 
 ### Phase 7: Rename Page Classes & Update Routing
-**Status:** Pending
+**Status:** Partially Complete (Files Renamed)
+**Commit:** a2e692a - refactor(WIP): rename files from list to home
 **Complexity:** Medium - systematic renaming
 
 **Tasks:**
