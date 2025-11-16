@@ -1,3 +1,4 @@
+import '../../../../core/constants/app.dart';
 import '../../domain/entities/pokemon_ability.dart';
 import '../../domain/entities/pokemon_details.dart';
 import '../../domain/entities/pokemon_move.dart';
@@ -283,7 +284,7 @@ class DetailsDto extends ListItemDto {
             if (matchingType == attackingType) {
               final damageFactor = efficacy['damage_factor'] as int?;
               if (damageFactor != null) {
-                multiplier = damageFactor / 100.0;
+                multiplier = damageFactor / AppConstants.damageFactorDivisor;
                 break;
               }
             }
@@ -353,7 +354,7 @@ class DetailsDto extends ListItemDto {
           if (damageFactor == null) continue;
 
           final currentMultiplier = effectivenessMap[defendingType] ?? 1.0;
-          effectivenessMap[defendingType] = currentMultiplier * (damageFactor / 100.0);
+          effectivenessMap[defendingType] = currentMultiplier * (damageFactor / AppConstants.damageFactorDivisor);
         }
       }
 

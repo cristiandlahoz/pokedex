@@ -3,20 +3,25 @@ class AppConstants {
   static const double smallPadding = 12.0;
   static const double mediumPadding = 16.0;
   static const double largePadding = 32.0;
-  
+
   static const double defaultBorderRadius = 12.0;
   static const double largeBorderRadius = 16.0;
   static const double extraLargeBorderRadius = 20.0;
   static const double detailsTopBorderRadius = 30.0;
-  
+
   static const double appBarExpandedHeight = 300.0;
   static const double pokemonImageHeight = 200.0;
   static const double statBarHeight = 12.0;
   static const double statNameWidth = 80.0;
   static const double statValueWidth = 40.0;
-  
+
   static const int animationDurationMs = 600;
   static const int pageTransitionDurationMs = 300;
+
+  static const int networkTimeoutSeconds = 30;
+  static const int searchDebounceMs = 500;
+
+  static const double damageFactorDivisor = 100.0;
   
   static const double iconSizeSmall = 20.0;
   static const double iconSizeMedium = 28.0;

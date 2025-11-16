@@ -1,5 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
+import '../constants/app.dart';
 import 'graphql_config.dart';
 
 @lazySingleton
@@ -31,7 +32,7 @@ class GraphQLService {
   Future<QueryResult> query(QueryOptions options) async {
     try {
       return await client.query(options).timeout(
-        const Duration(seconds: 30),
+        Duration(seconds: AppConstants.networkTimeoutSeconds),
         onTimeout: () {
           throw Exception('Request timeout');
         },

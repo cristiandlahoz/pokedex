@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/constants/app.dart';
 import '../../../../core/di/injection_container.dart';
 import '../../domain/entities/pokemon.dart';
 import '../constants/list.dart';
@@ -70,9 +71,10 @@ class _PokemonListPageState extends State<PokemonListPage>
 
   void _handleSearchChanged(String query) {
     _debounceSearch?.cancel();
-    _debounceSearch = Timer(const Duration(milliseconds: 500), () {
-      _pokemonBloc.add(ListSearchSubmitted(query));
-    });
+    _debounceSearch = Timer(
+      Duration(milliseconds: AppConstants.searchDebounceMs),
+      () => _pokemonBloc.add(ListSearchSubmitted(query)),
+    );
   }
 
   void _handlePokemonTap(Pokemon pokemon) =>
