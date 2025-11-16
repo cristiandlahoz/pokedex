@@ -6,6 +6,11 @@ import '../../domain/entities/pokemon_stat.dart';
 import '../../domain/entities/pokemon_types.dart';
 import '../../domain/entities/type_defense_info.dart';
 import 'list_item_dto.dart';
+import 'parsers/abilities_parser.dart';
+import 'parsers/egg_groups_parser.dart';
+import 'parsers/moves_parser.dart';
+import 'parsers/species_parser.dart';
+import 'parsers/stats_parser.dart';
 
 class DetailsDto extends ListItemDto {
   final String? genus;
@@ -75,107 +80,11 @@ class DetailsDto extends ListItemDto {
     try {
       final baseDto = ListItemDto.fromJson(json);
 
-      final species = json['pokemonspecy'] as Map<String, dynamic>?;
-      String? genus;
-      String? description;
-      if (species != null) {
-        final genera = species['pokemonspeciesnames'] as List?;
-        if (genera != null && genera.isNotEmpty) {
-          genus = genera[0]['genus'] as String?;
-        }
-
-        final descriptions = species['pokemonspeciesflavortexts'] as List?;
-        if (descriptions != null && descriptions.isNotEmpty) {
-          description = (descriptions[0]['flavor_text'] as String?)
-              ?.replaceAll('\n', ' ')
-              .replaceAll('\f', ' ');
-        }
-      }
-
-      final abilities = <PokemonAbility>[];
-      final abilitiesData = json['pokemonabilities'];
-      if (abilitiesData != null && abilitiesData is List) {
-        for (final abilityData in abilitiesData) {
-          if (abilityData is Map &&
-              abilityData['ability'] != null &&
-              abilityData['ability']['name'] != null) {
-            String? effect;
-            final flavorTexts = abilityData['ability']['abilityflavortexts'] as List?;
-            if (flavorTexts != null && flavorTexts.isNotEmpty) {
-              effect = (flavorTexts[0]['flavor_text'] as String?)
-                  ?.replaceAll('\n', ' ')
-                  .replaceAll('\f', ' ');
-            }
-
-            abilities.add(
-              PokemonAbility(
-                id: abilityData['ability']['id'] as int,
-                name: abilityData['ability']['name'] as String,
-                isHidden: abilityData['is_hidden'] as bool? ?? false,
-                effect: effect,
-              ),
-            );
-          }
-        }
-      }
-
-      final stats = <PokemonStat>[];
-      final statsData = json['pokemonstats'];
-      if (statsData != null && statsData is List) {
-        for (final statData in statsData) {
-          if (statData is Map &&
-              statData['stat'] != null &&
-              statData['stat']['name'] != null &&
-              statData['base_stat'] != null) {
-            stats.add(
-              PokemonStat(
-                name: statData['stat']['name'] as String,
-                baseStat: statData['base_stat'] as int,
-                effort: statData['effort'] as int? ?? 0,
-              ),
-            );
-          }
-        }
-      }
-
-      final moves = <PokemonMove>[];
-      final movesData = json['pokemonmoves'];
-      if (movesData != null && movesData is List) {
-        for (final moveData in movesData) {
-          if (moveData is Map &&
-              moveData['move'] != null &&
-              moveData['move']['name'] != null) {
-            final move = moveData['move'];
-            final typeData = move['type'];
-
-            moves.add(
-              PokemonMove(
-                name: move['name'] as String,
-                type: typeData != null && typeData['name'] != null
-                    ? typeData['name'] as String
-                    : null,
-                power: move['power'] as int?,
-                accuracy: move['accuracy'] as int?,
-                pp: move['pp'] as int?,
-              ),
-            );
-          }
-        }
-      }
-
-      final List<String> eggGroups = [];
-      if (species != null) {
-        final eggGroupsData = species['pokemonegggroups'];
-        if (eggGroupsData != null && eggGroupsData is List) {
-          for (final eggGroupData in eggGroupsData) {
-            if (eggGroupData is Map &&
-                eggGroupData['egggroup'] != null &&
-                eggGroupData['egggroup']['name'] != null) {
-              eggGroups.add(eggGroupData['egggroup']['name'] as String);
-            }
-          }
-        }
-      }
+      final species = SpeciesParser.parse(json['pokemonspecy']);
+      final abilities = AbilitiesParser.parse(json['pokemonabilities']);
+      final stats = StatsParser.parse(json['pokemonstats']);
+      final moves = MovesParser.parse(json['pokemonmoves']);
+      final eggGroups = EggGroupsParser.parse(json['pokemonspecy']);
 
       final typeDefenses = _parseTypeDefenses(json, baseDto.types);
       final typeOffenses = _parseTypeOffenses(json, baseDto.types);
@@ -187,17 +96,17 @@ class DetailsDto extends ListItemDto {
         imageUrl: baseDto.imageUrl,
         height: baseDto.height,
         weight: baseDto.weight,
-        genus: genus,
-        description: description,
+        genus: species.genus,
+        description: species.description,
         abilities: abilities,
         stats: stats,
         moves: moves,
         baseExperience: json['base_experience'] as int?,
-        captureRate: species?['capture_rate'] as int?,
-        baseHappiness: species?['base_happiness'] as int?,
-        growthRate: species?['growthrate']?['name'] as String?,
+        captureRate: species.captureRate,
+        baseHappiness: species.baseHappiness,
+        growthRate: species.growthRate,
         eggGroup: eggGroups.isNotEmpty ? eggGroups.first : null,
-        genderRatio: species?['gender_rate'] as int?,
+        genderRatio: species.genderRatio,
         eggGroups: eggGroups,
         typeDefenses: typeDefenses,
         typeOffenses: typeOffenses,
