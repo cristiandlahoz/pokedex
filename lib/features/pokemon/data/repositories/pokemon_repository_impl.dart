@@ -1,9 +1,9 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/exceptions/failures.dart';
 import '../../../../core/theme/tokens.dart';
+import '../../../../core/utils/result.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
 import '../../domain/repositories/pokemon_repository.dart';
@@ -19,7 +19,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   PokemonRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, List<Pokemon>>> getPokemonList({
+  Future<Result<List<Pokemon>>> getPokemonList({
     int page = 0,
     int limit = DesignTokens.defaultPageSize,
     Sorting? sort,
@@ -40,7 +40,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<Either<Failure, PokemonDetails>> getPokemonDetails(int id) async {
+  Future<Result<PokemonDetails>> getPokemonDetails(int id) async {
     return _handleRepositoryCall(
       operation: 'getPokemonDetails',
       call: () async {
@@ -54,7 +54,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<Either<Failure, List<Pokemon>>> searchPokemon(String query) async {
+  Future<Result<List<Pokemon>>> searchPokemon(String query) async {
     return _handleRepositoryCall(
       operation: 'searchPokemon',
       call: () async {
@@ -66,30 +66,29 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   /// Centralized error handling wrapper for repository calls
   /// Eliminates duplication and ensures consistent error handling
-  Future<Either<Failure, T>> _handleRepositoryCall<T>({
+  Future<Result<T>> _handleRepositoryCall<T>({
     required String operation,
     required Future<T> Function() call,
   }) async {
     try {
       final result = await call();
-      return Right(result);
-    } on Failure catch (failure) {
-      // If it's already a Failure (like from null check), just return it
+      return Success(result);
+    } on AppFailure catch (failure) {
       _logError(operation, failure, StackTrace.current);
-      return Left(failure);
+      return Failure(failure);
     } on GraphQLException catch (e, stackTrace) {
       _logError(operation, e, stackTrace);
-      return Left(
+      return Failure(
         ServerFailure(e.message, stackTrace: stackTrace, originalError: e),
       );
     } on NetworkException catch (e, stackTrace) {
       _logError(operation, e, stackTrace);
-      return Left(
+      return Failure(
         NetworkFailure(e.message, stackTrace: stackTrace, originalError: e),
       );
     } catch (e, stackTrace) {
       _logError(operation, e, stackTrace);
-      return Left(
+      return Failure(
         UnexpectedFailure(
           'Unexpected error: ${e.toString()}',
           stackTrace: stackTrace,

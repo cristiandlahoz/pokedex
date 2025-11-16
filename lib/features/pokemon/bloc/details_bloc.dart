@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import '../../../core/utils/result.dart';
 import '../domain/repositories/pokemon_repository.dart';
 import 'details_event.dart';
 import 'details_state.dart';
@@ -22,9 +23,11 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     final result = await repository.getPokemonDetails(event.pokemonId);
 
-    result.fold(
-      (failure) => emit(DetailsFailure(failure)),
-      (pokemon) => emit(DetailsSuccess(pokemon)),
-    );
+    switch (result) {
+      case Success(:final data):
+        emit(DetailsSuccess(data));
+      case Failure(:final failure):
+        emit(DetailsFailure(failure));
+    }
   }
 }

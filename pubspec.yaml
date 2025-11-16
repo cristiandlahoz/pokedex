@@ -51,8 +51,7 @@ dependencies:
   
   # Core
   equatable: ^2.0.5
-  dartz: ^0.10.1
-  
+
   # UI
   flutter_svg: ^2.0.10
   cached_network_image: ^3.4.1

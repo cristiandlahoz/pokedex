@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../core/theme/tokens.dart';
+import '../../../core/utils/result.dart';
 import '../domain/repositories/pokemon_repository.dart';
 import '../domain/value_objects/filters.dart';
 import '../domain/value_objects/sorting.dart';
@@ -39,29 +40,32 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       filter: _currentFilter,
     );
 
-    result.fold((failure) => emit(ListFailure(failure)), (pokemons) {
-      if (pokemons.isEmpty) {
-        emit(
-          ListSuccess(
-            pokemons: const [],
-            hasReachedMax: true,
-            currentPage: 0,
-            sort: _currentSort,
-            filter: _currentFilter,
-          ),
-        );
-      } else {
-        emit(
-          ListSuccess(
-            pokemons: pokemons,
-            hasReachedMax: pokemons.length < event.limit,
-            currentPage: event.page,
-            sort: _currentSort,
-            filter: _currentFilter,
-          ),
-        );
-      }
-    });
+    switch (result) {
+      case Success(:final data):
+        if (data.isEmpty) {
+          emit(
+            ListSuccess(
+              pokemons: const [],
+              hasReachedMax: true,
+              currentPage: 0,
+              sort: _currentSort,
+              filter: _currentFilter,
+            ),
+          );
+        } else {
+          emit(
+            ListSuccess(
+              pokemons: data,
+              hasReachedMax: data.length < event.limit,
+              currentPage: event.page,
+              sort: _currentSort,
+              filter: _currentFilter,
+            ),
+          );
+        }
+      case Failure(:final failure):
+        emit(ListFailure(failure));
+    }
   }
 
   Future<void> _onListLoadMoreRequested(
@@ -92,32 +96,32 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       filter: _currentFilter,
     );
 
-    result.fold(
-      (failure) => emit(
-        ListLoadMoreFailure(
-          pokemons: currentState.pokemons,
-          currentPage: currentState.currentPage,
-          sort: currentState.sort,
-          filter: currentState.filter,
-          failure: failure,
-        ),
-      ),
-      (newPokemons) {
-        if (newPokemons.isEmpty) {
+    switch (result) {
+      case Success(:final data):
+        if (data.isEmpty) {
           emit(currentState.copyWith(hasReachedMax: true));
         } else {
           emit(
             ListSuccess(
-              pokemons: [...currentState.pokemons, ...newPokemons],
-              hasReachedMax: newPokemons.length < DesignTokens.defaultPageSize,
+              pokemons: [...currentState.pokemons, ...data],
+              hasReachedMax: data.length < DesignTokens.defaultPageSize,
               currentPage: nextPage,
               sort: currentState.sort,
               filter: currentState.filter,
             ),
           );
         }
-      },
-    );
+      case Failure(:final failure):
+        emit(
+          ListLoadMoreFailure(
+            pokemons: currentState.pokemons,
+            currentPage: currentState.currentPage,
+            sort: currentState.sort,
+            filter: currentState.filter,
+            failure: failure,
+          ),
+        );
+    }
   }
 
   Future<void> _onListSearchSubmitted(
@@ -133,17 +137,20 @@ class ListBloc extends Bloc<ListEvent, ListState> {
 
     final result = await repository.searchPokemon(event.query);
 
-    result.fold((failure) => emit(ListFailure(failure)), (pokemons) {
-      emit(
-        ListSuccess(
-          pokemons: pokemons,
-          hasReachedMax: true,
-          currentPage: 0,
-          sort: _currentSort,
-          filter: _currentFilter,
-        ),
-      );
-    });
+    switch (result) {
+      case Success(:final data):
+        emit(
+          ListSuccess(
+            pokemons: data,
+            hasReachedMax: true,
+            currentPage: 0,
+            sort: _currentSort,
+            filter: _currentFilter,
+          ),
+        );
+      case Failure(:final failure):
+        emit(ListFailure(failure));
+    }
   }
 
   Future<void> _onListSortApplied(
