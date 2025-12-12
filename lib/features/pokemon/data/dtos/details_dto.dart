@@ -1,5 +1,9 @@
 import '../../../../core/di/injection_container.dart';
+import '../../domain/entities/pokemon_ability.dart';
 import '../../domain/entities/pokemon_details.dart';
+import '../../domain/entities/pokemon_move.dart';
+import '../../domain/entities/pokemon_stat.dart';
+import '../../domain/entities/type_defense_info.dart';
 import '../../domain/services/type_effectiveness_calculator.dart';
 import 'list_item_dto.dart';
 import 'parsers/abilities_parser.dart';
