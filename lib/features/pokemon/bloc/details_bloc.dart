@@ -26,7 +26,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     switch (result) {
       case Success(:final data):
         emit(DetailsSuccess(data));
-      case Failure(:final failure):
+      case ResultFailure(:final failure):
         emit(DetailsFailure(failure));
     }
   }

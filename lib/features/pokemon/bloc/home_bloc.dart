@@ -5,8 +5,8 @@ import '../../../core/utils/result.dart';
 import '../domain/repositories/pokemon_repository.dart';
 import '../domain/value_objects/filters.dart';
 import '../domain/value_objects/sorting.dart';
-import 'list_event.dart';
-import 'list_state.dart';
+import 'home_event.dart';
+import 'home_state.dart';
 
 @injectable
 class ListBloc extends Bloc<ListEvent, ListState> {
@@ -63,7 +63,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
             ),
           );
         }
-      case Failure(:final failure):
+      case ResultFailure(:final failure):
         emit(ListFailure(failure));
     }
   }
@@ -111,7 +111,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
             ),
           );
         }
-      case Failure(:final failure):
+      case ResultFailure(:final failure):
         emit(
           ListLoadMoreFailure(
             pokemons: currentState.pokemons,
@@ -148,7 +148,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
             filter: _currentFilter,
           ),
         );
-      case Failure(:final failure):
+      case ResultFailure(:final failure):
         emit(ListFailure(failure));
     }
   }
