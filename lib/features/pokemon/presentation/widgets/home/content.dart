@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Card;
-import '../../constants/list.dart';
+import '../../constants/home.dart';
 import '../../../domain/entities/pokemon.dart';
-import '../../../bloc/list_state.dart';
+import '../../../bloc/home_state.dart';
 import 'card.dart';
 import 'states.dart';
 

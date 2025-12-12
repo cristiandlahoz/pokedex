@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../../constants/list.dart';
+import '../../constants/home.dart';
 import '../../../../../core/exceptions/failures.dart';
 
 class LoadingState extends StatelessWidget {

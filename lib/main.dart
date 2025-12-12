@@ -4,7 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'core/di/injection_container.dart';
 import 'core/logging/bloc_observer.dart';
 import 'core/logging/logger.dart';
-import 'features/pokemon/presentation/pages/list_page.dart';
+import 'features/pokemon/presentation/pages/home_page.dart';
 
 void main() async {
   await initHiveForFlutter();
