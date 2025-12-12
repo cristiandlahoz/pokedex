@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
-import '../../../../core/exceptions/exceptions.dart';
-import '../../../../core/exceptions/failures.dart';
+import '../../../../core/exceptions/failures.dart' as failures;
 import '../../../../core/logging/logger.dart';
 import '../../../../core/logging/log_event.dart';
 import '../../../../core/theme/tokens.dart';
@@ -50,7 +49,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
       call: () async {
         final result = await dataSource.getPokemonDetails(id);
         if (result == null) {
-          throw const ServerFailure('Pokemon not found');
+          throw const failures.ServerFailure('Pokemon not found');
         }
         return DetailsDto.fromJson(result).toDomainDetails();
       },
@@ -69,7 +68,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   /// Centralized error handling wrapper for repository calls
-  /// Eliminates duplication and ensures consistent error handling
   Future<Result<T>> _handleRepositoryCall<T>({
     required String operation,
     required Future<T> Function() call,
@@ -80,7 +78,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
     logger.logRequest(RequestEvent(
       id: requestId,
       operation: operation,
-      timestamp: DateTime.now(),
     ));
 
     try {
@@ -90,56 +87,17 @@ class PokemonRepositoryImpl implements PokemonRepository {
         requestId: requestId,
         durationMs: stopwatch.elapsedMilliseconds,
         status: 'success',
-        timestamp: DateTime.now(),
         itemCount: result is List ? result.length : null,
       ));
 
       return Success(result);
-    } on AppFailure catch (failure) {
+    } on failures.Failure catch (failure) {
       logger.logError(ErrorEvent(
         requestId: requestId,
         errorType: failure.runtimeType.toString(),
-        message: failure.message,
-        timestamp: DateTime.now(),
+        message: failure.message
       ));
-      return Failure(failure);
-    } on GraphQLException catch (e, stackTrace) {
-      logger.logError(ErrorEvent(
-        requestId: requestId,
-        errorType: 'GraphQLException',
-        message: e.message,
-        stackTrace: stackTrace,
-        timestamp: DateTime.now(),
-      ));
-      return Failure(
-        ServerFailure(e.message, stackTrace: stackTrace, originalError: e),
-      );
-    } on NetworkException catch (e, stackTrace) {
-      logger.logError(ErrorEvent(
-        requestId: requestId,
-        errorType: 'NetworkException',
-        message: e.message,
-        stackTrace: stackTrace,
-        timestamp: DateTime.now(),
-      ));
-      return Failure(
-        NetworkFailure(e.message, stackTrace: stackTrace, originalError: e),
-      );
-    } catch (e, stackTrace) {
-      logger.logError(ErrorEvent(
-        requestId: requestId,
-        errorType: e.runtimeType.toString(),
-        message: e.toString(),
-        stackTrace: stackTrace,
-        timestamp: DateTime.now(),
-      ));
-      return Failure(
-        UnexpectedFailure(
-          'Unexpected error: ${e.toString()}',
-          stackTrace: stackTrace,
-          originalError: e,
-        ),
-      );
+      return ResultFailure(failure);
     }
   }
 

@@ -15,20 +15,18 @@ class CanonicalBlocObserver extends BlocObserver {
       bloc: bloc.runtimeType.toString(),
       fromState: bloc.state.runtimeType.toString(),
       toState: 'processing',
-      event: event.runtimeType.toString(),
-      timestamp: DateTime.now(),
+      event: event.runtimeType.toString()
     ));
   }
 
   @override
-  void onError(Bloc bloc, Object error, StackTrace stackTrace) {
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
     logger.logError(ErrorEvent(
       requestId: DateTime.now().millisecondsSinceEpoch.toString(),
       errorType: error.runtimeType.toString(),
       message: error.toString(),
       stackTrace: stackTrace,
-      timestamp: DateTime.now(),
       metadata: {'bloc': bloc.runtimeType.toString()},
     ));
   }
