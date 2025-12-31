@@ -1,5 +1,3 @@
-import '../../../../core/theme/tokens.dart';
-
 // Reusable fragments to eliminate duplication and maintain consistency
 
 /// Basic pokemon information fragment used across list and search queries
@@ -106,6 +104,20 @@ fragment EvolutionSpeciesFields on pokemonspecies {
 }
 ''';
 
+const String moveFragment = '''
+fragment MoveFields on pokemonmove {
+  move {
+    name
+    power
+    accuracy
+    pp
+    type {
+      name
+    }
+  }
+}
+''';
+
 const String getPokemonListQuery =
     '''
 $basicPokemonFragment
@@ -122,8 +134,9 @@ const String getPokemonDetailsQuery =
 $basicPokemonFragment
 $typeEffectivenessFragment
 $evolutionSpeciesFragment
+$moveFragment
 
-query GetPokemonDetails(\$id: Int!) {
+query GetPokemonDetails(\$id: Int!, \$movesLimit: Int, \$movesOffset: Int) {
   pokemon(where: {id: {_eq: \$id}}, limit: 1) {
     ...BasicPokemonFields
     pokemonabilities(order_by: {slot: asc}) {
@@ -144,16 +157,8 @@ query GetPokemonDetails(\$id: Int!) {
         name
       }
     }
-    pokemonmoves(limit: ${DesignTokens.defaultMovesLimit}) {
-      move {
-        name
-        power
-        accuracy
-        pp
-        type {
-          name
-        }
-      }
+    pokemonmoves(limit: \$movesLimit, offset: \$movesOffset) {
+      ...MoveFields
     }
     pokemonspecy {
       gender_rate
@@ -198,6 +203,18 @@ $basicPokemonFragment
 query SearchPokemon(\$name: String!) {
   pokemon(where: {name: {_ilike: \$name}}) {
     ...BasicPokemonFields
+  }
+}
+''';
+
+const String getPokemonMovesQuery = '''
+$moveFragment
+
+query GetPokemonMoves(\$id: Int!, \$limit: Int!, \$offset: Int!) {
+  pokemon(where: {id: {_eq: \$id}}, limit: 1) {
+    pokemonmoves(limit: \$limit, offset: \$offset) {
+      ...MoveFields
+    }
   }
 }
 ''';

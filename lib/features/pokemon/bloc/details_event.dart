@@ -15,3 +15,12 @@ class DetailsLoadRequested extends DetailsEvent {
   @override
   List<Object?> get props => [pokemonId];
 }
+
+class DetailsLoadMoreMovesRequested extends DetailsEvent {
+  final int pokemonId;
+
+  const DetailsLoadMoreMovesRequested(this.pokemonId);
+
+  @override
+  List<Object?> get props => [pokemonId];
+}

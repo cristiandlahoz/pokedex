@@ -6,11 +6,13 @@ import '../../../../core/theme/tokens.dart';
 import '../../../../core/utils/result.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
+import '../../domain/entities/pokemon_move.dart';
 import '../../domain/repositories/pokemon_repository.dart';
 import '../../domain/value_objects/filters.dart';
 import '../../domain/value_objects/sorting.dart';
 import '../datasources/pokemon_graphql_datasource.dart';
 import '../dtos/details_dto.dart';
+import '../dtos/parsers/moves_parser.dart';
 
 @LazySingleton(as: PokemonRepository)
 class PokemonRepositoryImpl implements PokemonRepository {
@@ -20,6 +22,9 @@ class PokemonRepositoryImpl implements PokemonRepository {
   PokemonRepositoryImpl(this.dataSource, this.logger);
 
   static int _counter = 0;
+
+  @override
+  int get movesPageSize => DesignTokens.defaultMovesLimit;
 
   @override
   Future<Result<List<Pokemon>>> getPokemonList({
@@ -43,15 +48,40 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<Result<PokemonDetails>> getPokemonDetails(int id) async {
+  Future<Result<PokemonDetails>> getPokemonDetails(
+    int id, {
+    int movesPage = 0,
+  }) async {
     return _handleRepositoryCall(
       operation: 'getPokemonDetails',
       call: () async {
-        final result = await dataSource.getPokemonDetails(id);
+        final result = await dataSource.getPokemonDetails(
+          id,
+          movesLimit: movesPageSize,
+          movesOffset: movesPage * movesPageSize,
+        );
         if (result == null) {
           throw const failures.ServerFailure('Pokemon not found');
         }
         return DetailsDto.fromJson(result).toDomainDetails();
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<PokemonMove>>> getPokemonMovesPage(
+    int id, {
+    required int page,
+  }) async {
+    return _handleRepositoryCall(
+      operation: 'getPokemonMovesPage',
+      call: () async {
+        final result = await dataSource.getPokemonMoves(
+          id,
+          limit: movesPageSize,
+          offset: page * movesPageSize,
+        );
+        return MovesParser.parse(result);
       },
     );
   }
