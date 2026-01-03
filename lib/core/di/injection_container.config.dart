@@ -9,7 +9,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
-import 'package:http/http.dart' as _i519;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:pokedex/core/connectivity/connectivity_bloc.dart' as _i961;
 import 'package:pokedex/core/connectivity/connectivity_service.dart' as _i198;
@@ -55,14 +54,12 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final loggingModule = _$LoggingModule();
-    final httpModule = _$HttpModule();
     gh.factory<_i913.GameVersionBloc>(() => _i913.GameVersionBloc());
     gh.factory<_i538.TypeEffectivenessCalculator>(
         () => _i538.TypeEffectivenessCalculator());
     gh.factory<_i17.LocationMatcher>(() => _i17.LocationMatcher());
     gh.lazySingleton<_i1008.GraphQLConfig>(() => _i1008.GraphQLConfig());
     gh.lazySingleton<_i1052.Logger>(() => loggingModule.provideLogger());
-    gh.lazySingleton<_i519.Client>(() => httpModule.provideHttpClient());
     gh.lazySingleton<_i198.ConnectivityService>(
         () => _i198.ConnectivityService());
     gh.lazySingleton<_i25.FavoritesLocalDataSource>(
@@ -106,5 +103,3 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$LoggingModule extends _i416.LoggingModule {}
-
-class _$HttpModule extends _i416.HttpModule {}
