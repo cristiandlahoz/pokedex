@@ -19,6 +19,7 @@ import '../widgets/details/header.dart';
 import '../widgets/sections/abilities_section.dart';
 import '../widgets/sections/base_stats_section.dart';
 import '../widgets/sections/breeding_section.dart';
+import '../widgets/sections/cards_section.dart';
 import '../widgets/sections/catch_rate_section.dart';
 import '../widgets/sections/evolution_section.dart';
 import '../widgets/sections/locations_section.dart';
@@ -268,6 +269,11 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
           padding: const EdgeInsets.all(AppConstants.defaultPadding),
           children: [
             const SizedBox(height: 16),
+            CardsSection(
+              pokemon: pokemon,
+              typeColor: primaryTypeColor,
+            ),
+            const SizedBox(height: 24),
             if (state is LocationsSuccess && state.locations.isNotEmpty)
               LocationsSection(
                 state: state,
