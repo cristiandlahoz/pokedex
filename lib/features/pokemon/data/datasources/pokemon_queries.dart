@@ -106,6 +106,10 @@ fragment EvolutionSpeciesFields on pokemonspecies {
 
 const String moveFragment = '''
 fragment MoveFields on pokemonmove {
+  version_group_id
+  versiongroup {
+    name
+  }
   move {
     name
     power
@@ -214,6 +218,41 @@ query GetPokemonMoves(\$id: Int!, \$limit: Int!, \$offset: Int!) {
   pokemon(where: {id: {_eq: \$id}}, limit: 1) {
     pokemonmoves(limit: \$limit, offset: \$offset) {
       ...MoveFields
+    }
+  }
+}
+''';
+
+const String getPokemonLocationsQuery = '''
+query GetPokemonLocations(\$pokemonId: Int!) {
+  encounter(
+    where: {pokemon_id: {_eq: \$pokemonId}}
+    order_by: {location_area_id: asc}
+  ) {
+    id
+    min_level
+    max_level
+    location_area_id
+    version_id
+    locationarea {
+      name
+      id
+      location {
+        name
+        id
+        region {
+          name
+          id
+        }
+      }
+    }
+    version {
+      name
+      id
+      versiongroup {
+        name
+        id
+      }
     }
   }
 }

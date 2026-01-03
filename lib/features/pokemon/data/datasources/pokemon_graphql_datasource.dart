@@ -1,12 +1,14 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/graphql/graphql_service.dart';
 import '../../../../core/theme/tokens.dart';
 import '../../domain/value_objects/filters.dart';
 import '../../domain/value_objects/sorting.dart';
-import 'pokemon_queries.dart';
 import '../dtos/list_item_dto.dart';
+import '../dtos/pokemon_location_dto.dart';
+import 'pokemon_queries.dart';
 import 'query_builders/pokemon_query_builder.dart';
 
 @lazySingleton
@@ -156,6 +158,30 @@ class PokemonGraphQLDataSource {
     final List<dynamic> pokemonList = result.data!['pokemon'] as List<dynamic>;
     return pokemonList
         .map((json) => ListItemDto.fromJson(json as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<PokemonLocationDto>> getPokemonLocations(int pokemonId) async {
+    final result = await graphQLService.query(
+      QueryOptions(
+        document: gql(getPokemonLocationsQuery),
+        variables: {'pokemonId': pokemonId},
+        fetchPolicy: FetchPolicy.cacheAndNetwork,
+      ),
+    );
+
+    if (result.hasException) {
+      throw GraphQLException.fromResult(result);
+    }
+
+    final encounters = result.data?['encounter'] as List?;
+    if (encounters == null || encounters.isEmpty) {
+      return [];
+    }
+
+    return encounters
+        .map((json) =>
+            PokemonLocationDto.fromJson(json as Map<String, dynamic>))
         .toList();
   }
 }

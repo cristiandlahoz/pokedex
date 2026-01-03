@@ -1,15 +1,20 @@
 import 'package:injectable/injectable.dart';
+
+import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/exceptions/failures.dart' as failures;
-import '../../../../core/logging/logger.dart';
 import '../../../../core/logging/log_event.dart';
+import '../../../../core/logging/logger.dart';
 import '../../../../core/theme/tokens.dart';
 import '../../../../core/utils/result.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
+import '../../domain/entities/pokemon_location.dart';
 import '../../domain/entities/pokemon_move.dart';
+import '../../domain/entities/region_map.dart';
 import '../../domain/repositories/pokemon_repository.dart';
 import '../../domain/value_objects/filters.dart';
 import '../../domain/value_objects/sorting.dart';
+import '../datasources/map_local_datasource.dart';
 import '../datasources/pokemon_graphql_datasource.dart';
 import '../dtos/details_dto.dart';
 import '../dtos/parsers/moves_parser.dart';
@@ -17,9 +22,14 @@ import '../dtos/parsers/moves_parser.dart';
 @LazySingleton(as: PokemonRepository)
 class PokemonRepositoryImpl implements PokemonRepository {
   final PokemonGraphQLDataSource dataSource;
+  final MapLocalDataSource mapDataSource;
   final Logger logger;
 
-  PokemonRepositoryImpl(this.dataSource, this.logger);
+  PokemonRepositoryImpl(
+    this.dataSource,
+    this.mapDataSource,
+    this.logger,
+  );
 
   static int _counter = 0;
 
@@ -93,6 +103,33 @@ class PokemonRepositoryImpl implements PokemonRepository {
       call: () async {
         final result = await dataSource.searchPokemon(query);
         return result.map((dto) => dto.toDomain()).toList();
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<PokemonLocation>>> getPokemonLocations(
+      int pokemonId) async {
+    return _handleRepositoryCall(
+      operation: 'getPokemonLocations',
+      call: () async {
+        final locationDtos = await dataSource.getPokemonLocations(pokemonId);
+        return locationDtos.map((dto) => dto.toDomain()).toList();
+      },
+    );
+  }
+
+  @override
+  Future<Result<RegionMap>> loadRegionMap(String regionName) async {
+    return _handleRepositoryCall(
+      operation: 'loadRegionMap',
+      call: () async {
+        try {
+          final result = await mapDataSource.loadRegionMap(regionName);
+          return result.toDomain();
+        } on CacheException catch (e) {
+          throw failures.CacheFailure(e.message);
+        }
       },
     );
   }
