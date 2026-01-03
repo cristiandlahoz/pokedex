@@ -20,14 +20,6 @@ fragment BasicPokemonFields on pokemon {
 }
 ''';
 
-/// Type information fragment for detailed type data
-const String typeFragment = '''
-fragment TypeFields on type {
-  id
-  name
-}
-''';
-
 /// Type effectiveness fragment for battle calculations
 const String typeEffectivenessFragment = '''
 fragment TypeEffectivenessFields on type {
