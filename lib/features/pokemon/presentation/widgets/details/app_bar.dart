@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/constants/app.dart';
 import '../../../domain/entities/pokemon_details.dart';
 import '../favorite_toggle_button.dart';
+import 'game_version_selector.dart';
 
 class DetailsAppBar extends StatelessWidget {
   final PokemonDetails pokemon;
@@ -41,7 +42,20 @@ class DetailsAppBar extends StatelessWidget {
           ],
         ),
       ),
-      child: _buildPokemonImage(),
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            Flexible(
+              child: _buildPokemonImage(),
+            ),
+            const SizedBox(height: 8),
+            const GameVersionSelector(),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/utils/result.dart';
 import '../domain/entities/pokemon_details.dart';
 import '../domain/repositories/pokemon_repository.dart';
+import '../domain/value_objects/game_version.dart';
 import 'details_event.dart';
 import 'details_state.dart';
 
@@ -13,6 +14,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   DetailsBloc({required this.repository}) : super(const DetailsInitial()) {
     on<DetailsLoadRequested>(_onDetailsLoadRequested);
     on<DetailsLoadMoreMovesRequested>(_onDetailsLoadMoreMovesRequested);
+    on<DetailsGameVersionSelected>(_onDetailsGameVersionSelected);
   }
 
   Future<void> _onDetailsLoadRequested(
@@ -28,10 +30,14 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     switch (result) {
       case Success(:final data):
+        final allVersions = GameVersion.allVersions;
+        final firstVersion = allVersions.isNotEmpty ? allVersions.first : null;
+        
         emit(DetailsSuccess(
           data,
           hasMoreMoves: data.moves.length >= repository.movesPageSize,
           currentMovesPage: 0,
+          selectedGameVersion: firstVersion,
         ));
       case ResultFailure(:final failure):
         emit(DetailsFailure(failure));
@@ -53,6 +59,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       currentState.pokemon,
       hasMoreMoves: currentState.hasMoreMoves,
       currentMovesPage: currentState.currentMovesPage,
+      selectedGameVersion: currentState.selectedGameVersion,
     ));
 
     final nextPage = currentState.currentMovesPage + 1;
@@ -91,9 +98,20 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           updatedPokemon,
           hasMoreMoves: data.length >= repository.movesPageSize,
           currentMovesPage: nextPage,
+          selectedGameVersion: currentState.selectedGameVersion,
         ));
       case ResultFailure():
         emit(currentState.copyWith());
     }
+  }
+
+  Future<void> _onDetailsGameVersionSelected(
+    DetailsGameVersionSelected event,
+    Emitter<DetailsState> emit,
+  ) async {
+    if (state is! DetailsSuccess) return;
+
+    final currentState = state as DetailsSuccess;
+    emit(currentState.copyWith(selectedGameVersion: event.version));
   }
 }
