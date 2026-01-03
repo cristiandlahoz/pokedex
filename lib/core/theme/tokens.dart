@@ -84,6 +84,11 @@ class DesignTokens {
   static const double opacityMedium = 0.6;
   static const double opacityMediumHigh = 0.7;
   static const double opacityText = 0.8;
+  static const double opacityFull = 1.0;
+
+  /// UI component specific opacities
+  static const double dropdownShadowOpacity = 0.08;
+  static const double mapHighlightOpacity = 0.6;
 
   /// Component sizes
   static const double buttonHeightBase = 48.0;
@@ -121,12 +126,18 @@ class DesignTokens {
   static const double borderWidthThick = 2.0;
   static const double borderWidthBold = 3.0;
 
+  /// Stroke widths (for painting)
+  static const double strokeWidthDefault = 2.0;
+
   /// Pagination
   static const int defaultPageSize = 20;
   static const int defaultMovesLimit = 20;
 
   /// Scroll behavior
   static const double scrollThreshold = 0.9;
+
+  /// Dropdown menu
+  static const double dropdownMenuMaxHeight = 400.0;
 
   /// Chip styling
   static const double chipHorizontalPadding = spacingS;
