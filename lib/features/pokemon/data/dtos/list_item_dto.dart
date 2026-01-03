@@ -29,27 +29,6 @@ class ListItemDto {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'pokemonsprites': imageUrl != null
-          ? [
-              {
-                'sprites': {'front_default': imageUrl}
-              }
-            ]
-          : null,
-      'height': height,
-      'weight': weight,
-      'pokemontypes': types
-          .map((type) => {
-                'type': {'name': type.name}
-              })
-          .toList(),
-    };
-  }
-
   factory ListItemDto.fromJson(Map<String, dynamic> json) {
     final sprites =
         json['pokemonsprites']?[0]?['sprites'] as Map<String, dynamic>?;
