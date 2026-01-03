@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../core/theme/tokens.dart';
+import '../../../../../core/utils/responsive_utils.dart';
 import '../../../domain/entities/region_map.dart';
 import '../../utils/map_overlay_painter.dart';
 
@@ -17,25 +18,40 @@ class LocationsMapViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titleFontSize = ResponsiveUtils.getFontSizeMedium(context) * 1.2;
+    final spacing = ResponsiveUtils.getSpacingMedium(context);
+    final borderRadius = ResponsiveUtils.getCardBorderRadius(context);
+    final horizontalMargin = ResponsiveUtils.getSpacingMedium(context);
+    final shadowBlur = ResponsiveUtils.getWidthPercentage(context, 0.025);
+    final shadowOffset = ResponsiveUtils.getHeightPercentage(context, 0.005);
+    
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            regionMap.region,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: typeColor,
-            ),
+        Text(
+          regionMap.region,
+          style: TextStyle(
+            fontSize: titleFontSize,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey.shade800,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: spacing),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
+          margin: EdgeInsets.symmetric(horizontal: horizontalMargin),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(borderRadius),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.1),
+                blurRadius: shadowBlur,
+                offset: Offset(0, shadowOffset),
+              ),
+            ],
+          ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(borderRadius),
             child: AspectRatio(
               aspectRatio: 1.0,
               child: _MapWithOverlay(
