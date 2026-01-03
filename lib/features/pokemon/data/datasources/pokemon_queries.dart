@@ -52,8 +52,62 @@ fragment TypeEffectivenessFields on type {
 }
 ''';
 
+/// Evolution chain fragment for species information
+const String evolutionSpeciesFragment = '''
+fragment EvolutionSpeciesFields on pokemonspecies {
+  id
+  name
+  evolves_from_species_id
+  
+  pokemons(where: {is_default: {_eq: true}}, limit: 1) {
+    id
+    name
+    pokemontypes {
+      type {
+        id
+        name
+      }
+    }
+    pokemonsprites {
+      sprites
+    }
+  }
+  
+  pokemonevolutions {
+    evolved_species_id
+    min_level
+    min_happiness
+    min_affection
+    time_of_day
+    
+    evolutiontrigger {
+      id
+      name
+      evolutiontriggernames(where: {language_id: {_eq: 9}}, limit: 1) {
+        name
+      }
+    }
+    
+    item {
+      id
+      name
+      itemnames(where: {language_id: {_eq: 9}}, limit: 1) {
+        name
+      }
+    }
+    
+    location {
+      id
+      locationnames(where: {language_id: {_eq: 9}}, limit: 1) {
+        name
+      }
+    }
+  }
+}
+''';
 
-const String getPokemonListQuery = '''
+const String getPokemonListQuery =
+    '''
 $basicPokemonFragment
 
 query GetPokemonList(\$limit: Int, \$offset: Int, \$order_by: [pokemon_order_by!], \$where: pokemon_bool_exp) {
@@ -63,9 +117,11 @@ query GetPokemonList(\$limit: Int, \$offset: Int, \$order_by: [pokemon_order_by!
 }
 ''';
 
-const String getPokemonDetailsQuery = '''
+const String getPokemonDetailsQuery =
+    '''
 $basicPokemonFragment
 $typeEffectivenessFragment
+$evolutionSpeciesFragment
 
 query GetPokemonDetails(\$id: Int!) {
   pokemon(where: {id: {_eq: \$id}}, limit: 1) {
@@ -118,6 +174,13 @@ query GetPokemonDetails(\$id: Int!) {
       pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}, limit: 1, order_by: {version_id: desc}) {
         flavor_text
       }
+      evolution_chain_id
+      evolutionchain {
+        id
+        pokemonspecies(order_by: {id: asc}) {
+          ...EvolutionSpeciesFields
+        }
+      }
     }
   }
   pokemontype(where: {pokemon_id: {_eq: \$id}}) {
@@ -128,7 +191,8 @@ query GetPokemonDetails(\$id: Int!) {
 }
 ''';
 
-const String searchPokemonQuery = '''
+const String searchPokemonQuery =
+    '''
 $basicPokemonFragment
 
 query SearchPokemon(\$name: String!) {

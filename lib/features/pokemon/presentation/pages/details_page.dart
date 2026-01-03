@@ -27,10 +27,7 @@ import '../widgets/shared/error_state.dart' as shared_error;
 class PokemonDetailsPage extends StatefulWidget {
   final Pokemon pokemon;
 
-  const PokemonDetailsPage({
-    super.key,
-    required this.pokemon,
-  });
+  const PokemonDetailsPage({super.key, required this.pokemon});
 
   @override
   State<PokemonDetailsPage> createState() => _PokemonDetailsPageState();
@@ -73,8 +70,8 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<DetailsBloc>()
-        ..add(DetailsLoadRequested(widget.pokemon.id)),
+      create: (context) =>
+          getIt<DetailsBloc>()..add(DetailsLoadRequested(widget.pokemon.id)),
       child: Scaffold(
         body: BlocBuilder<DetailsBloc, DetailsState>(
           builder: (context, state) {
@@ -109,8 +106,8 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
       backgroundColor: TypeHelper.getPrimaryTypeColor(widget.pokemon),
       onRetry: () {
         context.read<DetailsBloc>().add(
-              DetailsLoadRequested(widget.pokemon.id),
-            );
+          DetailsLoadRequested(widget.pokemon.id),
+        );
       },
     );
   }
@@ -171,10 +168,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
       unselectedLabelColor: Colors.grey,
       indicatorColor: primaryTypeColor,
       indicatorWeight: 3,
-      labelStyle: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-      ),
+      labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       unselectedLabelStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.normal,
@@ -194,7 +188,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         TrainingSection(pokemon: pokemon),
         BreedingSection(pokemon: pokemon),
         AbilitiesSection(pokemon: pokemon),
-        const EvolutionSection(),
+        EvolutionSection(pokemon: pokemon),
         const SizedBox(height: AppConstants.largePadding),
       ],
     );
@@ -233,10 +227,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   Widget _buildOtherTab(PokemonDetails pokemon) {
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
-      children: const [
-        SizedBox(height: AppConstants.largePadding),
-      ],
+      children: const [SizedBox(height: AppConstants.largePadding)],
     );
   }
-
 }

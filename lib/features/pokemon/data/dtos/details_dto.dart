@@ -1,4 +1,5 @@
 import '../../../../core/di/injection_container.dart';
+import '../../domain/entities/evolution_chain.dart';
 import '../../domain/entities/pokemon_ability.dart';
 import '../../domain/entities/pokemon_details.dart';
 import '../../domain/entities/pokemon_move.dart';
@@ -8,6 +9,7 @@ import '../../domain/services/type_effectiveness_calculator.dart';
 import 'list_item_dto.dart';
 import 'parsers/abilities_parser.dart';
 import 'parsers/egg_groups_parser.dart';
+import 'parsers/evolution_parser.dart';
 import 'parsers/moves_parser.dart';
 import 'parsers/species_parser.dart';
 import 'parsers/stats_parser.dart';
@@ -27,6 +29,7 @@ class DetailsDto extends ListItemDto {
   final List<String> eggGroups;
   final List<TypeDefenseInfo> typeDefenses;
   final List<TypeDefenseInfo> typeOffenses;
+  final EvolutionChain? evolutionChain;
 
   const DetailsDto({
     required super.id,
@@ -49,6 +52,7 @@ class DetailsDto extends ListItemDto {
     this.eggGroups = const [],
     this.typeDefenses = const [],
     this.typeOffenses = const [],
+    this.evolutionChain,
   });
 
   PokemonDetails toDomainDetails() {
@@ -73,6 +77,7 @@ class DetailsDto extends ListItemDto {
       eggGroups: eggGroups,
       typeDefenses: typeDefenses,
       typeOffenses: typeOffenses,
+      evolutionChain: evolutionChain,
     );
   }
 
@@ -85,6 +90,7 @@ class DetailsDto extends ListItemDto {
       final stats = StatsParser.parse(json['pokemonstats']);
       final moves = MovesParser.parse(json['pokemonmoves']);
       final eggGroups = EggGroupsParser.parse(json['pokemonspecy']);
+      final evolutionChain = EvolutionParser.parse(json['pokemonspecy']);
 
       final calculator = getIt<TypeEffectivenessCalculator>();
       final typeDefenses = calculator.calculateDefensiveEffectiveness(
@@ -117,6 +123,7 @@ class DetailsDto extends ListItemDto {
         eggGroups: eggGroups,
         typeDefenses: typeDefenses,
         typeOffenses: typeOffenses,
+        evolutionChain: evolutionChain,
       );
     } catch (e) {
       rethrow;

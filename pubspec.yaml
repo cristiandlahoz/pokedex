@@ -55,6 +55,7 @@ dependencies:
   # UI
   flutter_svg: ^2.0.10
   cached_network_image: ^3.4.1
+  graphview: ^1.2.0
 
 dev_dependencies:
   flutter_test:

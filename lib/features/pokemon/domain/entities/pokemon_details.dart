@@ -1,3 +1,4 @@
+import 'evolution_chain.dart';
 import 'pokemon.dart';
 import 'pokemon_ability.dart';
 import 'pokemon_move.dart';
@@ -19,6 +20,7 @@ class PokemonDetails extends Pokemon {
   final List<String> eggGroups;
   final List<TypeDefenseInfo> typeDefenses;
   final List<TypeDefenseInfo> typeOffenses;
+  final EvolutionChain? evolutionChain;
 
   const PokemonDetails({
     required super.id,
@@ -41,24 +43,26 @@ class PokemonDetails extends Pokemon {
     this.eggGroups = const [],
     this.typeDefenses = const [],
     this.typeOffenses = const [],
+    this.evolutionChain,
   });
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        genus,
-        description,
-        abilities,
-        stats,
-        moves,
-        baseExperience,
-        captureRate,
-        baseHappiness,
-        growthRate,
-        eggGroup,
-        genderRatio,
-        eggGroups,
-        typeDefenses,
-        typeOffenses,
-      ];
+    ...super.props,
+    genus,
+    description,
+    abilities,
+    stats,
+    moves,
+    baseExperience,
+    captureRate,
+    baseHappiness,
+    growthRate,
+    eggGroup,
+    genderRatio,
+    eggGroups,
+    typeDefenses,
+    typeOffenses,
+    evolutionChain,
+  ];
 }
