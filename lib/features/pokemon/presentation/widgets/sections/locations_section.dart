@@ -112,7 +112,9 @@ class _LocationsSectionState extends State<LocationsSection> {
               padding: EdgeInsets.only(bottom: spacing),
               child: _RegionCard(
                 region: region,
-                state: widget.state,
+                locations: locationsForVersion
+                    .where((loc) => loc.locationName.startsWith(region))
+                    .toList(),
                 typeColor: widget.typeColor,
               ),
             )),
@@ -123,12 +125,12 @@ class _LocationsSectionState extends State<LocationsSection> {
 
 class _RegionCard extends StatefulWidget {
   final String region;
-  final LocationsSuccess state;
+  final List<PokemonLocation> locations;
   final Color typeColor;
 
   const _RegionCard({
     required this.region,
-    required this.state,
+    required this.locations,
     required this.typeColor,
   });
 
@@ -139,12 +141,23 @@ class _RegionCard extends StatefulWidget {
 class _RegionCardState extends State<_RegionCard> {
   bool _isExpanded = true;
 
+  List<PokemonLocation> _getUniqueLocations() {
+    final Map<String, PokemonLocation> uniqueMap = {};
+    
+    for (final location in widget.locations) {
+      final key = '${location.areaName}_${location.minLevel}_${location.maxLevel}';
+      if (!uniqueMap.containsKey(key)) {
+        uniqueMap[key] = location;
+      }
+    }
+    
+    return uniqueMap.values.toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final regionName = widget.region[0].toUpperCase() + widget.region.substring(1);
-    final regionLocations = widget.state.locationsForSelectedVersion
-        .where((loc) => loc.locationName.startsWith(widget.region))
-        .toList();
+    final uniqueLocations = _getUniqueLocations();
 
     final borderRadius = ResponsiveUtils.getCardBorderRadius(context);
     final padding = ResponsiveUtils.getSpacingMedium(context);
@@ -171,7 +184,7 @@ class _RegionCardState extends State<_RegionCard> {
                 children: [
                   Flexible(
                     child: Text(
-                      '$regionName (${regionLocations.length})',
+                      '$regionName (${uniqueLocations.length})',
                       style: TextStyle(
                         fontSize: fontSize,
                         fontWeight: FontWeight.bold,
@@ -194,7 +207,7 @@ class _RegionCardState extends State<_RegionCard> {
             Padding(
               padding: EdgeInsets.fromLTRB(padding, 0, padding, padding),
               child: Column(
-                children: regionLocations
+                children: uniqueLocations
                     .map((location) => _buildLocationItem(location))
                     .toList(),
               ),
