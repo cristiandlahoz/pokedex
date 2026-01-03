@@ -3,7 +3,7 @@
   "image": "assets/maps/regions/unova.png",
   "locations": [
     {
-      "name": "Route 1",
+      "name": "route-1",
       "shape": "rect",
       "coords": [
         231,
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "name": "Route 2",
+      "name": "route-2",
       "shape": "rect",
       "coords": [
         229,
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "name": "Route 3",
+      "name": "route-3",
       "shape": "rect",
       "coords": [
         209,
@@ -33,7 +33,7 @@
       ]
     },
     {
-      "name": "Route 4",
+      "name": "route-4",
       "shape": "rect",
       "coords": [
         130,
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "name": "Route 5",
+      "name": "route-5",
       "shape": "rect",
       "coords": [
         115,
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "name": "Route 6",
+      "name": "route-6",
       "shape": "poly",
       "coords": [
         44,
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "name": "Route 7",
+      "name": "route-7",
       "shape": "poly",
       "coords": [
         45,
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "name": "Route 8",
+      "name": "route-8",
       "shape": "rect",
       "coords": [
         80,
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "name": "Route 9",
+      "name": "route-9",
       "shape": "rect",
       "coords": [
         113,
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "name": "Route 10",
+      "name": "route-10",
       "shape": "rect",
       "coords": [
         134,
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "name": "Route 11",
+      "name": "route-11",
       "shape": "rect",
       "coords": [
         138,
@@ -121,7 +121,7 @@
       ]
     },
     {
-      "name": "Route 12",
+      "name": "route-12",
       "shape": "rect",
       "coords": [
         170,
@@ -131,7 +131,7 @@
       ]
     },
     {
-      "name": "Route 13",
+      "name": "route-13",
       "shape": "poly",
       "coords": [
         195,
@@ -145,7 +145,7 @@
       ]
     },
     {
-      "name": "Route 14",
+      "name": "route-14",
       "shape": "poly",
       "coords": [
         194,
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "name": "Route 15",
+      "name": "route-15",
       "shape": "rect",
       "coords": [
         169,
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "name": "Route 16",
+      "name": "route-16",
       "shape": "rect",
       "coords": [
         138,
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "name": "Route 17",
+      "name": "route-17",
       "shape": "rect",
       "coords": [
         213,
@@ -189,7 +189,7 @@
       ]
     },
     {
-      "name": "Route 18",
+      "name": "route-18",
       "shape": "rect",
       "coords": [
         202,
@@ -199,7 +199,7 @@
       ]
     },
     {
-      "name": "Route 19",
+      "name": "route-19",
       "shape": "rect",
       "coords": [
         13,
@@ -209,7 +209,7 @@
       ]
     },
     {
-      "name": "Route 19",
+      "name": "route-19",
       "shape": "poly",
       "coords": [
         12,
@@ -223,7 +223,7 @@
       ]
     },
     {
-      "name": "Route 20",
+      "name": "route-20",
       "shape": "rect",
       "coords": [
         39,
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "name": "Route 21",
+      "name": "route-21",
       "shape": "rect",
       "coords": [
         233,
@@ -243,7 +243,7 @@
       ]
     },
     {
-      "name": "Route 22",
+      "name": "route-22",
       "shape": "rect",
       "coords": [
         211,
@@ -253,7 +253,7 @@
       ]
     },
     {
-      "name": "Route 23",
+      "name": "route-23",
       "shape": "rect",
       "coords": [
         195,
@@ -263,7 +263,7 @@
       ]
     },
     {
-      "name": "Route 23",
+      "name": "route-23",
       "shape": "rect",
       "coords": [
         195,
@@ -273,7 +273,7 @@
       ]
     },
     {
-      "name": "Route 23",
+      "name": "route-23",
       "shape": "rect",
       "coords": [
         188,
@@ -283,7 +283,7 @@
       ]
     },
     {
-      "name": "Marine Tube",
+      "name": "marine-tube",
       "shape": "rect",
       "coords": [
         229,
@@ -293,7 +293,7 @@
       ]
     },
     {
-      "name": "Marine Tube",
+      "name": "marine-tube",
       "shape": "rect",
       "coords": [
         251,
@@ -303,7 +303,7 @@
       ]
     },
     {
-      "name": "Marine Tube",
+      "name": "marine-tube",
       "shape": "rect",
       "coords": [
         241,
@@ -313,7 +313,7 @@
       ]
     },
     {
-      "name": "Sky Arrow Bridge",
+      "name": "sky-arrow-bridge",
       "shape": "poly",
       "coords": [
         138,
@@ -325,7 +325,7 @@
       ]
     },
     {
-      "name": "Desert Resort",
+      "name": "desert-resort",
       "shape": "rect",
       "coords": [
         118,
@@ -335,7 +335,7 @@
       ]
     },
     {
-      "name": "Tubeline Bridge",
+      "name": "tubeline-bridge",
       "shape": "rect",
       "coords": [
         93,
@@ -345,7 +345,7 @@
       ]
     },
     {
-      "name": "Village Bridge",
+      "name": "village-bridge",
       "shape": "rect",
       "coords": [
         150,
@@ -355,7 +355,7 @@
       ]
     },
     {
-      "name": "Marvelous Bridge",
+      "name": "marvelous-bridge",
       "shape": "rect",
       "coords": [
         149,
@@ -365,7 +365,7 @@
       ]
     },
     {
-      "name": "Driftveil Drawbridge",
+      "name": "driftveil-drawbridge",
       "shape": "rect",
       "coords": [
         80,
@@ -375,7 +375,7 @@
       ]
     },
     {
-      "name": "Nuvema Town",
+      "name": "nuvema-town",
       "shape": "rect",
       "coords": [
         226,
@@ -385,7 +385,7 @@
       ]
     },
     {
-      "name": "Plasma Frigate",
+      "name": "plasma-frigate",
       "shape": "rect",
       "coords": [
         219,
@@ -395,7 +395,7 @@
       ]
     },
     {
-      "name": "Accumula Town",
+      "name": "accumula-town",
       "shape": "rect",
       "coords": [
         226,
@@ -405,7 +405,7 @@
       ]
     },
     {
-      "name": "Striaton City",
+      "name": "striaton-city",
       "shape": "rect",
       "coords": [
         222,
@@ -415,7 +415,7 @@
       ]
     },
     {
-      "name": "Nacrene City",
+      "name": "nacrene-city",
       "shape": "rect",
       "coords": [
         197,
@@ -425,7 +425,7 @@
       ]
     },
     {
-      "name": "Castelia City",
+      "name": "castelia-city",
       "shape": "rect",
       "coords": [
         126,
@@ -435,7 +435,7 @@
       ]
     },
     {
-      "name": "Nimbasa City",
+      "name": "nimbasa-city",
       "shape": "rect",
       "coords": [
         126,
@@ -445,7 +445,7 @@
       ]
     },
     {
-      "name": "Driftveil City",
+      "name": "driftveil-city",
       "shape": "rect",
       "coords": [
         68,
@@ -455,7 +455,7 @@
       ]
     },
     {
-      "name": "Mistralton City",
+      "name": "mistralton-city",
       "shape": "rect",
       "coords": [
         34,
@@ -465,7 +465,7 @@
       ]
     },
     {
-      "name": "Icirrus City",
+      "name": "icirrus-city",
       "shape": "rect",
       "coords": [
         68,
@@ -475,7 +475,7 @@
       ]
     },
     {
-      "name": "Opelucid City",
+      "name": "opelucid-city",
       "shape": "rect",
       "coords": [
         126,
@@ -485,7 +485,7 @@
       ]
     },
     {
-      "name": "Pok\u00e9mon League",
+      "name": "pokemon-league",
       "shape": "rect",
       "coords": [
         164,
@@ -495,7 +495,7 @@
       ]
     },
     {
-      "name": "Lacunosa Town",
+      "name": "lacunosa-town",
       "shape": "rect",
       "coords": [
         184,
@@ -505,7 +505,7 @@
       ]
     },
     {
-      "name": "Undella Town",
+      "name": "undella-town",
       "shape": "rect",
       "coords": [
         218,
@@ -515,7 +515,7 @@
       ]
     },
     {
-      "name": "Black City",
+      "name": "black-city",
       "shape": "rect",
       "coords": [
         184,
@@ -525,7 +525,7 @@
       ]
     },
     {
-      "name": "White Forest",
+      "name": "white-forest",
       "shape": "rect",
       "coords": [
         190,
@@ -535,7 +535,7 @@
       ]
     },
     {
-      "name": "Aspertia City",
+      "name": "aspertia-city",
       "shape": "rect",
       "coords": [
         8,
@@ -545,7 +545,7 @@
       ]
     },
     {
-      "name": "Floccesy Town",
+      "name": "floccesy-town",
       "shape": "rect",
       "coords": [
         26,
@@ -555,7 +555,7 @@
       ]
     },
     {
-      "name": "Virbank City",
+      "name": "virbank-city",
       "shape": "rect",
       "coords": [
         63,
@@ -565,7 +565,7 @@
       ]
     },
     {
-      "name": "Pok\u00e9wood",
+      "name": "pokewood",
       "shape": "rect",
       "coords": [
         60,
@@ -575,7 +575,7 @@
       ]
     },
     {
-      "name": "Floccesy Ranch",
+      "name": "floccesy-ranch",
       "shape": "rect",
       "coords": [
         38,
@@ -585,7 +585,7 @@
       ]
     },
     {
-      "name": "Cave of Being",
+      "name": "cave-of-being",
       "shape": "rect",
       "coords": [
         38,
@@ -595,7 +595,7 @@
       ]
     },
     {
-      "name": "Virbank Complex",
+      "name": "virbank-complex",
       "shape": "rect",
       "coords": [
         61,
@@ -605,7 +605,7 @@
       ]
     },
     {
-      "name": "Castelia Sewers",
+      "name": "castelia-sewers",
       "shape": "rect",
       "coords": [
         153,
@@ -615,7 +615,7 @@
       ]
     },
     {
-      "name": "P2 Laboratory",
+      "name": "p2-laboratory",
       "shape": "rect",
       "coords": [
         211,
@@ -625,7 +625,7 @@
       ]
     },
     {
-      "name": "Relic Passage",
+      "name": "relic-passage",
       "shape": "rect",
       "coords": [
         102,
@@ -635,7 +635,7 @@
       ]
     },
     {
-      "name": "PWT",
+      "name": "pwt",
       "shape": "rect",
       "coords": [
         73,
@@ -645,7 +645,7 @@
       ]
     },
     {
-      "name": "Clay Tunnel",
+      "name": "clay-tunnel",
       "shape": "rect",
       "coords": [
         69,
@@ -655,7 +655,7 @@
       ]
     },
     {
-      "name": "Lentimas Town",
+      "name": "lentimas-town",
       "shape": "rect",
       "coords": [
         181,
@@ -665,7 +665,7 @@
       ]
     },
     {
-      "name": "Strange House",
+      "name": "strange-house",
       "shape": "rect",
       "coords": [
         195,
@@ -675,7 +675,7 @@
       ]
     },
     {
-      "name": "Reversal Mountain",
+      "name": "reversal-mountain",
       "shape": "rect",
       "coords": [
         203,
@@ -685,7 +685,7 @@
       ]
     },
     {
-      "name": "Seaside Cave",
+      "name": "seaside-cave",
       "shape": "rect",
       "coords": [
         232,
@@ -695,7 +695,7 @@
       ]
     },
     {
-      "name": "Humilau City",
+      "name": "humilau-city",
       "shape": "rect",
       "coords": [
         229,
@@ -705,7 +705,7 @@
       ]
     },
     {
-      "name": "N's Castle",
+      "name": "ns-castle",
       "shape": "rect",
       "coords": [
         179,
@@ -715,7 +715,7 @@
       ]
     },
     {
-      "name": "Victory Road",
+      "name": "victory-road",
       "shape": "rect",
       "coords": [
         180,
@@ -725,7 +725,7 @@
       ]
     },
     {
-      "name": "Dreamyard",
+      "name": "dreamyard",
       "shape": "rect",
       "coords": [
         236,
@@ -735,7 +735,7 @@
       ]
     },
     {
-      "name": "Wellspring Cave",
+      "name": "wellspring-cave",
       "shape": "rect",
       "coords": [
         212,
@@ -745,7 +745,7 @@
       ]
     },
     {
-      "name": "Pinwheel Forest",
+      "name": "pinwheel-forest",
       "shape": "rect",
       "coords": [
         191,
@@ -755,7 +755,7 @@
       ]
     },
     {
-      "name": "Relic Castle",
+      "name": "relic-castle",
       "shape": "rect",
       "coords": [
         112,
@@ -765,7 +765,7 @@
       ]
     },
     {
-      "name": "Mistralton Cave",
+      "name": "mistralton-cave",
       "shape": "rect",
       "coords": [
         66,
@@ -775,7 +775,7 @@
       ]
     },
     {
-      "name": "Chargestone Cave",
+      "name": "chargestone-cave",
       "shape": "rect",
       "coords": [
         39,
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "name": "Celestial Tower",
+      "name": "celestial-tower",
       "shape": "rect",
       "coords": [
         51,
@@ -795,7 +795,7 @@
       ]
     },
     {
-      "name": "Twist Mountain",
+      "name": "twist-mountain",
       "shape": "rect",
       "coords": [
         69,
@@ -805,7 +805,7 @@
       ]
     },
     {
-      "name": "Dragonspiral Tower",
+      "name": "dragonspiral-tower",
       "shape": "rect",
       "coords": [
         63,
@@ -815,7 +815,7 @@
       ]
     },
     {
-      "name": "Moor of Icirrus",
+      "name": "moor-of-icirrus",
       "shape": "rect",
       "coords": [
         85,
@@ -825,7 +825,7 @@
       ]
     },
     {
-      "name": "Anville Town",
+      "name": "anville-town",
       "shape": "rect",
       "coords": [
         4,
@@ -835,7 +835,7 @@
       ]
     },
     {
-      "name": "Challenger's Cave",
+      "name": "challengers-cave",
       "shape": "rect",
       "coords": [
         114,
@@ -845,7 +845,7 @@
       ]
     },
     {
-      "name": "Victory Road",
+      "name": "victory-road",
       "shape": "rect",
       "coords": [
         159,
@@ -855,7 +855,7 @@
       ]
     },
     {
-      "name": "Giant Chasm",
+      "name": "giant-chasm",
       "shape": "rect",
       "coords": [
         205,
@@ -865,7 +865,7 @@
       ]
     },
     {
-      "name": "Undella Bay",
+      "name": "undella-bay",
       "shape": "rect",
       "coords": [
         239,
@@ -875,7 +875,7 @@
       ]
     },
     {
-      "name": "Abundant Shrine",
+      "name": "abundant-shrine",
       "shape": "rect",
       "coords": [
         194,
@@ -885,7 +885,7 @@
       ]
     },
     {
-      "name": "Lostlorn Forest",
+      "name": "lostlorn-forest",
       "shape": "rect",
       "coords": [
         143,
@@ -895,7 +895,7 @@
       ]
     },
     {
-      "name": "EntraLink",
+      "name": "entralink",
       "shape": "rect",
       "coords": [
         129,
@@ -905,7 +905,7 @@
       ]
     },
     {
-      "name": "Liberty Island",
+      "name": "liberty-island",
       "shape": "rect",
       "coords": [
         71,
@@ -915,7 +915,7 @@
       ]
     },
     {
-      "name": "Unity Tower",
+      "name": "unity-tower",
       "shape": "rect",
       "coords": [
         95,

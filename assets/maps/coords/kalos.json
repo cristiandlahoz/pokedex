@@ -3,7 +3,7 @@
   "image": "assets/maps/regions/kalos.png",
   "locations": [
     {
-      "name": "Route 1",
+      "name": "route-1",
       "shape": "rect",
       "coords": [
         210,
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "name": "Route 2",
+      "name": "route-2",
       "shape": "rect",
       "coords": [
         209,
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "name": "Route 3",
+      "name": "route-3",
       "shape": "poly",
       "coords": [
         203,
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "name": "Route 4",
+      "name": "route-4",
       "shape": "poly",
       "coords": [
         176,
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "name": "Route 5",
+      "name": "route-5",
       "shape": "poly",
       "coords": [
         137,
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "name": "Route 6",
+      "name": "route-6",
       "shape": "poly",
       "coords": [
         100,
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "name": "Route 7",
+      "name": "route-7",
       "shape": "rect",
       "coords": [
         76,
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "name": "Route 8",
+      "name": "route-8",
       "shape": "poly",
       "coords": [
         60,
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "name": "Route 9",
+      "name": "route-9",
       "shape": "rect",
       "coords": [
         78,
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "name": "Route 10",
+      "name": "route-10",
       "shape": "poly",
       "coords": [
         36,
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "name": "Route 11",
+      "name": "route-11",
       "shape": "poly",
       "coords": [
         37,
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "name": "Route 12",
+      "name": "route-12",
       "shape": "poly",
       "coords": [
         103,
@@ -155,7 +155,7 @@
       ]
     },
     {
-      "name": "Route 13",
+      "name": "route-13",
       "shape": "poly",
       "coords": [
         117,
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "name": "Route 14",
+      "name": "route-14",
       "shape": "rect",
       "coords": [
         162,
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "name": "Route 15",
+      "name": "route-15",
       "shape": "poly",
       "coords": [
         171,
@@ -193,7 +193,7 @@
       ]
     },
     {
-      "name": "Route 16",
+      "name": "route-16",
       "shape": "poly",
       "coords": [
         213,
@@ -207,7 +207,7 @@
       ]
     },
     {
-      "name": "Route 17",
+      "name": "route-17",
       "shape": "poly",
       "coords": [
         226,
@@ -221,7 +221,7 @@
       ]
     },
     {
-      "name": "Route 18",
+      "name": "route-18",
       "shape": "poly",
       "coords": [
         287,
@@ -235,7 +235,7 @@
       ]
     },
     {
-      "name": "Route 19",
+      "name": "route-19",
       "shape": "poly",
       "coords": [
         294,
@@ -249,7 +249,7 @@
       ]
     },
     {
-      "name": "Route 20",
+      "name": "route-20",
       "shape": "poly",
       "coords": [
         270,
@@ -263,7 +263,7 @@
       ]
     },
     {
-      "name": "Route 21",
+      "name": "route-21",
       "shape": "rect",
       "coords": [
         241,
@@ -273,7 +273,7 @@
       ]
     },
     {
-      "name": "Route 22",
+      "name": "route-22",
       "shape": "poly",
       "coords": [
         229,
@@ -287,7 +287,7 @@
       ]
     },
     {
-      "name": "Ambrette Town",
+      "name": "ambrette-town",
       "shape": "rect",
       "coords": [
         65,
@@ -297,7 +297,7 @@
       ]
     },
     {
-      "name": "Anistar City",
+      "name": "anistar-city",
       "shape": "rect",
       "coords": [
         274,
@@ -307,7 +307,7 @@
       ]
     },
     {
-      "name": "Aquacorde Town",
+      "name": "aquacorde-town",
       "shape": "rect",
       "coords": [
         205,
@@ -317,7 +317,7 @@
       ]
     },
     {
-      "name": "Azure Bay",
+      "name": "azure-bay",
       "shape": "poly",
       "coords": [
         88,
@@ -331,7 +331,7 @@
       ]
     },
     {
-      "name": "Camphrier Town",
+      "name": "camphrier-town",
       "shape": "rect",
       "coords": [
         124,
@@ -341,7 +341,7 @@
       ]
     },
     {
-      "name": "Chamber of Empitness",
+      "name": "chamber-of-empitness",
       "shape": "rect",
       "coords": [
         216,
@@ -351,7 +351,7 @@
       ]
     },
     {
-      "name": "Connecting Cave",
+      "name": "connecting-cave",
       "shape": "rect",
       "coords": [
         65,
@@ -361,7 +361,7 @@
       ]
     },
     {
-      "name": "Couriway Town",
+      "name": "couriway-town",
       "shape": "rect",
       "coords": [
         291,
@@ -371,7 +371,7 @@
       ]
     },
     {
-      "name": "Coumarine City",
+      "name": "coumarine-city",
       "shape": "rect",
       "coords": [
         103,
@@ -381,7 +381,7 @@
       ]
     },
     {
-      "name": "Cyllage City",
+      "name": "cyllage-city",
       "shape": "rect",
       "coords": [
         49,
@@ -391,7 +391,7 @@
       ]
     },
     {
-      "name": "Dendemille Town",
+      "name": "dendemille-town",
       "shape": "rect",
       "coords": [
         212,
@@ -401,7 +401,7 @@
       ]
     },
     {
-      "name": "Frost Cavern",
+      "name": "frost-cavern",
       "shape": "rect",
       "coords": [
         226,
@@ -411,7 +411,7 @@
       ]
     },
     {
-      "name": "Geosenge Town",
+      "name": "geosenge-town",
       "shape": "rect",
       "coords": [
         22,
@@ -421,7 +421,7 @@
       ]
     },
     {
-      "name": "Glittering Cave",
+      "name": "glittering-cave",
       "shape": "rect",
       "coords": [
         111,
@@ -431,7 +431,7 @@
       ]
     },
     {
-      "name": "Kalos Power Plant",
+      "name": "kalos-power-plant",
       "shape": "rect",
       "coords": [
         116,
@@ -441,7 +441,7 @@
       ]
     },
     {
-      "name": "Kiloude City",
+      "name": "kiloude-city",
       "shape": "rect",
       "coords": [
         233,
@@ -451,7 +451,7 @@
       ]
     },
     {
-      "name": "Laverre City",
+      "name": "laverre-city",
       "shape": "rect",
       "coords": [
         158,
@@ -461,7 +461,7 @@
       ]
     },
     {
-      "name": "Lost Hotel",
+      "name": "lost-hotel",
       "shape": "rect",
       "coords": [
         185,
@@ -471,7 +471,7 @@
       ]
     },
     {
-      "name": "Lumiose City",
+      "name": "lumiose-city",
       "shape": "rect",
       "coords": [
         150,
@@ -481,7 +481,7 @@
       ]
     },
     {
-      "name": "Parfum Palace",
+      "name": "parfum-palace",
       "shape": "rect",
       "coords": [
         89,
@@ -491,7 +491,7 @@
       ]
     },
     {
-      "name": "Poke Ball Factory",
+      "name": "poke-ball-factory",
       "shape": "rect",
       "coords": [
         159,
@@ -501,7 +501,7 @@
       ]
     },
     {
-      "name": "Pokemon League",
+      "name": "pokemon-league",
       "shape": "rect",
       "coords": [
         228,
@@ -511,7 +511,7 @@
       ]
     },
     {
-      "name": "Pokemon Village",
+      "name": "pokemon-village",
       "shape": "rect",
       "coords": [
         253,
@@ -521,7 +521,7 @@
       ]
     },
     {
-      "name": "Reflection Cave",
+      "name": "reflection-cave",
       "shape": "rect",
       "coords": [
         35,
@@ -531,7 +531,7 @@
       ]
     },
     {
-      "name": "Santalune City",
+      "name": "santalune-city",
       "shape": "rect",
       "coords": [
         192,
@@ -541,7 +541,7 @@
       ]
     },
     {
-      "name": "Santalune Forest",
+      "name": "santalune-forest",
       "shape": "rect",
       "coords": [
         206,
@@ -551,7 +551,7 @@
       ]
     },
     {
-      "name": "Sea Spirit's Den",
+      "name": "sea-spirits-den",
       "shape": "rect",
       "coords": [
         75,
@@ -561,7 +561,7 @@
       ]
     },
     {
-      "name": "Shalour City",
+      "name": "shalour-city",
       "shape": "rect",
       "coords": [
         41,
@@ -571,7 +571,7 @@
       ]
     },
     {
-      "name": "Snowbelle City",
+      "name": "snowbelle-city",
       "shape": "rect",
       "coords": [
         264,
@@ -581,7 +581,7 @@
       ]
     },
     {
-      "name": "Terminus Cave",
+      "name": "terminus-cave",
       "shape": "rect",
       "coords": [
         302,
@@ -591,7 +591,7 @@
       ]
     },
     {
-      "name": "Vaniville Town",
+      "name": "vaniville-town",
       "shape": "rect",
       "coords": [
         205,
@@ -601,7 +601,7 @@
       ]
     },
     {
-      "name": "Victory Road",
+      "name": "victory-road",
       "shape": "rect",
       "coords": [
         229,

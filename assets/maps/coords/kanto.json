@@ -3,7 +3,7 @@
   "image": "assets/maps/regions/kanto.png",
   "locations": [
     {
-      "name": "Pallet Town",
+      "name": "pallet-town",
       "shape": "rect",
       "coords": [
         47,
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "name": "Viridian City",
+      "name": "viridian-city",
       "shape": "rect",
       "coords": [
         47,
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "name": "Viridian Forest",
+      "name": "viridian-forest",
       "shape": "rect",
       "coords": [
         47,
@@ -33,7 +33,7 @@
       ]
     },
     {
-      "name": "Pewter City",
+      "name": "pewter-city",
       "shape": "rect",
       "coords": [
         47,
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "name": "Pewter City",
+      "name": "pewter-city",
       "shape": "rect",
       "coords": [
         47,
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "name": "Mt. Moon",
+      "name": "mt-moon",
       "shape": "rect",
       "coords": [
         88,
@@ -63,7 +63,7 @@
       ]
     },
     {
-      "name": "Cerulean City",
+      "name": "cerulean-city",
       "shape": "rect",
       "coords": [
         127,
@@ -73,7 +73,7 @@
       ]
     },
     {
-      "name": "Rock Tunnel",
+      "name": "rock-tunnel",
       "shape": "rect",
       "coords": [
         160,
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "name": "Power Plant",
+      "name": "power-plant",
       "shape": "rect",
       "coords": [
         160,
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "name": "Lavender Town",
+      "name": "lavender-town",
       "shape": "rect",
       "coords": [
         160,
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "name": "Pok\u00e9mon Tower",
+      "name": "pokemon-tower",
       "shape": "rect",
       "coords": [
         168,
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "name": "Saffron City",
+      "name": "saffron-city",
       "shape": "rect",
       "coords": [
         124,
@@ -123,7 +123,7 @@
       ]
     },
     {
-      "name": "Celadon City",
+      "name": "celadon-city",
       "shape": "rect",
       "coords": [
         104,
@@ -133,7 +133,7 @@
       ]
     },
     {
-      "name": "Vermilion City",
+      "name": "vermilion-city",
       "shape": "rect",
       "coords": [
         128,
@@ -143,7 +143,7 @@
       ]
     },
     {
-      "name": "Diglett's Cave",
+      "name": "digletts-cave",
       "shape": "rect",
       "coords": [
         136,
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "name": "Fuchsia City",
+      "name": "fuchsia-city",
       "shape": "rect",
       "coords": [
         112,
@@ -163,7 +163,7 @@
       ]
     },
     {
-      "name": "Seafoam Islands",
+      "name": "seafoam-islands",
       "shape": "rect",
       "coords": [
         75,
@@ -173,7 +173,7 @@
       ]
     },
     {
-      "name": "Cinnabar Island",
+      "name": "cinnabar-island",
       "shape": "rect",
       "coords": [
         47,
@@ -183,7 +183,7 @@
       ]
     },
     {
-      "name": "Victory Road",
+      "name": "victory-road",
       "shape": "rect",
       "coords": [
         23,
@@ -193,7 +193,7 @@
       ]
     },
     {
-      "name": "Indigo Plateau",
+      "name": "indigo-plateau",
       "shape": "rect",
       "coords": [
         23,
@@ -203,7 +203,7 @@
       ]
     },
     {
-      "name": "Tohjo Falls",
+      "name": "tohjo-falls",
       "shape": "rect",
       "coords": [
         2,
@@ -213,7 +213,7 @@
       ]
     },
     {
-      "name": "Mt. Silver (Johto)",
+      "name": "mt-silver-johto",
       "shape": "rect",
       "coords": [
         0,
@@ -223,7 +223,7 @@
       ]
     },
     {
-      "name": "Route 1",
+      "name": "route-1",
       "shape": "rect",
       "coords": [
         47,
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "name": "Route 2",
+      "name": "route-2",
       "shape": "rect",
       "coords": [
         47,
@@ -243,7 +243,7 @@
       ]
     },
     {
-      "name": "Route 3",
+      "name": "route-3",
       "shape": "rect",
       "coords": [
         63,
@@ -253,7 +253,7 @@
       ]
     },
     {
-      "name": "Route 4",
+      "name": "route-4",
       "shape": "rect",
       "coords": [
         79,
@@ -263,7 +263,7 @@
       ]
     },
     {
-      "name": "Route 4",
+      "name": "route-4",
       "shape": "rect",
       "coords": [
         95,
@@ -273,7 +273,7 @@
       ]
     },
     {
-      "name": "Route 5",
+      "name": "route-5",
       "shape": "rect",
       "coords": [
         127,
@@ -283,7 +283,7 @@
       ]
     },
     {
-      "name": "Route 6",
+      "name": "route-6",
       "shape": "rect",
       "coords": [
         127,
@@ -293,7 +293,7 @@
       ]
     },
     {
-      "name": "Route 7",
+      "name": "route-7",
       "shape": "rect",
       "coords": [
         139,
@@ -303,7 +303,7 @@
       ]
     },
     {
-      "name": "Route 8",
+      "name": "route-8",
       "shape": "rect",
       "coords": [
         112,
@@ -313,7 +313,7 @@
       ]
     },
     {
-      "name": "Route 9",
+      "name": "route-9",
       "shape": "rect",
       "coords": [
         136,
@@ -323,7 +323,7 @@
       ]
     },
     {
-      "name": "Route 10",
+      "name": "route-10",
       "shape": "rect",
       "coords": [
         159,
@@ -333,7 +333,7 @@
       ]
     },
     {
-      "name": "Route 11",
+      "name": "route-11",
       "shape": "rect",
       "coords": [
         144,
@@ -343,7 +343,7 @@
       ]
     },
     {
-      "name": "Route 12",
+      "name": "route-12",
       "shape": "rect",
       "coords": [
         159,
@@ -353,7 +353,7 @@
       ]
     },
     {
-      "name": "Route 13",
+      "name": "route-13",
       "shape": "rect",
       "coords": [
         143,
@@ -363,7 +363,7 @@
       ]
     },
     {
-      "name": "Route 14",
+      "name": "route-14",
       "shape": "rect",
       "coords": [
         135,
@@ -373,7 +373,7 @@
       ]
     },
     {
-      "name": "Route 15",
+      "name": "route-15",
       "shape": "rect",
       "coords": [
         120,
@@ -383,7 +383,7 @@
       ]
     },
     {
-      "name": "Route 16",
+      "name": "route-16",
       "shape": "rect",
       "coords": [
         71,
@@ -393,7 +393,7 @@
       ]
     },
     {
-      "name": "Route 17",
+      "name": "route-17",
       "shape": "rect",
       "coords": [
         71,
@@ -403,7 +403,7 @@
       ]
     },
     {
-      "name": "Route 18",
+      "name": "route-18",
       "shape": "rect",
       "coords": [
         71,
@@ -413,7 +413,7 @@
       ]
     },
     {
-      "name": "Route 19",
+      "name": "route-19",
       "shape": "rect",
       "coords": [
         111,
@@ -423,7 +423,7 @@
       ]
     },
     {
-      "name": "Route 20",
+      "name": "route-20",
       "shape": "rect",
       "coords": [
         55,
@@ -433,7 +433,7 @@
       ]
     },
     {
-      "name": "Route 21",
+      "name": "route-21",
       "shape": "rect",
       "coords": [
         47,
@@ -443,7 +443,7 @@
       ]
     },
     {
-      "name": "Route 22",
+      "name": "route-22",
       "shape": "rect",
       "coords": [
         48,
@@ -453,7 +453,7 @@
       ]
     },
     {
-      "name": "Route 23",
+      "name": "route-23",
       "shape": "rect",
       "coords": [
         22,
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "name": "Route 24",
+      "name": "route-24",
       "shape": "rect",
       "coords": [
         127,
@@ -473,7 +473,7 @@
       ]
     },
     {
-      "name": "Route 25",
+      "name": "route-25",
       "shape": "rect",
       "coords": [
         136,
@@ -483,7 +483,7 @@
       ]
     },
     {
-      "name": "Route 27",
+      "name": "route-27",
       "shape": "rect",
       "coords": [
         0,
@@ -493,7 +493,7 @@
       ]
     },
     {
-      "name": "Route 26",
+      "name": "route-26",
       "shape": "rect",
       "coords": [
         22,
@@ -503,7 +503,7 @@
       ]
     },
     {
-      "name": "Route 28",
+      "name": "route-28",
       "shape": "rect",
       "coords": [
         8,
@@ -513,7 +513,7 @@
       ]
     },
     {
-      "name": "One Island",
+      "name": "one-island",
       "shape": "rect",
       "coords": [
         19,
@@ -523,7 +523,7 @@
       ]
     },
     {
-      "name": "Treasure Beach",
+      "name": "treasure-beach",
       "shape": "rect",
       "coords": [
         17,
@@ -533,7 +533,7 @@
       ]
     },
     {
-      "name": "Kindle Road",
+      "name": "kindle-road",
       "shape": "rect",
       "coords": [
         26,
@@ -543,7 +543,7 @@
       ]
     },
     {
-      "name": "Mt. Ember",
+      "name": "mt-ember",
       "shape": "rect",
       "coords": [
         26,
@@ -553,7 +553,7 @@
       ]
     },
     {
-      "name": "Two Island",
+      "name": "two-island",
       "shape": "rect",
       "coords": [
         82,
@@ -563,7 +563,7 @@
       ]
     },
     {
-      "name": "Cape Brink",
+      "name": "cape-brink",
       "shape": "rect",
       "coords": [
         82,
@@ -573,7 +573,7 @@
       ]
     },
     {
-      "name": "Three Island",
+      "name": "three-island",
       "shape": "rect",
       "coords": [
         155,
@@ -583,7 +583,7 @@
       ]
     },
     {
-      "name": "Three Isle Port",
+      "name": "three-isle-port",
       "shape": "rect",
       "coords": [
         154,
@@ -593,7 +593,7 @@
       ]
     },
     {
-      "name": "Bond Bridge",
+      "name": "bond-bridge",
       "shape": "rect",
       "coords": [
         131,
@@ -603,7 +603,7 @@
       ]
     },
     {
-      "name": "Berry Forest",
+      "name": "berry-forest",
       "shape": "rect",
       "coords": [
         121,
@@ -613,7 +613,7 @@
       ]
     },
     {
-      "name": "Four Island",
+      "name": "four-island",
       "shape": "rect",
       "coords": [
         35,
@@ -623,7 +623,7 @@
       ]
     },
     {
-      "name": "Five Island",
+      "name": "five-island",
       "shape": "rect",
       "coords": [
         138,
@@ -633,7 +633,7 @@
       ]
     },
     {
-      "name": "Five Isle Meadow",
+      "name": "five-isle-meadow",
       "shape": "rect",
       "coords": [
         146,
@@ -643,7 +643,7 @@
       ]
     },
     {
-      "name": "Memorial Pillar",
+      "name": "memorial-pillar",
       "shape": "rect",
       "coords": [
         154,
@@ -653,7 +653,7 @@
       ]
     },
     {
-      "name": "Water Labyrinth",
+      "name": "water-labyrinth",
       "shape": "rect",
       "coords": [
         122,
@@ -663,7 +663,7 @@
       ]
     },
     {
-      "name": "Lost Cave",
+      "name": "lost-cave",
       "shape": "rect",
       "coords": [
         155,
@@ -673,7 +673,7 @@
       ]
     },
     {
-      "name": "Resort Gorgeous",
+      "name": "resort-gorgeous",
       "shape": "rect",
       "coords": [
         138,
@@ -683,7 +683,7 @@
       ]
     },
     {
-      "name": "Navel Rock",
+      "name": "navel-rock",
       "shape": "rect",
       "coords": [
         86,
@@ -693,7 +693,7 @@
       ]
     },
     {
-      "name": "Six Island",
+      "name": "six-island",
       "shape": "rect",
       "coords": [
         146,
@@ -703,7 +703,7 @@
       ]
     },
     {
-      "name": "Water Path",
+      "name": "water-path",
       "shape": "rect",
       "coords": [
         154,
@@ -713,7 +713,7 @@
       ]
     },
     {
-      "name": "Dotted Hole",
+      "name": "dotted-hole",
       "shape": "rect",
       "coords": [
         139,
@@ -723,7 +723,7 @@
       ]
     },
     {
-      "name": "Ruin Valley",
+      "name": "ruin-valley",
       "shape": "rect",
       "coords": [
         138,
@@ -733,7 +733,7 @@
       ]
     },
     {
-      "name": "Green Path",
+      "name": "green-path",
       "shape": "rect",
       "coords": [
         130,
@@ -743,7 +743,7 @@
       ]
     },
     {
-      "name": "Pattern Bush",
+      "name": "pattern-bush",
       "shape": "rect",
       "coords": [
         147,
@@ -753,7 +753,7 @@
       ]
     },
     {
-      "name": "Outcast Island",
+      "name": "outcast-island",
       "shape": "rect",
       "coords": [
         130,
@@ -763,7 +763,7 @@
       ]
     },
     {
-      "name": "Altering Cave",
+      "name": "altering-cave",
       "shape": "rect",
       "coords": [
         130,
@@ -773,7 +773,7 @@
       ]
     },
     {
-      "name": "Seven Island",
+      "name": "seven-island",
       "shape": "rect",
       "coords": [
         50,
@@ -783,7 +783,7 @@
       ]
     },
     {
-      "name": "Trainer Tower",
+      "name": "trainer-tower",
       "shape": "rect",
       "coords": [
         50,
@@ -793,7 +793,7 @@
       ]
     },
     {
-      "name": "Canyon Entrance",
+      "name": "canyon-entrance",
       "shape": "rect",
       "coords": [
         50,
@@ -803,7 +803,7 @@
       ]
     },
     {
-      "name": "Seavault Canyon",
+      "name": "seavault-canyon",
       "shape": "rect",
       "coords": [
         58,
@@ -813,7 +813,7 @@
       ]
     },
     {
-      "name": "Tanoby Ruins",
+      "name": "tanoby-ruins",
       "shape": "rect",
       "coords": [
         34,
@@ -823,7 +823,7 @@
       ]
     },
     {
-      "name": "Birth Island",
+      "name": "birth-island",
       "shape": "rect",
       "coords": [
         150,
