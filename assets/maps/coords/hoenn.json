@@ -1,0 +1,586 @@
+{
+  "region": "Hoenn",
+  "image": "assets/maps/regions/hoenn.png",
+  "locations": [
+    {
+      "name": "Littleroot Town",
+      "shape": "rect",
+      "coords": [
+        57,
+        147,
+        65,
+        155
+      ]
+    },
+    {
+      "name": "Oldale Town",
+      "shape": "rect",
+      "coords": [
+        57,
+        122,
+        65,
+        129
+      ]
+    },
+    {
+      "name": "Petalburg City",
+      "shape": "rect",
+      "coords": [
+        30,
+        122,
+        45,
+        130
+      ]
+    },
+    {
+      "name": "Rustboro City",
+      "shape": "rect",
+      "coords": [
+        11,
+        82,
+        26,
+        90
+      ]
+    },
+    {
+      "name": "Rustboro City",
+      "shape": "rect",
+      "coords": [
+        11,
+        82,
+        19,
+        97
+      ]
+    },
+    {
+      "name": "Dewford Town",
+      "shape": "rect",
+      "coords": [
+        38,
+        185,
+        46,
+        193
+      ]
+    },
+    {
+      "name": "Slateport City",
+      "shape": "rect",
+      "coords": [
+        85,
+        140,
+        100,
+        155
+      ]
+    },
+    {
+      "name": "Mauville City",
+      "shape": "rect",
+      "coords": [
+        85,
+        89,
+        99,
+        96
+      ]
+    },
+    {
+      "name": "Mauville City",
+      "shape": "rect",
+      "coords": [
+        85,
+        89,
+        93,
+        104
+      ]
+    },
+    {
+      "name": "Verdanturf Town",
+      "shape": "rect",
+      "coords": [
+        57,
+        89,
+        65,
+        97
+      ]
+    },
+    {
+      "name": "Lavaridge Town",
+      "shape": "rect",
+      "coords": [
+        64,
+        64,
+        72,
+        72
+      ]
+    },
+    {
+      "name": "Fallarbor Town",
+      "shape": "rect",
+      "coords": [
+        44,
+        43,
+        59,
+        51
+      ]
+    },
+    {
+      "name": "Fortree City",
+      "shape": "rect",
+      "coords": [
+        109,
+        43,
+        117,
+        51
+      ]
+    },
+    {
+      "name": "Lilycove City",
+      "shape": "rect",
+      "coords": [
+        156,
+        61,
+        171,
+        76
+      ]
+    },
+    {
+      "name": "Pacifidlog Town",
+      "shape": "rect",
+      "coords": [
+        172,
+        147,
+        180,
+        155
+      ]
+    },
+    {
+      "name": "Sootopolis City",
+      "shape": "rect",
+      "coords": [
+        199,
+        109,
+        207,
+        117
+      ]
+    },
+    {
+      "name": "Mossdeep City",
+      "shape": "rect",
+      "coords": [
+        227,
+        79,
+        242,
+        87
+      ]
+    },
+    {
+      "name": "Evergrande City",
+      "shape": "rect",
+      "coords": [
+        268,
+        130,
+        276,
+        144
+      ]
+    },
+    {
+      "name": "Battle Frontier",
+      "shape": "rect",
+      "coords": [
+        221,
+        174,
+        237,
+        191
+      ]
+    },
+    {
+      "name": "Southern Island",
+      "shape": "rect",
+      "coords": [
+        268,
+        196,
+        280,
+        208
+      ]
+    },
+    {
+      "name": "Route 101",
+      "shape": "rect",
+      "coords": [
+        57,
+        130,
+        65,
+        147
+      ]
+    },
+    {
+      "name": "Route 102",
+      "shape": "rect",
+      "coords": [
+        45,
+        122,
+        57,
+        130
+      ]
+    },
+    {
+      "name": "Route 103",
+      "shape": "rect",
+      "coords": [
+        57,
+        115,
+        85,
+        123
+      ]
+    },
+    {
+      "name": "Route 104",
+      "shape": "rect",
+      "coords": [
+        11,
+        122,
+        29,
+        129
+      ]
+    },
+    {
+      "name": "Route 104",
+      "shape": "rect",
+      "coords": [
+        11,
+        122,
+        19,
+        97
+      ]
+    },
+    {
+      "name": "Route 105",
+      "shape": "rect",
+      "coords": [
+        11,
+        129,
+        19,
+        177
+      ]
+    },
+    {
+      "name": "Route 106",
+      "shape": "rect",
+      "coords": [
+        11,
+        177,
+        46,
+        185
+      ]
+    },
+    {
+      "name": "Route 107",
+      "shape": "rect",
+      "coords": [
+        46,
+        186,
+        61,
+        192
+      ]
+    },
+    {
+      "name": "Route 108",
+      "shape": "rect",
+      "coords": [
+        61,
+        186,
+        85,
+        192
+      ]
+    },
+    {
+      "name": "Route 109",
+      "shape": "rect",
+      "coords": [
+        85,
+        155,
+        93,
+        193
+      ]
+    },
+    {
+      "name": "Route 110",
+      "shape": "rect",
+      "coords": [
+        85,
+        104,
+        93,
+        140
+      ]
+    },
+    {
+      "name": "Route 111",
+      "shape": "rect",
+      "coords": [
+        85,
+        43,
+        93,
+        89
+      ]
+    },
+    {
+      "name": "Route 112",
+      "shape": "rect",
+      "coords": [
+        72,
+        64,
+        85,
+        72
+      ]
+    },
+    {
+      "name": "Route 113",
+      "shape": "rect",
+      "coords": [
+        59,
+        43,
+        85,
+        51
+      ]
+    },
+    {
+      "name": "Route 114",
+      "shape": "rect",
+      "coords": [
+        27,
+        43,
+        44,
+        51
+      ]
+    },
+    {
+      "name": "Route 114",
+      "shape": "rect",
+      "coords": [
+        27,
+        43,
+        35,
+        63
+      ]
+    },
+    {
+      "name": "Meteor Falls",
+      "shape": "rect",
+      "coords": [
+        18,
+        55,
+        27,
+        63
+      ]
+    },
+    {
+      "name": "Route 115",
+      "shape": "rect",
+      "coords": [
+        11,
+        55,
+        19,
+        82
+      ]
+    },
+    {
+      "name": "Route 116",
+      "shape": "rect",
+      "coords": [
+        26,
+        82,
+        65,
+        90
+      ]
+    },
+    {
+      "name": "Route 117",
+      "shape": "rect",
+      "coords": [
+        65,
+        89,
+        85,
+        97
+      ]
+    },
+    {
+      "name": "Route 118",
+      "shape": "rect",
+      "coords": [
+        99,
+        89,
+        112,
+        97
+      ]
+    },
+    {
+      "name": "Route 119",
+      "shape": "rect",
+      "coords": [
+        100,
+        43,
+        108,
+        89
+      ]
+    },
+    {
+      "name": "Route 120",
+      "shape": "rect",
+      "coords": [
+        118,
+        43,
+        125,
+        69
+      ]
+    },
+    {
+      "name": "Route 121",
+      "shape": "rect",
+      "coords": [
+        126,
+        61,
+        156,
+        70
+      ]
+    },
+    {
+      "name": "Route 122",
+      "shape": "rect",
+      "coords": [
+        142,
+        69,
+        149,
+        89
+      ]
+    },
+    {
+      "name": "Route 123",
+      "shape": "rect",
+      "coords": [
+        112,
+        89,
+        150,
+        97
+      ]
+    },
+    {
+      "name": "Route 124",
+      "shape": "rect",
+      "coords": [
+        171,
+        61,
+        227,
+        69
+      ]
+    },
+    {
+      "name": "Route 124",
+      "shape": "rect",
+      "coords": [
+        183,
+        69,
+        227,
+        86
+      ]
+    },
+    {
+      "name": "Route 125",
+      "shape": "rect",
+      "coords": [
+        227,
+        61,
+        242,
+        79
+      ]
+    },
+    {
+      "name": "Route 126",
+      "shape": "rect",
+      "coords": [
+        183,
+        86,
+        223,
+        134
+      ]
+    },
+    {
+      "name": "Route 127",
+      "shape": "rect",
+      "coords": [
+        223,
+        86,
+        241,
+        136
+      ]
+    },
+    {
+      "name": "Route 128",
+      "shape": "rect",
+      "coords": [
+        223,
+        136,
+        268,
+        144
+      ]
+    },
+    {
+      "name": "Route 129",
+      "shape": "rect",
+      "coords": [
+        222,
+        144,
+        242,
+        155
+      ]
+    },
+    {
+      "name": "Route 130",
+      "shape": "rect",
+      "coords": [
+        204,
+        147,
+        222,
+        155
+      ]
+    },
+    {
+      "name": "Route 131",
+      "shape": "rect",
+      "coords": [
+        180,
+        147,
+        204,
+        155
+      ]
+    },
+    {
+      "name": "Route 132",
+      "shape": "rect",
+      "coords": [
+        153,
+        147,
+        172,
+        155
+      ]
+    },
+    {
+      "name": "Route 133",
+      "shape": "rect",
+      "coords": [
+        131,
+        147,
+        153,
+        155
+      ]
+    },
+    {
+      "name": "Route 134",
+      "shape": "rect",
+      "coords": [
+        100,
+        147,
+        131,
+        155
+      ]
+    }
+  ]
+}

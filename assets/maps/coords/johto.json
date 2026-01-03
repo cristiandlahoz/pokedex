@@ -1,0 +1,466 @@
+{
+  "region": "Johto",
+  "image": "assets/maps/regions/johto.png",
+  "locations": [
+    {
+      "name": "New Bark Town",
+      "shape": "rect",
+      "coords": [
+        144,
+        109,
+        152,
+        117
+      ]
+    },
+    {
+      "name": "Cherrygrove City",
+      "shape": "rect",
+      "coords": [
+        105,
+        109,
+        113,
+        117
+      ]
+    },
+    {
+      "name": "Violet City",
+      "shape": "rect",
+      "coords": [
+        90,
+        60,
+        97,
+        68
+      ]
+    },
+    {
+      "name": "Dark Cave",
+      "shape": "rect",
+      "coords": [
+        116,
+        60,
+        136,
+        69
+      ]
+    },
+    {
+      "name": "Ruins of Alph",
+      "shape": "rect",
+      "coords": [
+        81,
+        76,
+        89,
+        84
+      ]
+    },
+    {
+      "name": "Union Cave",
+      "shape": "rect",
+      "coords": [
+        90,
+        129,
+        98,
+        137
+      ]
+    },
+    {
+      "name": "Azalea Town",
+      "shape": "rect",
+      "coords": [
+        71,
+        129,
+        79,
+        137
+      ]
+    },
+    {
+      "name": "Ilex Forest",
+      "shape": "rect",
+      "coords": [
+        53,
+        129,
+        61,
+        137
+      ]
+    },
+    {
+      "name": "Goldenrod City",
+      "shape": "rect",
+      "coords": [
+        49,
+        88,
+        63,
+        103
+      ]
+    },
+    {
+      "name": "National Park",
+      "shape": "rect",
+      "coords": [
+        53,
+        60,
+        61,
+        68
+      ]
+    },
+    {
+      "name": "Ecruteak City",
+      "shape": "rect",
+      "coords": [
+        66,
+        40,
+        81,
+        48
+      ]
+    },
+    {
+      "name": "Ecruteak City",
+      "shape": "rect",
+      "coords": [
+        71,
+        40,
+        81,
+        48
+      ]
+    },
+    {
+      "name": "Olivine City",
+      "shape": "rect",
+      "coords": [
+        18,
+        53,
+        33,
+        61
+      ]
+    },
+    {
+      "name": "Whirl Islands",
+      "shape": "rect",
+      "coords": [
+        18,
+        88,
+        26,
+        96
+      ]
+    },
+    {
+      "name": "Cianwood City",
+      "shape": "rect",
+      "coords": [
+        8,
+        96,
+        16,
+        104
+      ]
+    },
+    {
+      "name": "Mt. Mortar",
+      "shape": "rect",
+      "coords": [
+        86,
+        40,
+        94,
+        48
+      ]
+    },
+    {
+      "name": "Mahogany Town",
+      "shape": "rect",
+      "coords": [
+        109,
+        40,
+        117,
+        48
+      ]
+    },
+    {
+      "name": "Lake of Rage",
+      "shape": "rect",
+      "coords": [
+        109,
+        7,
+        117,
+        15
+      ]
+    },
+    {
+      "name": "Ice Path",
+      "shape": "rect",
+      "coords": [
+        129,
+        40,
+        137,
+        48
+      ]
+    },
+    {
+      "name": "Blackthorn City",
+      "shape": "rect",
+      "coords": [
+        137,
+        40,
+        145,
+        48
+      ]
+    },
+    {
+      "name": "Dragon's Den",
+      "shape": "rect",
+      "coords": [
+        137,
+        30,
+        145,
+        38
+      ]
+    },
+    {
+      "name": "Mt. Silver",
+      "shape": "rect",
+      "coords": [
+        158,
+        80,
+        166,
+        88
+      ]
+    },
+    {
+      "name": "Tohjo Falls (Kanto)",
+      "shape": "rect",
+      "coords": [
+        161,
+        109,
+        166,
+        115
+      ]
+    },
+    {
+      "name": "Safari Zone",
+      "shape": "rect",
+      "coords": [
+        0,
+        93,
+        5,
+        101
+      ]
+    },
+    {
+      "name": "Battle Frontier",
+      "shape": "rect",
+      "coords": [
+        10,
+        51,
+        18,
+        59
+      ]
+    },
+    {
+      "name": "Route 26 (Kanto)",
+      "shape": "rect",
+      "coords": [
+        152,
+        108,
+        161,
+        117
+      ]
+    },
+    {
+      "name": "Route 29",
+      "shape": "rect",
+      "coords": [
+        113,
+        108,
+        143,
+        118
+      ]
+    },
+    {
+      "name": "Route 30",
+      "shape": "rect",
+      "coords": [
+        105,
+        108,
+        116,
+        68
+      ]
+    },
+    {
+      "name": "Route 31",
+      "shape": "rect",
+      "coords": [
+        98,
+        59,
+        115,
+        68
+      ]
+    },
+    {
+      "name": "Route 32",
+      "shape": "rect",
+      "coords": [
+        89,
+        68,
+        99,
+        128
+      ]
+    },
+    {
+      "name": "Route 33",
+      "shape": "rect",
+      "coords": [
+        79,
+        128,
+        90,
+        137
+      ]
+    },
+    {
+      "name": "Route 34",
+      "shape": "rect",
+      "coords": [
+        52,
+        103,
+        62,
+        128
+      ]
+    },
+    {
+      "name": "Route 35",
+      "shape": "rect",
+      "coords": [
+        52,
+        68,
+        62,
+        88
+      ]
+    },
+    {
+      "name": "Route 36",
+      "shape": "rect",
+      "coords": [
+        60,
+        59,
+        89,
+        69
+      ]
+    },
+    {
+      "name": "Route 37",
+      "shape": "rect",
+      "coords": [
+        71,
+        55,
+        82,
+        58
+      ]
+    },
+    {
+      "name": "Route 38",
+      "shape": "rect",
+      "coords": [
+        25,
+        39,
+        66,
+        49
+      ]
+    },
+    {
+      "name": "Route 39",
+      "shape": "rect",
+      "coords": [
+        25,
+        48,
+        34,
+        53
+      ]
+    },
+    {
+      "name": "Route 40",
+      "shape": "rect",
+      "coords": [
+        17,
+        61,
+        27,
+        82
+      ]
+    },
+    {
+      "name": "Route 41",
+      "shape": "rect",
+      "coords": [
+        17,
+        82,
+        27,
+        105
+      ]
+    },
+    {
+      "name": "Route 42",
+      "shape": "rect",
+      "coords": [
+        81,
+        39,
+        109,
+        49
+      ]
+    },
+    {
+      "name": "Route 43",
+      "shape": "rect",
+      "coords": [
+        108,
+        15,
+        118,
+        40
+      ]
+    },
+    {
+      "name": "Route 44",
+      "shape": "rect",
+      "coords": [
+        117,
+        39,
+        128,
+        49
+      ]
+    },
+    {
+      "name": "Route 45",
+      "shape": "rect",
+      "coords": [
+        136,
+        48,
+        146,
+        89
+      ]
+    },
+    {
+      "name": "Route 46",
+      "shape": "rect",
+      "coords": [
+        130,
+        78,
+        140,
+        108
+      ]
+    },
+    {
+      "name": "Route 47",
+      "shape": "rect",
+      "coords": [
+        0,
+        104,
+        8,
+        111
+      ]
+    },
+    {
+      "name": "Route 48",
+      "shape": "rect",
+      "coords": [
+        0,
+        100,
+        6,
+        105
+      ]
+    }
+  ]
+}
