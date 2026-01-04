@@ -30,7 +30,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       case Success(:final data):
         emit(FavoritesLoaded(data));
       case ResultFailure():
-        emit(const FavoritesLoaded({})); // Emit empty set on error
+        emit(const FavoritesLoaded({}));
     }
   }
 
@@ -52,23 +52,19 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     final isFavorited = currentFavoriteIds.contains(event.pokemon.id);
 
     if (isFavorited) {
-      // Removing favorite - simple delete
       await favoritesRepository.removeFavorite(event.pokemon.id);
       add(const FavoritesLoadRequested());
     } else {
-      // Adding favorite - fetch full details first
       final detailsResult = await pokemonRepository.getPokemonDetails(
         event.pokemon.id,
       );
 
       switch (detailsResult) {
         case Success(:final data):
-          // Store full details
           await favoritesRepository.addFavoriteDetails(data);
           add(const FavoritesLoadRequested());
 
         case ResultFailure(:final failure):
-          // Emit error state with current favorites intact
           emit(
             FavoritesError(
               message: failure.message,
