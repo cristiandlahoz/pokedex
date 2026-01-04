@@ -2,13 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../entities/pokemon_move.dart';
 
-enum MoveSortColumn {
-  name,
-  level,
-  power,
-  accuracy,
-  pp,
-}
+enum MoveSortColumn { name, level, power, accuracy, pp }
 
 @injectable
 class MovesSortingService {
@@ -28,30 +22,30 @@ class MovesSortingService {
   ) {
     return switch (column) {
       MoveSortColumn.name => (a, b) => _compareStrings(
-            a.name,
-            b.name,
-            ascending,
-          ),
+        a.name,
+        b.name,
+        ascending,
+      ),
       MoveSortColumn.level => (a, b) => _compareNullableInts(
-            a.level,
-            b.level,
-            ascending,
-          ),
+        a.level,
+        b.level,
+        ascending,
+      ),
       MoveSortColumn.power => (a, b) => _compareNullableInts(
-            a.power,
-            b.power,
-            ascending,
-          ),
+        a.power,
+        b.power,
+        ascending,
+      ),
       MoveSortColumn.accuracy => (a, b) => _compareNullableInts(
-            a.accuracy,
-            b.accuracy,
-            ascending,
-          ),
+        a.accuracy,
+        b.accuracy,
+        ascending,
+      ),
       MoveSortColumn.pp => (a, b) => _compareNullableInts(
-            a.pp,
-            b.pp,
-            ascending,
-          ),
+        a.pp,
+        b.pp,
+        ascending,
+      ),
     };
   }
 

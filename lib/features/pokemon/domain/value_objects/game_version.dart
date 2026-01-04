@@ -3,36 +3,20 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/utils/string_utils.dart';
 
 enum GameVersionGroup {
-  redBlue(
-    name: 'red-blue',
-    displayName: 'Red - Blue',
-    region: 'Kanto',
-  ),
-  yellow(
-    name: 'yellow',
-    displayName: 'Yellow',
-    region: 'Kanto',
-  ),
+  redBlue(name: 'red-blue', displayName: 'Red - Blue', region: 'Kanto'),
+  yellow(name: 'yellow', displayName: 'Yellow', region: 'Kanto'),
   goldSilver(
     name: 'gold-silver',
     displayName: 'Gold - Silver',
     region: 'Johto',
   ),
-  crystal(
-    name: 'crystal',
-    displayName: 'Crystal',
-    region: 'Johto',
-  ),
+  crystal(name: 'crystal', displayName: 'Crystal', region: 'Johto'),
   rubySapphire(
     name: 'ruby-sapphire',
     displayName: 'Ruby - Sapphire',
     region: 'Hoenn',
   ),
-  emerald(
-    name: 'emerald',
-    displayName: 'Emerald',
-    region: 'Hoenn',
-  ),
+  emerald(name: 'emerald', displayName: 'Emerald', region: 'Hoenn'),
   fireRedLeafGreen(
     name: 'firered-leafgreen',
     displayName: 'FireRed - LeafGreen',
@@ -43,11 +27,7 @@ enum GameVersionGroup {
     displayName: 'Diamond - Pearl',
     region: 'Sinnoh',
   ),
-  platinum(
-    name: 'platinum',
-    displayName: 'Platinum',
-    region: 'Sinnoh',
-  ),
+  platinum(name: 'platinum', displayName: 'Platinum', region: 'Sinnoh'),
   heartGoldSoulSilver(
     name: 'heartgold-soulsilver',
     displayName: 'HeartGold - SoulSilver',
@@ -63,21 +43,13 @@ enum GameVersionGroup {
     displayName: 'Black 2 - White 2',
     region: 'Unova',
   ),
-  xY(
-    name: 'x-y',
-    displayName: 'X - Y',
-    region: 'Kalos',
-  ),
+  xY(name: 'x-y', displayName: 'X - Y', region: 'Kalos'),
   omegaRubyAlphaSapphire(
     name: 'omega-ruby-alpha-sapphire',
     displayName: 'Omega Ruby - Alpha Sapphire',
     region: 'Hoenn',
   ),
-  sunMoon(
-    name: 'sun-moon',
-    displayName: 'Sun - Moon',
-    region: 'Alola',
-  ),
+  sunMoon(name: 'sun-moon', displayName: 'Sun - Moon', region: 'Alola'),
   ultraSunUltraMoon(
     name: 'ultra-sun-ultra-moon',
     displayName: 'Ultra Sun - Ultra Moon',
@@ -129,10 +101,7 @@ enum GameVersionGroup {
   }
 
   GameVersion toGameVersion() {
-    return GameVersion(
-      name: name,
-      displayName: displayName,
-    );
+    return GameVersion(name: name, displayName: displayName);
   }
 }
 
@@ -140,10 +109,7 @@ class GameVersion extends Equatable {
   final String name;
   final String displayName;
 
-  const GameVersion({
-    required this.name,
-    required this.displayName,
-  });
+  const GameVersion({required this.name, required this.displayName});
 
   String get region {
     final group = GameVersionGroup.fromName(name);
