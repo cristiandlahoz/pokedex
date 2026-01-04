@@ -47,6 +47,56 @@ class PokemonDetails extends Pokemon {
     this.evolutionChain,
   });
 
+  PokemonDetails copyWith({
+    int? id,
+    String? name,
+    List<String>? types,
+    String? imageUrl,
+    String? shinyImageUrl,
+    double? height,
+    double? weight,
+    String? genus,
+    String? description,
+    List<PokemonAbility>? abilities,
+    List<PokemonStat>? stats,
+    List<PokemonMove>? moves,
+    int? baseExperience,
+    int? captureRate,
+    int? baseHappiness,
+    String? growthRate,
+    String? eggGroup,
+    int? genderRatio,
+    List<String>? eggGroups,
+    List<TypeDefenseInfo>? typeDefenses,
+    List<TypeDefenseInfo>? typeOffenses,
+    EvolutionChain? evolutionChain,
+  }) {
+    return PokemonDetails(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      types: types ?? this.types,
+      imageUrl: imageUrl ?? this.imageUrl,
+      shinyImageUrl: shinyImageUrl ?? this.shinyImageUrl,
+      height: height ?? this.height,
+      weight: weight ?? this.weight,
+      genus: genus ?? this.genus,
+      description: description ?? this.description,
+      abilities: abilities ?? this.abilities,
+      stats: stats ?? this.stats,
+      moves: moves ?? this.moves,
+      baseExperience: baseExperience ?? this.baseExperience,
+      captureRate: captureRate ?? this.captureRate,
+      baseHappiness: baseHappiness ?? this.baseHappiness,
+      growthRate: growthRate ?? this.growthRate,
+      eggGroup: eggGroup ?? this.eggGroup,
+      genderRatio: genderRatio ?? this.genderRatio,
+      eggGroups: eggGroups ?? this.eggGroups,
+      typeDefenses: typeDefenses ?? this.typeDefenses,
+      typeOffenses: typeOffenses ?? this.typeOffenses,
+      evolutionChain: evolutionChain ?? this.evolutionChain,
+    );
+  }
+
   @override
   List<Object?> get props => [
     ...super.props,

@@ -18,15 +18,6 @@ class DetailsLoadRequested extends DetailsEvent {
   List<Object?> get props => [pokemonId];
 }
 
-class DetailsLoadMoreMovesRequested extends DetailsEvent {
-  final int pokemonId;
-
-  const DetailsLoadMoreMovesRequested(this.pokemonId);
-
-  @override
-  List<Object?> get props => [pokemonId];
-}
-
 class DetailsGameVersionSelected extends DetailsEvent {
   final GameVersion version;
 

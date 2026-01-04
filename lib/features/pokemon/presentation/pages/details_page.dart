@@ -260,6 +260,8 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
               moves: moves,
               selectedGameVersion: selectedVersion,
               accentColor: TypeHelper.getPrimaryTypeColor(widget.pokemon),
+              sortingService: getIt(),
+              filteringService: getIt(),
             ),
             const SizedBox(height: AppConstants.largePadding),
           ],

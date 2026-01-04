@@ -55,18 +55,10 @@ class PokemonGraphQLDataSource {
         .toList();
   }
 
-  Future<Map<String, dynamic>?> getPokemonDetails(
-    int id, {
-    int? movesLimit,
-    int? movesOffset,
-  }) async {
+  Future<Map<String, dynamic>?> getPokemonDetails(int id) async {
     try {
       QueryResult result;
-      final variables = {
-        'id': id,
-        'movesLimit': movesLimit,
-        'movesOffset': movesOffset,
-      };
+      final variables = {'id': id};
 
       try {
         result = await graphQLService.query(
@@ -112,34 +104,6 @@ class PokemonGraphQLDataSource {
     } catch (e) {
       rethrow;
     }
-  }
-
-  Future<List<dynamic>> getPokemonMoves(
-    int id, {
-    required int limit,
-    required int offset,
-  }) async {
-    final result = await graphQLService.query(
-      QueryOptions(
-        document: gql(getPokemonMovesQuery),
-        variables: {
-          'id': id,
-          'limit': limit,
-          'offset': offset,
-        },
-        fetchPolicy: FetchPolicy.cacheAndNetwork,
-      ),
-    );
-
-    if (result.hasException) {
-      throw GraphQLException.fromResult(result);
-    }
-
-    final pokemonList = result.data!['pokemon'] as List<dynamic>?;
-    if (pokemonList == null || pokemonList.isEmpty) return [];
-
-    final pokemonData = pokemonList.first as Map<String, dynamic>;
-    return pokemonData['pokemonmoves'] as List<dynamic>? ?? [];
   }
 
   Future<List<ListItemDto>> searchPokemon(String name) async {

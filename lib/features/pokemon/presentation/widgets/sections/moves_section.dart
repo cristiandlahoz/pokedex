@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/constants/app.dart';
 import '../../../domain/entities/pokemon_move.dart';
+import '../../../domain/services/moves_filtering_service.dart';
+import '../../../domain/services/moves_sorting_service.dart';
 import '../../../domain/value_objects/game_version.dart';
+import '../../../domain/value_objects/learn_method.dart';
 import '../../utils/type_colors.dart';
-
-enum MoveSortColumn {
-  name,
-  level,
-  power,
-  accuracy,
-  pp,
-}
 
 class MovesSection extends StatefulWidget {
   final List<PokemonMove> moves;
   final GameVersion? selectedGameVersion;
   final Color? accentColor;
+  final MovesSortingService sortingService;
+  final MovesFilteringService filteringService;
 
   const MovesSection({
     super.key,
     required this.moves,
+    required this.sortingService,
+    required this.filteringService,
     this.selectedGameVersion,
     this.accentColor,
   });
@@ -57,111 +56,21 @@ class _MovesSectionState extends State<MovesSection> {
     }
   }
 
-  String _normalizeVersionName(String? name) {
-    if (name == null) return '';
-    return name.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
-  }
-
   List<PokemonMove> get _filteredAndSortedMoves {
-    var filtered = widget.moves;
-
-    if (widget.selectedGameVersion != null) {
-      final normalizedSelected = _normalizeVersionName(widget.selectedGameVersion!.name);
-      filtered = filtered
-          .where((move) => _normalizeVersionName(move.versionGroup) == normalizedSelected)
-          .toList();
-    }
-
-    if (_selectedLearnMethod != null) {
-      filtered = filtered
-          .where((move) => move.learnMethod == _selectedLearnMethod)
-          .toList();
-    }
-
-    final sorted = List<PokemonMove>.from(filtered);
-
-    switch (_sortColumn) {
-      case MoveSortColumn.name:
-        sorted.sort((a, b) => _sortAscending
-            ? a.name.compareTo(b.name)
-            : b.name.compareTo(a.name));
-        break;
-      case MoveSortColumn.level:
-        sorted.sort((a, b) {
-          if (a.level == null && b.level == null) return 0;
-          if (a.level == null) return 1;
-          if (b.level == null) return -1;
-          return _sortAscending
-              ? a.level!.compareTo(b.level!)
-              : b.level!.compareTo(a.level!);
-        });
-        break;
-      case MoveSortColumn.power:
-        sorted.sort((a, b) {
-          if (a.power == null && b.power == null) return 0;
-          if (a.power == null) return 1;
-          if (b.power == null) return -1;
-          return _sortAscending
-              ? a.power!.compareTo(b.power!)
-              : b.power!.compareTo(a.power!);
-        });
-        break;
-      case MoveSortColumn.accuracy:
-        sorted.sort((a, b) {
-          if (a.accuracy == null && b.accuracy == null) return 0;
-          if (a.accuracy == null) return 1;
-          if (b.accuracy == null) return -1;
-          return _sortAscending
-              ? a.accuracy!.compareTo(b.accuracy!)
-              : b.accuracy!.compareTo(a.accuracy!);
-        });
-        break;
-      case MoveSortColumn.pp:
-        sorted.sort((a, b) {
-          if (a.pp == null && b.pp == null) return 0;
-          if (a.pp == null) return 1;
-          if (b.pp == null) return -1;
-          return _sortAscending
-              ? a.pp!.compareTo(b.pp!)
-              : b.pp!.compareTo(a.pp!);
-        });
-        break;
-    }
-
-    return sorted;
+    final filtered = widget.filteringService.applyFilters(
+      widget.moves,
+      version: widget.selectedGameVersion,
+      learnMethod: _selectedLearnMethod,
+    );
+    return widget.sortingService.sort(filtered, _sortColumn, _sortAscending);
   }
 
   List<String> get _availableLearnMethods {
-    var movesToCheck = widget.moves;
-
-    if (widget.selectedGameVersion != null) {
-      final normalizedSelected = _normalizeVersionName(widget.selectedGameVersion!.name);
-      movesToCheck = movesToCheck
-          .where((move) => _normalizeVersionName(move.versionGroup) == normalizedSelected)
-          .toList();
-    }
-
-    final methods = movesToCheck
-        .where((move) => move.learnMethod != null)
-        .map((move) => move.learnMethod!)
-        .toSet()
-        .toList();
-    
-    methods.sort();
-    
-    final order = ['level-up', 'machine', 'egg', 'tutor'];
-    methods.sort((a, b) {
-      final indexA = order.indexOf(a);
-      final indexB = order.indexOf(b);
-      if (indexA != -1 && indexB != -1) {
-        return indexA.compareTo(indexB);
-      }
-      if (indexA != -1) return -1;
-      if (indexB != -1) return 1;
-      return a.compareTo(b);
-    });
-    
-    return methods;
+    final movesForVersion = widget.filteringService.filterByVersion(
+      widget.moves,
+      widget.selectedGameVersion,
+    );
+    return widget.filteringService.getAvailableLearnMethods(movesForVersion);
   }
 
   String _formatName(String name) {
@@ -170,21 +79,6 @@ class _MovesSectionState extends State<MovesSection> {
         .where((word) => word.isNotEmpty)
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ');
-  }
-
-  String _getLearnMethodLabel(String method) {
-    switch (method) {
-      case 'level-up':
-        return 'Level up';
-      case 'machine':
-        return 'TM/HM';
-      case 'egg':
-        return 'Eggs';
-      case 'tutor':
-        return 'Tutor';
-      default:
-        return _formatName(method);
-    }
   }
 
   void _onSortColumn(MoveSortColumn column) {
@@ -264,7 +158,7 @@ class _MovesSectionState extends State<MovesSection> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: ChoiceChip(
-              label: Text(_getLearnMethodLabel(method)),
+              label: Text(LearnMethod.getDisplayName(method)),
               selected: isSelected,
               onSelected: (_) {
                 setState(() {

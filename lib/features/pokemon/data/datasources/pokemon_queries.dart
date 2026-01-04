@@ -143,7 +143,7 @@ $typeEffectivenessFragment
 $evolutionSpeciesFragment
 $moveFragment
 
-query GetPokemonDetails(\$id: Int!, \$movesLimit: Int, \$movesOffset: Int) {
+query GetPokemonDetails(\$id: Int!) {
   pokemon(where: {id: {_eq: \$id}}, limit: 1) {
     ...BasicPokemonFields
     pokemonabilities(order_by: {slot: asc}) {
@@ -164,7 +164,7 @@ query GetPokemonDetails(\$id: Int!, \$movesLimit: Int, \$movesOffset: Int) {
         name
       }
     }
-    pokemonmoves(limit: \$movesLimit, offset: \$movesOffset) {
+    pokemonmoves {
       ...MoveFields
     }
     pokemonspecy {
@@ -208,20 +208,8 @@ const String searchPokemonQuery =
 $basicPokemonFragment
 
 query SearchPokemon(\$name: String!) {
-  pokemon(where: {name: {_ilike: \$name}}) {
+  pokemon(where: {name: {_ilike: $name}}) {
     ...BasicPokemonFields
-  }
-}
-''';
-
-const String getPokemonMovesQuery = '''
-$moveFragment
-
-query GetPokemonMoves(\$id: Int!, \$limit: Int!, \$offset: Int!) {
-  pokemon(where: {id: {_eq: \$id}}, limit: 1) {
-    pokemonmoves(limit: \$limit, offset: \$offset) {
-      ...MoveFields
-    }
   }
 }
 ''';

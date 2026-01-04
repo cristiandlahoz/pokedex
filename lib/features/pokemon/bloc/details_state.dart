@@ -20,15 +20,11 @@ class DetailsLoading extends DetailsState {
 
 class DetailsSuccess extends DetailsState {
   final PokemonDetails pokemon;
-  final bool hasMoreMoves;
-  final int currentMovesPage;
   final GameVersion? selectedGameVersion;
   final bool isShiny;
 
   const DetailsSuccess(
     this.pokemon, {
-    this.hasMoreMoves = true,
-    this.currentMovesPage = 0,
     this.selectedGameVersion,
     this.isShiny = false,
   });
@@ -46,16 +42,12 @@ class DetailsSuccess extends DetailsState {
 
   DetailsSuccess copyWith({
     PokemonDetails? pokemon,
-    bool? hasMoreMoves,
-    int? currentMovesPage,
     GameVersion? selectedGameVersion,
     bool clearGameVersion = false,
     bool? isShiny,
   }) {
     return DetailsSuccess(
       pokemon ?? this.pokemon,
-      hasMoreMoves: hasMoreMoves ?? this.hasMoreMoves,
-      currentMovesPage: currentMovesPage ?? this.currentMovesPage,
       selectedGameVersion: clearGameVersion
           ? null
           : (selectedGameVersion ?? this.selectedGameVersion),
@@ -64,17 +56,7 @@ class DetailsSuccess extends DetailsState {
   }
 
   @override
-  List<Object?> get props => [pokemon, hasMoreMoves, currentMovesPage, selectedGameVersion, isShiny];
-}
-
-class DetailsLoadingMoreMoves extends DetailsSuccess {
-  const DetailsLoadingMoreMoves(
-    super.pokemon, {
-    required super.hasMoreMoves,
-    required super.currentMovesPage,
-    super.selectedGameVersion,
-    super.isShiny,
-  });
+  List<Object?> get props => [pokemon, selectedGameVersion, isShiny];
 }
 
 class DetailsFailure extends DetailsState {

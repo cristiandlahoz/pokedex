@@ -3,14 +3,11 @@ import '../../../../core/theme/tokens.dart';
 import '../entities/pokemon.dart';
 import '../entities/pokemon_details.dart';
 import '../entities/pokemon_location.dart';
-import '../entities/pokemon_move.dart';
 import '../entities/region_map.dart';
 import '../value_objects/filters.dart';
 import '../value_objects/sorting.dart';
 
 abstract class PokemonRepository {
-  int get movesPageSize => DesignTokens.defaultMovesLimit;
-
   Future<Result<List<Pokemon>>> getPokemonList({
     int page = 0,
     int limit = DesignTokens.defaultPageSize,
@@ -18,10 +15,7 @@ abstract class PokemonRepository {
     Filters? filter,
   });
 
-  Future<Result<PokemonDetails>> getPokemonDetails(
-    int id, {
-    int movesPage = 0,
-  });
+  Future<Result<PokemonDetails>> getPokemonDetails(int id);
 
   Future<Result<List<Pokemon>>> searchPokemon(String query);
 

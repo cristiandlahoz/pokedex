@@ -9,7 +9,6 @@ import '../../../../core/utils/result.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
 import '../../domain/entities/pokemon_location.dart';
-import '../../domain/entities/pokemon_move.dart';
 import '../../domain/entities/region_map.dart';
 import '../../domain/repositories/pokemon_repository.dart';
 import '../../domain/value_objects/filters.dart';
@@ -17,7 +16,6 @@ import '../../domain/value_objects/sorting.dart';
 import '../datasources/map_local_datasource.dart';
 import '../datasources/pokemon_graphql_datasource.dart';
 import '../dtos/details_dto.dart';
-import '../dtos/parsers/moves_parser.dart';
 
 @LazySingleton(as: PokemonRepository)
 class PokemonRepositoryImpl implements PokemonRepository {
@@ -32,9 +30,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
   );
 
   static int _counter = 0;
-
-  @override
-  int get movesPageSize => DesignTokens.defaultMovesLimit;
 
   @override
   Future<Result<List<Pokemon>>> getPokemonList({
@@ -58,40 +53,15 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<Result<PokemonDetails>> getPokemonDetails(
-    int id, {
-    int movesPage = 0,
-  }) async {
+  Future<Result<PokemonDetails>> getPokemonDetails(int id) async {
     return _handleRepositoryCall(
       operation: 'getPokemonDetails',
       call: () async {
-        final result = await dataSource.getPokemonDetails(
-          id,
-          movesLimit: movesPageSize,
-          movesOffset: movesPage * movesPageSize,
-        );
+        final result = await dataSource.getPokemonDetails(id);
         if (result == null) {
           throw const failures.ServerFailure('Pokemon not found');
         }
         return DetailsDto.fromJson(result).toDomainDetails();
-      },
-    );
-  }
-
-  @override
-  Future<Result<List<PokemonMove>>> getPokemonMovesPage(
-    int id, {
-    required int page,
-  }) async {
-    return _handleRepositoryCall(
-      operation: 'getPokemonMovesPage',
-      call: () async {
-        final result = await dataSource.getPokemonMoves(
-          id,
-          limit: movesPageSize,
-          offset: page * movesPageSize,
-        );
-        return MovesParser.parse(result);
       },
     );
   }
@@ -134,7 +104,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
     );
   }
 
-  /// Centralized error handling wrapper for repository calls
   Future<Result<T>> _handleRepositoryCall<T>({
     required String operation,
     required Future<T> Function() call,

@@ -39,6 +39,10 @@ import 'package:pokedex/features/pokemon/domain/services/location_map_service.da
     as _i226;
 import 'package:pokedex/features/pokemon/domain/services/location_matcher.dart'
     as _i17;
+import 'package:pokedex/features/pokemon/domain/services/moves_filtering_service.dart'
+    as _i1066;
+import 'package:pokedex/features/pokemon/domain/services/moves_sorting_service.dart'
+    as _i750;
 import 'package:pokedex/features/pokemon/domain/services/type_effectiveness_calculator.dart'
     as _i538;
 
@@ -58,6 +62,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i538.TypeEffectivenessCalculator>(
         () => _i538.TypeEffectivenessCalculator());
     gh.factory<_i17.LocationMatcher>(() => _i17.LocationMatcher());
+    gh.factory<_i750.MovesSortingService>(() => _i750.MovesSortingService());
+    gh.factory<_i1066.MovesFilteringService>(
+        () => _i1066.MovesFilteringService());
     gh.lazySingleton<_i1008.GraphQLConfig>(() => _i1008.GraphQLConfig());
     gh.lazySingleton<_i1052.Logger>(() => loggingModule.provideLogger());
     gh.lazySingleton<_i198.ConnectivityService>(
