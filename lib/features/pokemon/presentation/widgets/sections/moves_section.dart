@@ -16,11 +16,13 @@ enum MoveSortColumn {
 class MovesSection extends StatefulWidget {
   final List<PokemonMove> moves;
   final GameVersion? selectedGameVersion;
+  final Color? accentColor;
 
   const MovesSection({
     super.key,
     required this.moves,
     this.selectedGameVersion,
+    this.accentColor,
   });
 
   @override
@@ -198,27 +200,35 @@ class _MovesSectionState extends State<MovesSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Center(
             child: Container(
               padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 8,
+                horizontal: 20,
+                vertical: 6,
               ),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.orange.shade300, width: 2),
+                border: Border.all(
+                  color: (widget.accentColor ?? Colors.orange).withOpacity(0.5),
+                  width: 1.5,
+                ),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text(
+              child: Text(
                 'Moves list',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.orange,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: widget.accentColor ?? Colors.orange,
                 ),
               ),
             ),
@@ -243,6 +253,7 @@ class _MovesSectionState extends State<MovesSection> {
 
   Widget _buildFilterChips() {
     final methods = _availableLearnMethods;
+    final chipColor = widget.accentColor ?? Colors.orange;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -251,7 +262,7 @@ class _MovesSectionState extends State<MovesSection> {
         children: methods.map((method) {
           final isSelected = _selectedLearnMethod == method;
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 3),
             child: ChoiceChip(
               label: Text(_getLearnMethodLabel(method)),
               selected: isSelected,
@@ -261,13 +272,14 @@ class _MovesSectionState extends State<MovesSection> {
                 });
               },
               backgroundColor: Colors.grey.shade200,
-              selectedColor: Colors.orange.shade300,
+              selectedColor: chipColor.withOpacity(0.7),
               labelStyle: TextStyle(
-                fontSize: 14,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                fontSize: 12,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 color: isSelected ? Colors.white : Colors.grey.shade700,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 6),
+              showCheckmark: false,
             ),
           );
         }).toList(),
@@ -350,12 +362,15 @@ class _MovesSectionState extends State<MovesSection> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: isActive ? Colors.black : Colors.grey.shade700,
+          Flexible(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: isActive ? Colors.black : Colors.grey.shade700,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           if (isActive)

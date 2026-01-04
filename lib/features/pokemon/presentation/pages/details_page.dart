@@ -235,9 +235,16 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         final moves = state is DetailsSuccess
             ? state.pokemon.moves
             : pokemon.moves;
+        
+        final selectedVersion = state is DetailsSuccess
+            ? state.selectedGameVersion
+            : null;
 
         return ListView(
-          padding: const EdgeInsets.all(AppConstants.defaultPadding),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppConstants.defaultPadding,
+            vertical: AppConstants.defaultPadding,
+          ),
           children: [
             const SizedBox(height: 16),
             Text(
@@ -249,10 +256,11 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
               ),
             ),
             const SizedBox(height: 16),
-            if (moves.isNotEmpty)
-              MovesSection(moves: moves)
-            else
-              MovesSection.withSampleData(),
+            MovesSection(
+              moves: moves,
+              selectedGameVersion: selectedVersion,
+              accentColor: TypeHelper.getPrimaryTypeColor(widget.pokemon),
+            ),
             const SizedBox(height: AppConstants.largePadding),
           ],
         );
