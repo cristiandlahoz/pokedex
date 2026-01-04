@@ -23,16 +23,25 @@ class DetailsSuccess extends DetailsState {
   final bool hasMoreMoves;
   final int currentMovesPage;
   final GameVersion? selectedGameVersion;
+  final bool isShiny;
 
   const DetailsSuccess(
     this.pokemon, {
     this.hasMoreMoves = true,
     this.currentMovesPage = 0,
     this.selectedGameVersion,
+    this.isShiny = false,
   });
 
   List<GameVersion> get allGameVersions {
-    return GameVersion.allVersions;
+    final availableVersionNames = pokemon.moves
+        .map((move) => move.versionGroup)
+        .where((vg) => vg != null)
+        .toSet();
+    
+    return GameVersion.allVersions
+        .where((version) => availableVersionNames.contains(version.name))
+        .toList();
   }
 
   DetailsSuccess copyWith({
@@ -41,6 +50,7 @@ class DetailsSuccess extends DetailsState {
     int? currentMovesPage,
     GameVersion? selectedGameVersion,
     bool clearGameVersion = false,
+    bool? isShiny,
   }) {
     return DetailsSuccess(
       pokemon ?? this.pokemon,
@@ -49,11 +59,12 @@ class DetailsSuccess extends DetailsState {
       selectedGameVersion: clearGameVersion
           ? null
           : (selectedGameVersion ?? this.selectedGameVersion),
+      isShiny: isShiny ?? this.isShiny,
     );
   }
 
   @override
-  List<Object?> get props => [pokemon, hasMoreMoves, currentMovesPage, selectedGameVersion];
+  List<Object?> get props => [pokemon, hasMoreMoves, currentMovesPage, selectedGameVersion, isShiny];
 }
 
 class DetailsLoadingMoreMoves extends DetailsSuccess {
@@ -62,6 +73,7 @@ class DetailsLoadingMoreMoves extends DetailsSuccess {
     required super.hasMoreMoves,
     required super.currentMovesPage,
     super.selectedGameVersion,
+    super.isShiny,
   });
 }
 

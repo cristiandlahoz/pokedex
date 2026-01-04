@@ -131,7 +131,7 @@ class DesignTokens {
 
   /// Pagination
   static const int defaultPageSize = 20;
-  static const int defaultMovesLimit = 20;
+  static const int defaultMovesLimit = 500;
 
   /// Scroll behavior
   static const double scrollThreshold = 0.9;
