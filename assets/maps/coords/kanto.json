@@ -1,0 +1,836 @@
+{
+  "region": "Kanto",
+  "image": "assets/maps/regions/kanto.png",
+  "locations": [
+    {
+      "name": "pallet-town",
+      "shape": "rect",
+      "coords": [
+        47,
+        112,
+        56,
+        103
+      ]
+    },
+    {
+      "name": "viridian-city",
+      "shape": "rect",
+      "coords": [
+        47,
+        92,
+        56,
+        76
+      ]
+    },
+    {
+      "name": "viridian-forest",
+      "shape": "rect",
+      "coords": [
+        47,
+        64,
+        56,
+        71
+      ]
+    },
+    {
+      "name": "pewter-city",
+      "shape": "rect",
+      "coords": [
+        47,
+        62,
+        56,
+        46
+      ]
+    },
+    {
+      "name": "pewter-city",
+      "shape": "rect",
+      "coords": [
+        47,
+        47,
+        62,
+        56
+      ]
+    },
+    {
+      "name": "mt-moon",
+      "shape": "rect",
+      "coords": [
+        88,
+        39,
+        96,
+        48
+      ]
+    },
+    {
+      "name": "cerulean-city",
+      "shape": "rect",
+      "coords": [
+        127,
+        39,
+        137,
+        48
+      ]
+    },
+    {
+      "name": "rock-tunnel",
+      "shape": "rect",
+      "coords": [
+        160,
+        40,
+        168,
+        47
+      ]
+    },
+    {
+      "name": "power-plant",
+      "shape": "rect",
+      "coords": [
+        160,
+        50,
+        168,
+        57
+      ]
+    },
+    {
+      "name": "lavender-town",
+      "shape": "rect",
+      "coords": [
+        160,
+        64,
+        168,
+        71
+      ]
+    },
+    {
+      "name": "pokemon-tower",
+      "shape": "rect",
+      "coords": [
+        168,
+        74,
+        176,
+        82
+      ]
+    },
+    {
+      "name": "saffron-city",
+      "shape": "rect",
+      "coords": [
+        124,
+        62,
+        138,
+        76
+      ]
+    },
+    {
+      "name": "celadon-city",
+      "shape": "rect",
+      "coords": [
+        104,
+        64,
+        111,
+        72
+      ]
+    },
+    {
+      "name": "vermilion-city",
+      "shape": "rect",
+      "coords": [
+        128,
+        88,
+        136,
+        96
+      ]
+    },
+    {
+      "name": "digletts-cave",
+      "shape": "rect",
+      "coords": [
+        136,
+        88,
+        144,
+        96
+      ]
+    },
+    {
+      "name": "fuchsia-city",
+      "shape": "rect",
+      "coords": [
+        112,
+        112,
+        120,
+        120
+      ]
+    },
+    {
+      "name": "seafoam-islands",
+      "shape": "rect",
+      "coords": [
+        75,
+        128,
+        88,
+        135
+      ]
+    },
+    {
+      "name": "cinnabar-island",
+      "shape": "rect",
+      "coords": [
+        47,
+        128,
+        55,
+        136
+      ]
+    },
+    {
+      "name": "victory-road",
+      "shape": "rect",
+      "coords": [
+        23,
+        55,
+        31,
+        48
+      ]
+    },
+    {
+      "name": "indigo-plateau",
+      "shape": "rect",
+      "coords": [
+        23,
+        39,
+        31,
+        47
+      ]
+    },
+    {
+      "name": "tohjo-falls",
+      "shape": "rect",
+      "coords": [
+        2,
+        109,
+        10,
+        116
+      ]
+    },
+    {
+      "name": "mt-silver-johto",
+      "shape": "rect",
+      "coords": [
+        0,
+        80,
+        8,
+        88
+      ]
+    },
+    {
+      "name": "route-1",
+      "shape": "rect",
+      "coords": [
+        47,
+        103,
+        56,
+        92
+      ]
+    },
+    {
+      "name": "route-2",
+      "shape": "rect",
+      "coords": [
+        47,
+        76,
+        56,
+        71
+      ]
+    },
+    {
+      "name": "route-3",
+      "shape": "rect",
+      "coords": [
+        63,
+        47,
+        88,
+        56
+      ]
+    },
+    {
+      "name": "route-4",
+      "shape": "rect",
+      "coords": [
+        79,
+        39,
+        88,
+        48
+      ]
+    },
+    {
+      "name": "route-4",
+      "shape": "rect",
+      "coords": [
+        95,
+        39,
+        128,
+        48
+      ]
+    },
+    {
+      "name": "route-5",
+      "shape": "rect",
+      "coords": [
+        127,
+        48,
+        137,
+        61
+      ]
+    },
+    {
+      "name": "route-6",
+      "shape": "rect",
+      "coords": [
+        127,
+        77,
+        137,
+        88
+      ]
+    },
+    {
+      "name": "route-7",
+      "shape": "rect",
+      "coords": [
+        139,
+        63,
+        159,
+        72
+      ]
+    },
+    {
+      "name": "route-8",
+      "shape": "rect",
+      "coords": [
+        112,
+        63,
+        123,
+        72
+      ]
+    },
+    {
+      "name": "route-9",
+      "shape": "rect",
+      "coords": [
+        136,
+        39,
+        159,
+        48
+      ]
+    },
+    {
+      "name": "route-10",
+      "shape": "rect",
+      "coords": [
+        159,
+        39,
+        168,
+        64
+      ]
+    },
+    {
+      "name": "route-11",
+      "shape": "rect",
+      "coords": [
+        144,
+        87,
+        159,
+        96
+      ]
+    },
+    {
+      "name": "route-12",
+      "shape": "rect",
+      "coords": [
+        159,
+        72,
+        168,
+        104
+      ]
+    },
+    {
+      "name": "route-13",
+      "shape": "rect",
+      "coords": [
+        143,
+        103,
+        168,
+        112
+      ]
+    },
+    {
+      "name": "route-14",
+      "shape": "rect",
+      "coords": [
+        135,
+        103,
+        145,
+        120
+      ]
+    },
+    {
+      "name": "route-15",
+      "shape": "rect",
+      "coords": [
+        120,
+        111,
+        135,
+        120
+      ]
+    },
+    {
+      "name": "route-16",
+      "shape": "rect",
+      "coords": [
+        71,
+        63,
+        103,
+        72
+      ]
+    },
+    {
+      "name": "route-17",
+      "shape": "rect",
+      "coords": [
+        71,
+        72,
+        80,
+        112
+      ]
+    },
+    {
+      "name": "route-18",
+      "shape": "rect",
+      "coords": [
+        71,
+        111,
+        112,
+        120
+      ]
+    },
+    {
+      "name": "route-19",
+      "shape": "rect",
+      "coords": [
+        111,
+        120,
+        121,
+        136
+      ]
+    },
+    {
+      "name": "route-20",
+      "shape": "rect",
+      "coords": [
+        55,
+        127,
+        111,
+        137
+      ]
+    },
+    {
+      "name": "route-21",
+      "shape": "rect",
+      "coords": [
+        47,
+        127,
+        56,
+        112
+      ]
+    },
+    {
+      "name": "route-22",
+      "shape": "rect",
+      "coords": [
+        48,
+        79,
+        31,
+        88
+      ]
+    },
+    {
+      "name": "route-23",
+      "shape": "rect",
+      "coords": [
+        22,
+        55,
+        32,
+        79
+      ]
+    },
+    {
+      "name": "route-24",
+      "shape": "rect",
+      "coords": [
+        127,
+        40,
+        136,
+        23
+      ]
+    },
+    {
+      "name": "route-25",
+      "shape": "rect",
+      "coords": [
+        136,
+        23,
+        152,
+        33
+      ]
+    },
+    {
+      "name": "route-27",
+      "shape": "rect",
+      "coords": [
+        0,
+        103,
+        32,
+        118
+      ]
+    },
+    {
+      "name": "route-26",
+      "shape": "rect",
+      "coords": [
+        22,
+        88,
+        32,
+        108
+      ]
+    },
+    {
+      "name": "route-28",
+      "shape": "rect",
+      "coords": [
+        8,
+        79,
+        23,
+        88
+      ]
+    },
+    {
+      "name": "one-island",
+      "shape": "rect",
+      "coords": [
+        19,
+        235,
+        26,
+        243
+      ]
+    },
+    {
+      "name": "treasure-beach",
+      "shape": "rect",
+      "coords": [
+        17,
+        243,
+        27,
+        259
+      ]
+    },
+    {
+      "name": "kindle-road",
+      "shape": "rect",
+      "coords": [
+        26,
+        203,
+        35,
+        423
+      ]
+    },
+    {
+      "name": "mt-ember",
+      "shape": "rect",
+      "coords": [
+        26,
+        194,
+        35,
+        202
+      ]
+    },
+    {
+      "name": "two-island",
+      "shape": "rect",
+      "coords": [
+        82,
+        243,
+        90,
+        251
+      ]
+    },
+    {
+      "name": "cape-brink",
+      "shape": "rect",
+      "coords": [
+        82,
+        243,
+        90,
+        226
+      ]
+    },
+    {
+      "name": "three-island",
+      "shape": "rect",
+      "coords": [
+        155,
+        266,
+        163,
+        274
+      ]
+    },
+    {
+      "name": "three-isle-port",
+      "shape": "rect",
+      "coords": [
+        154,
+        274,
+        172,
+        284
+      ]
+    },
+    {
+      "name": "bond-bridge",
+      "shape": "rect",
+      "coords": [
+        131,
+        266,
+        154,
+        275
+      ]
+    },
+    {
+      "name": "berry-forest",
+      "shape": "rect",
+      "coords": [
+        121,
+        266,
+        130,
+        275
+      ]
+    },
+    {
+      "name": "four-island",
+      "shape": "rect",
+      "coords": [
+        35,
+        363,
+        43,
+        371
+      ]
+    },
+    {
+      "name": "five-island",
+      "shape": "rect",
+      "coords": [
+        138,
+        419,
+        146,
+        427
+      ]
+    },
+    {
+      "name": "five-isle-meadow",
+      "shape": "rect",
+      "coords": [
+        146,
+        417,
+        154,
+        436
+      ]
+    },
+    {
+      "name": "memorial-pillar",
+      "shape": "rect",
+      "coords": [
+        154,
+        426,
+        163,
+        452
+      ]
+    },
+    {
+      "name": "water-labyrinth",
+      "shape": "rect",
+      "coords": [
+        122,
+        410,
+        147,
+        419
+      ]
+    },
+    {
+      "name": "lost-cave",
+      "shape": "rect",
+      "coords": [
+        155,
+        402,
+        162,
+        410
+      ]
+    },
+    {
+      "name": "resort-gorgeous",
+      "shape": "rect",
+      "coords": [
+        138,
+        402,
+        163,
+        412
+      ]
+    },
+    {
+      "name": "navel-rock",
+      "shape": "rect",
+      "coords": [
+        86,
+        391,
+        103,
+        406
+      ]
+    },
+    {
+      "name": "six-island",
+      "shape": "rect",
+      "coords": [
+        146,
+        530,
+        155,
+        540
+      ]
+    },
+    {
+      "name": "water-path",
+      "shape": "rect",
+      "coords": [
+        154,
+        514,
+        163,
+        556
+      ]
+    },
+    {
+      "name": "dotted-hole",
+      "shape": "rect",
+      "coords": [
+        139,
+        555,
+        146,
+        563
+      ]
+    },
+    {
+      "name": "ruin-valley",
+      "shape": "rect",
+      "coords": [
+        138,
+        546,
+        155,
+        564
+      ]
+    },
+    {
+      "name": "green-path",
+      "shape": "rect",
+      "coords": [
+        130,
+        514,
+        147,
+        423
+      ]
+    },
+    {
+      "name": "pattern-bush",
+      "shape": "rect",
+      "coords": [
+        147,
+        514,
+        154,
+        523
+      ]
+    },
+    {
+      "name": "outcast-island",
+      "shape": "rect",
+      "coords": [
+        130,
+        514,
+        139,
+        499
+      ]
+    },
+    {
+      "name": "altering-cave",
+      "shape": "rect",
+      "coords": [
+        130,
+        490,
+        139,
+        499
+      ]
+    },
+    {
+      "name": "seven-island",
+      "shape": "rect",
+      "coords": [
+        50,
+        555,
+        60,
+        563
+      ]
+    },
+    {
+      "name": "trainer-tower",
+      "shape": "rect",
+      "coords": [
+        50,
+        555,
+        60,
+        538
+      ]
+    },
+    {
+      "name": "canyon-entrance",
+      "shape": "rect",
+      "coords": [
+        50,
+        563,
+        60,
+        571
+      ]
+    },
+    {
+      "name": "seavault-canyon",
+      "shape": "rect",
+      "coords": [
+        58,
+        562,
+        67,
+        586
+      ]
+    },
+    {
+      "name": "tanoby-ruins",
+      "shape": "rect",
+      "coords": [
+        34,
+        586,
+        92,
+        596
+      ]
+    },
+    {
+      "name": "birth-island",
+      "shape": "rect",
+      "coords": [
+        150,
+        558,
+        168,
+        607
+      ]
+    }
+  ]
+}

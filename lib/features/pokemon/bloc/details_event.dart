@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../domain/value_objects/game_version.dart';
+
 sealed class DetailsEvent extends Equatable {
   const DetailsEvent();
 
@@ -14,4 +16,17 @@ class DetailsLoadRequested extends DetailsEvent {
 
   @override
   List<Object?> get props => [pokemonId];
+}
+
+class DetailsGameVersionSelected extends DetailsEvent {
+  final GameVersion version;
+
+  const DetailsGameVersionSelected({required this.version});
+
+  @override
+  List<Object?> get props => [version];
+}
+
+class DetailsShinyToggled extends DetailsEvent {
+  const DetailsShinyToggled();
 }

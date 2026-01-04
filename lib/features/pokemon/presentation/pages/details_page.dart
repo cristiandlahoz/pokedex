@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/constants/app.dart';
 import '../../../../core/di/injection_container.dart';
 import '../../../../core/exceptions/failures.dart';
-import '../../domain/entities/pokemon.dart';
-import '../../domain/entities/pokemon_details.dart';
 import '../../bloc/details_bloc.dart';
 import '../../bloc/details_event.dart';
 import '../../bloc/details_state.dart';
+import '../../bloc/game_version_bloc.dart';
+import '../../bloc/locations_bloc.dart';
+import '../../bloc/locations_event.dart';
+import '../../bloc/locations_state.dart';
+import '../../domain/entities/pokemon.dart';
+import '../../domain/entities/pokemon_details.dart';
 import '../utils/type_helper.dart';
+import '../widgets/details/app_bar.dart';
+import '../widgets/details/header.dart';
 import '../widgets/sections/abilities_section.dart';
 import '../widgets/sections/base_stats_section.dart';
 import '../widgets/sections/breeding_section.dart';
+import '../widgets/sections/cards_section.dart';
 import '../widgets/sections/catch_rate_section.dart';
-import '../widgets/sections/species_section.dart';
 import '../widgets/sections/evolution_section.dart';
+import '../widgets/sections/locations_section.dart';
 import '../widgets/sections/moves_section.dart';
 import '../widgets/sections/physical_stats_section.dart';
-import '../widgets/details/app_bar.dart';
-import '../widgets/details/header.dart';
+import '../widgets/sections/species_section.dart';
 import '../widgets/sections/training_section.dart';
 import '../widgets/sections/type_effectiveness_section.dart';
-import '../widgets/shared/loading_state.dart' as shared_loading;
 import '../widgets/shared/error_state.dart' as shared_error;
+import '../widgets/shared/loading_state.dart' as shared_loading;
 
 class PokemonDetailsPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -113,18 +120,29 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildLoadedState(PokemonDetails pokemon) {
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return [
-          DetailsAppBar(
-            pokemon: pokemon,
-            backgroundColor: TypeHelper.getPrimaryTypeColor(pokemon),
-          ),
-        ];
-      },
-      body: FadeTransition(
-        opacity: _fadeAnimation,
-        child: _buildContentContainer(pokemon),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<LocationsBloc>()
+            ..add(LocationsLoadRequested(pokemonId: pokemon.id)),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GameVersionBloc>(),
+        ),
+      ],
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            DetailsAppBar(
+              pokemon: pokemon,
+              backgroundColor: TypeHelper.getPrimaryTypeColor(pokemon),
+            ),
+          ];
+        },
+        body: FadeTransition(
+          opacity: _fadeAnimation,
+          child: _buildContentContainer(pokemon),
+        ),
       ),
     );
   }
@@ -212,22 +230,94 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildMovesTab(PokemonDetails pokemon) {
-    return ListView(
-      padding: const EdgeInsets.all(AppConstants.defaultPadding),
-      children: [
-        if (pokemon.moves.isNotEmpty)
-          MovesSection(moves: pokemon.moves)
-        else
-          MovesSection.withSampleData(),
-        const SizedBox(height: AppConstants.largePadding),
-      ],
+    return BlocBuilder<DetailsBloc, DetailsState>(
+      builder: (context, state) {
+        final moves = state is DetailsSuccess
+            ? state.pokemon.moves
+            : pokemon.moves;
+        
+        final selectedVersion = state is DetailsSuccess
+            ? state.selectedGameVersion
+            : null;
+
+        return ListView(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppConstants.defaultPadding,
+            vertical: AppConstants.defaultPadding,
+          ),
+          children: [
+            const SizedBox(height: 16),
+            Text(
+              'The moves listed below showcase all available techniques the selected Pokémon can learn',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            const SizedBox(height: 16),
+            MovesSection(
+              moves: moves,
+              selectedGameVersion: selectedVersion,
+              accentColor: TypeHelper.getPrimaryTypeColor(widget.pokemon),
+              sortingService: getIt(),
+              filteringService: getIt(),
+            ),
+            const SizedBox(height: AppConstants.largePadding),
+          ],
+        );
+      },
     );
   }
 
   Widget _buildOtherTab(PokemonDetails pokemon) {
-    return ListView(
-      padding: const EdgeInsets.all(AppConstants.defaultPadding),
-      children: const [SizedBox(height: AppConstants.largePadding)],
+    final primaryTypeColor = TypeHelper.getPrimaryTypeColor(pokemon);
+    
+    return BlocBuilder<LocationsBloc, LocationsState>(
+      builder: (context, state) {
+        return ListView(
+          padding: const EdgeInsets.all(AppConstants.defaultPadding),
+          children: [
+            const SizedBox(height: 16),
+            CardsSection(
+              pokemon: pokemon,
+              typeColor: primaryTypeColor,
+            ),
+            const SizedBox(height: 24),
+            if (state is LocationsSuccess && state.locations.isNotEmpty)
+              LocationsSection(
+                state: state,
+                typeColor: primaryTypeColor,
+              )
+            else if (state is LocationsLoading)
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(32),
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            else if (state is LocationsFailure)
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  'Could not load locations: ${state.failure.message}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              )
+            else
+              const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  'No location data available for this Pokémon',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+            const SizedBox(height: AppConstants.largePadding),
+          ],
+        );
+      },
     );
   }
 }

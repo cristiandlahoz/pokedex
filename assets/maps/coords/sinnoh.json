@@ -1,0 +1,766 @@
+{
+  "region": "Sinnoh",
+  "image": "assets/maps/regions/sinnoh.png",
+  "locations": [
+    {
+      "name": "twinleaf-town",
+      "shape": "rect",
+      "coords": [
+        22,
+        150,
+        30,
+        158
+      ]
+    },
+    {
+      "name": "lake-verity",
+      "shape": "rect",
+      "coords": [
+        8,
+        136,
+        23,
+        151
+      ]
+    },
+    {
+      "name": "sandgem-town",
+      "shape": "rect",
+      "coords": [
+        36,
+        143,
+        44,
+        151
+      ]
+    },
+    {
+      "name": "jubilife-city",
+      "shape": "rect",
+      "coords": [
+        29,
+        122,
+        44,
+        137
+      ]
+    },
+    {
+      "name": "canalave-city",
+      "shape": "rect",
+      "coords": [
+        8,
+        115,
+        16,
+        130
+      ]
+    },
+    {
+      "name": "iron-island",
+      "shape": "rect",
+      "coords": [
+        22,
+        66,
+        30,
+        74
+      ]
+    },
+    {
+      "name": "full-moon-island",
+      "shape": "rect",
+      "coords": [
+        16,
+        17,
+        24,
+        25
+      ]
+    },
+    {
+      "name": "new-moon-island",
+      "shape": "rect",
+      "coords": [
+        29,
+        17,
+        37,
+        25
+      ]
+    },
+    {
+      "name": "floaroma-town",
+      "shape": "rect",
+      "coords": [
+        36,
+        94,
+        44,
+        109
+      ]
+    },
+    {
+      "name": "eterna-city",
+      "shape": "rect",
+      "coords": [
+        64,
+        73,
+        79,
+        81
+      ]
+    },
+    {
+      "name": "eterna-city",
+      "shape": "rect",
+      "coords": [
+        64,
+        73,
+        72,
+        88
+      ]
+    },
+    {
+      "name": "oreburgh-city",
+      "shape": "rect",
+      "coords": [
+        57,
+        122,
+        72,
+        130
+      ]
+    },
+    {
+      "name": "oreburgh-city",
+      "shape": "rect",
+      "coords": [
+        64,
+        136,
+        72,
+        122
+      ]
+    },
+    {
+      "name": "pal-park",
+      "shape": "rect",
+      "coords": [
+        64,
+        158,
+        72,
+        164
+      ]
+    },
+    {
+      "name": "snowpoint-city",
+      "shape": "rect",
+      "coords": [
+        78,
+        3,
+        86,
+        18
+      ]
+    },
+    {
+      "name": "lake-acuity",
+      "shape": "rect",
+      "coords": [
+        64,
+        6,
+        76,
+        18
+      ]
+    },
+    {
+      "name": "acuity-lakefront",
+      "shape": "rect",
+      "coords": [
+        64,
+        3,
+        77,
+        18
+      ]
+    },
+    {
+      "name": "celestic-town",
+      "shape": "rect",
+      "coords": [
+        100,
+        73,
+        108,
+        81
+      ]
+    },
+    {
+      "name": "hearthome-city",
+      "shape": "rect",
+      "coords": [
+        99,
+        108,
+        114,
+        123
+      ]
+    },
+    {
+      "name": "solaceon-town",
+      "shape": "rect",
+      "coords": [
+        120,
+        101,
+        135,
+        109
+      ]
+    },
+    {
+      "name": "veilstone-city",
+      "shape": "rect",
+      "coords": [
+        148,
+        87,
+        163,
+        102
+      ]
+    },
+    {
+      "name": "sendoff-spring",
+      "shape": "rect",
+      "coords": [
+        162,
+        108,
+        177,
+        118
+      ]
+    },
+    {
+      "name": "spring-path",
+      "shape": "rect",
+      "coords": [
+        162,
+        118,
+        177,
+        123
+      ]
+    },
+    {
+      "name": "lake-valor",
+      "shape": "rect",
+      "coords": [
+        148,
+        122,
+        159,
+        136
+      ]
+    },
+    {
+      "name": "valor-lakefront",
+      "shape": "rect",
+      "coords": [
+        159,
+        122,
+        163,
+        136
+      ]
+    },
+    {
+      "name": "sunyshore-city",
+      "shape": "rect",
+      "coords": [
+        183,
+        122,
+        198,
+        137
+      ]
+    },
+    {
+      "name": "victory-road",
+      "shape": "rect",
+      "coords": [
+        183,
+        88,
+        191,
+        94
+      ]
+    },
+    {
+      "name": "pokemon-league",
+      "shape": "rect",
+      "coords": [
+        183,
+        80,
+        191,
+        88
+      ]
+    },
+    {
+      "name": "fight-area",
+      "shape": "rect",
+      "coords": [
+        134,
+        52,
+        149,
+        60
+      ]
+    },
+    {
+      "name": "survival-area",
+      "shape": "rect",
+      "coords": [
+        141,
+        31,
+        149,
+        39
+      ]
+    },
+    {
+      "name": "resort-area",
+      "shape": "rect",
+      "coords": [
+        22,
+        150,
+        30,
+        158
+      ]
+    },
+    {
+      "name": "battle-tower",
+      "shape": "rect",
+      "coords": [
+        141,
+        45,
+        145,
+        52
+      ]
+    },
+    {
+      "name": "battle-frontier",
+      "shape": "rect",
+      "coords": [
+        145,
+        45,
+        149,
+        52
+      ]
+    },
+    {
+      "name": "mt-coronet",
+      "shape": "rect",
+      "coords": [
+        85,
+        45,
+        93,
+        102
+      ]
+    },
+    {
+      "name": "mt-coronet",
+      "shape": "rect",
+      "coords": [
+        78,
+        94,
+        86,
+        123
+      ]
+    },
+    {
+      "name": "valley-windwords",
+      "shape": "rect",
+      "coords": [
+        50,
+        101,
+        58,
+        109
+      ]
+    },
+    {
+      "name": "fuego-ironworks",
+      "shape": "rect",
+      "coords": [
+        36,
+        87,
+        44,
+        95
+      ]
+    },
+    {
+      "name": "eterna-forest",
+      "shape": "rect",
+      "coords": [
+        43,
+        73,
+        58,
+        88
+      ]
+    },
+    {
+      "name": "seabreak-path",
+      "shape": "rect",
+      "coords": [
+        197,
+        10,
+        205,
+        68
+      ]
+    },
+    {
+      "name": "flower-paradise",
+      "shape": "rect",
+      "coords": [
+        197,
+        2,
+        205,
+        10
+      ]
+    },
+    {
+      "name": "stark-mountain",
+      "shape": "rect",
+      "coords": [
+        162,
+        10,
+        170,
+        16
+      ]
+    },
+    {
+      "name": "route-201",
+      "shape": "rect",
+      "coords": [
+        23,
+        143,
+        36,
+        151
+      ]
+    },
+    {
+      "name": "route-202",
+      "shape": "rect",
+      "coords": [
+        36,
+        137,
+        44,
+        143
+      ]
+    },
+    {
+      "name": "route-203",
+      "shape": "rect",
+      "coords": [
+        44,
+        122,
+        57,
+        130
+      ]
+    },
+    {
+      "name": "route-204",
+      "shape": "rect",
+      "coords": [
+        36,
+        109,
+        44,
+        122
+      ]
+    },
+    {
+      "name": "route-205",
+      "shape": "rect",
+      "coords": [
+        44,
+        87,
+        52,
+        109
+      ]
+    },
+    {
+      "name": "route-205",
+      "shape": "rect",
+      "coords": [
+        57,
+        73,
+        64,
+        81
+      ]
+    },
+    {
+      "name": "route-206",
+      "shape": "rect",
+      "coords": [
+        64,
+        88,
+        72,
+        115
+      ]
+    },
+    {
+      "name": "route-207",
+      "shape": "rect",
+      "coords": [
+        64,
+        115,
+        79,
+        123
+      ]
+    },
+    {
+      "name": "route-208",
+      "shape": "rect",
+      "coords": [
+        85,
+        115,
+        99,
+        123
+      ]
+    },
+    {
+      "name": "route-209",
+      "shape": "rect",
+      "coords": [
+        114,
+        115,
+        128,
+        123
+      ]
+    },
+    {
+      "name": "route-209",
+      "shape": "rect",
+      "coords": [
+        120,
+        109,
+        128,
+        123
+      ]
+    },
+    {
+      "name": "route-210",
+      "shape": "rect",
+      "coords": [
+        120,
+        73,
+        128,
+        101
+      ]
+    },
+    {
+      "name": "route-210",
+      "shape": "rect",
+      "coords": [
+        108,
+        73,
+        128,
+        81
+      ]
+    },
+    {
+      "name": "route-211",
+      "shape": "rect",
+      "coords": [
+        79,
+        73,
+        101,
+        81
+      ]
+    },
+    {
+      "name": "route-212",
+      "shape": "rect",
+      "coords": [
+        99,
+        123,
+        107,
+        151
+      ]
+    },
+    {
+      "name": "route-212",
+      "shape": "rect",
+      "coords": [
+        99,
+        143,
+        127,
+        151
+      ]
+    },
+    {
+      "name": "route-213",
+      "shape": "rect",
+      "coords": [
+        142,
+        136,
+        163,
+        151
+      ]
+    },
+    {
+      "name": "route-214",
+      "shape": "rect",
+      "coords": [
+        155,
+        102,
+        163,
+        123
+      ]
+    },
+    {
+      "name": "route-215",
+      "shape": "rect",
+      "coords": [
+        127,
+        87,
+        148,
+        95
+      ]
+    },
+    {
+      "name": "route-216",
+      "shape": "rect",
+      "coords": [
+        64,
+        45,
+        86,
+        53
+      ]
+    },
+    {
+      "name": "route-217",
+      "shape": "rect",
+      "coords": [
+        64,
+        17,
+        72,
+        45
+      ]
+    },
+    {
+      "name": "route-218",
+      "shape": "rect",
+      "coords": [
+        16,
+        122,
+        29,
+        130
+      ]
+    },
+    {
+      "name": "route-219",
+      "shape": "rect",
+      "coords": [
+        36,
+        151,
+        44,
+        158
+      ]
+    },
+    {
+      "name": "route-220",
+      "shape": "rect",
+      "coords": [
+        36,
+        157,
+        52,
+        165
+      ]
+    },
+    {
+      "name": "route-221",
+      "shape": "rect",
+      "coords": [
+        52,
+        157,
+        72,
+        165
+      ]
+    },
+    {
+      "name": "route-222",
+      "shape": "rect",
+      "coords": [
+        162,
+        129,
+        183,
+        137
+      ]
+    },
+    {
+      "name": "route-223",
+      "shape": "rect",
+      "coords": [
+        183,
+        94,
+        191,
+        122
+      ]
+    },
+    {
+      "name": "route-224",
+      "shape": "rect",
+      "coords": [
+        190,
+        73,
+        198,
+        88
+      ]
+    },
+    {
+      "name": "route-224",
+      "shape": "rect",
+      "coords": [
+        197,
+        68,
+        205,
+        81
+      ]
+    },
+    {
+      "name": "route-225",
+      "shape": "rect",
+      "coords": [
+        134,
+        31,
+        142,
+        52
+      ]
+    },
+    {
+      "name": "route-226",
+      "shape": "rect",
+      "coords": [
+        149,
+        31,
+        170,
+        39
+      ]
+    },
+    {
+      "name": "route-227",
+      "shape": "rect",
+      "coords": [
+        162,
+        16,
+        170,
+        32
+      ]
+    },
+    {
+      "name": "route-228",
+      "shape": "rect",
+      "coords": [
+        169,
+        31,
+        177,
+        53
+      ]
+    },
+    {
+      "name": "route-229",
+      "shape": "rect",
+      "coords": [
+        169,
+        52,
+        184,
+        60
+      ]
+    },
+    {
+      "name": "route-230",
+      "shape": "rect",
+      "coords": [
+        149,
+        52,
+        169,
+        60
+      ]
+    }
+  ]
+}

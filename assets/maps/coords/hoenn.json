@@ -1,0 +1,586 @@
+{
+  "region": "Hoenn",
+  "image": "assets/maps/regions/hoenn.png",
+  "locations": [
+    {
+      "name": "littleroot-town",
+      "shape": "rect",
+      "coords": [
+        57,
+        147,
+        65,
+        155
+      ]
+    },
+    {
+      "name": "oldale-town",
+      "shape": "rect",
+      "coords": [
+        57,
+        122,
+        65,
+        129
+      ]
+    },
+    {
+      "name": "petalburg-city",
+      "shape": "rect",
+      "coords": [
+        30,
+        122,
+        45,
+        130
+      ]
+    },
+    {
+      "name": "rustboro-city",
+      "shape": "rect",
+      "coords": [
+        11,
+        82,
+        26,
+        90
+      ]
+    },
+    {
+      "name": "rustboro-city",
+      "shape": "rect",
+      "coords": [
+        11,
+        82,
+        19,
+        97
+      ]
+    },
+    {
+      "name": "dewford-town",
+      "shape": "rect",
+      "coords": [
+        38,
+        185,
+        46,
+        193
+      ]
+    },
+    {
+      "name": "slateport-city",
+      "shape": "rect",
+      "coords": [
+        85,
+        140,
+        100,
+        155
+      ]
+    },
+    {
+      "name": "mauville-city",
+      "shape": "rect",
+      "coords": [
+        85,
+        89,
+        99,
+        96
+      ]
+    },
+    {
+      "name": "mauville-city",
+      "shape": "rect",
+      "coords": [
+        85,
+        89,
+        93,
+        104
+      ]
+    },
+    {
+      "name": "verdanturf-town",
+      "shape": "rect",
+      "coords": [
+        57,
+        89,
+        65,
+        97
+      ]
+    },
+    {
+      "name": "lavaridge-town",
+      "shape": "rect",
+      "coords": [
+        64,
+        64,
+        72,
+        72
+      ]
+    },
+    {
+      "name": "fallarbor-town",
+      "shape": "rect",
+      "coords": [
+        44,
+        43,
+        59,
+        51
+      ]
+    },
+    {
+      "name": "fortree-city",
+      "shape": "rect",
+      "coords": [
+        109,
+        43,
+        117,
+        51
+      ]
+    },
+    {
+      "name": "lilycove-city",
+      "shape": "rect",
+      "coords": [
+        156,
+        61,
+        171,
+        76
+      ]
+    },
+    {
+      "name": "pacifidlog-town",
+      "shape": "rect",
+      "coords": [
+        172,
+        147,
+        180,
+        155
+      ]
+    },
+    {
+      "name": "sootopolis-city",
+      "shape": "rect",
+      "coords": [
+        199,
+        109,
+        207,
+        117
+      ]
+    },
+    {
+      "name": "mossdeep-city",
+      "shape": "rect",
+      "coords": [
+        227,
+        79,
+        242,
+        87
+      ]
+    },
+    {
+      "name": "evergrande-city",
+      "shape": "rect",
+      "coords": [
+        268,
+        130,
+        276,
+        144
+      ]
+    },
+    {
+      "name": "battle-frontier",
+      "shape": "rect",
+      "coords": [
+        221,
+        174,
+        237,
+        191
+      ]
+    },
+    {
+      "name": "southern-island",
+      "shape": "rect",
+      "coords": [
+        268,
+        196,
+        280,
+        208
+      ]
+    },
+    {
+      "name": "route-101",
+      "shape": "rect",
+      "coords": [
+        57,
+        130,
+        65,
+        147
+      ]
+    },
+    {
+      "name": "route-102",
+      "shape": "rect",
+      "coords": [
+        45,
+        122,
+        57,
+        130
+      ]
+    },
+    {
+      "name": "route-103",
+      "shape": "rect",
+      "coords": [
+        57,
+        115,
+        85,
+        123
+      ]
+    },
+    {
+      "name": "route-104",
+      "shape": "rect",
+      "coords": [
+        11,
+        122,
+        29,
+        129
+      ]
+    },
+    {
+      "name": "route-104",
+      "shape": "rect",
+      "coords": [
+        11,
+        122,
+        19,
+        97
+      ]
+    },
+    {
+      "name": "route-105",
+      "shape": "rect",
+      "coords": [
+        11,
+        129,
+        19,
+        177
+      ]
+    },
+    {
+      "name": "route-106",
+      "shape": "rect",
+      "coords": [
+        11,
+        177,
+        46,
+        185
+      ]
+    },
+    {
+      "name": "route-107",
+      "shape": "rect",
+      "coords": [
+        46,
+        186,
+        61,
+        192
+      ]
+    },
+    {
+      "name": "route-108",
+      "shape": "rect",
+      "coords": [
+        61,
+        186,
+        85,
+        192
+      ]
+    },
+    {
+      "name": "route-109",
+      "shape": "rect",
+      "coords": [
+        85,
+        155,
+        93,
+        193
+      ]
+    },
+    {
+      "name": "route-110",
+      "shape": "rect",
+      "coords": [
+        85,
+        104,
+        93,
+        140
+      ]
+    },
+    {
+      "name": "route-111",
+      "shape": "rect",
+      "coords": [
+        85,
+        43,
+        93,
+        89
+      ]
+    },
+    {
+      "name": "route-112",
+      "shape": "rect",
+      "coords": [
+        72,
+        64,
+        85,
+        72
+      ]
+    },
+    {
+      "name": "route-113",
+      "shape": "rect",
+      "coords": [
+        59,
+        43,
+        85,
+        51
+      ]
+    },
+    {
+      "name": "route-114",
+      "shape": "rect",
+      "coords": [
+        27,
+        43,
+        44,
+        51
+      ]
+    },
+    {
+      "name": "route-114",
+      "shape": "rect",
+      "coords": [
+        27,
+        43,
+        35,
+        63
+      ]
+    },
+    {
+      "name": "meteor-falls",
+      "shape": "rect",
+      "coords": [
+        18,
+        55,
+        27,
+        63
+      ]
+    },
+    {
+      "name": "route-115",
+      "shape": "rect",
+      "coords": [
+        11,
+        55,
+        19,
+        82
+      ]
+    },
+    {
+      "name": "route-116",
+      "shape": "rect",
+      "coords": [
+        26,
+        82,
+        65,
+        90
+      ]
+    },
+    {
+      "name": "route-117",
+      "shape": "rect",
+      "coords": [
+        65,
+        89,
+        85,
+        97
+      ]
+    },
+    {
+      "name": "route-118",
+      "shape": "rect",
+      "coords": [
+        99,
+        89,
+        112,
+        97
+      ]
+    },
+    {
+      "name": "route-119",
+      "shape": "rect",
+      "coords": [
+        100,
+        43,
+        108,
+        89
+      ]
+    },
+    {
+      "name": "route-120",
+      "shape": "rect",
+      "coords": [
+        118,
+        43,
+        125,
+        69
+      ]
+    },
+    {
+      "name": "route-121",
+      "shape": "rect",
+      "coords": [
+        126,
+        61,
+        156,
+        70
+      ]
+    },
+    {
+      "name": "route-122",
+      "shape": "rect",
+      "coords": [
+        142,
+        69,
+        149,
+        89
+      ]
+    },
+    {
+      "name": "route-123",
+      "shape": "rect",
+      "coords": [
+        112,
+        89,
+        150,
+        97
+      ]
+    },
+    {
+      "name": "route-124",
+      "shape": "rect",
+      "coords": [
+        171,
+        61,
+        227,
+        69
+      ]
+    },
+    {
+      "name": "route-124",
+      "shape": "rect",
+      "coords": [
+        183,
+        69,
+        227,
+        86
+      ]
+    },
+    {
+      "name": "route-125",
+      "shape": "rect",
+      "coords": [
+        227,
+        61,
+        242,
+        79
+      ]
+    },
+    {
+      "name": "route-126",
+      "shape": "rect",
+      "coords": [
+        183,
+        86,
+        223,
+        134
+      ]
+    },
+    {
+      "name": "route-127",
+      "shape": "rect",
+      "coords": [
+        223,
+        86,
+        241,
+        136
+      ]
+    },
+    {
+      "name": "route-128",
+      "shape": "rect",
+      "coords": [
+        223,
+        136,
+        268,
+        144
+      ]
+    },
+    {
+      "name": "route-129",
+      "shape": "rect",
+      "coords": [
+        222,
+        144,
+        242,
+        155
+      ]
+    },
+    {
+      "name": "route-130",
+      "shape": "rect",
+      "coords": [
+        204,
+        147,
+        222,
+        155
+      ]
+    },
+    {
+      "name": "route-131",
+      "shape": "rect",
+      "coords": [
+        180,
+        147,
+        204,
+        155
+      ]
+    },
+    {
+      "name": "route-132",
+      "shape": "rect",
+      "coords": [
+        153,
+        147,
+        172,
+        155
+      ]
+    },
+    {
+      "name": "route-133",
+      "shape": "rect",
+      "coords": [
+        131,
+        147,
+        153,
+        155
+      ]
+    },
+    {
+      "name": "route-134",
+      "shape": "rect",
+      "coords": [
+        100,
+        147,
+        131,
+        155
+      ]
+    }
+  ]
+}

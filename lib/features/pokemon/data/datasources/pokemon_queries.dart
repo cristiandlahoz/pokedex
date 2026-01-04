@@ -1,5 +1,3 @@
-import '../../../../core/theme/tokens.dart';
-
 // Reusable fragments to eliminate duplication and maintain consistency
 
 /// Basic pokemon information fragment used across list and search queries
@@ -19,14 +17,6 @@ fragment BasicPokemonFields on pokemon {
   pokemonsprites {
     sprites
   }
-}
-''';
-
-/// Type information fragment for detailed type data
-const String typeFragment = '''
-fragment TypeFields on type {
-  id
-  name
 }
 ''';
 
@@ -106,6 +96,35 @@ fragment EvolutionSpeciesFields on pokemonspecies {
 }
 ''';
 
+const String moveFragment = '''
+fragment MoveFields on pokemonmove {
+  level
+  move_learn_method_id
+  version_group_id
+  versiongroup {
+    name
+  }
+  movelearnmethod {
+    name
+  }
+  move {
+    name
+    power
+    accuracy
+    pp
+    type {
+      name
+    }
+    machines(where: {version_group_id: {_is_null: false}}, limit: 1) {
+      machine_number
+      item {
+        name
+      }
+    }
+  }
+}
+''';
+
 const String getPokemonListQuery =
     '''
 $basicPokemonFragment
@@ -122,6 +141,7 @@ const String getPokemonDetailsQuery =
 $basicPokemonFragment
 $typeEffectivenessFragment
 $evolutionSpeciesFragment
+$moveFragment
 
 query GetPokemonDetails(\$id: Int!) {
   pokemon(where: {id: {_eq: \$id}}, limit: 1) {
@@ -144,16 +164,8 @@ query GetPokemonDetails(\$id: Int!) {
         name
       }
     }
-    pokemonmoves(limit: ${DesignTokens.defaultMovesLimit}) {
-      move {
-        name
-        power
-        accuracy
-        pp
-        type {
-          name
-        }
-      }
+    pokemonmoves {
+      ...MoveFields
     }
     pokemonspecy {
       gender_rate
@@ -196,8 +208,43 @@ const String searchPokemonQuery =
 $basicPokemonFragment
 
 query SearchPokemon(\$name: String!) {
-  pokemon(where: {name: {_ilike: \$name}}) {
+  pokemon(where: {name: {_ilike: $name}}) {
     ...BasicPokemonFields
+  }
+}
+''';
+
+const String getPokemonLocationsQuery = '''
+query GetPokemonLocations(\$pokemonId: Int!) {
+  encounter(
+    where: {pokemon_id: {_eq: \$pokemonId}}
+    order_by: {location_area_id: asc}
+  ) {
+    id
+    min_level
+    max_level
+    location_area_id
+    version_id
+    locationarea {
+      name
+      id
+      location {
+        name
+        id
+        region {
+          name
+          id
+        }
+      }
+    }
+    version {
+      name
+      id
+      versiongroup {
+        name
+        id
+      }
+    }
   }
 }
 ''';
