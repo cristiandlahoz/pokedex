@@ -3,6 +3,8 @@ import 'pokemon.dart';
 import 'pokemon_ability.dart';
 import 'pokemon_move.dart';
 import 'pokemon_stat.dart';
+import 'pokemon_types.dart';
+import 'pokemon_variety.dart';
 import 'type_defense_info.dart';
 
 class PokemonDetails extends Pokemon {
@@ -21,6 +23,7 @@ class PokemonDetails extends Pokemon {
   final List<TypeDefenseInfo> typeDefenses;
   final List<TypeDefenseInfo> typeOffenses;
   final EvolutionChain? evolutionChain;
+  final List<PokemonVariety> varieties;
 
   const PokemonDetails({
     required super.id,
@@ -45,16 +48,17 @@ class PokemonDetails extends Pokemon {
     this.typeDefenses = const [],
     this.typeOffenses = const [],
     this.evolutionChain,
+    this.varieties = const [],
   });
 
   PokemonDetails copyWith({
     int? id,
     String? name,
-    List<String>? types,
+    List<PokemonTypes>? types,
     String? imageUrl,
     String? shinyImageUrl,
-    double? height,
-    double? weight,
+    int? height,
+    int? weight,
     String? genus,
     String? description,
     List<PokemonAbility>? abilities,
@@ -70,6 +74,7 @@ class PokemonDetails extends Pokemon {
     List<TypeDefenseInfo>? typeDefenses,
     List<TypeDefenseInfo>? typeOffenses,
     EvolutionChain? evolutionChain,
+    List<PokemonVariety>? varieties,
   }) {
     return PokemonDetails(
       id: id ?? this.id,
@@ -94,6 +99,7 @@ class PokemonDetails extends Pokemon {
       typeDefenses: typeDefenses ?? this.typeDefenses,
       typeOffenses: typeOffenses ?? this.typeOffenses,
       evolutionChain: evolutionChain ?? this.evolutionChain,
+      varieties: varieties ?? this.varieties,
     );
   }
 
@@ -115,5 +121,6 @@ class PokemonDetails extends Pokemon {
     typeDefenses,
     typeOffenses,
     evolutionChain,
+    varieties,
   ];
 }
