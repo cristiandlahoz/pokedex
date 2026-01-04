@@ -1,0 +1,165 @@
+{
+  "@@locale": "en",
+  "triviaTitle": "Trivia",
+  "@triviaTitle": {
+    "description": "Title for the trivia tab"
+  },
+  "triviaQuestion": "Who's That Pokémon?",
+  "@triviaQuestion": {
+    "description": "The trivia question shown above the silhouette"
+  },
+  "triviaCorrect": "Correct!",
+  "@triviaCorrect": {
+    "description": "Message shown when user answers correctly"
+  },
+  "triviaWrong": "Wrong! It was {pokemonName}",
+  "@triviaWrong": {
+    "description": "Message shown when user answers incorrectly",
+    "placeholders": {
+      "pokemonName": {
+        "type": "String",
+        "example": "Pikachu"
+      }
+    }
+  },
+  "triviaTimeout": "Time's up! It was {pokemonName}",
+  "@triviaTimeout": {
+    "description": "Message shown when timer expires",
+    "placeholders": {
+      "pokemonName": {
+        "type": "String",
+        "example": "Pikachu"
+      }
+    }
+  },
+  "triviaPoints": "{points} points",
+  "@triviaPoints": {
+    "description": "Points earned for correct answer",
+    "placeholders": {
+      "points": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "triviaNextQuestion": "Next Question",
+  "@triviaNextQuestion": {
+    "description": "Button to load next question"
+  },
+  "triviaBackToMenu": "Back to Menu",
+  "@triviaBackToMenu": {
+    "description": "Button to return to level selection"
+  },
+  "triviaViewDetails": "View Details",
+  "@triviaViewDetails": {
+    "description": "Button to view Pokemon details page"
+  },
+  "triviaLevelEasy": "Easy",
+  "@triviaLevelEasy": {
+    "description": "Level 1 difficulty name"
+  },
+  "triviaLevelMedium": "Medium",
+  "@triviaLevelMedium": {
+    "description": "Level 2 difficulty name"
+  },
+  "triviaLevelHard": "Hard",
+  "@triviaLevelHard": {
+    "description": "Level 3 difficulty name"
+  },
+  "triviaLevelVeryHard": "Very Hard",
+  "@triviaLevelVeryHard": {
+    "description": "Level 4 difficulty name"
+  },
+  "triviaLevelExpert": "Expert",
+  "@triviaLevelExpert": {
+    "description": "Level 5 difficulty name"
+  },
+  "triviaSelectLevel": "Select Difficulty",
+  "@triviaSelectLevel": {
+    "description": "Prompt to select difficulty level"
+  },
+  "triviaSelectPlayer": "Select Player",
+  "@triviaSelectPlayer": {
+    "description": "Dropdown label for player selection"
+  },
+  "triviaAddPlayer": "Add Player",
+  "@triviaAddPlayer": {
+    "description": "Button to add new player"
+  },
+  "triviaPlayerName": "Player Name",
+  "@triviaPlayerName": {
+    "description": "Text field label for player name"
+  },
+  "triviaPlayerNameHint": "Enter your name",
+  "@triviaPlayerNameHint": {
+    "description": "Hint text for player name field"
+  },
+  "triviaPlayerNameEmpty": "Please enter a name",
+  "@triviaPlayerNameEmpty": {
+    "description": "Error message when player name is empty"
+  },
+  "triviaPlayerNameDuplicate": "Player already exists",
+  "@triviaPlayerNameDuplicate": {
+    "description": "Error message when player name already exists"
+  },
+  "triviaCancel": "Cancel",
+  "@triviaCancel": {
+    "description": "Cancel button text"
+  },
+  "triviaCreate": "Create",
+  "@triviaCreate": {
+    "description": "Create button text"
+  },
+  "triviaStatistics": "Statistics",
+  "@triviaStatistics": {
+    "description": "Tab label for statistics view"
+  },
+  "triviaPlay": "Play",
+  "@triviaPlay": {
+    "description": "Tab label for game view"
+  },
+  "triviaOverallAccuracy": "Overall Accuracy",
+  "@triviaOverallAccuracy": {
+    "description": "Label for overall accuracy statistic"
+  },
+  "triviaLevel": "Level",
+  "@triviaLevel": {
+    "description": "Column header for level in stats table"
+  },
+  "triviaCorrectAnswers": "Correct",
+  "@triviaCorrectAnswers": {
+    "description": "Column header for correct answers in stats table"
+  },
+  "triviaWrongAnswers": "Wrong",
+  "@triviaWrongAnswers": {
+    "description": "Column header for wrong answers in stats table"
+  },
+  "triviaAccuracy": "Accuracy",
+  "@triviaAccuracy": {
+    "description": "Column header for accuracy in stats table"
+  },
+  "triviaStartGame": "Start Game",
+  "@triviaStartGame": {
+    "description": "Button text to start a new trivia game"
+  },
+  "triviaNoStats": "No statistics yet. Start playing!",
+  "@triviaNoStats": {
+    "description": "Message shown when player has no statistics"
+  },
+  "triviaLoading": "Loading...",
+  "@triviaLoading": {
+    "description": "Loading message"
+  },
+  "triviaError": "An error occurred. Please try again.",
+  "@triviaError": {
+    "description": "Generic error message"
+  },
+  "triviaRetry": "Retry",
+  "@triviaRetry": {
+    "description": "Retry button text"
+  },
+  "triviaCannotSwitchDuringGame": "Cannot view statistics during active game",
+  "@triviaCannotSwitchDuringGame": {
+    "description": "Warning message when trying to switch to statistics during active game"
+  }
+}

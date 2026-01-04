@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   cupertino_icons: ^1.0.8
   
@@ -52,6 +54,8 @@ dependencies:
   # Core
   equatable: ^2.0.5
   connectivity_plus: ^6.1.2
+  intl: ^0.20.2
+  shared_preferences: ^2.3.4
 
   # UI
   flutter_svg: ^2.0.10
@@ -83,6 +87,9 @@ flutter:
   # included with the application so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # Enable localization code generation
+  generate: true
 
   assets:
     - assets/icons/types/
