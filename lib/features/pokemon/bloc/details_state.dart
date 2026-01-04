@@ -34,10 +34,16 @@ class DetailsSuccess extends DetailsState {
         .map((move) => move.versionGroup)
         .where((vg) => vg != null)
         .toSet();
-    
+
     return GameVersion.allVersions
         .where((version) => availableVersionNames.contains(version.name))
         .toList();
+  }
+
+  String? get currentImageUrl {
+    return isShiny
+        ? (pokemon.shinyImageUrl ?? pokemon.imageUrl)
+        : pokemon.imageUrl;
   }
 
   DetailsSuccess copyWith({
