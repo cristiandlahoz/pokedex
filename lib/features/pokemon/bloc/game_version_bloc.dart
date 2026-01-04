@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../domain/value_objects/game_version.dart';
 import 'game_version_event.dart';
 import 'game_version_state.dart';
 
@@ -20,11 +21,21 @@ class GameVersionBloc extends Bloc<GameVersionEvent, GameVersionState> {
       return;
     }
 
-    final selected = event.initialVersion ?? event.versions.first;
-    emit(GameVersionSelectionState(
-      availableVersions: event.versions,
-      selectedVersion: selected,
-    ));
+    final uniqueVersions = <String, GameVersion>{};
+    for (final version in event.versions) {
+      uniqueVersions[version.name] = version;
+    }
+    final deduplicatedVersions = uniqueVersions.values.toList();
+
+    final selected = event.initialVersion != null
+        ? (uniqueVersions[event.initialVersion!.name] ?? deduplicatedVersions.first)
+        : deduplicatedVersions.first;
+    emit(
+      GameVersionSelectionState(
+        availableVersions: deduplicatedVersions,
+        selectedVersion: selected,
+      ),
+    );
   }
 
   void _onGameVersionChanged(
@@ -34,9 +45,11 @@ class GameVersionBloc extends Bloc<GameVersionEvent, GameVersionState> {
     final currentState = state;
     if (currentState is! GameVersionSelectionState) return;
 
-    emit(GameVersionSelectionState(
-      availableVersions: currentState.availableVersions,
-      selectedVersion: event.version,
-    ));
+    emit(
+      GameVersionSelectionState(
+        availableVersions: currentState.availableVersions,
+        selectedVersion: event.version,
+      ),
+    );
   }
 }
