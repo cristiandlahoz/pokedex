@@ -18,7 +18,7 @@ class EvolutionSection extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final hasEvolutions = evolutionChain.species.length > 1;
+    final hasEvolutions = evolutionChain.hasEvolutions;
 
     return Padding(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),

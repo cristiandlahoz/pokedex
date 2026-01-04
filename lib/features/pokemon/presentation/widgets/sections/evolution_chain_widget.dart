@@ -46,7 +46,6 @@ class EvolutionChainWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final graph = Graph()..isTree = true;
 
-    // Cache maxVerticalNodes to avoid redundant O(n²) calculation
     final maxVerticalNodes = _calculateMaxVerticalNodes();
 
     final configuration = SugiyamaConfiguration()
@@ -64,12 +63,16 @@ class EvolutionChainWidget extends StatelessWidget {
 
     for (final species in chain.species) {
       try {
-        //build nodes
         final node = Node.Id(species.speciesId);
         nodeMap[species.speciesId] = node;
         graph.addNode(node);
+      } catch (_) {
+        continue;
+      }
+    }
 
-        //build edges
+    for (final species in chain.species) {
+      try {
         if (species.evolvesFromSpeciesId != null) {
           final fromNode = nodeMap[species.evolvesFromSpeciesId];
           final toNode = nodeMap[species.speciesId];

@@ -22,25 +22,11 @@ class EvolutionChain extends Equatable {
     return map;
   }
 
-  EvolutionSpecies? get root {
-    try {
-      return species.firstWhere((s) => s.isBaseForm);
-    } catch (_) {
-      return null;
-    }
-  }
-
   List<EvolutionSpecies> getEvolutionsOf(int speciesId) {
     return _childrenMap[speciesId] ?? [];
   }
 
   bool get hasEvolutions => species.length > 1;
-
-  bool get isBranching {
-    if (root == null) return false;
-    final rootEvolutions = getEvolutionsOf(root!.speciesId);
-    return rootEvolutions.length > 1;
-  }
 
   @override
   List<Object?> get props => [chainId, species];
