@@ -313,6 +313,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cannot view statistics during active game'**
   String get triviaCannotSwitchDuringGame;
+
+  /// Section title for achievement badges
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get triviaAchievements;
+
+  /// Label for current achievement badge
+  ///
+  /// In en, this message translates to:
+  /// **'Current Badge'**
+  String get triviaCurrentBadge;
+
+  /// Label for progress bar to next badge
+  ///
+  /// In en, this message translates to:
+  /// **'Progress to next badge'**
+  String get triviaProgressToNext;
+
+  /// Message shown when user hasn't answered enough questions
+  ///
+  /// In en, this message translates to:
+  /// **'Answer at least {count} questions to unlock badges!'**
+  String triviaMinAnswersRequired(int count);
+
+  /// Badge name for 0-20% accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get triviaBadgePrincipiante;
+
+  /// Badge name for 20-40% accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Apprentice'**
+  String get triviaBadgeAprendiz;
+
+  /// Badge name for 40-60% accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Trainer'**
+  String get triviaBadgeEntrenador;
+
+  /// Badge name for 60-75% accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Expert'**
+  String get triviaBadgeConocedor;
+
+  /// Badge name for 75-85% accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Great Expert'**
+  String get triviaBadgeGranConocedor;
+
+  /// Badge name for 85-95% accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Pokémon Master'**
+  String get triviaBadgeMaestro;
+
+  /// Badge name for 95-100% accuracy
+  ///
+  /// In en, this message translates to:
+  /// **'Champion'**
+  String get triviaBadgeCampeon;
+
+  /// Message shown when player reached highest badge
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum rank achieved!'**
+  String get triviaMaxRank;
 }
 
 class _AppLocalizationsDelegate

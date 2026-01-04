@@ -35,5 +35,17 @@
   "triviaLoading": "Cargando...",
   "triviaError": "Ocurrió un error. Por favor intenta de nuevo.",
   "triviaRetry": "Reintentar",
-  "triviaCannotSwitchDuringGame": "No se pueden ver estadísticas durante el juego activo"
+  "triviaCannotSwitchDuringGame": "No se pueden ver estadísticas durante el juego activo",
+  "triviaAchievements": "Logros",
+  "triviaCurrentBadge": "Insignia Actual",
+  "triviaProgressToNext": "Progreso al siguiente nivel",
+  "triviaMinAnswersRequired": "¡Responde al menos {count} preguntas para desbloquear insignias!",
+  "triviaBadgePrincipiante": "Principiante",
+  "triviaBadgeAprendiz": "Aprendiz",
+  "triviaBadgeEntrenador": "Entrenador",
+  "triviaBadgeConocedor": "Conocedor",
+  "triviaBadgeGranConocedor": "Gran Conocedor",
+  "triviaBadgeMaestro": "Maestro Pokémon",
+  "triviaBadgeCampeon": "Campeón",
+  "triviaMaxRank": "¡Rango máximo alcanzado!"
 }

@@ -4,6 +4,7 @@ import '../../../../../core/i18n/arb/app_localizations.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../domain/entities/trivia_player.dart';
 import '../../constants/trivia.dart';
+import '../../constants/trivia_badges.dart';
 
 /// Statistics view widget showing player performance
 class StatsView extends StatelessWidget {
@@ -27,6 +28,230 @@ class StatsView extends StatelessWidget {
       default:
         return 'Level $level';
     }
+  }
+
+  String _getBadgeName(BuildContext context, String nameKey) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (nameKey) {
+      case 'triviaBadgePrincipiante':
+        return l10n.triviaBadgePrincipiante;
+      case 'triviaBadgeAprendiz':
+        return l10n.triviaBadgeAprendiz;
+      case 'triviaBadgeEntrenador':
+        return l10n.triviaBadgeEntrenador;
+      case 'triviaBadgeConocedor':
+        return l10n.triviaBadgeConocedor;
+      case 'triviaBadgeGranConocedor':
+        return l10n.triviaBadgeGranConocedor;
+      case 'triviaBadgeMaestro':
+        return l10n.triviaBadgeMaestro;
+      case 'triviaBadgeCampeon':
+        return l10n.triviaBadgeCampeon;
+      default:
+        return nameKey;
+    }
+  }
+
+  Widget _buildBadgeSection(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final totalAnswers = player.getTotalCorrect() + player.getTotalWrong();
+    final overallAccuracy = player.getOverallAccuracy();
+
+    // Check if minimum answers requirement is met
+    if (totalAnswers < TriviaBadgeConfig.minAnswersRequired) {
+      return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(TriviaConstants.borderRadius),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(TriviaConstants.paddingLarge),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFFE3F2FD), Color(0xFFBBDEFB)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(TriviaConstants.borderRadius),
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.emoji_events,
+                    size: 24,
+                    color: AppColors.info,
+                  ),
+                  const SizedBox(width: TriviaConstants.paddingSmall),
+                  Text(
+                    l10n.triviaAchievements,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: TriviaConstants.paddingMedium),
+              const Icon(
+                Icons.lock_outline,
+                size: 48,
+                color: AppColors.textSecondary,
+              ),
+              const SizedBox(height: TriviaConstants.paddingSmall),
+              Text(
+                l10n.triviaMinAnswersRequired(
+                  TriviaBadgeConfig.minAnswersRequired,
+                ),
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: AppColors.textSecondary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: TriviaConstants.paddingSmall),
+              Text(
+                '$totalAnswers / ${TriviaBadgeConfig.minAnswersRequired}',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // Get current badge
+    final currentBadge = TriviaBadgeConfig.getBadgeForAccuracy(overallAccuracy);
+    if (currentBadge == null) return const SizedBox.shrink();
+
+    final nextBadge = TriviaBadgeConfig.getNextBadge(overallAccuracy);
+    final progress = TriviaBadgeConfig.getProgressToNext(overallAccuracy);
+    final isMaxRank = nextBadge == null;
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(TriviaConstants.borderRadius),
+      ),
+      elevation: 4,
+      child: Container(
+        padding: const EdgeInsets.all(TriviaConstants.paddingLarge),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: currentBadge.gradientColors,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(TriviaConstants.borderRadius),
+        ),
+        child: Column(
+          children: [
+            // Title
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.emoji_events,
+                  size: 24,
+                  color: currentBadge.iconColor,
+                ),
+                const SizedBox(width: TriviaConstants.paddingSmall),
+                Text(
+                  l10n.triviaAchievements,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: currentBadge.iconColor,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: TriviaConstants.paddingMedium),
+
+            // Badge icon
+            Icon(currentBadge.icon, size: 64, color: currentBadge.iconColor),
+            const SizedBox(height: TriviaConstants.paddingSmall),
+
+            // Badge name
+            Text(
+              _getBadgeName(context, currentBadge.nameKey),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: currentBadge.iconColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: TriviaConstants.paddingSmall),
+
+            // Accuracy
+            Text(
+              '${overallAccuracy.toStringAsFixed(1)}%',
+              style: TextStyle(
+                fontSize: 18,
+                color: currentBadge.iconColor.withOpacity(0.9),
+              ),
+            ),
+
+            // Progress section
+            if (!isMaxRank) ...[
+              const SizedBox(height: TriviaConstants.paddingMedium),
+              Text(
+                l10n.triviaProgressToNext,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: currentBadge.iconColor.withOpacity(0.8),
+                ),
+              ),
+              const SizedBox(height: TriviaConstants.paddingSmall),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  value: progress,
+                  minHeight: 12,
+                  backgroundColor: Colors.white.withOpacity(0.3),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.white.withOpacity(0.9),
+                  ),
+                ),
+              ),
+              const SizedBox(height: TriviaConstants.paddingSmall),
+              Text(
+                '${nextBadge!.minAccuracy.toStringAsFixed(0)}% → ${_getBadgeName(context, nextBadge.nameKey)}',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: currentBadge.iconColor.withOpacity(0.8),
+                ),
+              ),
+            ] else ...[
+              const SizedBox(height: TriviaConstants.paddingMedium),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.star, color: currentBadge.iconColor, size: 20),
+                  const SizedBox(width: 4),
+                  Text(
+                    l10n.triviaMaxRank,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: currentBadge.iconColor,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Icon(Icons.star, color: currentBadge.iconColor, size: 20),
+                ],
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -84,6 +309,10 @@ class StatsView extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: TriviaConstants.paddingLarge),
+
+          // Achievement badges section
+          _buildBadgeSection(context),
           const SizedBox(height: TriviaConstants.paddingLarge),
 
           // Per-level statistics

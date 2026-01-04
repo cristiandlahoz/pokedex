@@ -122,4 +122,42 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get triviaCannotSwitchDuringGame =>
       'Cannot view statistics during active game';
+
+  @override
+  String get triviaAchievements => 'Achievements';
+
+  @override
+  String get triviaCurrentBadge => 'Current Badge';
+
+  @override
+  String get triviaProgressToNext => 'Progress to next badge';
+
+  @override
+  String triviaMinAnswersRequired(int count) {
+    return 'Answer at least $count questions to unlock badges!';
+  }
+
+  @override
+  String get triviaBadgePrincipiante => 'Beginner';
+
+  @override
+  String get triviaBadgeAprendiz => 'Apprentice';
+
+  @override
+  String get triviaBadgeEntrenador => 'Trainer';
+
+  @override
+  String get triviaBadgeConocedor => 'Expert';
+
+  @override
+  String get triviaBadgeGranConocedor => 'Great Expert';
+
+  @override
+  String get triviaBadgeMaestro => 'Pokémon Master';
+
+  @override
+  String get triviaBadgeCampeon => 'Champion';
+
+  @override
+  String get triviaMaxRank => 'Maximum rank achieved!';
 }

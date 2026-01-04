@@ -161,5 +161,59 @@
   "triviaCannotSwitchDuringGame": "Cannot view statistics during active game",
   "@triviaCannotSwitchDuringGame": {
     "description": "Warning message when trying to switch to statistics during active game"
+  },
+  "triviaAchievements": "Achievements",
+  "@triviaAchievements": {
+    "description": "Section title for achievement badges"
+  },
+  "triviaCurrentBadge": "Current Badge",
+  "@triviaCurrentBadge": {
+    "description": "Label for current achievement badge"
+  },
+  "triviaProgressToNext": "Progress to next badge",
+  "@triviaProgressToNext": {
+    "description": "Label for progress bar to next badge"
+  },
+  "triviaMinAnswersRequired": "Answer at least {count} questions to unlock badges!",
+  "@triviaMinAnswersRequired": {
+    "description": "Message shown when user hasn't answered enough questions",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "triviaBadgePrincipiante": "Beginner",
+  "@triviaBadgePrincipiante": {
+    "description": "Badge name for 0-20% accuracy"
+  },
+  "triviaBadgeAprendiz": "Apprentice",
+  "@triviaBadgeAprendiz": {
+    "description": "Badge name for 20-40% accuracy"
+  },
+  "triviaBadgeEntrenador": "Trainer",
+  "@triviaBadgeEntrenador": {
+    "description": "Badge name for 40-60% accuracy"
+  },
+  "triviaBadgeConocedor": "Expert",
+  "@triviaBadgeConocedor": {
+    "description": "Badge name for 60-75% accuracy"
+  },
+  "triviaBadgeGranConocedor": "Great Expert",
+  "@triviaBadgeGranConocedor": {
+    "description": "Badge name for 75-85% accuracy"
+  },
+  "triviaBadgeMaestro": "Pokémon Master",
+  "@triviaBadgeMaestro": {
+    "description": "Badge name for 85-95% accuracy"
+  },
+  "triviaBadgeCampeon": "Champion",
+  "@triviaBadgeCampeon": {
+    "description": "Badge name for 95-100% accuracy"
+  },
+  "triviaMaxRank": "Maximum rank achieved!",
+  "@triviaMaxRank": {
+    "description": "Message shown when player reached highest badge"
   }
 }
