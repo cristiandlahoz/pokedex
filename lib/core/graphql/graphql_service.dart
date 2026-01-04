@@ -31,12 +31,14 @@ class GraphQLService {
 
   Future<QueryResult> query(QueryOptions options) async {
     try {
-      return await client.query(options).timeout(
-        Duration(seconds: AppConstants.networkTimeoutSeconds),
-        onTimeout: () {
-          throw Exception('Request timeout');
-        },
-      );
+      return await client
+          .query(options)
+          .timeout(
+            Duration(seconds: AppConstants.networkTimeoutSeconds),
+            onTimeout: () {
+              throw Exception('Request timeout');
+            },
+          );
     } catch (e) {
       rethrow;
     }

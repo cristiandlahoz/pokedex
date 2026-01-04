@@ -37,9 +37,8 @@ class ListContent extends StatelessWidget {
     );
   }
 
-  int _calculateItemCount() => state.hasReachedMax
-      ? state.pokemons.length
-      : state.pokemons.length + 1;
+  int _calculateItemCount() =>
+      state.hasReachedMax ? state.pokemons.length : state.pokemons.length + 1;
 
   Widget _buildListItem(int index) {
     if (index >= state.pokemons.length) return const LoadingState();
@@ -49,19 +48,14 @@ class ListContent extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         vertical: ListConstants.listItemVerticalPadding,
       ),
-      child: Card(
-        pokemon: pokemon,
-        onTap: () => onPokemonTap(pokemon),
-      ),
+      child: Card(pokemon: pokemon, onTap: () => onPokemonTap(pokemon)),
     );
   }
 
   Future<void> _handleRefresh() async {
     onRefresh();
     await Future.delayed(
-      const Duration(
-        milliseconds: ListConstants.refreshDelayDuration,
-      ),
+      const Duration(milliseconds: ListConstants.refreshDelayDuration),
     );
   }
 }

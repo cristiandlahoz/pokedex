@@ -34,10 +34,7 @@ class ResponseEvent extends LogEvent {
     required this.status,
     this.itemCount,
     super.metadata,
-  }) : super(
-          id: requestId,
-          timestamp: DateTime.now(),
-        );
+  }) : super(id: requestId, timestamp: DateTime.now());
 }
 
 class ErrorEvent extends LogEvent {
@@ -52,10 +49,7 @@ class ErrorEvent extends LogEvent {
     required this.message,
     this.stackTrace,
     super.metadata,
-  }) : super(
-          id: requestId,
-          timestamp: DateTime.now(),
-        );
+  }) : super(id: requestId, timestamp: DateTime.now());
 }
 
 class StateChangeEvent extends LogEvent {

@@ -6,11 +6,7 @@ class IdBadge extends StatelessWidget {
   final int pokemonId;
   final bool isLarge;
 
-  const IdBadge({
-    super.key,
-    required this.pokemonId,
-    this.isLarge = false,
-  });
+  const IdBadge({super.key, required this.pokemonId, this.isLarge = false});
 
   @override
   Widget build(BuildContext context) {

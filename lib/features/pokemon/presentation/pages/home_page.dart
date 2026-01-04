@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/app.dart';
-import '../../../../core/di/injection_container.dart';
 import '../../domain/entities/pokemon.dart';
 import '../constants/home.dart';
 import '../../domain/value_objects/filters.dart';
@@ -20,7 +19,10 @@ import '../widgets/menus/filter_menu.dart';
 import '../widgets/menus/sort_menu.dart';
 
 class PokemonListPage extends StatefulWidget {
-  const PokemonListPage({super.key});
+  final ListBloc bloc;
+  final String? title;
+
+  const PokemonListPage({super.key, required this.bloc, this.title});
 
   @override
   State<PokemonListPage> createState() => _PokemonListPageState();
@@ -43,13 +45,13 @@ class _PokemonListPageState extends State<PokemonListPage>
   void dispose() {
     _searchController.dispose();
     disposeScrollPagination();
-    _pokemonBloc.close();
     _debounceSearch?.cancel();
+    // Don't close bloc - it's managed by parent (main.dart)
     super.dispose();
   }
 
   void _initializeDependencies() {
-    _pokemonBloc = getIt<ListBloc>();
+    _pokemonBloc = widget.bloc;
     initializeScrollPagination(threshold: ListConstants.scrollThreshold);
   }
 
@@ -121,26 +123,25 @@ class _PokemonListPageState extends State<PokemonListPage>
   }
 
   @override
-  Widget build(BuildContext context) => BlocProvider.value(
-    value: _pokemonBloc,
-    child: BlocBuilder<ListBloc, ListState>(
-      builder: (context, state) {
-        final filterCount = state is ListSuccess
-            ? state.filter.activeFilterCount
-            : 0;
+  Widget build(BuildContext context) => BlocBuilder<ListBloc, ListState>(
+    bloc: _pokemonBloc,
+    builder: (context, state) {
+      final filterCount = state is ListSuccess
+          ? state.filter.activeFilterCount
+          : 0;
 
-        return Scaffold(
-          appBar: ListAppBar(
-            searchController: _searchController,
-            onSearchChanged: _handleSearchChanged,
-            onSortPressed: _handleSortPressed,
-            onFilterPressed: _handleFilterPressed,
-            filterCount: filterCount,
-          ),
-          body: _buildStateContent(state),
-        );
-      },
-    ),
+      return Scaffold(
+        appBar: ListAppBar(
+          title: widget.title,
+          searchController: _searchController,
+          onSearchChanged: _handleSearchChanged,
+          onSortPressed: _handleSortPressed,
+          onFilterPressed: _handleFilterPressed,
+          filterCount: filterCount,
+        ),
+        body: _buildStateContent(state),
+      );
+    },
   );
 
   Widget _buildStateContent(ListState state) => switch (state) {

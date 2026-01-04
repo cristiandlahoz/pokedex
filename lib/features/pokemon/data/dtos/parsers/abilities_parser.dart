@@ -19,12 +19,14 @@ class AbilitiesParser {
             .replaceAll('\f', ' ');
       }
 
-      abilities.add(PokemonAbility(
-        id: abilityData['ability']['id'] as int,
-        name: abilityData['ability']['name'] as String,
-        isHidden: abilityData['is_hidden'] as bool? ?? false,
-        effect: effect,
-      ));
+      abilities.add(
+        PokemonAbility(
+          id: abilityData['ability']['id'] as int,
+          name: abilityData['ability']['name'] as String,
+          isHidden: abilityData['is_hidden'] as bool? ?? false,
+          effect: effect,
+        ),
+      );
     }
 
     return abilities;

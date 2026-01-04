@@ -6,10 +6,7 @@ import '../shared/physical_stat_card.dart';
 class PhysicalStatsSection extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const PhysicalStatsSection({
-    super.key,
-    required this.pokemon,
-  });
+  const PhysicalStatsSection({super.key, required this.pokemon});
 
   String _formatHeight(int? height) {
     if (height == null) return 'N/A';
@@ -24,7 +21,7 @@ class PhysicalStatsSection extends StatelessWidget {
   String _formatGenderRatio(int? genderRate) {
     if (genderRate == null) return 'Unknown';
     if (genderRate == -1) return 'Genderless';
-    
+
     final femalePercent = (genderRate / 8 * 100).toStringAsFixed(1);
     final malePercent = ((8 - genderRate) / 8 * 100).toStringAsFixed(1);
     return '$malePercent%  $femalePercent%';
@@ -33,7 +30,9 @@ class PhysicalStatsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppConstants.defaultPadding),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppConstants.defaultPadding,
+      ),
       child: Column(
         children: [
           Row(

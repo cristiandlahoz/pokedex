@@ -50,7 +50,7 @@ class EvolutionSection extends StatelessWidget {
           if (hasEvolutions)
             EvolutionChainWidget(
               chain: evolutionChain,
-              currentPokemonId: pokemon.id
+              currentPokemonId: pokemon.id,
             )
           else
             Center(

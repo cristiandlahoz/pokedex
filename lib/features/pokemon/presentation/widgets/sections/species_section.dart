@@ -9,10 +9,7 @@ import '../shared/section_title_badge.dart';
 class SpeciesSection extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const SpeciesSection({
-    super.key,
-    required this.pokemon,
-  });
+  const SpeciesSection({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +56,10 @@ class SpeciesSection extends StatelessWidget {
             children: pokemon.types.map((type) {
               return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 4),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: TypeColors.getColor(type.name),
                   borderRadius: BorderRadius.circular(20),

@@ -8,11 +8,7 @@ class SortMenu extends StatefulWidget {
   final Sorting currentSort;
   final ValueChanged<Sorting> onApply;
 
-  const SortMenu({
-    super.key,
-    required this.currentSort,
-    required this.onApply,
-  });
+  const SortMenu({super.key, required this.currentSort, required this.onApply});
 
   @override
   State<SortMenu> createState() => _SortMenuState();
@@ -149,8 +145,7 @@ class _SortMenuState extends State<SortMenu> {
                 style: TextStyle(
                   fontSize: DesignTokens.fontSizeMedium,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                  color:
-                      isSelected ? AppColors.primary : AppColors.textPrimary,
+                  color: isSelected ? AppColors.primary : AppColors.textPrimary,
                 ),
               ),
             ),
@@ -250,9 +245,7 @@ class _SortMenuState extends State<SortMenu> {
       padding: const EdgeInsets.all(DesignTokens.spacingL),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: Border(
-          top: BorderSide(color: AppColors.cardBorder, width: 1),
-        ),
+        border: Border(top: BorderSide(color: AppColors.cardBorder, width: 1)),
       ),
       child: Row(
         children: [
@@ -281,10 +274,7 @@ class _SortMenuState extends State<SortMenu> {
                 ),
                 backgroundColor: AppColors.primary,
               ),
-              child: const Text(
-                'Apply',
-                style: TextStyle(color: Colors.white),
-              ),
+              child: const Text('Apply', style: TextStyle(color: Colors.white)),
             ),
           ),
         ],

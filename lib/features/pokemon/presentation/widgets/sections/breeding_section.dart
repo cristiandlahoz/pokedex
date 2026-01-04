@@ -7,16 +7,16 @@ import '../shared/section_title_badge.dart';
 class BreedingSection extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const BreedingSection({
-    super.key,
-    required this.pokemon,
-  });
+  const BreedingSection({super.key, required this.pokemon});
 
   String _formatEggGroupName(String name) {
     if (name.contains('-')) {
-      return name.split('-').map((word) {
-        return word[0].toUpperCase() + word.substring(1);
-      }).join(' ');
+      return name
+          .split('-')
+          .map((word) {
+            return word[0].toUpperCase() + word.substring(1);
+          })
+          .join(' ');
     }
     return name[0].toUpperCase() + name.substring(1);
   }
@@ -70,7 +70,10 @@ class BreedingSection extends StatelessWidget {
               final index = entry.key;
               final eggGroup = entry.value;
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   color: _getEggGroupColor(index),
                   borderRadius: BorderRadius.circular(8),

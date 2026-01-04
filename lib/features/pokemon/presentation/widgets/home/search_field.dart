@@ -22,9 +22,7 @@ class SearchField extends StatelessWidget {
     ),
     decoration: BoxDecoration(
       color: AppColors.searchBarBackground,
-      borderRadius: BorderRadius.circular(
-        SearchConstants.borderRadius,
-      ),
+      borderRadius: BorderRadius.circular(SearchConstants.borderRadius),
     ),
     child: TextField(
       controller: controller,

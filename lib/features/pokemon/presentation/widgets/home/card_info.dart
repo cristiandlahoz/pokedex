@@ -7,10 +7,7 @@ import '../shared/type_badge.dart';
 class CardInfo extends StatelessWidget {
   final Pokemon pokemon;
 
-  const CardInfo({
-    super.key,
-    required this.pokemon,
-  });
+  const CardInfo({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +38,12 @@ class CardInfo extends StatelessWidget {
   Widget _buildTypeBadges() {
     return Row(
       children: pokemon.types
-          .map((type) => Padding(
-                padding: const EdgeInsets.only(
-                  right: TypeBadgeConstants.spacing,
-                ),
-                child: TypeBadge(type: type),
-              ))
+          .map(
+            (type) => Padding(
+              padding: const EdgeInsets.only(right: TypeBadgeConstants.spacing),
+              child: TypeBadge(type: type),
+            ),
+          )
           .toList(),
     );
   }

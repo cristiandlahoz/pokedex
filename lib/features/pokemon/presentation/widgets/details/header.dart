@@ -5,10 +5,7 @@ import '../../../domain/entities/pokemon_details.dart';
 class DetailsHeader extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const DetailsHeader({
-    super.key,
-    required this.pokemon,
-  });
+  const DetailsHeader({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {

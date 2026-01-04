@@ -1,26 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-enum SortField {
-  id,
-  name,
-  height,
-  weight,
-  baseExperience,
-}
+enum SortField { id, name, height, weight, baseExperience }
 
-enum SortDirection {
-  ascending,
-  descending,
-}
+enum SortDirection { ascending, descending }
 
 class Sorting extends Equatable {
   final SortField field;
   final SortDirection direction;
 
-  const Sorting({
-    required this.field,
-    required this.direction,
-  });
+  const Sorting({required this.field, required this.direction});
 
   static const defaultCriteria = Sorting(
     field: SortField.id,
@@ -30,10 +18,7 @@ class Sorting extends Equatable {
   bool get isDefault =>
       field == SortField.id && direction == SortDirection.ascending;
 
-  Sorting copyWith({
-    SortField? field,
-    SortDirection? direction,
-  }) {
+  Sorting copyWith({SortField? field, SortDirection? direction}) {
     return Sorting(
       field: field ?? this.field,
       direction: direction ?? this.direction,

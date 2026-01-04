@@ -6,10 +6,7 @@ class Filters extends Equatable {
   final List<PokemonTypes> types;
   final List<PokemonGeneration> generations;
 
-  const Filters({
-    this.types = const [],
-    this.generations = const [],
-  });
+  const Filters({this.types = const [], this.generations = const []});
 
   bool get isEmpty => types.isEmpty && generations.isEmpty;
   bool get isNotEmpty => !isEmpty;

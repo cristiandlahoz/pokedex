@@ -15,8 +15,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   Sorting _currentSort = Sorting.defaultCriteria;
   Filters _currentFilter = Filters.empty;
 
-  ListBloc({required this.repository})
-    : super(const ListInitial()) {
+  ListBloc({required this.repository}) : super(const ListInitial()) {
     on<ListLoadRequested>(_onListLoadRequested);
     on<ListLoadMoreRequested>(_onListLoadMoreRequested);
     on<ListSearchSubmitted>(_onListSearchSubmitted);

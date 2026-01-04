@@ -22,12 +22,12 @@ class AppConstants {
   static const int searchDebounceMs = 500;
 
   static const double damageFactorDivisor = 100.0;
-  
+
   static const double iconSizeSmall = 20.0;
   static const double iconSizeMedium = 28.0;
   static const double iconSizeLarge = 100.0;
   static const double iconSizeExtraLarge = 200.0;
-  
+
   static const double fontSizeSmall = 12.0;
   static const double fontSizeMedium = 13.0;
   static const double fontSizeRegular = 14.0;
@@ -36,12 +36,12 @@ class AppConstants {
   static const double fontSizeTitle = 22.0;
   static const double fontSizeHuge = 24.0;
   static const double fontSizeHeader = 32.0;
-  
+
   static const double opacityLight = 0.1;
   static const double opacityMedium = 0.7;
   static const double opacityBorder = 0.3;
   static const double opacityText = 0.8;
-  
+
   static const double chipHorizontalPadding = 8.0;
   static const double chipVerticalPadding = 4.0;
   static const double chipBorderRadius = 6.0;

@@ -21,9 +21,7 @@ class PokemonQueryBuilder {
       SortDirection.descending: 'desc',
     };
 
-    return {
-      fieldMapping[sort.field]!: directionMapping[sort.direction]!,
-    };
+    return {fieldMapping[sort.field]!: directionMapping[sort.direction]!};
   }
 
   Map<String, dynamic>? buildWhereClause(Filters? filter) {
@@ -38,9 +36,9 @@ class PokemonQueryBuilder {
       conditions.add({
         'pokemontypes': {
           'type': {
-            'name': {'_in': typeNames}
-          }
-        }
+            'name': {'_in': typeNames},
+          },
+        },
       });
     }
 
@@ -48,8 +46,8 @@ class PokemonQueryBuilder {
       final generationIds = filter.generations.map((g) => g.id).toList();
       conditions.add({
         'pokemonspecy': {
-          'generation_id': {'_in': generationIds}
-        }
+          'generation_id': {'_in': generationIds},
+        },
       });
     }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/constants/app.dart';
 import '../../../domain/entities/pokemon_details.dart';
+import '../favorite_toggle_button.dart';
 
 class DetailsAppBar extends StatelessWidget {
   final PokemonDetails pokemon;
@@ -19,19 +20,12 @@ class DetailsAppBar extends StatelessWidget {
       expandedHeight: AppConstants.appBarExpandedHeight,
       pinned: true,
       backgroundColor: backgroundColor,
-      flexibleSpace: FlexibleSpaceBar(
-        background: _buildBackground(),
-      ),
+      flexibleSpace: FlexibleSpaceBar(background: _buildBackground()),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Navigator.of(context).pop(),
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.favorite_border, color: Colors.white),
-          onPressed: () {},
-        ),
-      ],
+      actions: [FavoriteToggleButton(pokemon: pokemon, color: Colors.white)],
     );
   }
 
@@ -65,9 +59,7 @@ class DetailsAppBar extends StatelessWidget {
             width: AppConstants.pokemonImageHeight,
             height: AppConstants.pokemonImageHeight,
             child: const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
+              child: CircularProgressIndicator(color: Colors.white),
             ),
           ),
           errorWidget: (context, url, error) => const Center(

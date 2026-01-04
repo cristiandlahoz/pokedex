@@ -75,28 +75,29 @@ class PokemonRepositoryImpl implements PokemonRepository {
     final requestId = _generateRequestId();
     final stopwatch = Stopwatch()..start();
 
-    logger.logRequest(RequestEvent(
-      id: requestId,
-      operation: operation,
-    ));
+    logger.logRequest(RequestEvent(id: requestId, operation: operation));
 
     try {
       final result = await call();
 
-      logger.logResponse(ResponseEvent(
-        requestId: requestId,
-        durationMs: stopwatch.elapsedMilliseconds,
-        status: 'success',
-        itemCount: result is List ? result.length : null,
-      ));
+      logger.logResponse(
+        ResponseEvent(
+          requestId: requestId,
+          durationMs: stopwatch.elapsedMilliseconds,
+          status: 'success',
+          itemCount: result is List ? result.length : null,
+        ),
+      );
 
       return Success(result);
     } on failures.Failure catch (failure) {
-      logger.logError(ErrorEvent(
-        requestId: requestId,
-        errorType: failure.runtimeType.toString(),
-        message: failure.message
-      ));
+      logger.logError(
+        ErrorEvent(
+          requestId: requestId,
+          errorType: failure.runtimeType.toString(),
+          message: failure.message,
+        ),
+      );
       return ResultFailure(failure);
     }
   }

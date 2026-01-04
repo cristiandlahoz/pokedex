@@ -4,11 +4,7 @@ class CategoryHeader extends StatelessWidget {
   final String title;
   final Color color;
 
-  const CategoryHeader({
-    super.key,
-    required this.title,
-    required this.color,
-  });
+  const CategoryHeader({super.key, required this.title, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +22,9 @@ class CategoryHeader extends StatelessWidget {
         Text(
           title,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: color,
-              ),
+            fontWeight: FontWeight.w600,
+            color: color,
+          ),
         ),
       ],
     );

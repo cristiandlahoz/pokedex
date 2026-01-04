@@ -15,7 +15,9 @@ class TypeEffectivenessCalculator {
       }
 
       final Map<PokemonTypes, double> effectivenessMap = {};
-      final typeEfficacyByDefendingType = _extractEfficacyData(pokemonTypesData);
+      final typeEfficacyByDefendingType = _extractEfficacyData(
+        pokemonTypesData,
+      );
       final typeToIdMap = _buildTypeIdMap(pokemonTypesData);
 
       for (final attackingType in PokemonTypes.values) {
@@ -43,10 +45,10 @@ class TypeEffectivenessCalculator {
       }
 
       return effectivenessMap.entries
-          .map((entry) => TypeDefenseInfo(
-                type: entry.key,
-                damageMultiplier: entry.value,
-              ))
+          .map(
+            (entry) =>
+                TypeDefenseInfo(type: entry.key, damageMultiplier: entry.value),
+          )
           .toList();
     } catch (e) {
       return [];
@@ -92,15 +94,16 @@ class TypeEffectivenessCalculator {
 
           final currentMultiplier = effectivenessMap[defendingType] ?? 1.0;
           effectivenessMap[defendingType] =
-              currentMultiplier * (damageFactor / AppConstants.damageFactorDivisor);
+              currentMultiplier *
+              (damageFactor / AppConstants.damageFactorDivisor);
         }
       }
 
       return effectivenessMap.entries
-          .map((entry) => TypeDefenseInfo(
-                type: entry.key,
-                damageMultiplier: entry.value,
-              ))
+          .map(
+            (entry) =>
+                TypeDefenseInfo(type: entry.key, damageMultiplier: entry.value),
+          )
           .toList();
     } catch (e) {
       return [];

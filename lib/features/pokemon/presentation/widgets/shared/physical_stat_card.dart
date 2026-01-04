@@ -25,11 +25,7 @@ class PhysicalStatCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Icon(
-            icon,
-            color: color,
-            size: AppConstants.iconSizeMedium,
-          ),
+          Icon(icon, color: color, size: AppConstants.iconSizeMedium),
           const SizedBox(height: 8),
           Text(
             value,

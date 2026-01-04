@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class LoadingState extends StatelessWidget {
   final Color backgroundColor;
 
-  const LoadingState({
-    super.key,
-    required this.backgroundColor,
-  });
+  const LoadingState({super.key, required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {

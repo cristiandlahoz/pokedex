@@ -25,8 +25,7 @@ class SectionContainer extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor ?? AppColors.sectionBackground,
-        borderRadius:
-            BorderRadius.circular(DesignTokens.defaultBorderRadius),
+        borderRadius: BorderRadius.circular(DesignTokens.defaultBorderRadius),
       ),
       child: child,
     );

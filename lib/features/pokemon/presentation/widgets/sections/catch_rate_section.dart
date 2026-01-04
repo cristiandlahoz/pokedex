@@ -60,10 +60,7 @@ class _RateTag extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(AppConstants.smallPadding - 2),
-          border: Border.all(
-            color: Colors.black87,
-            width: 1,
-          ),
+          border: Border.all(color: Colors.black87, width: 1),
         ),
         child: Text(
           '${rate.toStringAsFixed(1)}%',
@@ -110,10 +107,7 @@ class _PokeBallRateCard extends StatelessWidget {
 class CatchRateSection extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const CatchRateSection({
-    super.key,
-    required this.pokemon,
-  });
+  const CatchRateSection({super.key, required this.pokemon});
 
   int _getMaxHP() {
     if (pokemon.stats.isEmpty) return 100;
@@ -131,7 +125,8 @@ class CatchRateSection extends StatelessWidget {
 
     return [
       _BallRate(
-        rate: CatchRateCalculator.calculate(
+        rate:
+            CatchRateCalculator.calculate(
               captureRate: pokemon.captureRate!,
               ballModifier: CatchRateCalculator.pokeBallModifier,
               maxHP: maxHP,
@@ -141,7 +136,8 @@ class CatchRateSection extends StatelessWidget {
         label: 'Poké Ball',
       ),
       _BallRate(
-        rate: CatchRateCalculator.calculate(
+        rate:
+            CatchRateCalculator.calculate(
               captureRate: pokemon.captureRate!,
               ballModifier: CatchRateCalculator.greatBallModifier,
               maxHP: maxHP,
@@ -151,7 +147,8 @@ class CatchRateSection extends StatelessWidget {
         label: 'Great Ball',
       ),
       _BallRate(
-        rate: CatchRateCalculator.calculate(
+        rate:
+            CatchRateCalculator.calculate(
               captureRate: pokemon.captureRate!,
               ballModifier: CatchRateCalculator.ultraBallModifier,
               maxHP: maxHP,

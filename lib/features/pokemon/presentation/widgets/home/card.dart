@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/material.dart' as m;
-import '../../constants/card.dart';
-import '../../utils/type_colors.dart';
+import 'package:flutter/material.dart' hide Card;
+
 import '../../../../../core/utils/responsive_utils.dart';
 import '../../../domain/entities/pokemon.dart';
 import '../../../domain/entities/pokemon_types.dart';
+import '../../constants/card.dart';
+import '../../utils/type_colors.dart';
+import '../favorite_toggle_button.dart';
 import 'card_image.dart';
 import 'card_info.dart';
 import 'id_badge.dart';
@@ -81,10 +83,9 @@ class Card extends StatelessWidget {
                   context,
                   CardConstants.heartIconRight,
                 ),
-                child: Icon(
-                  Icons.favorite_border,
+                child: FavoriteToggleButton(
+                  pokemon: pokemon,
                   color: Colors.white.withValues(alpha: 0.7),
-                  size: ResponsiveUtils.getFontSizeLarge(context),
                 ),
               ),
             ],

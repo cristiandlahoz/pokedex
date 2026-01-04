@@ -24,10 +24,7 @@ class InfoPlaceholder extends StatelessWidget {
           Icon(icon, color: Colors.grey.shade600),
           const SizedBox(width: AppConstants.smallPadding),
           Expanded(
-            child: Text(
-              message,
-              style: TextStyle(color: Colors.grey.shade600),
-            ),
+            child: Text(message, style: TextStyle(color: Colors.grey.shade600)),
           ),
         ],
       ),

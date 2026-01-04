@@ -14,15 +14,17 @@ class MovesParser {
       final move = moveData['move'];
       final typeData = move['type'];
 
-      moves.add(PokemonMove(
-        name: move['name'] as String,
-        type: typeData != null && typeData['name'] != null
-            ? typeData['name'] as String
-            : null,
-        power: move['power'] as int?,
-        accuracy: move['accuracy'] as int?,
-        pp: move['pp'] as int?,
-      ));
+      moves.add(
+        PokemonMove(
+          name: move['name'] as String,
+          type: typeData != null && typeData['name'] != null
+              ? typeData['name'] as String
+              : null,
+          power: move['power'] as int?,
+          accuracy: move['accuracy'] as int?,
+          pp: move['pp'] as int?,
+        ),
+      );
     }
 
     return moves;

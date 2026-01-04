@@ -5,7 +5,7 @@ import '../../../domain/entities/pokemon_details.dart';
 import '../../utils/type_helper.dart';
 
 class _AbilitiesConstants {
-  static const String explanationText = 
+  static const String explanationText =
       'Abilities provide passive effects in battle or in the overworld. Pokémon have 1-3 abilities, though they can only have 1 at a time.';
 }
 
@@ -23,11 +23,10 @@ class _SectionTitleBadge extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: color.withValues(alpha: AppConstants.opacityLight * 2),
-        borderRadius: BorderRadius.circular(AppConstants.extraLargeBorderRadius),
-        border: Border.all(
-          color: color,
-          width: 1.5,
+        borderRadius: BorderRadius.circular(
+          AppConstants.extraLargeBorderRadius,
         ),
+        border: Border.all(color: color, width: 1.5),
       ),
       child: Text(
         'Abilities',
@@ -54,10 +53,7 @@ class _HiddenBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.purple.shade100,
         borderRadius: BorderRadius.circular(AppConstants.smallPadding),
-        border: Border.all(
-          color: Colors.purple.shade300,
-          width: 1,
-        ),
+        border: Border.all(color: Colors.purple.shade300, width: 1),
       ),
       child: Text(
         'Hidden',
@@ -75,17 +71,17 @@ class _AbilityCard extends StatelessWidget {
   final PokemonAbility ability;
   final Color primaryTypeColor;
 
-  const _AbilityCard({
-    required this.ability,
-    required this.primaryTypeColor,
-  });
+  const _AbilityCard({required this.ability, required this.primaryTypeColor});
 
   String _formatAbilityName(String name) {
     if (name.isEmpty) return '';
-    return name.split('-').map((word) {
-      if (word.isEmpty) return '';
-      return word[0].toUpperCase() + word.substring(1);
-    }).join(' ');
+    return name
+        .split('-')
+        .map((word) {
+          if (word.isEmpty) return '';
+          return word[0].toUpperCase() + word.substring(1);
+        })
+        .join(' ');
   }
 
   @override
@@ -148,10 +144,7 @@ class _AbilityCard extends StatelessWidget {
 class AbilitiesSection extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const AbilitiesSection({
-    super.key,
-    required this.pokemon,
-  });
+  const AbilitiesSection({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +165,9 @@ class AbilitiesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _SectionTitleBadge(color: TypeHelper.getPrimaryTypeColorFromDetails(pokemon)),
+          _SectionTitleBadge(
+            color: TypeHelper.getPrimaryTypeColorFromDetails(pokemon),
+          ),
           const SizedBox(height: AppConstants.mediumPadding),
           const Text(
             _AbilitiesConstants.explanationText,
@@ -184,10 +179,14 @@ class AbilitiesSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppConstants.defaultPadding),
-          ...pokemon.abilities.map((ability) => _AbilityCard(
-                ability: ability,
-                primaryTypeColor: TypeHelper.getPrimaryTypeColorFromDetails(pokemon),
-              )),
+          ...pokemon.abilities.map(
+            (ability) => _AbilityCard(
+              ability: ability,
+              primaryTypeColor: TypeHelper.getPrimaryTypeColorFromDetails(
+                pokemon,
+              ),
+            ),
+          ),
         ],
       ),
     );

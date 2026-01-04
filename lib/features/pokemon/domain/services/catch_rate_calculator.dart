@@ -26,8 +26,7 @@ class CatchRateCalculator {
     final effectiveCurrentHP = currentHP ?? maxHP;
 
     // HP Factor: how much HP the Pokemon has lost
-    final double hpFactor =
-        (3 * maxHP - 2 * effectiveCurrentHP) / (3 * maxHP);
+    final double hpFactor = (3 * maxHP - 2 * effectiveCurrentHP) / (3 * maxHP);
 
     // Modified catch rate
     final double a = hpFactor * captureRate * ballModifier * statusModifier;

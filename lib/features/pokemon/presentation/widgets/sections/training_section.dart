@@ -7,35 +7,38 @@ import '../shared/section_title_badge.dart';
 class TrainingSection extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const TrainingSection({
-    super.key,
-    required this.pokemon,
-  });
+  const TrainingSection({super.key, required this.pokemon});
 
   String _formatGrowthRate(String? growthRate) {
     if (growthRate == null) return 'Unknown';
-    return growthRate.split('-').map((word) {
-      return word[0].toUpperCase() + word.substring(1);
-    }).join('-');
+    return growthRate
+        .split('-')
+        .map((word) {
+          return word[0].toUpperCase() + word.substring(1);
+        })
+        .join('-');
   }
 
   String _getEvYield() {
     if (pokemon.stats.isEmpty) return 'Unknown';
-    
+
     final evStats = pokemon.stats.where((stat) => stat.effort > 0).toList();
     if (evStats.isEmpty) return 'None';
-    
-    return evStats.map((stat) {
-      final statName = stat.name.split('-').last;
-      final formattedName = statName[0].toUpperCase() + statName.substring(1);
-      return '${stat.effort} $formattedName';
-    }).join(', ');
+
+    return evStats
+        .map((stat) {
+          final statName = stat.name.split('-').last;
+          final formattedName =
+              statName[0].toUpperCase() + statName.substring(1);
+          return '${stat.effort} $formattedName';
+        })
+        .join(', ');
   }
 
   @override
   Widget build(BuildContext context) {
-    if (pokemon.growthRate == null && 
-        pokemon.baseExperience == null && 
+    if (pokemon.growthRate == null &&
+        pokemon.baseExperience == null &&
         pokemon.baseHappiness == null) {
       return const SizedBox.shrink();
     }
@@ -75,19 +78,13 @@ class TrainingSection extends StatelessWidget {
             ),
           ],
           const SizedBox(height: 12),
-          _buildInfoRow(
-            label: 'EV Yield:',
-            value: _getEvYield(),
-          ),
+          _buildInfoRow(label: 'EV Yield:', value: _getEvYield()),
         ],
       ),
     );
   }
 
-  Widget _buildInfoRow({
-    required String label,
-    required String value,
-  }) {
+  Widget _buildInfoRow({required String label, required String value}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -103,10 +100,7 @@ class TrainingSection extends StatelessWidget {
           child: Text(
             value,
             textAlign: TextAlign.end,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black54,
-            ),
+            style: const TextStyle(fontSize: 14, color: Colors.black54),
           ),
         ),
       ],

@@ -7,11 +7,7 @@ class TypeIcons {
     return 'assets/icons/types/${type.name.toLowerCase()}.svg';
   }
 
-  static Widget getTypeIcon(
-    PokemonTypes type, {
-    double? size,
-    Color? color,
-  }) {
+  static Widget getTypeIcon(PokemonTypes type, {double? size, Color? color}) {
     return SvgPicture.asset(
       getIconPath(type),
       width: size,

@@ -9,10 +9,7 @@ import '../../../domain/entities/pokemon_types.dart';
 class TypeBadge extends StatelessWidget {
   final PokemonTypes type;
 
-  const TypeBadge({
-    super.key,
-    required this.type,
-  });
+  const TypeBadge({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +23,7 @@ class TypeBadge extends StatelessWidget {
         color: TypeColors.getColorForType(type),
         shape: BoxShape.circle,
       ),
-      child: SvgPicture.asset(
-        TypeIcons.getIconPath(type),
-      ),
+      child: SvgPicture.asset(TypeIcons.getIconPath(type)),
     );
   }
 }

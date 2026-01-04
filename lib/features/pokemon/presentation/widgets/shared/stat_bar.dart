@@ -52,7 +52,9 @@ class StatBar extends StatelessWidget {
             height: AppConstants.statBarHeight,
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+              borderRadius: BorderRadius.circular(
+                AppConstants.defaultBorderRadius,
+              ),
             ),
           ),
           FractionallySizedBox(
@@ -61,7 +63,9 @@ class StatBar extends StatelessWidget {
               height: AppConstants.statBarHeight,
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+                borderRadius: BorderRadius.circular(
+                  AppConstants.defaultBorderRadius,
+                ),
               ),
             ),
           ),

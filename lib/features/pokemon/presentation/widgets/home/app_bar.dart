@@ -5,6 +5,7 @@ import '../../constants/app_bar.dart';
 import 'search_field.dart';
 
 class ListAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String? title;
   final TextEditingController searchController;
   final ValueChanged<String> onSearchChanged;
   final VoidCallback? onSortPressed;
@@ -13,6 +14,7 @@ class ListAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const ListAppBar({
     super.key,
+    this.title,
     required this.searchController,
     required this.onSearchChanged,
     this.onSortPressed,
@@ -30,7 +32,7 @@ class ListAppBar extends StatelessWidget implements PreferredSizeWidget {
     toolbarHeight: AppBarConstants.toolbarHeight,
     centerTitle: true,
     title: Text(
-      'Pokédex',
+      title ?? 'Pokédex',
       style: TextStyle(
         fontSize: DesignTokens.fontSizeXLarge,
         fontWeight: FontWeight.bold,
@@ -119,10 +121,7 @@ class ListAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
-                constraints: const BoxConstraints(
-                  minWidth: 14,
-                  minHeight: 14,
-                ),
+                constraints: const BoxConstraints(minWidth: 14, minHeight: 14),
                 child: Center(
                   child: Text(
                     '$filterCount',

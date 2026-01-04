@@ -9,9 +9,7 @@ import 'details_state.dart';
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   final PokemonRepository repository;
 
-  DetailsBloc({
-    required this.repository,
-  }) : super(const DetailsInitial()) {
+  DetailsBloc({required this.repository}) : super(const DetailsInitial()) {
     on<DetailsLoadRequested>(_onDetailsLoadRequested);
   }
 

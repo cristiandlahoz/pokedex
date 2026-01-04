@@ -11,7 +11,7 @@ class MovesSection extends StatelessWidget {
   static const String _accuracySuffix = '%';
   static const String _nameSeparator = '-';
   static const String _nameJoiner = ' ';
-  
+
   static const Color _cardBackgroundColor = Colors.white;
   static const Color _powerColor = Colors.red;
   static const Color _accuracyColor = Colors.blue;
@@ -20,22 +20,54 @@ class MovesSection extends StatelessWidget {
 
   final List<PokemonMove> moves;
 
-  const MovesSection({
-    super.key,
-    required this.moves,
-  });
+  const MovesSection({super.key, required this.moves});
 
   factory MovesSection.withSampleData() {
     return const MovesSection(
       moves: [
-        PokemonMove(name: 'tackle', type: 'normal', power: 40, accuracy: 100, pp: 35),
+        PokemonMove(
+          name: 'tackle',
+          type: 'normal',
+          power: 40,
+          accuracy: 100,
+          pp: 35,
+        ),
         PokemonMove(name: 'growl', type: 'normal', pp: 40),
-        PokemonMove(name: 'vine-whip', type: 'grass', power: 45, accuracy: 100, pp: 25),
-        PokemonMove(name: 'razor-leaf', type: 'grass', power: 55, accuracy: 95, pp: 25),
-        PokemonMove(name: 'poison-powder', type: 'poison', accuracy: 75, pp: 35),
+        PokemonMove(
+          name: 'vine-whip',
+          type: 'grass',
+          power: 45,
+          accuracy: 100,
+          pp: 25,
+        ),
+        PokemonMove(
+          name: 'razor-leaf',
+          type: 'grass',
+          power: 55,
+          accuracy: 95,
+          pp: 25,
+        ),
+        PokemonMove(
+          name: 'poison-powder',
+          type: 'poison',
+          accuracy: 75,
+          pp: 35,
+        ),
         PokemonMove(name: 'sleep-powder', type: 'grass', accuracy: 75, pp: 15),
-        PokemonMove(name: 'take-down', type: 'normal', power: 90, accuracy: 85, pp: 20),
-        PokemonMove(name: 'solar-beam', type: 'grass', power: 120, accuracy: 100, pp: 10),
+        PokemonMove(
+          name: 'take-down',
+          type: 'normal',
+          power: 90,
+          accuracy: 85,
+          pp: 20,
+        ),
+        PokemonMove(
+          name: 'solar-beam',
+          type: 'grass',
+          power: 120,
+          accuracy: 100,
+          pp: 10,
+        ),
       ],
     );
   }
@@ -74,9 +106,7 @@ class MovesSection extends StatelessWidget {
   }
 
   Widget _buildMovesList() {
-    return Column(
-      children: moves.map(_buildMoveCard).toList(),
-    );
+    return Column(children: moves.map(_buildMoveCard).toList());
   }
 
   Widget _buildMoveCard(PokemonMove move) {
@@ -92,7 +122,8 @@ class MovesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildMoveHeader(move),
-          if (_hasStats(move)) const SizedBox(height: AppConstants.smallPadding),
+          if (_hasStats(move))
+            const SizedBox(height: AppConstants.smallPadding),
           if (_hasStats(move)) _buildMoveStats(move),
         ],
       ),
@@ -142,11 +173,19 @@ class MovesSection extends StatelessWidget {
     final stats = <Widget>[];
 
     if (move.power != null) {
-      stats.add(_buildStatChip(_powerLabel, move.power.toString(), _powerColor));
+      stats.add(
+        _buildStatChip(_powerLabel, move.power.toString(), _powerColor),
+      );
     }
 
     if (move.accuracy != null) {
-      stats.add(_buildStatChip(_accuracyLabel, '${move.accuracy}$_accuracySuffix', _accuracyColor));
+      stats.add(
+        _buildStatChip(
+          _accuracyLabel,
+          '${move.accuracy}$_accuracySuffix',
+          _accuracyColor,
+        ),
+      );
     }
 
     if (move.pp != null) {
@@ -169,7 +208,9 @@ class MovesSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: color.withValues(alpha: AppConstants.opacityLight),
         borderRadius: BorderRadius.circular(AppConstants.chipBorderRadius),
-        border: Border.all(color: color.withValues(alpha: AppConstants.opacityBorder)),
+        border: Border.all(
+          color: color.withValues(alpha: AppConstants.opacityBorder),
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

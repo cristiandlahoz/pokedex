@@ -61,7 +61,6 @@ class _BaseStatsSectionState extends State<BaseStatsSection> {
     return TypeColors.getColor(widget.primaryType);
   }
 
-
   int _getTotalStats() {
     return widget.stats.map((s) => _getStatValue(s)).reduce((a, b) => a + b);
   }
@@ -80,11 +79,17 @@ class _BaseStatsSectionState extends State<BaseStatsSection> {
   int _getMaxValue() {
     switch (_selectedView) {
       case StatView.base:
-        return widget.stats.map((s) => s.baseStat).reduce((a, b) => a > b ? a : b);
+        return widget.stats
+            .map((s) => s.baseStat)
+            .reduce((a, b) => a > b ? a : b);
       case StatView.min:
-        return widget.stats.map((s) => s.calculateMinStat()).reduce((a, b) => a > b ? a : b);
+        return widget.stats
+            .map((s) => s.calculateMinStat())
+            .reduce((a, b) => a > b ? a : b);
       case StatView.max:
-        return widget.stats.map((s) => s.calculateMaxStat()).reduce((a, b) => a > b ? a : b);
+        return widget.stats
+            .map((s) => s.calculateMaxStat())
+            .reduce((a, b) => a > b ? a : b);
     }
   }
 
@@ -112,7 +117,9 @@ class _BaseStatsSectionState extends State<BaseStatsSection> {
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             color: isSelected ? _getPrimaryTypeColor() : Colors.grey[200],
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           child: Text(
             label,
@@ -153,10 +160,7 @@ class _BaseStatsSectionState extends State<BaseStatsSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SectionTitleBadge(
-            title: _getTitle(),
-            color: _getPrimaryTypeColor(),
-          ),
+          SectionTitleBadge(title: _getTitle(), color: _getPrimaryTypeColor()),
           const SizedBox(height: 16),
           Row(
             children: [

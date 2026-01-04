@@ -7,11 +7,7 @@ class CardImage extends StatelessWidget {
   final String imageUrl;
   final int pokemonId;
 
-  const CardImage({
-    super.key,
-    required this.imageUrl,
-    required this.pokemonId,
-  });
+  const CardImage({super.key, required this.imageUrl, required this.pokemonId});
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +30,10 @@ class CardImage extends StatelessWidget {
   }
 
   Widget _buildLoadingState(BuildContext context, String url) {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
+    return const Center(child: CircularProgressIndicator());
   }
 
-  Widget _buildErrorWidget(
-    BuildContext context,
-    String url,
-    dynamic error,
-  ) {
+  Widget _buildErrorWidget(BuildContext context, String url, dynamic error) {
     return const Center(
       child: Icon(
         Icons.error_outline,

@@ -4,16 +4,12 @@ sealed class Failure extends Equatable {
   final String message;
   final StackTrace? stackTrace;
   final Object? originalError;
-  
-  const Failure(
-    this.message, {
-    this.stackTrace,
-    this.originalError,
-  });
-  
+
+  const Failure(this.message, {this.stackTrace, this.originalError});
+
   @override
   List<Object?> get props => [message, stackTrace, originalError];
-  
+
   @override
   String toString() => message;
 
@@ -31,27 +27,15 @@ sealed class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure(
-    super.message, {
-    super.stackTrace,
-    super.originalError,
-  });
+  const ServerFailure(super.message, {super.stackTrace, super.originalError});
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure(
-    super.message, {
-    super.stackTrace,
-    super.originalError,
-  });
+  const NetworkFailure(super.message, {super.stackTrace, super.originalError});
 }
 
 class CacheFailure extends Failure {
-  const CacheFailure(
-    super.message, {
-    super.stackTrace,
-    super.originalError,
-  });
+  const CacheFailure(super.message, {super.stackTrace, super.originalError});
 }
 
 class UnexpectedFailure extends Failure {

@@ -49,7 +49,9 @@ class TypeHelper {
   }
 
   /// Gets all type colors from a PokemonDetails entity
-  static List<Color> getAllTypeColorsFromDetails(PokemonDetails pokemonDetails) {
+  static List<Color> getAllTypeColorsFromDetails(
+    PokemonDetails pokemonDetails,
+  ) {
     return pokemonDetails.types
         .map((type) => TypeColors.getColor(type.name))
         .toList();

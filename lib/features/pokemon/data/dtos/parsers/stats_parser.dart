@@ -12,11 +12,13 @@ class StatsParser {
       if (statData['stat']['name'] == null) continue;
       if (statData['base_stat'] == null) continue;
 
-      stats.add(PokemonStat(
-        name: statData['stat']['name'] as String,
-        baseStat: statData['base_stat'] as int,
-        effort: statData['effort'] as int? ?? 0,
-      ));
+      stats.add(
+        PokemonStat(
+          name: statData['stat']['name'] as String,
+          baseStat: statData['base_stat'] as int,
+          effort: statData['effort'] as int? ?? 0,
+        ),
+      );
     }
 
     return stats;

@@ -10,10 +10,7 @@ import '../shared/type_effectiveness_badge.dart';
 class TypeEffectivenessSection extends StatelessWidget {
   final PokemonDetails pokemon;
 
-  const TypeEffectivenessSection({
-    super.key,
-    required this.pokemon,
-  });
+  const TypeEffectivenessSection({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +24,21 @@ class TypeEffectivenessSection extends StatelessWidget {
   }
 
   Widget _buildTypeDefensesCard(BuildContext context) {
-    final weaknesses = pokemon.typeDefenses
-        .where((d) => d.damageMultiplier >= 2.0)
-        .toList()
-      ..sort((a, b) => b.damageMultiplier.compareTo(a.damageMultiplier));
+    final weaknesses =
+        pokemon.typeDefenses.where((d) => d.damageMultiplier >= 2.0).toList()
+          ..sort((a, b) => b.damageMultiplier.compareTo(a.damageMultiplier));
 
-    final resistances = pokemon.typeDefenses
-        .where((d) => d.damageMultiplier > 0.5 && d.damageMultiplier < 1.0)
-        .toList()
-      ..sort((a, b) => a.damageMultiplier.compareTo(b.damageMultiplier));
+    final resistances =
+        pokemon.typeDefenses
+            .where((d) => d.damageMultiplier > 0.5 && d.damageMultiplier < 1.0)
+            .toList()
+          ..sort((a, b) => a.damageMultiplier.compareTo(b.damageMultiplier));
 
-    final veryResistant = pokemon.typeDefenses
-        .where((d) => d.damageMultiplier > 0.0 && d.damageMultiplier < 0.5)
-        .toList()
-      ..sort((a, b) => a.damageMultiplier.compareTo(b.damageMultiplier));
+    final veryResistant =
+        pokemon.typeDefenses
+            .where((d) => d.damageMultiplier > 0.0 && d.damageMultiplier < 0.5)
+            .toList()
+          ..sort((a, b) => a.damageMultiplier.compareTo(b.damageMultiplier));
 
     final immunities = pokemon.typeDefenses
         .where((d) => d.damageMultiplier == 0)
@@ -54,10 +52,7 @@ class TypeEffectivenessSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SectionTitleBadge(
-            title: 'Type Defenses',
-            color: primaryTypeColor,
-          ),
+          SectionTitleBadge(title: 'Type Defenses', color: primaryTypeColor),
           const SizedBox(height: 16),
           if (weaknesses.isNotEmpty) ...[
             CategoryHeader(title: 'Weak to', color: Colors.red.shade700),
@@ -72,7 +67,10 @@ class TypeEffectivenessSection extends StatelessWidget {
             const SizedBox(height: 16),
           ],
           if (veryResistant.isNotEmpty) ...[
-            CategoryHeader(title: 'Very Resistant to', color: Colors.green.shade900),
+            CategoryHeader(
+              title: 'Very Resistant to',
+              color: Colors.green.shade900,
+            ),
             const SizedBox(height: 8),
             _buildTypeList(veryResistant, showMultiplier: true),
             const SizedBox(height: 16),
@@ -97,25 +95,37 @@ class TypeEffectivenessSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SectionTitleBadge(
-            title: 'Type Damage',
-            color: primaryTypeColor,
-          ),
+          SectionTitleBadge(title: 'Type Damage', color: primaryTypeColor),
           const SizedBox(height: 16),
           if (offensiveData['superEffective']!.isNotEmpty) ...[
-            CategoryHeader(title: 'Super effective against', color: Colors.blue.shade700),
+            CategoryHeader(
+              title: 'Super effective against',
+              color: Colors.blue.shade700,
+            ),
             const SizedBox(height: 8),
-            _buildTypeList(offensiveData['superEffective']!, showMultiplier: true),
+            _buildTypeList(
+              offensiveData['superEffective']!,
+              showMultiplier: true,
+            ),
             const SizedBox(height: 16),
           ],
           if (offensiveData['notVeryEffective']!.isNotEmpty) ...[
-            CategoryHeader(title: 'Not very effective against', color: Colors.orange.shade700),
+            CategoryHeader(
+              title: 'Not very effective against',
+              color: Colors.orange.shade700,
+            ),
             const SizedBox(height: 8),
-            _buildTypeList(offensiveData['notVeryEffective']!, showMultiplier: true),
+            _buildTypeList(
+              offensiveData['notVeryEffective']!,
+              showMultiplier: true,
+            ),
             const SizedBox(height: 16),
           ],
           if (offensiveData['noEffect']!.isNotEmpty) ...[
-            CategoryHeader(title: 'No effect against', color: Colors.grey.shade700),
+            CategoryHeader(
+              title: 'No effect against',
+              color: Colors.grey.shade700,
+            ),
             const SizedBox(height: 8),
             _buildTypeList(offensiveData['noEffect']!),
           ],
@@ -125,15 +135,15 @@ class TypeEffectivenessSection extends StatelessWidget {
   }
 
   Map<String, List<TypeDefenseInfo>> _calculateOffensiveEffectiveness() {
-    final superEffective = pokemon.typeOffenses
-        .where((o) => o.damageMultiplier >= 2.0)
-        .toList()
-      ..sort((a, b) => b.damageMultiplier.compareTo(a.damageMultiplier));
+    final superEffective =
+        pokemon.typeOffenses.where((o) => o.damageMultiplier >= 2.0).toList()
+          ..sort((a, b) => b.damageMultiplier.compareTo(a.damageMultiplier));
 
-    final notVeryEffective = pokemon.typeOffenses
-        .where((o) => o.damageMultiplier > 0.0 && o.damageMultiplier <= 0.5)
-        .toList()
-      ..sort((a, b) => a.damageMultiplier.compareTo(b.damageMultiplier));
+    final notVeryEffective =
+        pokemon.typeOffenses
+            .where((o) => o.damageMultiplier > 0.0 && o.damageMultiplier <= 0.5)
+            .toList()
+          ..sort((a, b) => a.damageMultiplier.compareTo(b.damageMultiplier));
 
     final noEffect = pokemon.typeOffenses
         .where((o) => o.damageMultiplier == 0.0)
@@ -146,8 +156,10 @@ class TypeEffectivenessSection extends StatelessWidget {
     };
   }
 
-
-  Widget _buildTypeList(List<TypeDefenseInfo> types, {bool showMultiplier = false}) {
+  Widget _buildTypeList(
+    List<TypeDefenseInfo> types, {
+    bool showMultiplier = false,
+  }) {
     return Wrap(
       spacing: 8,
       runSpacing: 8,

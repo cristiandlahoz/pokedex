@@ -18,16 +18,8 @@ class SortMenuItem {
       label: 'Pokédex Number',
       icon: Icons.numbers,
     ),
-    SortMenuItem(
-      field: SortField.name,
-      label: 'Name',
-      icon: Icons.abc,
-    ),
-    SortMenuItem(
-      field: SortField.height,
-      label: 'Height',
-      icon: Icons.height,
-    ),
+    SortMenuItem(field: SortField.name, label: 'Name', icon: Icons.abc),
+    SortMenuItem(field: SortField.height, label: 'Height', icon: Icons.height),
     SortMenuItem(
       field: SortField.weight,
       label: 'Weight',

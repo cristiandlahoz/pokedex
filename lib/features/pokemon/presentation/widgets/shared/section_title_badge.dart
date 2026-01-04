@@ -23,10 +23,7 @@ class SectionTitleBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: color.withValues(alpha: DesignTokens.opacityMediumLight),
         borderRadius: BorderRadius.circular(DesignTokens.radiusXLBase),
-        border: Border.all(
-          color: color,
-          width: DesignTokens.borderWidthMedium,
-        ),
+        border: Border.all(color: color, width: DesignTokens.borderWidthMedium),
       ),
       child: Text(
         title,
