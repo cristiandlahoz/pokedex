@@ -47,13 +47,15 @@ final class LocationsSuccess extends LocationsState {
 
   List<GameVersion> get locationGameVersions {
     return locations
-        .map((loc) => GameVersion(
-              name: loc.gameVersion,
-              displayName: GameVersion.formatDisplayName(loc.gameVersion),
-            ))
+        .map(
+          (loc) => GameVersion(
+            name: loc.gameVersion,
+            displayName: GameVersion.formatDisplayName(loc.gameVersion),
+          ),
+        )
         .toSet()
         .toList()
-        ..sort((a, b) => a.displayName.compareTo(b.displayName));
+      ..sort((a, b) => a.displayName.compareTo(b.displayName));
   }
 
   LocationsSuccess copyWith({
@@ -63,8 +65,8 @@ final class LocationsSuccess extends LocationsState {
   }) {
     return LocationsSuccess(
       locations: locations ?? this.locations,
-      selectedGameVersion: selectedGameVersion != null 
-          ? selectedGameVersion() 
+      selectedGameVersion: selectedGameVersion != null
+          ? selectedGameVersion()
           : this.selectedGameVersion,
       regionMaps: regionMaps != null ? (regionMaps() ?? []) : this.regionMaps,
     );

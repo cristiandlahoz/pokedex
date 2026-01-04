@@ -63,14 +63,16 @@ class ListItemDto {
     if (shiny) {
       final String? officialArtWorkShiny =
           sprites['other']?['official-artwork']?['front_shiny'] as String?;
-      final String? homeShiny = sprites['other']?['home']?['front_shiny'] as String?;
+      final String? homeShiny =
+          sprites['other']?['home']?['front_shiny'] as String?;
       final String? defaultSpriteShiny = sprites['front_shiny'] as String?;
 
       return officialArtWorkShiny ?? homeShiny ?? defaultSpriteShiny;
     } else {
       final String? officialArtWork =
           sprites['other']?['official-artwork']?['front_default'] as String?;
-      final String? home = sprites['other']?['home']?['front_default'] as String?;
+      final String? home =
+          sprites['other']?['home']?['front_default'] as String?;
       final String? defaultSprite = sprites['front_default'] as String?;
 
       return officialArtWork ?? home ?? defaultSprite;

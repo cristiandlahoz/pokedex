@@ -13,10 +13,8 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
   final PokemonRepository repository;
   final LocationMapService locationMapService;
 
-  LocationsBloc({
-    required this.repository,
-    required this.locationMapService,
-  }) : super(const LocationsInitial()) {
+  LocationsBloc({required this.repository, required this.locationMapService})
+    : super(const LocationsInitial()) {
     on<LocationsLoadRequested>(_onLoadRequested);
     on<GameVersionSelected>(_onGameVersionSelected);
   }
@@ -32,9 +30,7 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
     switch (result) {
       case Success(:final data):
         if (data.isEmpty) {
-          emit(const LocationsSuccess(
-            locations: [],
-          ));
+          emit(const LocationsSuccess(locations: []));
           return;
         }
 
@@ -43,11 +39,10 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
           name: firstVersionName,
           displayName: GameVersion.formatDisplayName(firstVersionName),
         );
-        
-        emit(LocationsSuccess(
-          locations: data,
-          selectedGameVersion: firstVersion,
-        ));
+
+        emit(
+          LocationsSuccess(locations: data, selectedGameVersion: firstVersion),
+        );
 
         await _loadAndMatchRegionMap(emit);
 
@@ -63,10 +58,12 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
     final currentState = state;
     if (currentState is! LocationsSuccess) return;
 
-    emit(currentState.copyWith(
-      selectedGameVersion: () => event.version,
-      regionMaps: () => const [],
-    ));
+    emit(
+      currentState.copyWith(
+        selectedGameVersion: () => event.version,
+        regionMaps: () => const [],
+      ),
+    );
 
     await _loadAndMatchRegionMap(emit);
   }

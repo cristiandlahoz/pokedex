@@ -144,8 +144,9 @@ class PokemonGraphQLDataSource {
     }
 
     return encounters
-        .map((json) =>
-            PokemonLocationDto.fromJson(json as Map<String, dynamic>))
+        .map(
+          (json) => PokemonLocationDto.fromJson(json as Map<String, dynamic>),
+        )
         .toList();
   }
 }

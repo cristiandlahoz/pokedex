@@ -28,7 +28,9 @@ class PokemonLocationDto {
     return PokemonLocationDto(
       locationName: location?['name'] as String? ?? 'Unknown',
       areaName: locationArea?['name'] as String? ?? 'Unknown',
-      region: StringUtils.capitalizeFirst(region?['name'] as String? ?? 'Unknown'),
+      region: StringUtils.capitalizeFirst(
+        region?['name'] as String? ?? 'Unknown',
+      ),
       gameVersion: versionGroup?['name'] as String? ?? 'unknown',
       minLevel: json['min_level'] as int? ?? 0,
       maxLevel: json['max_level'] as int? ?? 0,
@@ -36,11 +38,11 @@ class PokemonLocationDto {
   }
 
   PokemonLocation toDomain() => PokemonLocation(
-        locationName: locationName,
-        areaName: areaName,
-        region: region,
-        gameVersion: gameVersion,
-        minLevel: minLevel,
-        maxLevel: maxLevel,
-      );
+    locationName: locationName,
+    areaName: areaName,
+    region: region,
+    gameVersion: gameVersion,
+    minLevel: minLevel,
+    maxLevel: maxLevel,
+  );
 }
