@@ -64,12 +64,12 @@ class PokemonVariety extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        name,
-        isDefault,
-        order,
-        imageUrl,
-        shinyImageUrl,
-        types,
-      ];
+    id,
+    name,
+    isDefault,
+    order,
+    imageUrl,
+    shinyImageUrl,
+    types,
+  ];
 }

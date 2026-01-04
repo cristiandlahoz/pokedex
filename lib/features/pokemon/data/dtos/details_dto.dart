@@ -99,7 +99,8 @@ class DetailsDto extends ListItemDto {
       final eggGroups = EggGroupsParser.parse(json['pokemonspecy']);
       final evolutionChain = EvolutionParser.parse(json['pokemonspecy']);
 
-      final varieties = (json['pokemonspecy']?['pokemons'] as List<dynamic>?)
+      final varieties =
+          (json['pokemonspecy']?['pokemons'] as List<dynamic>?)
               ?.map((variety) => PokemonVarietyDTO.fromJson(variety).toDomain())
               .toList() ??
           [];

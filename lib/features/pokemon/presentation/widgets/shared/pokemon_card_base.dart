@@ -61,7 +61,9 @@ class PokemonCardBase extends StatelessWidget {
           : null,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: EvolutionConstants.cardShadowOpacity),
+          color: Colors.black.withValues(
+            alpha: EvolutionConstants.cardShadowOpacity,
+          ),
           blurRadius: EvolutionConstants.cardShadowBlur,
           offset: const Offset(0, 2),
         ),

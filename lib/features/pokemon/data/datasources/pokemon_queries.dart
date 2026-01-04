@@ -252,7 +252,8 @@ query GetPokemonDetails(\$id: Int!) {
 }
 ''';
 
-const String getPokemonFormDetailsQuery = '''
+const String getPokemonFormDetailsQuery =
+    '''
 $basicPokemonFragment
 $typeEffectivenessFragment
 $moveFragment

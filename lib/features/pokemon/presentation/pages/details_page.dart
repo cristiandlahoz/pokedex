@@ -197,8 +197,12 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildAboutTab(PokemonDetails pokemon) {
-    final specialEvolutions = VarietyClassifier.getSpecialEvolutions(pokemon.varieties);
-    final alternativeForms = VarietyClassifier.getAlternativeForms(pokemon.varieties);
+    final specialEvolutions = VarietyClassifier.getSpecialEvolutions(
+      pokemon.varieties,
+    );
+    final alternativeForms = VarietyClassifier.getAlternativeForms(
+      pokemon.varieties,
+    );
 
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),

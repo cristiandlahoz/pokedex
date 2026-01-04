@@ -67,9 +67,7 @@ class DetailsAppBar extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            Expanded(
-              child: _buildPokemonImage(context),
-            ),
+            Expanded(child: _buildPokemonImage(context)),
             const FormSelector(),
             const SizedBox(height: 8),
             const GameVersionSelector(),
@@ -87,8 +85,8 @@ class DetailsAppBar extends StatelessWidget {
         final imageUrl = state is DetailsSuccess
             ? state.currentImageUrl
             : (isShiny
-                ? (pokemon.shinyImageUrl ?? pokemon.imageUrl)
-                : pokemon.imageUrl);
+                  ? (pokemon.shinyImageUrl ?? pokemon.imageUrl)
+                  : pokemon.imageUrl);
 
         if (imageUrl == null || imageUrl.isEmpty) {
           return Center(

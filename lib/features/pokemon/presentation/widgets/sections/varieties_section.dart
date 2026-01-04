@@ -45,10 +45,7 @@ class _PillSectionTitle extends StatelessWidget {
   final String title;
   final Color color;
 
-  const _PillSectionTitle({
-    required this.title,
-    required this.color,
-  });
+  const _PillSectionTitle({required this.title, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +56,16 @@ class _PillSectionTitle extends StatelessWidget {
           vertical: EvolutionConstants.pillVerticalPadding,
         ),
         decoration: BoxDecoration(
-          color: color.withValues(alpha: EvolutionConstants.pillBackgroundOpacity),
-          borderRadius: BorderRadius.circular(EvolutionConstants.pillBorderRadius),
+          color: color.withValues(
+            alpha: EvolutionConstants.pillBackgroundOpacity,
+          ),
+          borderRadius: BorderRadius.circular(
+            EvolutionConstants.pillBorderRadius,
+          ),
           border: Border.all(
-            color: color.withValues(alpha: EvolutionConstants.pillBorderOpacity),
+            color: color.withValues(
+              alpha: EvolutionConstants.pillBorderOpacity,
+            ),
             width: EvolutionConstants.pillBorderWidth,
           ),
         ),

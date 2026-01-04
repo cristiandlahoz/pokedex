@@ -28,8 +28,8 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       case Success(:final data):
         final successState = DetailsSuccess(data);
         final availableVersions = successState.allGameVersions;
-        final firstVersion = availableVersions.isNotEmpty 
-            ? availableVersions.first 
+        final firstVersion = availableVersions.isNotEmpty
+            ? availableVersions.first
             : null;
 
         emit(DetailsSuccess(data, selectedGameVersion: firstVersion));

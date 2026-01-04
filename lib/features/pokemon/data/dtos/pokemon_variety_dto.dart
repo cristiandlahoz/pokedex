@@ -31,7 +31,8 @@ class PokemonVarietyDTO {
   }
 
   PokemonVariety toDomain() {
-    final typeNames = types
+    final typeNames =
+        types
             ?.map((t) => t['type']['name'] as String)
             .toList()
             .cast<String>() ??

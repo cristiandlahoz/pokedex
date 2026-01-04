@@ -7,10 +7,7 @@ import 'variety_card.dart';
 class VarietiesListWidget extends StatelessWidget {
   final List<PokemonVariety> varieties;
 
-  const VarietiesListWidget({
-    super.key,
-    required this.varieties,
-  });
+  const VarietiesListWidget({super.key, required this.varieties});
 
   @override
   Widget build(BuildContext context) {

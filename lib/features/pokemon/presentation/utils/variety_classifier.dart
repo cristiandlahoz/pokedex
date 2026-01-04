@@ -21,24 +21,28 @@ class VarietyClassifier {
   static bool isSpecialEvolution(PokemonVariety variety) {
     if (variety.isDefault) return false;
     final lowerName = variety.name.toLowerCase();
-    return _specialEvolutionKeywords
-        .any((keyword) => lowerName.contains(keyword));
+    return _specialEvolutionKeywords.any(
+      (keyword) => lowerName.contains(keyword),
+    );
   }
 
   static bool isAlternativeForm(PokemonVariety variety) {
     if (variety.isDefault) return false;
     final lowerName = variety.name.toLowerCase();
-    return _alternativeFormKeywords
-        .any((keyword) => lowerName.contains(keyword));
+    return _alternativeFormKeywords.any(
+      (keyword) => lowerName.contains(keyword),
+    );
   }
 
   static List<PokemonVariety> getSpecialEvolutions(
-      List<PokemonVariety> varieties) {
+    List<PokemonVariety> varieties,
+  ) {
     return varieties.where(isSpecialEvolution).toList();
   }
 
   static List<PokemonVariety> getAlternativeForms(
-      List<PokemonVariety> varieties) {
+    List<PokemonVariety> varieties,
+  ) {
     return varieties.where(isAlternativeForm).toList();
   }
 }

@@ -28,7 +28,8 @@ class GameVersionBloc extends Bloc<GameVersionEvent, GameVersionState> {
     final deduplicatedVersions = uniqueVersions.values.toList();
 
     final selected = event.initialVersion != null
-        ? (uniqueVersions[event.initialVersion!.name] ?? deduplicatedVersions.first)
+        ? (uniqueVersions[event.initialVersion!.name] ??
+              deduplicatedVersions.first)
         : deduplicatedVersions.first;
     emit(
       GameVersionSelectionState(

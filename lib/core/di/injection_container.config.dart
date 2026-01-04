@@ -47,64 +47,79 @@ import 'package:pokedex/features/pokemon/domain/services/type_effectiveness_calc
     as _i538;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i526.GetItHelper(
-      this,
-      environment,
-      environmentFilter,
-    );
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final loggingModule = _$LoggingModule();
     gh.factory<_i913.GameVersionBloc>(() => _i913.GameVersionBloc());
     gh.factory<_i538.TypeEffectivenessCalculator>(
-        () => _i538.TypeEffectivenessCalculator());
+      () => _i538.TypeEffectivenessCalculator(),
+    );
     gh.factory<_i17.LocationMatcher>(() => _i17.LocationMatcher());
     gh.factory<_i750.MovesSortingService>(() => _i750.MovesSortingService());
     gh.factory<_i1066.MovesFilteringService>(
-        () => _i1066.MovesFilteringService());
+      () => _i1066.MovesFilteringService(),
+    );
     gh.lazySingleton<_i1008.GraphQLConfig>(() => _i1008.GraphQLConfig());
     gh.lazySingleton<_i1052.Logger>(() => loggingModule.provideLogger());
     gh.lazySingleton<_i198.ConnectivityService>(
-        () => _i198.ConnectivityService());
+      () => _i198.ConnectivityService(),
+    );
     gh.lazySingleton<_i25.FavoritesLocalDataSource>(
-        () => _i25.FavoritesLocalDataSource());
+      () => _i25.FavoritesLocalDataSource(),
+    );
     gh.lazySingleton<_i339.MapLocalDataSource>(
-        () => _i339.MapLocalDataSource());
+      () => _i339.MapLocalDataSource(),
+    );
     gh.lazySingleton<_i56.FavoritesRepository>(
-        () => _i988.FavoritesRepositoryImpl(
-              dataSource: gh<_i25.FavoritesLocalDataSource>(),
-              logger: gh<_i1052.Logger>(),
-            ));
+      () => _i988.FavoritesRepositoryImpl(
+        dataSource: gh<_i25.FavoritesLocalDataSource>(),
+        logger: gh<_i1052.Logger>(),
+      ),
+    );
     gh.lazySingleton<_i403.GraphQLService>(
-        () => _i403.GraphQLService(gh<_i1008.GraphQLConfig>()));
+      () => _i403.GraphQLService(gh<_i1008.GraphQLConfig>()),
+    );
     gh.lazySingleton<_i716.PokemonGraphQLDataSource>(
-        () => _i716.PokemonGraphQLDataSource(gh<_i403.GraphQLService>()));
+      () => _i716.PokemonGraphQLDataSource(gh<_i403.GraphQLService>()),
+    );
     gh.factory<_i961.ConnectivityBloc>(
-        () => _i961.ConnectivityBloc(service: gh<_i198.ConnectivityService>()));
-    gh.lazySingleton<_i896.PokemonRepository>(() => _i337.PokemonRepositoryImpl(
-          gh<_i716.PokemonGraphQLDataSource>(),
-          gh<_i339.MapLocalDataSource>(),
-          gh<_i1052.Logger>(),
-        ));
-    gh.factory<_i596.FavoritesBloc>(() => _i596.FavoritesBloc(
-          favoritesRepository: gh<_i56.FavoritesRepository>(),
-          pokemonRepository: gh<_i896.PokemonRepository>(),
-        ));
-    gh.factory<_i226.LocationMapService>(() => _i226.LocationMapService(
-          repository: gh<_i896.PokemonRepository>(),
-          locationMatcher: gh<_i17.LocationMatcher>(),
-        ));
+      () => _i961.ConnectivityBloc(service: gh<_i198.ConnectivityService>()),
+    );
+    gh.lazySingleton<_i896.PokemonRepository>(
+      () => _i337.PokemonRepositoryImpl(
+        gh<_i716.PokemonGraphQLDataSource>(),
+        gh<_i339.MapLocalDataSource>(),
+        gh<_i1052.Logger>(),
+      ),
+    );
+    gh.factory<_i596.FavoritesBloc>(
+      () => _i596.FavoritesBloc(
+        favoritesRepository: gh<_i56.FavoritesRepository>(),
+        pokemonRepository: gh<_i896.PokemonRepository>(),
+      ),
+    );
+    gh.factory<_i226.LocationMapService>(
+      () => _i226.LocationMapService(
+        repository: gh<_i896.PokemonRepository>(),
+        locationMatcher: gh<_i17.LocationMatcher>(),
+      ),
+    );
     gh.factory<_i314.ListBloc>(
-        () => _i314.ListBloc(repository: gh<_i896.PokemonRepository>()));
+      () => _i314.ListBloc(repository: gh<_i896.PokemonRepository>()),
+    );
     gh.factory<_i477.DetailsBloc>(
-        () => _i477.DetailsBloc(repository: gh<_i896.PokemonRepository>()));
-    gh.factory<_i276.LocationsBloc>(() => _i276.LocationsBloc(
-          repository: gh<_i896.PokemonRepository>(),
-          locationMapService: gh<_i226.LocationMapService>(),
-        ));
+      () => _i477.DetailsBloc(repository: gh<_i896.PokemonRepository>()),
+    );
+    gh.factory<_i276.LocationsBloc>(
+      () => _i276.LocationsBloc(
+        repository: gh<_i896.PokemonRepository>(),
+        locationMapService: gh<_i226.LocationMapService>(),
+      ),
+    );
     return this;
   }
 }

@@ -109,7 +109,9 @@ class _MovesSectionState extends State<MovesSection> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: (widget.accentColor ?? Colors.orange).withValues(alpha: 0.5),
+                  color: (widget.accentColor ?? Colors.orange).withValues(
+                    alpha: 0.5,
+                  ),
                   width: 1.5,
                 ),
                 borderRadius: BorderRadius.circular(20),
