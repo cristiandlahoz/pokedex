@@ -67,18 +67,14 @@ class TCGCardAbility extends StatelessWidget {
           if (abilityEffect != null) ...[
             SizedBox(height: 4 * scale),
             Text(
-              abilityEffect!.length > 60 
-                ? '${abilityEffect!.substring(0, 60)}...' 
-                : abilityEffect!,
-              style: TextStyle(
-                fontSize: 11 * scale,
-                color: Colors.black.withValues(alpha: 0.85),
-                height: 1.2,
-                fontWeight: FontWeight.w500,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+                  abilityEffect!,
+                  style: TextStyle(
+                    fontSize: 11 * scale,
+                    color: Colors.black.withOpacity(0.85),
+                    height: 1.2,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
           ],
         ],
       ),
