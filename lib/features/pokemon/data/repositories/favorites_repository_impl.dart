@@ -1,4 +1,6 @@
 import 'package:injectable/injectable.dart';
+import 'package:pokedex/features/pokemon/domain/entities/pokemon_location.dart';
+import 'package:pokedex/features/pokemon/domain/entities/region_map.dart';
 
 import '../../../../core/exceptions/failures.dart';
 import '../../../../core/logging/log_event.dart';
