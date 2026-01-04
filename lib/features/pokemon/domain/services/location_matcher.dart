@@ -18,7 +18,7 @@ class LocationMatcher {
         location.areaName,
         coordinateNames,
       );
-      
+
       if (matchedName != null) {
         matchedAreas.add(matchedName);
       }
