@@ -4,6 +4,7 @@ import '../../domain/entities/pokemon_ability.dart';
 import '../../domain/entities/pokemon_details.dart';
 import '../../domain/entities/pokemon_move.dart';
 import '../../domain/entities/pokemon_stat.dart';
+import '../../domain/entities/pokemon_variety.dart';
 import '../../domain/entities/type_defense_info.dart';
 import '../../domain/services/type_effectiveness_calculator.dart';
 import 'list_item_dto.dart';
@@ -13,6 +14,7 @@ import 'parsers/evolution_parser.dart';
 import 'parsers/moves_parser.dart';
 import 'parsers/species_parser.dart';
 import 'parsers/stats_parser.dart';
+import 'pokemon_variety_dto.dart';
 
 class DetailsDto extends ListItemDto {
   final String? genus;
@@ -30,6 +32,7 @@ class DetailsDto extends ListItemDto {
   final List<TypeDefenseInfo> typeDefenses;
   final List<TypeDefenseInfo> typeOffenses;
   final EvolutionChain? evolutionChain;
+  final List<PokemonVariety> varieties;
 
   const DetailsDto({
     required super.id,
@@ -54,6 +57,7 @@ class DetailsDto extends ListItemDto {
     this.typeDefenses = const [],
     this.typeOffenses = const [],
     this.evolutionChain,
+    this.varieties = const [],
   });
 
   PokemonDetails toDomainDetails() {
@@ -80,6 +84,7 @@ class DetailsDto extends ListItemDto {
       typeDefenses: typeDefenses,
       typeOffenses: typeOffenses,
       evolutionChain: evolutionChain,
+      varieties: varieties,
     );
   }
 
@@ -93,6 +98,12 @@ class DetailsDto extends ListItemDto {
       final moves = MovesParser.parse(json['pokemonmoves']);
       final eggGroups = EggGroupsParser.parse(json['pokemonspecy']);
       final evolutionChain = EvolutionParser.parse(json['pokemonspecy']);
+
+      final varieties =
+          (json['pokemonspecy']?['pokemons'] as List<dynamic>?)
+              ?.map((variety) => PokemonVarietyDTO.fromJson(variety).toDomain())
+              .toList() ??
+          [];
 
       final calculator = getIt<TypeEffectivenessCalculator>();
       final typeDefenses = calculator.calculateDefensiveEffectiveness(
@@ -127,6 +138,7 @@ class DetailsDto extends ListItemDto {
         typeDefenses: typeDefenses,
         typeOffenses: typeOffenses,
         evolutionChain: evolutionChain,
+        varieties: varieties,
       );
     } catch (e) {
       rethrow;

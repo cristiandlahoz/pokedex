@@ -75,7 +75,7 @@ class TCGCardAbility extends StatelessWidget {
               abilityEffect!,
               style: TextStyle(
                 fontSize: 11 * scale,
-                color: Colors.black.withOpacity(0.85),
+                color: Colors.black.withValues(alpha: 0.85),
                 height: 1.2,
                 fontWeight: FontWeight.w500,
               ),

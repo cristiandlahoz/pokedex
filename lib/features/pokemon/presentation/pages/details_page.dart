@@ -16,6 +16,7 @@ import '../../domain/entities/pokemon_details.dart';
 import '../utils/type_helper.dart';
 import '../widgets/details/app_bar.dart';
 import '../widgets/details/header.dart';
+import '../utils/variety_classifier.dart';
 import '../widgets/sections/abilities_section.dart';
 import '../widgets/sections/base_stats_section.dart';
 import '../widgets/sections/breeding_section.dart';
@@ -25,6 +26,7 @@ import '../widgets/sections/evolution_section.dart';
 import '../widgets/sections/locations_section.dart';
 import '../widgets/sections/moves_section.dart';
 import '../widgets/sections/physical_stats_section.dart';
+import '../widgets/sections/varieties_section.dart';
 import '../widgets/sections/species_section.dart';
 import '../widgets/sections/training_section.dart';
 import '../widgets/sections/type_effectiveness_section.dart';
@@ -195,6 +197,13 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildAboutTab(PokemonDetails pokemon) {
+    final specialEvolutions = VarietyClassifier.getSpecialEvolutions(
+      pokemon.varieties,
+    );
+    final alternativeForms = VarietyClassifier.getAlternativeForms(
+      pokemon.varieties,
+    );
+
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
       children: [
@@ -206,6 +215,18 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         BreedingSection(pokemon: pokemon),
         AbilitiesSection(pokemon: pokemon),
         EvolutionSection(pokemon: pokemon),
+        if (specialEvolutions.isNotEmpty)
+          VarietiesSection(
+            title: 'Special evolutions',
+            pokemon: pokemon,
+            varieties: specialEvolutions,
+          ),
+        if (alternativeForms.isNotEmpty)
+          VarietiesSection(
+            title: 'Alternative Forms',
+            pokemon: pokemon,
+            varieties: alternativeForms,
+          ),
         const SizedBox(height: AppConstants.largePadding),
       ],
     );

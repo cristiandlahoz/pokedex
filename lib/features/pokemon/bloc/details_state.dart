@@ -40,6 +40,12 @@ class DetailsSuccess extends DetailsState {
         .toList();
   }
 
+  String? get currentImageUrl {
+    return isShiny
+        ? (pokemon.shinyImageUrl ?? pokemon.imageUrl)
+        : pokemon.imageUrl;
+  }
+
   DetailsSuccess copyWith({
     PokemonDetails? pokemon,
     GameVersion? selectedGameVersion,

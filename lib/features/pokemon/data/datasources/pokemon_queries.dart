@@ -96,6 +96,46 @@ fragment EvolutionSpeciesFields on pokemonspecies {
 }
 ''';
 
+/// Pokemon forms fragment for variant/form data
+const String pokemonFormFragment = '''
+fragment PokemonFormFields on pokemonform {
+  id
+  name
+  form_name
+  form_order
+  is_default
+  is_mega
+  is_battle_only
+  pokemon_id
+  pokemonformnames(where: {language_id: {_eq: 9}}, limit: 1) {
+    name
+    pokemon_name
+  }
+  pokemonformsprites {
+    sprites
+  }
+}
+''';
+
+/// Pokemon varieties fragment for regional variants (Alolan, Galarian, etc.)
+const String pokemonVarietyFragment = '''
+fragment PokemonVarietyFields on pokemon {
+  id
+  name
+  is_default
+  order
+  pokemontypes {
+    type {
+      id
+      name
+    }
+  }
+  pokemonsprites {
+    sprites
+  }
+}
+''';
+
 const String moveFragment = '''
 fragment MoveFields on pokemonmove {
   level
@@ -141,11 +181,16 @@ const String getPokemonDetailsQuery =
 $basicPokemonFragment
 $typeEffectivenessFragment
 $evolutionSpeciesFragment
+$pokemonFormFragment
+$pokemonVarietyFragment
 $moveFragment
 
 query GetPokemonDetails(\$id: Int!) {
   pokemon(where: {id: {_eq: \$id}}, limit: 1) {
     ...BasicPokemonFields
+    pokemonforms(order_by: {form_order: asc}) {
+      ...PokemonFormFields
+    }
     pokemonabilities(order_by: {slot: asc}) {
       ability {
         id
@@ -168,6 +213,7 @@ query GetPokemonDetails(\$id: Int!) {
       ...MoveFields
     }
     pokemonspecy {
+      id
       gender_rate
       capture_rate
       base_happiness
@@ -186,6 +232,9 @@ query GetPokemonDetails(\$id: Int!) {
       pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}, limit: 1, order_by: {version_id: desc}) {
         flavor_text
       }
+      pokemons(order_by: {order: asc}) {
+        ...PokemonVarietyFields
+      }
       evolution_chain_id
       evolutionchain {
         id
@@ -203,12 +252,72 @@ query GetPokemonDetails(\$id: Int!) {
 }
 ''';
 
+const String getPokemonFormDetailsQuery =
+    '''
+$basicPokemonFragment
+$typeEffectivenessFragment
+$moveFragment
+
+query GetPokemonFormDetails(\$formId: Int!) {
+  pokemonform(where: {id: {_eq: \$formId}}, limit: 1) {
+    id
+    name
+    form_name
+    is_default
+    is_mega
+    pokemon_id
+    pokemonformnames(where: {language_id: {_eq: 9}}, limit: 1) {
+      name
+      pokemon_name
+    }
+    pokemonformsprites {
+      sprites
+    }
+    pokemon {
+      id
+      pokemontypes {
+        type {
+          id
+          name
+        }
+      }
+      pokemonabilities(order_by: {slot: asc}) {
+        ability {
+          id
+          name
+          abilityflavortexts(where: {language_id: {_eq: 9}}, limit: 1, order_by: {version_group_id: desc}) {
+            flavor_text
+          }
+        }
+        is_hidden
+        slot
+      }
+      pokemonstats {
+        base_stat
+        effort
+        stat {
+          name
+        }
+      }
+      pokemonmoves {
+        ...MoveFields
+      }
+    }
+  }
+  pokemontype(where: {pokemon_id: {_eq: \$formId}}) {
+    type {
+      ...TypeEffectivenessFields
+    }
+  }
+}
+''';
+
 const String searchPokemonQuery =
     '''
 $basicPokemonFragment
 
 query SearchPokemon(\$name: String!) {
-  pokemon(where: {name: {_ilike: $name}}) {
+  pokemon(where: {name: {_ilike: \$name}}) {
     ...BasicPokemonFields
   }
 }

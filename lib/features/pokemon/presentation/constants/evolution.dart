@@ -25,4 +25,19 @@ class EvolutionConstants {
 
   static const double nameTextSize = 16.0;
   static const double requirementTextSize = 13.0;
+
+  static const double cardWidth = 180.0;
+  static const double cardBorderRadius = 12.0;
+  static const double cardShadowOpacity = 0.05;
+  static const double cardShadowBlur = 8.0;
+
+  static const double varietiesListHeight = 300.0;
+
+  static const double pillBorderRadius = 20.0;
+  static const double pillHorizontalPadding = 24.0;
+  static const double pillVerticalPadding = 8.0;
+  static const double pillBackgroundOpacity = 0.2;
+  static const double pillBorderOpacity = 0.3;
+  static const double pillBorderWidth = 1.5;
+  static const double pillTextSize = 14.0;
 }
