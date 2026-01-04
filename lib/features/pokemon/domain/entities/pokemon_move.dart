@@ -24,5 +24,15 @@ class PokemonMove extends Equatable {
   });
 
   @override
-  List<Object?> get props => [name, type, power, accuracy, pp, level, learnMethod, versionGroup, machineNumber];
+  List<Object?> get props => [
+    name,
+    type,
+    power,
+    accuracy,
+    pp,
+    level,
+    learnMethod,
+    versionGroup,
+    machineNumber,
+  ];
 }

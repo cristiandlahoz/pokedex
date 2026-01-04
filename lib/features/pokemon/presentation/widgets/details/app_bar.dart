@@ -25,9 +25,7 @@ class DetailsAppBar extends StatelessWidget {
       expandedHeight: AppConstants.appBarExpandedHeight,
       pinned: true,
       backgroundColor: backgroundColor,
-      flexibleSpace: FlexibleSpaceBar(
-        background: _buildBackground(context),
-      ),
+      flexibleSpace: FlexibleSpaceBar(background: _buildBackground(context)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Navigator.of(context).pop(),
@@ -70,9 +68,7 @@ class DetailsAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            Flexible(
-              child: _buildPokemonImage(context),
-            ),
+            Flexible(child: _buildPokemonImage(context)),
             const SizedBox(height: 8),
             const GameVersionSelector(),
             const SizedBox(height: 8),
@@ -86,7 +82,7 @@ class DetailsAppBar extends StatelessWidget {
     return BlocBuilder<DetailsBloc, DetailsState>(
       builder: (context, state) {
         final isShiny = state is DetailsSuccess ? state.isShiny : false;
-        final imageUrl = isShiny 
+        final imageUrl = isShiny
             ? (pokemon.shinyImageUrl ?? pokemon.imageUrl)
             : pokemon.imageUrl;
 
@@ -103,9 +99,7 @@ class DetailsAppBar extends StatelessWidget {
                 width: AppConstants.pokemonImageHeight,
                 height: AppConstants.pokemonImageHeight,
                 child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                  ),
+                  child: CircularProgressIndicator(color: Colors.white),
                 ),
               ),
               errorWidget: (context, url, error) => const Center(

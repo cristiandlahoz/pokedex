@@ -42,14 +42,14 @@ class _MovesSectionState extends State<MovesSection> {
   @override
   void didUpdateWidget(MovesSection oldWidget) {
     super.didUpdateWidget(oldWidget);
-    
+
     if (oldWidget.selectedGameVersion != widget.selectedGameVersion) {
       final availableMethods = _availableLearnMethods;
-      if (_selectedLearnMethod != null && 
+      if (_selectedLearnMethod != null &&
           !availableMethods.contains(_selectedLearnMethod)) {
         setState(() {
-          _selectedLearnMethod = availableMethods.isNotEmpty 
-              ? availableMethods.first 
+          _selectedLearnMethod = availableMethods.isNotEmpty
+              ? availableMethods.first
               : null;
         });
       }
@@ -106,10 +106,7 @@ class _MovesSectionState extends State<MovesSection> {
         children: [
           Center(
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 6,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: (widget.accentColor ?? Colors.orange).withOpacity(0.5),
@@ -132,10 +129,7 @@ class _MovesSectionState extends State<MovesSection> {
           const SizedBox(height: 8),
           const Text(
             'You can sort the moves by tapping on the header of each column.',
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey,
-            ),
+            style: TextStyle(fontSize: 12, color: Colors.grey),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -190,10 +184,7 @@ class _MovesSectionState extends State<MovesSection> {
           padding: const EdgeInsets.all(32),
           child: Text(
             'There are no moves that can be learnt with this method',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
             textAlign: TextAlign.center,
           ),
         ),
@@ -240,10 +231,7 @@ class _MovesSectionState extends State<MovesSection> {
             flex: 1,
             child: _buildHeaderCell('Acc', MoveSortColumn.accuracy),
           ),
-          Expanded(
-            flex: 1,
-            child: _buildHeaderCell('PP', MoveSortColumn.pp),
-          ),
+          Expanded(flex: 1, child: _buildHeaderCell('PP', MoveSortColumn.pp)),
         ],
       ),
     );
@@ -288,14 +276,8 @@ class _MovesSectionState extends State<MovesSection> {
       ),
       child: Row(
         children: [
-          Expanded(
-            flex: 3,
-            child: _buildMoveNameCell(move),
-          ),
-          Expanded(
-            flex: 1,
-            child: _buildLevelCell(move),
-          ),
+          Expanded(flex: 3, child: _buildMoveNameCell(move)),
+          Expanded(flex: 1, child: _buildLevelCell(move)),
           Expanded(
             flex: 1,
             child: _buildStatCell(move.power?.toString() ?? '-'),
@@ -304,10 +286,7 @@ class _MovesSectionState extends State<MovesSection> {
             flex: 1,
             child: _buildStatCell(move.accuracy?.toString() ?? '-'),
           ),
-          Expanded(
-            flex: 1,
-            child: _buildStatCell(move.pp?.toString() ?? '-'),
-          ),
+          Expanded(flex: 1, child: _buildStatCell(move.pp?.toString() ?? '-')),
         ],
       ),
     );
@@ -319,17 +298,10 @@ class _MovesSectionState extends State<MovesSection> {
       children: [
         Text(
           _formatName(move.name),
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 4),
-        Row(
-          children: [
-            if (move.type != null) _buildTypeIcon(move.type!),
-          ],
-        ),
+        Row(children: [if (move.type != null) _buildTypeIcon(move.type!)]),
       ],
     );
   }
@@ -337,7 +309,7 @@ class _MovesSectionState extends State<MovesSection> {
   Widget _buildTypeIcon(String type) {
     final color = TypeColors.getColor(type);
     final iconPath = 'assets/icons/types/${type.toLowerCase()}.svg';
-    
+
     return Container(
       width: 28,
       height: 28,
@@ -348,17 +320,14 @@ class _MovesSectionState extends State<MovesSection> {
       padding: const EdgeInsets.all(4),
       child: SvgPicture.asset(
         iconPath,
-        colorFilter: const ColorFilter.mode(
-          Colors.white,
-          BlendMode.srcIn,
-        ),
+        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
       ),
     );
   }
 
   Widget _buildLevelCell(PokemonMove move) {
     String text = '-';
-    
+
     if (_selectedLearnMethod == 'machine' && move.machineNumber != null) {
       text = move.machineNumber.toString().padLeft(2, '0');
     } else if (move.level != null) {
@@ -367,10 +336,7 @@ class _MovesSectionState extends State<MovesSection> {
 
     return Text(
       text,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
+      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
       textAlign: TextAlign.center,
     );
   }
@@ -378,10 +344,7 @@ class _MovesSectionState extends State<MovesSection> {
   Widget _buildStatCell(String value) {
     return Text(
       value,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
+      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
       textAlign: TextAlign.center,
     );
   }

@@ -23,5 +23,13 @@ class Pokemon extends Equatable {
   String get displayName => name[0].toUpperCase() + name.substring(1);
 
   @override
-  List<Object?> get props => [id, name, imageUrl, shinyImageUrl, height, weight, types];
+  List<Object?> get props => [
+    id,
+    name,
+    imageUrl,
+    shinyImageUrl,
+    height,
+    weight,
+    types,
+  ];
 }

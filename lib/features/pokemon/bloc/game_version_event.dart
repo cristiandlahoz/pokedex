@@ -10,10 +10,7 @@ final class GameVersionsLoaded extends GameVersionEvent {
   final List<GameVersion> versions;
   final GameVersion? initialVersion;
 
-  const GameVersionsLoaded({
-    required this.versions,
-    this.initialVersion,
-  });
+  const GameVersionsLoaded({required this.versions, this.initialVersion});
 
   @override
   List<Object?> get props => [versions, initialVersion];

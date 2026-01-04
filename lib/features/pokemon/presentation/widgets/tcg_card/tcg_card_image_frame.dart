@@ -43,7 +43,9 @@ class TCGCardImageFrame extends StatelessWidget {
             height: 100 * scale,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(6 * scale)),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(6 * scale),
+              ),
             ),
             child: Center(
               child: imageUrl.isNotEmpty
@@ -54,7 +56,9 @@ class TCGCardImageFrame extends StatelessWidget {
                       placeholder: (context, url) => SizedBox(
                         width: 40 * scale,
                         height: 40 * scale,
-                        child: CircularProgressIndicator(strokeWidth: 3 * scale),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3 * scale,
+                        ),
                       ),
                       errorWidget: (context, url, error) => Icon(
                         Icons.catching_pokemon,
@@ -70,7 +74,10 @@ class TCGCardImageFrame extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10 * scale, vertical: 4 * scale),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10 * scale,
+              vertical: 4 * scale,
+            ),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -79,7 +86,9 @@ class TCGCardImageFrame extends StatelessWidget {
                   Colors.grey.shade300,
                 ],
               ),
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(6 * scale)),
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(6 * scale),
+              ),
             ),
             child: Text(
               '$pokedexNumber  $genus.  $height  $weight',

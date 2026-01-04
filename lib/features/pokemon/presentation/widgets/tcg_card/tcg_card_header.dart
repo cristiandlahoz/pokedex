@@ -24,7 +24,12 @@ class TCGCardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(12 * scale, 10 * scale, 12 * scale, 5 * scale),
+      padding: EdgeInsets.fromLTRB(
+        12 * scale,
+        10 * scale,
+        12 * scale,
+        5 * scale,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +39,10 @@ class TCGCardHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8 * scale, vertical: 2 * scale),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8 * scale,
+                    vertical: 2 * scale,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(4 * scale),

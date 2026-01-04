@@ -19,11 +19,11 @@ class PokemonLocation extends Equatable {
 
   @override
   List<Object?> get props => [
-        locationName,
-        areaName,
-        region,
-        gameVersion,
-        minLevel,
-        maxLevel,
-      ];
+    locationName,
+    areaName,
+    region,
+    gameVersion,
+    minLevel,
+    maxLevel,
+  ];
 }

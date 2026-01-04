@@ -21,9 +21,6 @@ class MapAreaDto {
     );
   }
 
-  MapArea toDomain() => MapArea(
-        name: name,
-        shape: AreaShape.fromString(shape),
-        coords: coords,
-      );
+  MapArea toDomain() =>
+      MapArea(name: name, shape: AreaShape.fromString(shape), coords: coords);
 }

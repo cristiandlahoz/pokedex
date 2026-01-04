@@ -23,11 +23,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   final MapLocalDataSource mapDataSource;
   final Logger logger;
 
-  PokemonRepositoryImpl(
-    this.dataSource,
-    this.mapDataSource,
-    this.logger,
-  );
+  PokemonRepositoryImpl(this.dataSource, this.mapDataSource, this.logger);
 
   static int _counter = 0;
 
@@ -79,7 +75,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<Result<List<PokemonLocation>>> getPokemonLocations(
-      int pokemonId) async {
+    int pokemonId,
+  ) async {
     return _handleRepositoryCall(
       operation: 'getPokemonLocations',
       call: () async {

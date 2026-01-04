@@ -1,7 +1,12 @@
 class LocationNameNormalizer {
   static String normalize(String apiLocationName) {
     return apiLocationName
-        .replaceAll(RegExp(r'^(kanto|johto|hoenn|sinnoh|unova|kalos|alola|galar|paldea|hisui)-'), '')
+        .replaceAll(
+          RegExp(
+            r'^(kanto|johto|hoenn|sinnoh|unova|kalos|alola|galar|paldea|hisui)-',
+          ),
+          '',
+        )
         .replaceAll(RegExp(r'-(area|zone|main)$'), '');
   }
 

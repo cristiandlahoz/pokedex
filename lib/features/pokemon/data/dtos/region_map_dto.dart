@@ -23,8 +23,8 @@ class RegionMapDto {
   }
 
   RegionMap toDomain() => RegionMap(
-        region: region,
-        imagePath: image,
-        areas: locations.map((dto) => dto.toDomain()).toList(),
-      );
+    region: region,
+    imagePath: image,
+    areas: locations.map((dto) => dto.toDomain()).toList(),
+  );
 }

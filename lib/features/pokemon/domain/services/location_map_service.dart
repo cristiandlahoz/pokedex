@@ -24,7 +24,9 @@ class LocationMapService {
     if (locations.isEmpty) return const [];
 
     final locationNames = locations.map((loc) => loc.areaName).toList();
-    final detectedRegions = RegionDetector.detectRegionsForLocations(locationNames);
+    final detectedRegions = RegionDetector.detectRegionsForLocations(
+      locationNames,
+    );
 
     if (detectedRegions.isEmpty) {
       detectedRegions.add(fallbackRegion.toLowerCase());
@@ -43,7 +45,9 @@ class LocationMapService {
           );
 
           if (highlightedAreas.isNotEmpty) {
-            final updatedMap = data.copyWith(highlightedAreas: highlightedAreas);
+            final updatedMap = data.copyWith(
+              highlightedAreas: highlightedAreas,
+            );
             loadedMaps.add(updatedMap);
           }
 

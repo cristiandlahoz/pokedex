@@ -13,8 +13,10 @@ class MovesFilteringService {
     if (version == null) return moves;
     final normalizedSelected = _normalizeVersionName(version.name);
     return moves
-        .where((move) =>
-            _normalizeVersionName(move.versionGroup) == normalizedSelected)
+        .where(
+          (move) =>
+              _normalizeVersionName(move.versionGroup) == normalizedSelected,
+        )
         .toList();
   }
 
@@ -58,7 +60,7 @@ class MovesFilteringService {
 
   List<String> _sortByPriority(List<String> methods) {
     final priorityMap = {
-      for (var method in LearnMethod.values) method.id: method.priority
+      for (var method in LearnMethod.values) method.id: method.priority,
     };
 
     methods.sort((a, b) {

@@ -49,39 +49,43 @@ class TCGCardFooter extends StatelessWidget {
                       letterSpacing: 0,
                     ),
                   ),
-                  ...weaknesses.take(1).map((w) => Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 14 * scale,
-                        height: 14 * scale,
-                        padding: EdgeInsets.all(2.5 * scale),
-                        decoration: BoxDecoration(
-                          color: TypeColors.getTypeColor(w.type),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.black.withValues(alpha: 0.15),
-                            width: 0.5 * scale,
-                          ),
-                        ),
-                        child: SvgPicture.asset(
-                          TypeIcons.getIconPath(w.type),
-                          colorFilter: const ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
-                          ),
+                  ...weaknesses
+                      .take(1)
+                      .map(
+                        (w) => Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 14 * scale,
+                              height: 14 * scale,
+                              padding: EdgeInsets.all(2.5 * scale),
+                              decoration: BoxDecoration(
+                                color: TypeColors.getTypeColor(w.type),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.black.withValues(alpha: 0.15),
+                                  width: 0.5 * scale,
+                                ),
+                              ),
+                              child: SvgPicture.asset(
+                                TypeIcons.getIconPath(w.type),
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              ' ×${w.damageMultiplier.toStringAsFixed(0)}',
+                              style: TextStyle(
+                                fontSize: 9 * scale,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 0,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Text(
-                        ' ×${w.damageMultiplier.toStringAsFixed(0)}',
-                        style: TextStyle(
-                          fontSize: 9 * scale,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 0,
-                        ),
-                      ),
-                    ],
-                  )),
                 ],
               ),
             ),
@@ -98,39 +102,43 @@ class TCGCardFooter extends StatelessWidget {
                       letterSpacing: 0,
                     ),
                   ),
-                  ...resistances.take(1).map((r) => Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 14 * scale,
-                        height: 14 * scale,
-                        padding: EdgeInsets.all(2.5 * scale),
-                        decoration: BoxDecoration(
-                          color: TypeColors.getTypeColor(r.type),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.black.withValues(alpha: 0.15),
-                            width: 0.5 * scale,
-                          ),
-                        ),
-                        child: SvgPicture.asset(
-                          TypeIcons.getIconPath(r.type),
-                          colorFilter: const ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
-                          ),
+                  ...resistances
+                      .take(1)
+                      .map(
+                        (r) => Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 14 * scale,
+                              height: 14 * scale,
+                              padding: EdgeInsets.all(2.5 * scale),
+                              decoration: BoxDecoration(
+                                color: TypeColors.getTypeColor(r.type),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.black.withValues(alpha: 0.15),
+                                  width: 0.5 * scale,
+                                ),
+                              ),
+                              child: SvgPicture.asset(
+                                TypeIcons.getIconPath(r.type),
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              ' -${((1 - r.damageMultiplier) * 30).toInt()}',
+                              style: TextStyle(
+                                fontSize: 9 * scale,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 0,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Text(
-                        ' -${((1 - r.damageMultiplier) * 30).toInt()}',
-                        style: TextStyle(
-                          fontSize: 9 * scale,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 0,
-                        ),
-                      ),
-                    ],
-                  )),
                 ],
               ),
             ),

@@ -21,10 +21,12 @@ class GameVersionBloc extends Bloc<GameVersionEvent, GameVersionState> {
     }
 
     final selected = event.initialVersion ?? event.versions.first;
-    emit(GameVersionSelectionState(
-      availableVersions: event.versions,
-      selectedVersion: selected,
-    ));
+    emit(
+      GameVersionSelectionState(
+        availableVersions: event.versions,
+        selectedVersion: selected,
+      ),
+    );
   }
 
   void _onGameVersionChanged(
@@ -34,9 +36,11 @@ class GameVersionBloc extends Bloc<GameVersionEvent, GameVersionState> {
     final currentState = state;
     if (currentState is! GameVersionSelectionState) return;
 
-    emit(GameVersionSelectionState(
-      availableVersions: currentState.availableVersions,
-      selectedVersion: event.version,
-    ));
+    emit(
+      GameVersionSelectionState(
+        availableVersions: currentState.availableVersions,
+        selectedVersion: event.version,
+      ),
+    );
   }
 }

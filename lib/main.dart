@@ -206,13 +206,13 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                   child: IndexedStack(
                     index: _currentIndex,
                     children: [
-                        BlocProvider.value(
-                          value: _pokemonBloc,
-                          child: PokemonListPage(
-                            bloc: _pokemonBloc,
-                            title: 'Pokédex',
-                          ),
+                      BlocProvider.value(
+                        value: _pokemonBloc,
+                        child: PokemonListPage(
+                          bloc: _pokemonBloc,
+                          title: 'Pokédex',
                         ),
+                      ),
                       BlocProvider.value(
                         value: _favoritesBloc,
                         child: PokemonListPage(
@@ -220,12 +220,12 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                           title: 'Favorites',
                         ),
                       ),
-                        BlocProvider.value(
-                          value: _triviaBloc,
-                          child: TriviaPage(
-                            onLanguageChange: widget.onLanguageChange,
-                          ),
+                      BlocProvider.value(
+                        value: _triviaBloc,
+                        child: TriviaPage(
+                          onLanguageChange: widget.onLanguageChange,
                         ),
+                      ),
                     ],
                   ),
                 ),
