@@ -18,8 +18,4 @@ abstract class PokemonRepository {
   Future<Result<PokemonDetails>> getPokemonDetails(int id);
 
   Future<Result<List<Pokemon>>> searchPokemon(String query);
-
-  Future<Result<List<PokemonLocation>>> getPokemonLocations(int pokemonId);
-
-  Future<Result<RegionMap>> loadRegionMap(String regionName);
 }

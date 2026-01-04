@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:pokedex/features/pokemon/domain/repositories/locations_repository.dart';
 
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/exceptions/failures.dart' as failures;
@@ -18,7 +19,7 @@ import '../datasources/pokemon_graphql_datasource.dart';
 import '../dtos/details_dto.dart';
 
 @LazySingleton(as: PokemonRepository)
-class PokemonRepositoryImpl implements PokemonRepository {
+class PokemonRepositoryImpl implements PokemonRepository, LocationsRepository {
   final PokemonGraphQLDataSource dataSource;
   final MapLocalDataSource mapDataSource;
   final Logger logger;

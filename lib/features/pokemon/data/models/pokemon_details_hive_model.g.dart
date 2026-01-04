@@ -39,13 +39,15 @@ class PokemonDetailsHiveModelAdapter
       typeDefenses: (fields[18] as List).cast<TypeDefenseInfoHiveModel>(),
       typeOffenses: (fields[19] as List).cast<TypeDefenseInfoHiveModel>(),
       evolutionChain: fields[20] as EvolutionChainHiveModel?,
+      shinyImageUrl: fields[21] as String?,
+      varieties: (fields[22] as List).cast<PokemonVarietyHiveModel>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, PokemonDetailsHiveModel obj) {
     writer
-      ..writeByte(21)
+      ..writeByte(23)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -87,7 +89,11 @@ class PokemonDetailsHiveModelAdapter
       ..writeByte(19)
       ..write(obj.typeOffenses)
       ..writeByte(20)
-      ..write(obj.evolutionChain);
+      ..write(obj.evolutionChain)
+      ..writeByte(21)
+      ..write(obj.shinyImageUrl)
+      ..writeByte(22)
+      ..write(obj.varieties);
   }
 
   @override

@@ -1,19 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pokedex/features/pokemon/domain/repositories/locations_repository.dart';
 
 import '../../../../core/utils/result.dart';
-import '../domain/repositories/pokemon_repository.dart';
-import '../domain/services/location_map_service.dart';
+import '../domain/entities/pokemon_location.dart';
+import '../domain/entities/region_map.dart';
+import '../domain/services/location_matcher.dart';
+import '../domain/services/region_detector.dart';
 import '../domain/value_objects/game_version.dart';
 import 'locations_event.dart';
 import 'locations_state.dart';
 
 @injectable
 class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
-  final PokemonRepository repository;
-  final LocationMapService locationMapService;
+  final LocationsRepository repository;
+  final LocationMatcher locationMatcher;
 
-  LocationsBloc({required this.repository, required this.locationMapService})
+  LocationsBloc({required this.repository, required this.locationMatcher})
     : super(const LocationsInitial()) {
     on<LocationsLoadRequested>(_onLoadRequested);
     on<GameVersionSelected>(_onGameVersionSelected);
@@ -73,11 +76,53 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
     if (currentState is! LocationsSuccess) return;
 
     final locationsForVersion = currentState.locationsForSelectedVersion;
-    final loadedMaps = await locationMapService.loadAndMatchMapsForLocations(
+    final loadedMaps = await loadAndMatchMapsForLocations(
       locations: locationsForVersion,
       fallbackRegion: currentState.selectedRegion,
     );
 
     emit(currentState.copyWith(regionMaps: () => loadedMaps));
+  }
+
+  Future<List<RegionMap>> loadAndMatchMapsForLocations({
+    required List<PokemonLocation> locations,
+    required String fallbackRegion,
+  }) async {
+    if (locations.isEmpty) return const [];
+
+    final locationNames = locations.map((loc) => loc.areaName).toList();
+    final detectedRegions = RegionDetector.detectRegionsForLocations(
+      locationNames,
+    );
+
+    if (detectedRegions.isEmpty) {
+      detectedRegions.add(fallbackRegion.toLowerCase());
+    }
+
+    final loadedMaps = <RegionMap>[];
+
+    for (final region in detectedRegions) {
+      final result = await repository.loadRegionMap(region);
+
+      switch (result) {
+        case Success(:final data):
+          final highlightedAreas = locationMatcher.matchLocationsToMap(
+            locations: locations,
+            regionMap: data,
+          );
+
+          if (highlightedAreas.isNotEmpty) {
+            final updatedMap = data.copyWith(
+              highlightedAreas: highlightedAreas,
+            );
+            loadedMaps.add(updatedMap);
+          }
+
+        case ResultFailure():
+          continue;
+      }
+    }
+
+    return loadedMaps;
   }
 }

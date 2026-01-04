@@ -6,6 +6,7 @@ import 'evolution_chain_hive_model.dart';
 import 'pokemon_ability_hive_model.dart';
 import 'pokemon_move_hive_model.dart';
 import 'pokemon_stat_hive_model.dart';
+import 'pokemon_variety_hive_model.dart';
 import 'type_defense_info_hive_model.dart';
 
 part 'pokemon_details_hive_model.g.dart';
@@ -77,6 +78,12 @@ class PokemonDetailsHiveModel extends HiveObject {
   @HiveField(20)
   final EvolutionChainHiveModel? evolutionChain;
 
+  @HiveField(21)
+  final String? shinyImageUrl;
+
+  @HiveField(22)
+  final List<PokemonVarietyHiveModel> varieties;
+
   PokemonDetailsHiveModel({
     required this.id,
     required this.name,
@@ -99,6 +106,8 @@ class PokemonDetailsHiveModel extends HiveObject {
     required this.typeDefenses,
     required this.typeOffenses,
     this.evolutionChain,
+    this.shinyImageUrl,
+    required this.varieties,
   });
 
   factory PokemonDetailsHiveModel.fromDomain(PokemonDetails details) {
@@ -136,6 +145,10 @@ class PokemonDetailsHiveModel extends HiveObject {
       evolutionChain: details.evolutionChain != null
           ? EvolutionChainHiveModel.fromDomain(details.evolutionChain!)
           : null,
+      shinyImageUrl: details.shinyImageUrl,
+      varieties: details.varieties
+          .map((v) => PokemonVarietyHiveModel.fromDomain(v))
+          .toList(),
     );
   }
 
@@ -145,6 +158,7 @@ class PokemonDetailsHiveModel extends HiveObject {
       name: name,
       types: typeIndices.map((i) => PokemonTypes.values[i]).toList(),
       imageUrl: imageUrl,
+      shinyImageUrl: shinyImageUrl,
       height: height,
       weight: weight,
       genus: genus,
@@ -162,6 +176,7 @@ class PokemonDetailsHiveModel extends HiveObject {
       typeDefenses: typeDefenses.map((t) => t.toDomain()).toList(),
       typeOffenses: typeOffenses.map((t) => t.toDomain()).toList(),
       evolutionChain: evolutionChain?.toDomain(),
+      varieties: varieties.map((v) => v.toDomain()).toList(),
     );
   }
 }

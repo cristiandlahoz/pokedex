@@ -1,6 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:pokedex/features/pokemon/domain/entities/pokemon_location.dart';
-import 'package:pokedex/features/pokemon/domain/entities/region_map.dart';
 
 import '../../../../core/exceptions/failures.dart';
 import '../../../../core/logging/log_event.dart';
@@ -9,8 +7,6 @@ import '../../../../core/theme/tokens.dart';
 import '../../../../core/utils/result.dart';
 import '../../domain/entities/pokemon.dart';
 import '../../domain/entities/pokemon_details.dart';
-import '../../domain/entities/pokemon_location.dart';
-import '../../domain/entities/region_map.dart';
 import '../../domain/repositories/favorites_repository.dart';
 import '../../domain/repositories/pokemon_repository.dart';
 import '../../domain/value_objects/filters.dart';
@@ -121,20 +117,6 @@ class FavoritesRepositoryImpl
       call: () async {
         return dataSource.getFavoriteIds();
       },
-    );
-  }
-
-  @override
-  Future<Result<List<PokemonLocation>>> getPokemonLocations(
-    int pokemonId,
-  ) async {
-    throw UnimplementedError('Favorites repository does not support locations');
-  }
-
-  @override
-  Future<Result<RegionMap>> loadRegionMap(String regionName) async {
-    throw UnimplementedError(
-      'Favorites repository does not support region maps',
     );
   }
 

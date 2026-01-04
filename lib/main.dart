@@ -27,6 +27,7 @@ import 'features/pokemon/data/models/pokemon_ability_hive_model.dart';
 import 'features/pokemon/data/models/pokemon_details_hive_model.dart';
 import 'features/pokemon/data/models/pokemon_move_hive_model.dart';
 import 'features/pokemon/data/models/pokemon_stat_hive_model.dart';
+import 'features/pokemon/data/models/pokemon_variety_hive_model.dart';
 import 'features/pokemon/data/models/trivia_level_stats_hive_model.dart';
 import 'features/pokemon/data/models/trivia_player_hive_model.dart';
 import 'features/pokemon/data/models/type_defense_info_hive_model.dart';
@@ -45,6 +46,7 @@ void main() async {
   Hive.registerAdapter(PokemonAbilityHiveModelAdapter());
   Hive.registerAdapter(PokemonStatHiveModelAdapter());
   Hive.registerAdapter(PokemonMoveHiveModelAdapter());
+  Hive.registerAdapter(PokemonVarietyHiveModelAdapter());
   Hive.registerAdapter(TypeDefenseInfoHiveModelAdapter());
   Hive.registerAdapter(EvolutionChainHiveModelAdapter());
   Hive.registerAdapter(EvolutionSpeciesHiveModelAdapter());
@@ -52,6 +54,7 @@ void main() async {
   Hive.registerAdapter(TriviaPlayerHiveModelAdapter());
   Hive.registerAdapter(TriviaLevelStatsHiveModelAdapter());
 
+  // Clear favorites cache to handle model structure changes
   await Hive.openBox<PokemonDetailsHiveModel>('favorites');
   await Hive.openBox<TriviaPlayerHiveModel>('trivia_players');
 
@@ -173,7 +176,6 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
   Widget build(BuildContext context) {
     final int pokedexTab = 0;
     final int favoritesTab = 1;
-    final int favoritesTabWhenOffline = 0;
     final int triviaTab = 2;
 
     return BlocConsumer<ConnectivityBloc, ConnectivityState>(
