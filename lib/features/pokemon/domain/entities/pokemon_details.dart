@@ -27,6 +27,7 @@ class PokemonDetails extends Pokemon {
     required super.name,
     required super.types,
     super.imageUrl,
+    super.shinyImageUrl,
     super.height,
     super.weight,
     this.genus,

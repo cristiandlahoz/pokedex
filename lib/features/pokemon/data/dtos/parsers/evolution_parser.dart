@@ -58,7 +58,7 @@ class EvolutionParser {
           spritesData.isNotEmpty) {
         final sprites = spritesData[0]['sprites'] as Map<String, dynamic>?;
         if (sprites != null) {
-          imageUrl = ListItemDto.getSprite(sprites);
+          imageUrl = ListItemDto.getSprite(sprites, false);
         }
       }
 

@@ -5,6 +5,7 @@ class Pokemon extends Equatable {
   final int id;
   final String name;
   final String? imageUrl;
+  final String? shinyImageUrl;
   final int? height;
   final int? weight;
   final List<PokemonTypes> types;
@@ -14,6 +15,7 @@ class Pokemon extends Equatable {
     required this.name,
     required this.types,
     this.imageUrl,
+    this.shinyImageUrl,
     this.height,
     this.weight,
   });
@@ -21,5 +23,5 @@ class Pokemon extends Equatable {
   String get displayName => name[0].toUpperCase() + name.substring(1);
 
   @override
-  List<Object?> get props => [id, name, imageUrl, height, weight, types];
+  List<Object?> get props => [id, name, imageUrl, shinyImageUrl, height, weight, types];
 }

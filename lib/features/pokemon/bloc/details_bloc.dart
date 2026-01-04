@@ -15,6 +15,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<DetailsLoadRequested>(_onDetailsLoadRequested);
     on<DetailsLoadMoreMovesRequested>(_onDetailsLoadMoreMovesRequested);
     on<DetailsGameVersionSelected>(_onDetailsGameVersionSelected);
+    on<DetailsShinyToggled>(_onDetailsShinyToggled);
   }
 
   Future<void> _onDetailsLoadRequested(
@@ -60,6 +61,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       hasMoreMoves: currentState.hasMoreMoves,
       currentMovesPage: currentState.currentMovesPage,
       selectedGameVersion: currentState.selectedGameVersion,
+      isShiny: currentState.isShiny,
     ));
 
     final nextPage = currentState.currentMovesPage + 1;
@@ -76,6 +78,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           name: currentState.pokemon.name,
           types: currentState.pokemon.types,
           imageUrl: currentState.pokemon.imageUrl,
+          shinyImageUrl: currentState.pokemon.shinyImageUrl,
           height: currentState.pokemon.height,
           weight: currentState.pokemon.weight,
           genus: currentState.pokemon.genus,
@@ -99,6 +102,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           hasMoreMoves: data.length >= repository.movesPageSize,
           currentMovesPage: nextPage,
           selectedGameVersion: currentState.selectedGameVersion,
+          isShiny: currentState.isShiny,
         ));
       case ResultFailure():
         emit(currentState.copyWith());
@@ -113,5 +117,15 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     final currentState = state as DetailsSuccess;
     emit(currentState.copyWith(selectedGameVersion: event.version));
+  }
+
+  void _onDetailsShinyToggled(
+    DetailsShinyToggled event,
+    Emitter<DetailsState> emit,
+  ) {
+    if (state is! DetailsSuccess) return;
+
+    final currentState = state as DetailsSuccess;
+    emit(currentState.copyWith(isShiny: !currentState.isShiny));
   }
 }

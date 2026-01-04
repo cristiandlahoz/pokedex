@@ -35,3 +35,7 @@ class DetailsGameVersionSelected extends DetailsEvent {
   @override
   List<Object?> get props => [version];
 }
+
+class DetailsShinyToggled extends DetailsEvent {
+  const DetailsShinyToggled();
+}
