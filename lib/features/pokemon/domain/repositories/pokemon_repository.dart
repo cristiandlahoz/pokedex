@@ -2,8 +2,6 @@ import '../../../../core/utils/result.dart';
 import '../../../../core/theme/tokens.dart';
 import '../entities/pokemon.dart';
 import '../entities/pokemon_details.dart';
-import '../entities/pokemon_location.dart';
-import '../entities/region_map.dart';
 import '../value_objects/filters.dart';
 import '../value_objects/sorting.dart';
 

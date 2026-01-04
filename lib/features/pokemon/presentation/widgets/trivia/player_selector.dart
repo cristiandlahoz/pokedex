@@ -90,7 +90,7 @@ class PlayerSelector extends StatelessWidget {
           children: [
             if (players.isNotEmpty)
               DropdownButtonFormField<String>(
-                value: currentPlayer?.name,
+                initialValue: currentPlayer?.name,
                 decoration: InputDecoration(
                   labelText: l10n.triviaSelectPlayer,
                   border: OutlineInputBorder(
