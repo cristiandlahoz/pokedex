@@ -32,9 +32,9 @@ class _TCGCardFullscreenViewerState extends State<TCGCardFullscreenViewer> {
   Widget build(BuildContext context) {
     final cardData = TCGCardData(widget.pokemon, variant: widget.variant);
     final typeColor = TypeHelper.getPrimaryTypeColor(widget.pokemon);
-    
+
     final screenWidth = MediaQuery.of(context).size.width;
-    
+
     final cardWidth = (screenWidth * 0.85).clamp(280.0, 450.0);
     final cardHeight = cardWidth * 1.39;
 
@@ -128,8 +128,8 @@ class _TCGCardFullscreenViewerState extends State<TCGCardFullscreenViewer> {
     try {
       await Future.delayed(const Duration(milliseconds: 500));
 
-      final boundary = _cardKey.currentContext!.findRenderObject()
-          as RenderRepaintBoundary;
+      final boundary =
+          _cardKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 3.0);
       final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
@@ -147,7 +147,8 @@ class _TCGCardFullscreenViewerState extends State<TCGCardFullscreenViewer> {
             mimeType: 'image/png',
           ),
         ],
-        text: 'Check out my ${widget.pokemon.displayName} TCG card from Pokedex!',
+        text:
+            'Check out my ${widget.pokemon.displayName} TCG card from Pokedex!',
       );
     } catch (e) {
       if (mounted) {

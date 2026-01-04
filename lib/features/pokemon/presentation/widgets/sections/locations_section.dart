@@ -36,15 +36,19 @@ class _LocationsSectionState extends State<LocationsSection> {
         _buildLocationsList(),
         if (widget.state.regionMaps.isNotEmpty) ...[
           SizedBox(height: spacing),
-          _buildSectionButton('Locations map (${widget.state.regionMaps.length})'),
+          _buildSectionButton(
+            'Locations map (${widget.state.regionMaps.length})',
+          ),
           SizedBox(height: spacing),
-          ...widget.state.regionMaps.map((regionMap) => Padding(
-                padding: EdgeInsets.only(bottom: spacing),
-                child: LocationsMapViewer(
-                  regionMap: regionMap,
-                  typeColor: widget.typeColor,
-                ),
-              )),
+          ...widget.state.regionMaps.map(
+            (regionMap) => Padding(
+              padding: EdgeInsets.only(bottom: spacing),
+              child: LocationsMapViewer(
+                regionMap: regionMap,
+                typeColor: widget.typeColor,
+              ),
+            ),
+          ),
         ],
       ],
     );
@@ -90,10 +94,7 @@ class _LocationsSectionState extends State<LocationsSection> {
         child: Text(
           'No locations available for this pokemon game version',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.grey.shade600,
-            fontSize: fontSize,
-          ),
+          style: TextStyle(color: Colors.grey.shade600, fontSize: fontSize),
         ),
       );
     }
@@ -104,20 +105,22 @@ class _LocationsSectionState extends State<LocationsSection> {
         .toList();
 
     final spacing = ResponsiveUtils.getSpacingSmall(context);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ...uniqueRegions.map((region) => Padding(
-              padding: EdgeInsets.only(bottom: spacing),
-              child: _RegionCard(
-                region: region,
-                locations: locationsForVersion
-                    .where((loc) => loc.locationName.startsWith(region))
-                    .toList(),
-                typeColor: widget.typeColor,
-              ),
-            )),
+        ...uniqueRegions.map(
+          (region) => Padding(
+            padding: EdgeInsets.only(bottom: spacing),
+            child: _RegionCard(
+              region: region,
+              locations: locationsForVersion
+                  .where((loc) => loc.locationName.startsWith(region))
+                  .toList(),
+              typeColor: widget.typeColor,
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -143,26 +146,28 @@ class _RegionCardState extends State<_RegionCard> {
 
   List<PokemonLocation> _getUniqueLocations() {
     final Map<String, PokemonLocation> uniqueMap = {};
-    
+
     for (final location in widget.locations) {
-      final key = '${location.areaName}_${location.minLevel}_${location.maxLevel}';
+      final key =
+          '${location.areaName}_${location.minLevel}_${location.maxLevel}';
       if (!uniqueMap.containsKey(key)) {
         uniqueMap[key] = location;
       }
     }
-    
+
     return uniqueMap.values.toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    final regionName = widget.region[0].toUpperCase() + widget.region.substring(1);
+    final regionName =
+        widget.region[0].toUpperCase() + widget.region.substring(1);
     final uniqueLocations = _getUniqueLocations();
 
     final borderRadius = ResponsiveUtils.getCardBorderRadius(context);
     final padding = ResponsiveUtils.getSpacingMedium(context);
     final fontSize = ResponsiveUtils.getFontSizeMedium(context);
-    
+
     return Container(
       decoration: BoxDecoration(
         color: widget.typeColor.withValues(alpha: DesignTokens.opacityLight),

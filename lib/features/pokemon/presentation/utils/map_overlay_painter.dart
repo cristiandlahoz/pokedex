@@ -47,7 +47,11 @@ class MapOverlayPainter extends CustomPainter {
   }
 
   void _drawArea(
-      Canvas canvas, MapArea area, Paint fillPaint, Paint borderPaint) {
+    Canvas canvas,
+    MapArea area,
+    Paint fillPaint,
+    Paint borderPaint,
+  ) {
     switch (area.shape) {
       case AreaShape.rect:
         _drawRect(canvas, area.coords, fillPaint, borderPaint);
@@ -68,7 +72,11 @@ class MapOverlayPainter extends CustomPainter {
   }
 
   void _drawCircle(
-      Canvas canvas, List<double> coords, Paint fill, Paint border) {
+    Canvas canvas,
+    List<double> coords,
+    Paint fill,
+    Paint border,
+  ) {
     final center = Offset(coords[0], coords[1]);
     final radius = coords[2];
     canvas.drawCircle(center, radius, fill);
@@ -76,7 +84,11 @@ class MapOverlayPainter extends CustomPainter {
   }
 
   void _drawPolygon(
-      Canvas canvas, List<double> coords, Paint fill, Paint border) {
+    Canvas canvas,
+    List<double> coords,
+    Paint fill,
+    Paint border,
+  ) {
     final path = Path();
     path.moveTo(coords[0], coords[1]);
     for (int i = 2; i < coords.length; i += 2) {

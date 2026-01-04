@@ -24,7 +24,7 @@ class LocationsMapViewer extends StatelessWidget {
     final horizontalMargin = ResponsiveUtils.getSpacingMedium(context);
     final shadowBlur = ResponsiveUtils.getWidthPercentage(context, 0.025);
     final shadowOffset = ResponsiveUtils.getHeightPercentage(context, 0.005);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -119,10 +119,26 @@ class _MapWithOverlayState extends State<_MapWithOverlay> {
           children: [
             ColorFiltered(
               colorFilter: const ColorFilter.matrix([
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0,      0,      0,      1, 0,
+                0.2126,
+                0.7152,
+                0.0722,
+                0,
+                0,
+                0.2126,
+                0.7152,
+                0.0722,
+                0,
+                0,
+                0.2126,
+                0.7152,
+                0.0722,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
               ]),
               child: Image.asset(
                 widget.map.imagePath,
@@ -137,7 +153,9 @@ class _MapWithOverlayState extends State<_MapWithOverlay> {
                 painter: MapOverlayPainter(
                   areas: widget.map.getAreasByNames(widget.highlightedAreas),
                   imageSize: _imageSize!,
-                  highlightColor: widget.highlightColor.withValues(alpha: DesignTokens.mapHighlightOpacity),
+                  highlightColor: widget.highlightColor.withValues(
+                    alpha: DesignTokens.mapHighlightOpacity,
+                  ),
                 ),
               ),
           ],

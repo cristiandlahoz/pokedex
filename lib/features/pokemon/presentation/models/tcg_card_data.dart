@@ -52,14 +52,14 @@ class TCGCardData {
   }
 
   PokemonMove? get bestMove {
-    final validMoves = pokemon.moves.where((m) => 
-      m.power != null && m.power! > 0
-    ).toList();
-    
+    final validMoves = pokemon.moves
+        .where((m) => m.power != null && m.power! > 0)
+        .toList();
+
     if (validMoves.isEmpty) return null;
-    
+
     validMoves.sort((a, b) => b.power!.compareTo(a.power!));
-    
+
     switch (variant) {
       case TCGCardVariant.basic:
       case TCGCardVariant.shiny:
@@ -77,7 +77,7 @@ class TCGCardData {
 
   String? get abilityName {
     if (pokemon.abilities.isEmpty) return null;
-    
+
     final abilityIndex = switch (variant) {
       TCGCardVariant.basic => 0,
       TCGCardVariant.alternate => pokemon.abilities.length > 1 ? 1 : 0,
@@ -86,13 +86,13 @@ class TCGCardData {
       TCGCardVariant.firstEdition => 0,
       TCGCardVariant.promo => pokemon.abilities.length > 1 ? 1 : 0,
     };
-    
+
     return pokemon.abilities[abilityIndex].name;
   }
 
   String? get abilityEffect {
     if (pokemon.abilities.isEmpty) return null;
-    
+
     final abilityIndex = switch (variant) {
       TCGCardVariant.basic => 0,
       TCGCardVariant.alternate => pokemon.abilities.length > 1 ? 1 : 0,
@@ -101,20 +101,20 @@ class TCGCardData {
       TCGCardVariant.firstEdition => 0,
       TCGCardVariant.promo => pokemon.abilities.length > 1 ? 1 : 0,
     };
-    
+
     return pokemon.abilities[abilityIndex].effect;
   }
 
   List<TypeDefenseInfo> get weaknesses {
     return pokemon.typeDefenses
-      .where((t) => t.damageMultiplier >= 2.0)
-      .toList();
+        .where((t) => t.damageMultiplier >= 2.0)
+        .toList();
   }
 
   List<TypeDefenseInfo> get resistances {
     return pokemon.typeDefenses
-      .where((t) => t.damageMultiplier > 0 && t.damageMultiplier <= 0.5)
-      .toList();
+        .where((t) => t.damageMultiplier > 0 && t.damageMultiplier <= 0.5)
+        .toList();
   }
 
   int get retreatCost {
@@ -122,7 +122,7 @@ class TCGCardData {
       (s) => s.name == 'speed',
       orElse: () => throw Exception('Speed stat not found'),
     );
-    
+
     if (speedStat.baseStat >= 100) return 0;
     if (speedStat.baseStat >= 70) return 1;
     if (speedStat.baseStat >= 40) return 2;
@@ -145,11 +145,13 @@ class TCGCardData {
   PokemonTypes get typeForCard {
     return switch (variant) {
       TCGCardVariant.basic => primaryType,
-      TCGCardVariant.alternate => pokemon.types.length > 1 ? pokemon.types[1] : primaryType,
+      TCGCardVariant.alternate =>
+        pokemon.types.length > 1 ? pokemon.types[1] : primaryType,
       TCGCardVariant.shiny => primaryType,
       TCGCardVariant.reverseHolo => primaryType,
       TCGCardVariant.firstEdition => primaryType,
-      TCGCardVariant.promo => pokemon.types.length > 1 ? pokemon.types[1] : primaryType,
+      TCGCardVariant.promo =>
+        pokemon.types.length > 1 ? pokemon.types[1] : primaryType,
     };
   }
 }

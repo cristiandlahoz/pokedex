@@ -84,10 +84,8 @@ class CardsSection extends StatelessWidget {
   void _openFullscreenViewer(BuildContext context, TCGCardVariant variant) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => TCGCardFullscreenViewer(
-          pokemon: pokemon,
-          variant: variant,
-        ),
+        builder: (_) =>
+            TCGCardFullscreenViewer(pokemon: pokemon, variant: variant),
       ),
     );
   }

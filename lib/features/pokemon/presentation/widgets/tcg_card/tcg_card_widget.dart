@@ -12,11 +12,7 @@ class TCGCardWidget extends StatelessWidget {
   final TCGCardData cardData;
   final Size? fixedSize;
 
-  const TCGCardWidget({
-    super.key,
-    required this.cardData,
-    this.fixedSize,
-  });
+  const TCGCardWidget({super.key, required this.cardData, this.fixedSize});
 
   Color _getCardBackgroundColor() {
     return TypeColors.getTypeColor(cardData.typeForCard);
@@ -107,14 +103,22 @@ class TCGCardWidget extends StatelessWidget {
                       abilityEffect: cardData.abilityEffect,
                       scale: scale,
                     ),
-                    Divider(height: 0.5 * scale, thickness: 0.3 * scale, color: Colors.black38),
+                    Divider(
+                      height: 0.5 * scale,
+                      thickness: 0.3 * scale,
+                      color: Colors.black38,
+                    ),
                     TCGCardAttack(
                       attack: cardData.bestMove,
                       type: cardData.typeForCard,
                       scale: scale,
                     ),
                     SizedBox(height: 2 * scale),
-                    Divider(height: 0.5 * scale, thickness: 0.3 * scale, color: Colors.black38),
+                    Divider(
+                      height: 0.5 * scale,
+                      thickness: 0.3 * scale,
+                      color: Colors.black38,
+                    ),
                     TCGCardFooter(
                       weaknesses: cardData.weaknesses,
                       resistances: cardData.resistances,
@@ -122,7 +126,10 @@ class TCGCardWidget extends StatelessWidget {
                       scale: scale,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 4 * scale, vertical: 1 * scale),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 4 * scale,
+                        vertical: 1 * scale,
+                      ),
                       child: Text(
                         '©2025 Pokémon',
                         style: TextStyle(

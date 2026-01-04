@@ -7,6 +7,7 @@ import '../../../bloc/details_event.dart';
 import '../../../bloc/details_state.dart';
 import '../../../domain/entities/pokemon_details.dart';
 import '../favorite_toggle_button.dart';
+import 'form_selector.dart';
 import 'game_version_selector.dart';
 
 class DetailsAppBar extends StatelessWidget {
@@ -25,9 +26,7 @@ class DetailsAppBar extends StatelessWidget {
       expandedHeight: AppConstants.appBarExpandedHeight,
       pinned: true,
       backgroundColor: backgroundColor,
-      flexibleSpace: FlexibleSpaceBar(
-        background: _buildBackground(context),
-      ),
+      flexibleSpace: FlexibleSpaceBar(background: _buildBackground(context)),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Navigator.of(context).pop(),
@@ -67,12 +66,11 @@ class DetailsAppBar extends StatelessWidget {
       ),
       child: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
-            Flexible(
+            Expanded(
               child: _buildPokemonImage(context),
             ),
+            const FormSelector(),
             const SizedBox(height: 8),
             const GameVersionSelector(),
             const SizedBox(height: 8),
@@ -86,16 +84,28 @@ class DetailsAppBar extends StatelessWidget {
     return BlocBuilder<DetailsBloc, DetailsState>(
       builder: (context, state) {
         final isShiny = state is DetailsSuccess ? state.isShiny : false;
-        final imageUrl = isShiny 
-            ? (pokemon.shinyImageUrl ?? pokemon.imageUrl)
-            : pokemon.imageUrl;
+        final imageUrl = state is DetailsSuccess
+            ? state.currentImageUrl
+            : (isShiny
+                ? (pokemon.shinyImageUrl ?? pokemon.imageUrl)
+                : pokemon.imageUrl);
+
+        if (imageUrl == null || imageUrl.isEmpty) {
+          return Center(
+            child: Icon(
+              Icons.catching_pokemon,
+              size: AppConstants.pokemonImageHeight,
+              color: Colors.white.withValues(alpha: 0.5),
+            ),
+          );
+        }
 
         return Center(
           child: Hero(
             tag: 'pokemon_${pokemon.id}',
             transitionOnUserGestures: true,
             child: CachedNetworkImage(
-              imageUrl: imageUrl ?? '',
+              imageUrl: imageUrl,
               width: AppConstants.pokemonImageHeight,
               height: AppConstants.pokemonImageHeight,
               fit: BoxFit.contain,
@@ -103,16 +113,14 @@ class DetailsAppBar extends StatelessWidget {
                 width: AppConstants.pokemonImageHeight,
                 height: AppConstants.pokemonImageHeight,
                 child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                  ),
+                  child: CircularProgressIndicator(color: Colors.white),
                 ),
               ),
-              errorWidget: (context, url, error) => const Center(
+              errorWidget: (context, url, error) => Center(
                 child: Icon(
-                  Icons.error_outline,
-                  size: AppConstants.iconSizeLarge,
-                  color: Colors.white70,
+                  Icons.catching_pokemon,
+                  size: AppConstants.pokemonImageHeight,
+                  color: Colors.white.withValues(alpha: 0.5),
                 ),
               ),
             ),

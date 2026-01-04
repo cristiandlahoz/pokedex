@@ -17,20 +17,25 @@ class TCGCardAbility extends StatelessWidget {
     if (abilityName == null) return const SizedBox.shrink();
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(12 * scale, 8 * scale, 12 * scale, 5 * scale),
+      padding: EdgeInsets.fromLTRB(
+        12 * scale,
+        8 * scale,
+        12 * scale,
+        5 * scale,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10 * scale, vertical: 3 * scale),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10 * scale,
+                  vertical: 3 * scale,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      Colors.red.shade700,
-                      Colors.red.shade600,
-                    ],
+                    colors: [Colors.red.shade700, Colors.red.shade600],
                   ),
                   borderRadius: BorderRadius.circular(12 * scale),
                   border: Border.all(
@@ -67,14 +72,14 @@ class TCGCardAbility extends StatelessWidget {
           if (abilityEffect != null) ...[
             SizedBox(height: 4 * scale),
             Text(
-                  abilityEffect!,
-                  style: TextStyle(
-                    fontSize: 11 * scale,
-                    color: Colors.black.withOpacity(0.85),
-                    height: 1.2,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+              abilityEffect!,
+              style: TextStyle(
+                fontSize: 11 * scale,
+                color: Colors.black.withValues(alpha: 0.85),
+                height: 1.2,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ],
         ],
       ),

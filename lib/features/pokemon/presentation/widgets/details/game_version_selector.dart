@@ -21,6 +21,8 @@ class GameVersionSelector extends StatefulWidget {
 }
 
 class _GameVersionSelectorState extends State<GameVersionSelector> {
+  bool _hasInitialized = false;
+
   @override
   void initState() {
     super.initState();
@@ -31,10 +33,25 @@ class _GameVersionSelectorState extends State<GameVersionSelector> {
     final detailsState = context.read<DetailsBloc>().state;
     if (detailsState is DetailsSuccess) {
       final versions = detailsState.allGameVersions;
-      context.read<GameVersionBloc>().add(GameVersionsLoaded(
-            versions: versions,
-            initialVersion: detailsState.selectedGameVersion,
-          ));
+      context.read<GameVersionBloc>().add(
+        GameVersionsLoaded(
+          versions: versions,
+          initialVersion: detailsState.selectedGameVersion,
+        ),
+      );
+    }
+  }
+
+  void _initializeLocationIfNeeded(GameVersion version) {
+    if (!_hasInitialized) {
+      _hasInitialized = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          context.read<LocationsBloc>().add(
+            GameVersionSelected(version: version),
+          );
+        }
+      });
     }
   }
 
@@ -61,6 +78,8 @@ class _GameVersionSelectorState extends State<GameVersionSelector> {
         final selectedVersion = versionState.selectedVersion;
         final allVersions = versionState.availableVersions;
 
+        _initializeLocationIfNeeded(selectedVersion);
+
         return Container(
           margin: EdgeInsets.symmetric(
             horizontal: horizontalMargin,
@@ -79,7 +98,9 @@ class _GameVersionSelectorState extends State<GameVersionSelector> {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: DesignTokens.opacityLight * 0.6),
+                color: Colors.black.withValues(
+                  alpha: DesignTokens.opacityLight * 0.6,
+                ),
                 blurRadius: shadowBlur,
                 offset: Offset(0, shadowOffset),
               ),
@@ -152,14 +173,14 @@ class _GameVersionSelectorState extends State<GameVersionSelector> {
             onChanged: (value) {
               if (value != null) {
                 context.read<GameVersionBloc>().add(
-                      GameVersionChanged(version: value),
-                    );
+                  GameVersionChanged(version: value),
+                );
                 context.read<DetailsBloc>().add(
-                      DetailsGameVersionSelected(version: value),
-                    );
+                  DetailsGameVersionSelected(version: value),
+                );
                 context.read<LocationsBloc>().add(
-                      GameVersionSelected(version: value),
-                    );
+                  GameVersionSelected(version: value),
+                );
               }
             },
           ),
@@ -167,4 +188,4 @@ class _GameVersionSelectorState extends State<GameVersionSelector> {
       },
     );
   }
-  }
+}

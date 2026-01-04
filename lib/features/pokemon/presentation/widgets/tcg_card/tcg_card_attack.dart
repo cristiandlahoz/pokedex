@@ -27,7 +27,12 @@ class TCGCardAttack extends StatelessWidget {
         : type;
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(12 * scale, 8 * scale, 12 * scale, 5 * scale),
+      padding: EdgeInsets.fromLTRB(
+        12 * scale,
+        8 * scale,
+        12 * scale,
+        5 * scale,
+      ),
       child: Row(
         children: [
           Container(

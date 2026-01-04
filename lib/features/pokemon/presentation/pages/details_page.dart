@@ -16,6 +16,7 @@ import '../../domain/entities/pokemon_details.dart';
 import '../utils/type_helper.dart';
 import '../widgets/details/app_bar.dart';
 import '../widgets/details/header.dart';
+import '../utils/variety_classifier.dart';
 import '../widgets/sections/abilities_section.dart';
 import '../widgets/sections/base_stats_section.dart';
 import '../widgets/sections/breeding_section.dart';
@@ -25,6 +26,7 @@ import '../widgets/sections/evolution_section.dart';
 import '../widgets/sections/locations_section.dart';
 import '../widgets/sections/moves_section.dart';
 import '../widgets/sections/physical_stats_section.dart';
+import '../widgets/sections/varieties_section.dart';
 import '../widgets/sections/species_section.dart';
 import '../widgets/sections/training_section.dart';
 import '../widgets/sections/type_effectiveness_section.dart';
@@ -123,12 +125,11 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<LocationsBloc>()
-            ..add(LocationsLoadRequested(pokemonId: pokemon.id)),
+          create: (context) =>
+              getIt<LocationsBloc>()
+                ..add(LocationsLoadRequested(pokemonId: pokemon.id)),
         ),
-        BlocProvider(
-          create: (context) => getIt<GameVersionBloc>(),
-        ),
+        BlocProvider(create: (context) => getIt<GameVersionBloc>()),
       ],
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -196,6 +197,9 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   }
 
   Widget _buildAboutTab(PokemonDetails pokemon) {
+    final specialEvolutions = VarietyClassifier.getSpecialEvolutions(pokemon.varieties);
+    final alternativeForms = VarietyClassifier.getAlternativeForms(pokemon.varieties);
+
     return ListView(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
       children: [
@@ -207,6 +211,18 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         BreedingSection(pokemon: pokemon),
         AbilitiesSection(pokemon: pokemon),
         EvolutionSection(pokemon: pokemon),
+        if (specialEvolutions.isNotEmpty)
+          VarietiesSection(
+            title: 'Special evolutions',
+            pokemon: pokemon,
+            varieties: specialEvolutions,
+          ),
+        if (alternativeForms.isNotEmpty)
+          VarietiesSection(
+            title: 'Alternative Forms',
+            pokemon: pokemon,
+            varieties: alternativeForms,
+          ),
         const SizedBox(height: AppConstants.largePadding),
       ],
     );
@@ -235,7 +251,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
         final moves = state is DetailsSuccess
             ? state.pokemon.moves
             : pokemon.moves;
-        
+
         final selectedVersion = state is DetailsSuccess
             ? state.selectedGameVersion
             : null;
@@ -250,10 +266,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
             Text(
               'The moves listed below showcase all available techniques the selected Pokémon can learn',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade600,
-              ),
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
             ),
             const SizedBox(height: 16),
             MovesSection(
@@ -272,23 +285,17 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
 
   Widget _buildOtherTab(PokemonDetails pokemon) {
     final primaryTypeColor = TypeHelper.getPrimaryTypeColor(pokemon);
-    
+
     return BlocBuilder<LocationsBloc, LocationsState>(
       builder: (context, state) {
         return ListView(
           padding: const EdgeInsets.all(AppConstants.defaultPadding),
           children: [
             const SizedBox(height: 16),
-            CardsSection(
-              pokemon: pokemon,
-              typeColor: primaryTypeColor,
-            ),
+            CardsSection(pokemon: pokemon, typeColor: primaryTypeColor),
             const SizedBox(height: 24),
             if (state is LocationsSuccess && state.locations.isNotEmpty)
-              LocationsSection(
-                state: state,
-                typeColor: primaryTypeColor,
-              )
+              LocationsSection(state: state, typeColor: primaryTypeColor)
             else if (state is LocationsLoading)
               const Center(
                 child: Padding(
