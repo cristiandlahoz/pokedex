@@ -98,8 +98,13 @@ fragment EvolutionSpeciesFields on pokemonspecies {
 
 const String moveFragment = '''
 fragment MoveFields on pokemonmove {
+  level
+  move_learn_method_id
   version_group_id
   versiongroup {
+    name
+  }
+  movelearnmethod {
     name
   }
   move {
@@ -109,6 +114,12 @@ fragment MoveFields on pokemonmove {
     pp
     type {
       name
+    }
+    machines(where: {version_group_id: {_is_null: false}}, limit: 1) {
+      machine_number
+      item {
+        name
+      }
     }
   }
 }
