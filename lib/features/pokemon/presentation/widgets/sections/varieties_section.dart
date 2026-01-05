@@ -34,7 +34,10 @@ class VarietiesSection extends StatelessWidget {
         children: [
           _PillSectionTitle(title: title, color: typeColor),
           const SizedBox(height: EvolutionConstants.verticalSpacing),
-          VarietiesListWidget(varieties: varieties),
+          VarietiesListWidget(
+            varieties: varieties,
+            currentPokemonId: pokemon.id,
+          ),
         ],
       ),
     );

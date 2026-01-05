@@ -7,8 +7,13 @@ import '../shared/pokemon_card_base.dart';
 
 class VarietyCard extends StatelessWidget {
   final PokemonVariety variety;
+  final bool isCurrentPokemon;
 
-  const VarietyCard({super.key, required this.variety});
+  const VarietyCard({
+    super.key,
+    required this.variety,
+    this.isCurrentPokemon = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ class VarietyCard extends StatelessWidget {
       imageUrl: variety.imageUrl,
       types: variety.types.toPokemonTypes(),
       name: variety.displayName,
+      showBorder: isCurrentPokemon,
       onTap: () =>
           Navigation.navigateToVariety(context: context, variety: variety),
     );

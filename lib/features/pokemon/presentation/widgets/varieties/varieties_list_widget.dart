@@ -6,8 +6,13 @@ import 'variety_card.dart';
 
 class VarietiesListWidget extends StatelessWidget {
   final List<PokemonVariety> varieties;
+  final int currentPokemonId;
 
-  const VarietiesListWidget({super.key, required this.varieties});
+  const VarietiesListWidget({
+    super.key,
+    required this.varieties,
+    required this.currentPokemonId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,10 @@ class VarietiesListWidget extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(width: 12.0),
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           itemBuilder: (context, index) {
-            return VarietyCard(variety: varieties[index]);
+            return VarietyCard(
+              variety: varieties[index],
+              isCurrentPokemon: varieties[index].id == currentPokemonId,
+            );
           },
         ),
       ),
